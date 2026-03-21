@@ -1,0 +1,373 @@
+asyncapi: 2.6.0
+info:
+  title: Deepgram Speech-to-Text Streaming Events
+  description: >-
+    The Deepgram Speech-to-Text streaming API provides real-time transcription
+    of audio using a WebSocket connection. Audio data is sent as binary
+    WebSocket messages and transcription results are returned as JSON messages
+    in real-time, supporting interim results, final results, speaker
+    diarization, and speech detection events. The API supports the same model
+    family and feature parameters as the pre-recorded API.
+  version: '1.0'
+  contact:
+    name: Deepgram Support
+    url: https://developers.deepgram.com
+servers:
+  production:
+    url: 'wss://api.deepgram.com/v1/listen'
+    protocol: wss
+    description: >-
+      Deepgram production WebSocket server for real-time speech-to-text
+      streaming. Connect with query parameters to configure the transcription
+      session.
+    security:
+      - bearerAuth: []
+  eu:
+    url: 'wss://api.eu.deepgram.com/v1/listen'
+    protocol: wss
+    description: >-
+      Deepgram EU WebSocket server for real-time speech-to-text streaming.
+    security:
+      - bearerAuth: []
+channels:
+  /v1/listen:
+    description: >-
+      WebSocket channel for real-time speech-to-text streaming. The client
+      sends binary audio frames and receives JSON transcription events.
+      Connection parameters include model, language, punctuate, diarize,
+      smart_format, interim_results, utterance_end_ms, vad_events, and
+      encoding options.
+    publish:
+      operationId: sendAudioData
+      summary: Send audio data for real-time transcription
+      description: >-
+        Client sends binary audio data frames to the WebSocket connection.
+        Audio should be sent as binary WebSocket messages. Send a JSON close
+        message to signal end of audio stream.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/AudioFrame'
+          - $ref: '#/components/messages/CloseStream'
+          - $ref: '#/components/messages/KeepAlive'
+    subscribe:
+      operationId: receiveTranscriptionEvents
+      summary: Receive transcription events
+      description: >-
+        Server sends JSON messages containing transcription results, metadata,
+        and stream lifecycle events.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/TranscriptResult'
+          - $ref: '#/components/messages/SpeechStarted'
+          - $ref: '#/components/messages/UtteranceEnd'
+          - $ref: '#/components/messages/StreamMetadata'
+          - $ref: '#/components/messages/StreamError'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Deepgram API key passed as a token query parameter or Authorization
+        header when establishing the WebSocket connection.
+  messages:
+    AudioFrame:
+      name: AudioFrame
+      title: Audio Frame
+      summary: Binary audio data frame
+      description: >-
+        Raw binary audio data sent as a WebSocket binary message. The audio
+        encoding format should be specified via connection query parameters.
+      contentType: application/octet-stream
+      payload:
+        type: string
+        format: binary
+        description: >-
+          Raw binary audio data in the configured encoding format.
+    CloseStream:
+      name: CloseStream
+      title: Close Stream
+      summary: Signal to close the audio stream
+      description: >-
+        JSON message sent by the client to signal the end of the audio
+        stream, triggering final processing of any remaining audio.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/CloseStreamPayload'
+    KeepAlive:
+      name: KeepAlive
+      title: Keep Alive
+      summary: Keep the connection alive
+      description: >-
+        JSON message sent by the client to keep the WebSocket connection
+        alive during periods of silence without closing the stream.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/KeepAlivePayload'
+    TranscriptResult:
+      name: TranscriptResult
+      title: Transcript Result
+      summary: Real-time transcription result
+      description: >-
+        JSON message containing transcription results. Can be an interim
+        result (is_final=false) or a final result (is_final=true) depending
+        on the interim_results connection parameter.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/TranscriptResultPayload'
+    SpeechStarted:
+      name: SpeechStarted
+      title: Speech Started
+      summary: Speech activity detected
+      description: >-
+        Event indicating that speech activity has been detected in the
+        audio stream. Sent when vad_events is enabled.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SpeechStartedPayload'
+    UtteranceEnd:
+      name: UtteranceEnd
+      title: Utterance End
+      summary: End of utterance detected
+      description: >-
+        Event indicating that the end of an utterance has been detected
+        based on the configured utterance_end_ms threshold.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UtteranceEndPayload'
+    StreamMetadata:
+      name: StreamMetadata
+      title: Stream Metadata
+      summary: Stream metadata information
+      description: >-
+        Metadata about the streaming session including request ID, model
+        information, and session configuration.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/StreamMetadataPayload'
+    StreamError:
+      name: StreamError
+      title: Stream Error
+      summary: Stream error event
+      description: >-
+        Error event indicating an issue with the streaming session.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/StreamErrorPayload'
+  schemas:
+    CloseStreamPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: CloseStream
+          description: >-
+            Message type identifier.
+    KeepAlivePayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: KeepAlive
+          description: >-
+            Message type identifier.
+    TranscriptResultPayload:
+      type: object
+      properties:
+        type:
+          type: string
+          const: Results
+          description: >-
+            Message type identifier.
+        channel_index:
+          type: array
+          items:
+            type: integer
+          description: >-
+            Channel index information.
+        duration:
+          type: number
+          format: float
+          description: >-
+            Duration of audio processed in seconds.
+        start:
+          type: number
+          format: float
+          description: >-
+            Start time of this result in seconds.
+        is_final:
+          type: boolean
+          description: >-
+            Whether this is a final or interim result.
+        speech_final:
+          type: boolean
+          description: >-
+            Whether the speech endpoint has been detected.
+        channel:
+          type: object
+          properties:
+            alternatives:
+              type: array
+              items:
+                $ref: '#/components/schemas/StreamAlternative'
+              description: >-
+                Alternative transcriptions ordered by confidence.
+          description: >-
+            Channel transcription data.
+    StreamAlternative:
+      type: object
+      properties:
+        transcript:
+          type: string
+          description: >-
+            Transcript text for this alternative.
+        confidence:
+          type: number
+          format: float
+          description: >-
+            Confidence score for this alternative.
+          minimum: 0
+          maximum: 1
+        words:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamWord'
+          description: >-
+            Individual words with timing information.
+    StreamWord:
+      type: object
+      properties:
+        word:
+          type: string
+          description: >-
+            The transcribed word.
+        start:
+          type: number
+          format: float
+          description: >-
+            Start time of the word in seconds.
+        end:
+          type: number
+          format: float
+          description: >-
+            End time of the word in seconds.
+        confidence:
+          type: number
+          format: float
+          description: >-
+            Confidence score for this word.
+        speaker:
+          type: integer
+          description: >-
+            Speaker identifier when diarization is enabled.
+        punctuated_word:
+          type: string
+          description: >-
+            The word with punctuation applied.
+    SpeechStartedPayload:
+      type: object
+      properties:
+        type:
+          type: string
+          const: SpeechStarted
+          description: >-
+            Message type identifier.
+        channel:
+          type: array
+          items:
+            type: integer
+          description: >-
+            Channel indices where speech was detected.
+        timestamp:
+          type: number
+          format: float
+          description: >-
+            Timestamp in seconds when speech was detected.
+    UtteranceEndPayload:
+      type: object
+      properties:
+        type:
+          type: string
+          const: UtteranceEnd
+          description: >-
+            Message type identifier.
+        channel:
+          type: array
+          items:
+            type: integer
+          description: >-
+            Channel indices for the utterance.
+        last_word_end:
+          type: number
+          format: float
+          description: >-
+            Timestamp in seconds of the last word in the utterance.
+    StreamMetadataPayload:
+      type: object
+      properties:
+        type:
+          type: string
+          const: Metadata
+          description: >-
+            Message type identifier.
+        transaction_key:
+          type: string
+          description: >-
+            Transaction key for this session.
+        request_id:
+          type: string
+          description: >-
+            Unique request identifier for this session.
+        sha256:
+          type: string
+          description: >-
+            SHA-256 hash identifier.
+        created:
+          type: string
+          format: date-time
+          description: >-
+            Timestamp when the session was created.
+        duration:
+          type: number
+          format: float
+          description: >-
+            Total duration of audio processed.
+        channels:
+          type: integer
+          description: >-
+            Number of audio channels.
+        models:
+          type: array
+          items:
+            type: string
+          description: >-
+            Model identifiers used for transcription.
+        model_info:
+          type: object
+          additionalProperties: true
+          description: >-
+            Detailed model information.
+    StreamErrorPayload:
+      type: object
+      properties:
+        type:
+          type: string
+          const: Error
+          description: >-
+            Message type identifier.
+        description:
+          type: string
+          description: >-
+            Human-readable error description.
+        message:
+          type: string
+          description: >-
+            Error message.
+        variant:
+          type: string
+          description: >-
+            Error variant classifier.

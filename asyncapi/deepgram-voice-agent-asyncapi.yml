@@ -1,0 +1,571 @@
+asyncapi: 2.6.0
+info:
+  title: Deepgram Voice Agent Events
+  description: >-
+    The Deepgram Voice Agent API is an end-to-end solution that combines
+    speech-to-text, LLM orchestration, and text-to-speech into a single
+    real-time WebSocket API. It simplifies building conversational voice
+    agents by handling barge-in detection, turn-taking prediction, function
+    calling, and mid-session control. The client sends a settings
+    configuration message after connection, followed by audio frames, and
+    receives agent audio responses along with lifecycle and control events.
+  version: '1.0'
+  contact:
+    name: Deepgram Support
+    url: https://developers.deepgram.com
+servers:
+  production:
+    url: 'wss://agent.deepgram.com/v1/agent/converse'
+    protocol: wss
+    description: >-
+      Deepgram production WebSocket server for the Voice Agent API. Connect
+      and send a Settings message to configure the agent before sending
+      audio data.
+    security:
+      - bearerAuth: []
+channels:
+  /v1/agent/converse:
+    description: >-
+      WebSocket channel for the Voice Agent API. After connecting, the
+      client sends a Settings message to configure the agent's listen
+      (STT), think (LLM), and speak (TTS) providers, followed by binary
+      audio frames. The server responds with agent audio, transcription
+      events, and lifecycle messages.
+    publish:
+      operationId: sendAgentInput
+      summary: Send input to the voice agent
+      description: >-
+        Client sends settings configuration, audio frames, function call
+        results, and control messages to the voice agent.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/Settings'
+          - $ref: '#/components/messages/AudioInput'
+          - $ref: '#/components/messages/UpdateInstructions'
+          - $ref: '#/components/messages/UpdateSpeak'
+          - $ref: '#/components/messages/InjectAgentMessage'
+          - $ref: '#/components/messages/FunctionCallResponse'
+          - $ref: '#/components/messages/AgentKeepAlive'
+    subscribe:
+      operationId: receiveAgentOutput
+      summary: Receive output from the voice agent
+      description: >-
+        Server sends agent audio responses, transcription results, function
+        call requests, and agent lifecycle events.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/AgentAudioData'
+          - $ref: '#/components/messages/UserStartedSpeaking'
+          - $ref: '#/components/messages/AgentStartedSpeaking'
+          - $ref: '#/components/messages/AgentThinking'
+          - $ref: '#/components/messages/ConversationText'
+          - $ref: '#/components/messages/FunctionCallRequest'
+          - $ref: '#/components/messages/FunctionCalling'
+          - $ref: '#/components/messages/Welcome'
+          - $ref: '#/components/messages/AgentError'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Deepgram API key passed as a token query parameter or Authorization
+        header when establishing the WebSocket connection.
+  messages:
+    Settings:
+      name: Settings
+      title: Settings
+      summary: Agent session configuration
+      description: >-
+        Initialization message sent immediately after opening the WebSocket
+        and before sending any audio. Configures the agent's audio format,
+        STT (listen), LLM (think), and TTS (speak) providers, agent
+        instructions, and optional context.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SettingsPayload'
+    AudioInput:
+      name: AudioInput
+      title: Audio Input
+      summary: User audio data
+      description: >-
+        Binary WebSocket message containing raw audio data from the user's
+        microphone in the encoding configured in the Settings message.
+      contentType: application/octet-stream
+      payload:
+        type: string
+        format: binary
+        description: >-
+          Raw binary audio from the user.
+    UpdateInstructions:
+      name: UpdateInstructions
+      title: Update Instructions
+      summary: Update agent instructions mid-session
+      description: >-
+        Updates the agent's system instructions during an active session
+        without restarting the connection.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UpdateInstructionsPayload'
+    UpdateSpeak:
+      name: UpdateSpeak
+      title: Update Speak Settings
+      summary: Update TTS settings mid-session
+      description: >-
+        Updates the text-to-speech provider settings during an active
+        session.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UpdateSpeakPayload'
+    InjectAgentMessage:
+      name: InjectAgentMessage
+      title: Inject Agent Message
+      summary: Inject a message into the agent conversation
+      description: >-
+        Injects a text message into the agent's conversation context,
+        allowing external events to influence the conversation flow.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/InjectAgentMessagePayload'
+    FunctionCallResponse:
+      name: FunctionCallResponse
+      title: Function Call Response
+      summary: Response to a function call request
+      description: >-
+        Sends the result of a function call back to the agent after the
+        client has executed the requested function.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/FunctionCallResponsePayload'
+    AgentKeepAlive:
+      name: AgentKeepAlive
+      title: Keep Alive
+      summary: Keep the agent connection alive
+      description: >-
+        Keeps the WebSocket connection alive during periods of inactivity.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/KeepAlivePayload'
+    AgentAudioData:
+      name: AgentAudioData
+      title: Agent Audio Data
+      summary: Agent speech audio
+      description: >-
+        Binary WebSocket message containing synthesized speech audio from
+        the agent in the encoding configured in the Settings message.
+      contentType: application/octet-stream
+      payload:
+        type: string
+        format: binary
+        description: >-
+          Raw binary audio from the agent's TTS output.
+    UserStartedSpeaking:
+      name: UserStartedSpeaking
+      title: User Started Speaking
+      summary: User speech activity detected
+      description: >-
+        Event indicating that the user has started speaking, which may
+        trigger barge-in behavior to interrupt the agent.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UserStartedSpeakingPayload'
+    AgentStartedSpeaking:
+      name: AgentStartedSpeaking
+      title: Agent Started Speaking
+      summary: Agent has begun speaking
+      description: >-
+        Event indicating that the agent has started generating and sending
+        audio output.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AgentStartedSpeakingPayload'
+    AgentThinking:
+      name: AgentThinking
+      title: Agent Thinking
+      summary: Agent is processing a response
+      description: >-
+        Event indicating that the agent's LLM is generating a response to
+        the user's input.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AgentThinkingPayload'
+    ConversationText:
+      name: ConversationText
+      title: Conversation Text
+      summary: Transcript of conversation
+      description: >-
+        Text transcript of the conversation including both user speech
+        transcriptions and agent response text.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ConversationTextPayload'
+    FunctionCallRequest:
+      name: FunctionCallRequest
+      title: Function Call Request
+      summary: Agent requests a function call
+      description: >-
+        The agent's LLM has determined that a function should be called.
+        The client must execute the function and return the result via
+        a FunctionCallResponse message.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/FunctionCallRequestPayload'
+    FunctionCalling:
+      name: FunctionCalling
+      title: Function Calling
+      summary: Agent is invoking a function
+      description: >-
+        Event indicating that the agent is in the process of calling a
+        function.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/FunctionCallingPayload'
+    Welcome:
+      name: Welcome
+      title: Welcome
+      summary: Connection established
+      description: >-
+        Welcome message sent by the server after the WebSocket connection
+        is established and the Settings message has been processed.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WelcomePayload'
+    AgentError:
+      name: AgentError
+      title: Error
+      summary: Agent error event
+      description: >-
+        Error event indicating an issue with the voice agent session.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AgentErrorPayload'
+  schemas:
+    SettingsPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: Settings
+          description: >-
+            Message type identifier.
+        audio:
+          type: object
+          properties:
+            input:
+              type: object
+              properties:
+                encoding:
+                  type: string
+                  description: >-
+                    Audio encoding format for input audio from the user.
+                sample_rate:
+                  type: integer
+                  description: >-
+                    Sample rate in Hertz for input audio.
+              description: >-
+                Input audio configuration.
+            output:
+              type: object
+              properties:
+                encoding:
+                  type: string
+                  description: >-
+                    Audio encoding format for output audio from the agent.
+                sample_rate:
+                  type: integer
+                  description: >-
+                    Sample rate in Hertz for output audio.
+                container:
+                  type: string
+                  description: >-
+                    Container format for output audio.
+              description: >-
+                Output audio configuration.
+          description: >-
+            Audio format configuration for both input and output.
+        agent:
+          type: object
+          properties:
+            listen:
+              type: object
+              properties:
+                model:
+                  type: string
+                  description: >-
+                    Speech-to-text model to use for transcription.
+                language:
+                  type: string
+                  description: >-
+                    Language for speech recognition.
+              description: >-
+                STT provider configuration.
+            think:
+              type: object
+              properties:
+                provider:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      description: >-
+                        LLM provider type such as open_ai, anthropic, or
+                        deepgram.
+                  description: >-
+                    LLM provider settings.
+                model:
+                  type: string
+                  description: >-
+                    LLM model identifier.
+                instructions:
+                  type: string
+                  description: >-
+                    System instructions for the agent's behavior.
+                functions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FunctionDefinition'
+                  description: >-
+                    Functions available for the agent to call.
+              description: >-
+                LLM provider configuration.
+            speak:
+              type: object
+              properties:
+                model:
+                  type: string
+                  description: >-
+                    Text-to-speech model or voice to use.
+              description: >-
+                TTS provider configuration.
+          description: >-
+            Agent provider configuration for listen, think, and speak.
+        context:
+          type: object
+          properties:
+            messages:
+              type: array
+              items:
+                type: object
+                properties:
+                  role:
+                    type: string
+                    description: >-
+                      Role of the message sender.
+                  content:
+                    type: string
+                    description: >-
+                      Content of the message.
+              description: >-
+                Initial conversation context messages.
+            replay:
+              type: boolean
+              description: >-
+                Whether to replay context messages to the user.
+          description: >-
+            Optional initial conversation context.
+    FunctionDefinition:
+      type: object
+      properties:
+        name:
+          type: string
+          description: >-
+            Name of the function.
+        description:
+          type: string
+          description: >-
+            Description of what the function does.
+        parameters:
+          type: object
+          description: >-
+            JSON Schema defining the function's parameters.
+    UpdateInstructionsPayload:
+      type: object
+      required:
+        - type
+        - instructions
+      properties:
+        type:
+          type: string
+          const: UpdateInstructions
+          description: >-
+            Message type identifier.
+        instructions:
+          type: string
+          description: >-
+            New system instructions for the agent.
+    UpdateSpeakPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: UpdateSpeak
+          description: >-
+            Message type identifier.
+        model:
+          type: string
+          description: >-
+            New text-to-speech model or voice.
+    InjectAgentMessagePayload:
+      type: object
+      required:
+        - type
+        - message
+      properties:
+        type:
+          type: string
+          const: InjectAgentMessage
+          description: >-
+            Message type identifier.
+        message:
+          type: string
+          description: >-
+            Text message to inject into the conversation.
+    FunctionCallResponsePayload:
+      type: object
+      required:
+        - type
+        - function_call_id
+        - output
+      properties:
+        type:
+          type: string
+          const: FunctionCallResponse
+          description: >-
+            Message type identifier.
+        function_call_id:
+          type: string
+          description: >-
+            Identifier of the function call being responded to.
+        output:
+          type: string
+          description: >-
+            String result of the function execution.
+    KeepAlivePayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: KeepAlive
+          description: >-
+            Message type identifier.
+    UserStartedSpeakingPayload:
+      type: object
+      properties:
+        type:
+          type: string
+          const: UserStartedSpeaking
+          description: >-
+            Message type identifier.
+    AgentStartedSpeakingPayload:
+      type: object
+      properties:
+        type:
+          type: string
+          const: AgentStartedSpeaking
+          description: >-
+            Message type identifier.
+        total_latency:
+          type: number
+          format: float
+          description: >-
+            Total latency in seconds from user input to agent response.
+        tts_latency:
+          type: number
+          format: float
+          description: >-
+            Text-to-speech processing latency in seconds.
+        ttt_latency:
+          type: number
+          format: float
+          description: >-
+            Text-to-text (LLM) processing latency in seconds.
+    AgentThinkingPayload:
+      type: object
+      properties:
+        type:
+          type: string
+          const: AgentThinking
+          description: >-
+            Message type identifier.
+    ConversationTextPayload:
+      type: object
+      properties:
+        type:
+          type: string
+          const: ConversationText
+          description: >-
+            Message type identifier.
+        role:
+          type: string
+          enum:
+            - user
+            - assistant
+          description: >-
+            Role of the speaker in the conversation.
+        content:
+          type: string
+          description: >-
+            Text content of the conversation turn.
+    FunctionCallRequestPayload:
+      type: object
+      properties:
+        type:
+          type: string
+          const: FunctionCallRequest
+          description: >-
+            Message type identifier.
+        function_call_id:
+          type: string
+          description: >-
+            Unique identifier for this function call.
+        function_name:
+          type: string
+          description: >-
+            Name of the function to call.
+        input:
+          type: object
+          additionalProperties: true
+          description: >-
+            Arguments to pass to the function.
+    FunctionCallingPayload:
+      type: object
+      properties:
+        type:
+          type: string
+          const: FunctionCalling
+          description: >-
+            Message type identifier.
+    WelcomePayload:
+      type: object
+      properties:
+        type:
+          type: string
+          const: Welcome
+          description: >-
+            Message type identifier.
+        session_id:
+          type: string
+          description: >-
+            Unique identifier for this agent session.
+    AgentErrorPayload:
+      type: object
+      properties:
+        type:
+          type: string
+          const: Error
+          description: >-
+            Message type identifier.
+        description:
+          type: string
+          description: >-
+            Human-readable error description.
+        message:
+          type: string
+          description: >-
+            Error message.

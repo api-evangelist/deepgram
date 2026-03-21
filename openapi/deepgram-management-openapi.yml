@@ -1,0 +1,1097 @@
+openapi: 3.1.0
+info:
+  title: Deepgram Management API
+  description: >-
+    The Deepgram Management API allows developers to programmatically manage
+    their Deepgram account resources. It provides endpoints for managing
+    projects, API keys, team members, invitations, scopes, billing balances,
+    usage tracking, and model metadata. This API enables automation of
+    administrative tasks and integration of Deepgram account management into
+    existing workflows and infrastructure tooling.
+  version: '1.0'
+  contact:
+    name: Deepgram Support
+    url: https://developers.deepgram.com
+  termsOfService: https://deepgram.com/tos
+externalDocs:
+  description: Deepgram Management API Documentation
+  url: https://developers.deepgram.com/docs/create-additional-api-keys
+servers:
+  - url: https://api.deepgram.com
+    description: Deepgram Production Server
+tags:
+  - name: Projects
+    description: >-
+      Manage Deepgram projects and project settings.
+  - name: Keys
+    description: >-
+      Create, list, and manage API keys for projects.
+  - name: Members
+    description: >-
+      Manage project team members.
+  - name: Invitations
+    description: >-
+      Manage project invitations.
+  - name: Scopes
+    description: >-
+      Manage member scopes and permissions within projects.
+  - name: Usage
+    description: >-
+      Retrieve usage data and request logs for projects.
+  - name: Balances
+    description: >-
+      Retrieve billing balance information for projects.
+  - name: Models
+    description: >-
+      Retrieve available model metadata.
+security:
+  - bearerAuth: []
+paths:
+  /v1/projects:
+    get:
+      operationId: listProjects
+      summary: List all projects
+      description: >-
+        Retrieves basic information about all projects associated with the
+        authenticated API key.
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: List of projects retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectList'
+        '401':
+          description: Unauthorized due to missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}:
+    get:
+      operationId: getProject
+      summary: Get a project
+      description: >-
+        Retrieves detailed information about a specific project.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      responses:
+        '200':
+          description: Project details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      operationId: updateProject
+      summary: Update a project
+      description: >-
+        Updates settings for a specific project.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUpdate'
+      responses:
+        '200':
+          description: Project updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: deleteProject
+      summary: Delete a project
+      description: >-
+        Permanently deletes a specific project and all associated resources.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      responses:
+        '204':
+          description: Project deleted successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}/keys:
+    get:
+      operationId: listProjectKeys
+      summary: List project API keys
+      description: >-
+        Retrieves all API keys associated with the specified project.
+      tags:
+        - Keys
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      responses:
+        '200':
+          description: List of API keys retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: createProjectKey
+      summary: Create a project API key
+      description: >-
+        Creates a new API key for the specified project with the given scopes.
+        Requires the keys:write scope on the authenticating key.
+      tags:
+        - Keys
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KeyCreate'
+      responses:
+        '200':
+          description: API key created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyWithSecret'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}/keys/{key_id}:
+    get:
+      operationId: getProjectKey
+      summary: Get a project API key
+      description: >-
+        Retrieves details about a specific API key in the project.
+      tags:
+        - Keys
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - $ref: '#/components/parameters/key_id'
+      responses:
+        '200':
+          description: API key details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Key'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Key not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: deleteProjectKey
+      summary: Delete a project API key
+      description: >-
+        Permanently deletes a specific API key from the project.
+      tags:
+        - Keys
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - $ref: '#/components/parameters/key_id'
+      responses:
+        '204':
+          description: API key deleted successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Key not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}/members:
+    get:
+      operationId: listProjectMembers
+      summary: List project members
+      description: >-
+        Retrieves a list of account objects for members of the specified project.
+      tags:
+        - Members
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      responses:
+        '200':
+          description: List of members retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}/members/{member_id}:
+    delete:
+      operationId: removeProjectMember
+      summary: Remove a project member
+      description: >-
+        Removes a member from the specified project.
+      tags:
+        - Members
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - $ref: '#/components/parameters/member_id'
+      responses:
+        '204':
+          description: Member removed successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Member not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}/invites:
+    get:
+      operationId: listProjectInvitations
+      summary: List project invitations
+      description: >-
+        Retrieves a list of pending invitations for the specified project.
+      tags:
+        - Invitations
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      responses:
+        '200':
+          description: List of invitations retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvitationList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: sendProjectInvitation
+      summary: Send a project invitation
+      description: >-
+        Sends an invitation to the specified email address to join the project.
+      tags:
+        - Invitations
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvitationCreate'
+      responses:
+        '200':
+          description: Invitation sent successfully
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}/invites/{email}:
+    delete:
+      operationId: deleteProjectInvitation
+      summary: Delete a project invitation
+      description: >-
+        Removes a pending invitation for the specified email address from
+        the project.
+      tags:
+        - Invitations
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - name: email
+          in: path
+          required: true
+          description: >-
+            Email address of the invitation to remove.
+          schema:
+            type: string
+            format: email
+      responses:
+        '204':
+          description: Invitation deleted successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Invitation not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}/members/{member_id}/scopes:
+    get:
+      operationId: getMemberScopes
+      summary: Get member scopes
+      description: >-
+        Retrieves the scopes assigned to a specific member within a project.
+      tags:
+        - Scopes
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - $ref: '#/components/parameters/member_id'
+      responses:
+        '200':
+          description: Member scopes retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScopeList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: updateMemberScopes
+      summary: Update member scopes
+      description: >-
+        Updates the scopes assigned to a specific member within a project.
+      tags:
+        - Scopes
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - $ref: '#/components/parameters/member_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScopeUpdate'
+      responses:
+        '200':
+          description: Member scopes updated successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}/usage:
+    get:
+      operationId: getProjectUsage
+      summary: Get project usage
+      description: >-
+        Retrieves usage data for the specified project over a given time range.
+      tags:
+        - Usage
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - name: start
+          in: query
+          description: >-
+            Start date for the usage period in ISO 8601 format.
+          schema:
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          description: >-
+            End date for the usage period in ISO 8601 format.
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Usage data retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageSummary'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}/requests:
+    get:
+      operationId: listProjectRequests
+      summary: List project requests
+      description: >-
+        Retrieves a paginated list of API requests made to the specified
+        project over a given time range.
+      tags:
+        - Usage
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - name: start
+          in: query
+          description: >-
+            Start date for the request period in ISO 8601 format.
+          schema:
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          description: >-
+            End date for the request period in ISO 8601 format.
+          schema:
+            type: string
+            format: date-time
+        - name: limit
+          in: query
+          description: >-
+            Maximum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+        - name: cursor
+          in: query
+          description: >-
+            Pagination cursor for retrieving the next page of results.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Request list retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}/balances:
+    get:
+      operationId: listProjectBalances
+      summary: List project balances
+      description: >-
+        Retrieves billing balance information for the specified project.
+      tags:
+        - Balances
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      responses:
+        '200':
+          description: Balance information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalanceList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}/balances/{balance_id}:
+    get:
+      operationId: getProjectBalance
+      summary: Get a project balance
+      description: >-
+        Retrieves details about a specific billing balance for the project.
+      tags:
+        - Balances
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - name: balance_id
+          in: path
+          required: true
+          description: >-
+            Unique identifier of the balance.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Balance details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balance'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Balance not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/models:
+    get:
+      operationId: listModels
+      summary: List all available models
+      description: >-
+        Retrieves metadata on all the latest public models available on
+        the Deepgram platform, including both speech-to-text and
+        text-to-speech models.
+      tags:
+        - Models
+      parameters:
+        - name: include_outdated
+          in: query
+          description: >-
+            Include non-latest versions of models in the response.
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Model list retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/models/{model_id}:
+    get:
+      operationId: getModel
+      summary: Get a model
+      description: >-
+        Retrieves metadata for a specific model by its identifier.
+      tags:
+        - Models
+      parameters:
+        - name: model_id
+          in: path
+          required: true
+          description: >-
+            Unique identifier of the model.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Model details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Model not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Deepgram API key passed as a bearer token in the Authorization header.
+  parameters:
+    project_id:
+      name: project_id
+      in: path
+      required: true
+      description: >-
+        Unique identifier of the project.
+      schema:
+        type: string
+    key_id:
+      name: key_id
+      in: path
+      required: true
+      description: >-
+        Unique identifier of the API key.
+      schema:
+        type: string
+    member_id:
+      name: member_id
+      in: path
+      required: true
+      description: >-
+        Unique identifier of the member.
+      schema:
+        type: string
+  schemas:
+    ProjectList:
+      type: object
+      properties:
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+          description: >-
+            List of projects.
+    Project:
+      type: object
+      properties:
+        project_id:
+          type: string
+          description: >-
+            Unique identifier for the project.
+        name:
+          type: string
+          description: >-
+            Name of the project.
+        company:
+          type: string
+          description: >-
+            Company name associated with the project.
+    ProjectUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: >-
+            New name for the project.
+        company:
+          type: string
+          description: >-
+            New company name for the project.
+    KeyList:
+      type: object
+      properties:
+        api_keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/Key'
+          description: >-
+            List of API keys.
+    Key:
+      type: object
+      properties:
+        api_key_id:
+          type: string
+          description: >-
+            Unique identifier for the API key.
+        key:
+          type: string
+          description: >-
+            Masked API key value.
+        comment:
+          type: string
+          description: >-
+            Description or comment for the API key.
+        scopes:
+          type: array
+          items:
+            type: string
+          description: >-
+            Scopes assigned to this API key.
+        created:
+          type: string
+          format: date-time
+          description: >-
+            Timestamp when the key was created.
+        expiration_date:
+          type: string
+          format: date-time
+          description: >-
+            Expiration date of the key, if set.
+    KeyWithSecret:
+      type: object
+      properties:
+        api_key_id:
+          type: string
+          description: >-
+            Unique identifier for the API key.
+        key:
+          type: string
+          description: >-
+            Full API key value. Only returned at creation time.
+        comment:
+          type: string
+          description: >-
+            Description or comment for the API key.
+        scopes:
+          type: array
+          items:
+            type: string
+          description: >-
+            Scopes assigned to this API key.
+        created:
+          type: string
+          format: date-time
+          description: >-
+            Timestamp when the key was created.
+    KeyCreate:
+      type: object
+      required:
+        - comment
+        - scopes
+      properties:
+        comment:
+          type: string
+          description: >-
+            Description or name for the API key.
+        scopes:
+          type: array
+          items:
+            type: string
+          description: >-
+            Scopes to assign to this API key.
+        expiration_date:
+          type: string
+          format: date-time
+          description: >-
+            Optional expiration date for the key.
+        time_to_live_in_seconds:
+          type: integer
+          description: >-
+            Optional time-to-live in seconds for the key.
+    MemberList:
+      type: object
+      properties:
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+          description: >-
+            List of project members.
+    Member:
+      type: object
+      properties:
+        member_id:
+          type: string
+          description: >-
+            Unique identifier for the member.
+        email:
+          type: string
+          format: email
+          description: >-
+            Email address of the member.
+        first_name:
+          type: string
+          description: >-
+            First name of the member.
+        last_name:
+          type: string
+          description: >-
+            Last name of the member.
+        scopes:
+          type: array
+          items:
+            type: string
+          description: >-
+            Scopes assigned to this member.
+    InvitationList:
+      type: object
+      properties:
+        invites:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invitation'
+          description: >-
+            List of pending invitations.
+    Invitation:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: >-
+            Email address of the invitee.
+        scope:
+          type: string
+          description: >-
+            Scope assigned to the invitation.
+    InvitationCreate:
+      type: object
+      required:
+        - email
+        - scope
+      properties:
+        email:
+          type: string
+          format: email
+          description: >-
+            Email address to send the invitation to.
+        scope:
+          type: string
+          description: >-
+            Scope to assign to the invited member.
+    ScopeList:
+      type: object
+      properties:
+        scopes:
+          type: array
+          items:
+            type: string
+          description: >-
+            List of scopes assigned to the member.
+    ScopeUpdate:
+      type: object
+      required:
+        - scope
+      properties:
+        scope:
+          type: string
+          description: >-
+            New scope to assign to the member.
+    UsageSummary:
+      type: object
+      properties:
+        start:
+          type: string
+          format: date-time
+          description: >-
+            Start of the usage period.
+        end:
+          type: string
+          format: date-time
+          description: >-
+            End of the usage period.
+        resolution:
+          type: object
+          properties:
+            units:
+              type: string
+              description: >-
+                Time unit for the resolution.
+            amount:
+              type: integer
+              description: >-
+                Number of time units per resolution period.
+          description: >-
+            Resolution of the usage data.
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              start:
+                type: string
+                format: date-time
+                description: >-
+                  Start of the period.
+              end:
+                type: string
+                format: date-time
+                description: >-
+                  End of the period.
+              hours:
+                type: number
+                format: float
+                description: >-
+                  Total audio hours processed.
+              requests:
+                type: integer
+                description: >-
+                  Total number of API requests.
+          description: >-
+            Usage data broken down by resolution period.
+    RequestList:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: >-
+            Current page number.
+        limit:
+          type: integer
+          description: >-
+            Number of results per page.
+        requests:
+          type: array
+          items:
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: >-
+                  Unique identifier for the request.
+              created:
+                type: string
+                format: date-time
+                description: >-
+                  Timestamp when the request was made.
+              path:
+                type: string
+                description: >-
+                  API path of the request.
+              api_key_id:
+                type: string
+                description: >-
+                  API key used for the request.
+          description: >-
+            List of API requests.
+    BalanceList:
+      type: object
+      properties:
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Balance'
+          description: >-
+            List of billing balances.
+    Balance:
+      type: object
+      properties:
+        balance_id:
+          type: string
+          description: >-
+            Unique identifier for the balance.
+        amount:
+          type: number
+          format: float
+          description: >-
+            Current balance amount.
+        units:
+          type: string
+          description: >-
+            Units of the balance amount.
+        purchase:
+          type: string
+          description: >-
+            Purchase method or plan name.
+    ModelList:
+      type: object
+      properties:
+        stt:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+          description: >-
+            Available speech-to-text models.
+        tts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+          description: >-
+            Available text-to-speech models.
+    Model:
+      type: object
+      properties:
+        name:
+          type: string
+          description: >-
+            Name of the model.
+        canonical_name:
+          type: string
+          description: >-
+            Canonical identifier for the model.
+        architecture:
+          type: string
+          description: >-
+            Architecture of the model.
+        languages:
+          type: array
+          items:
+            type: string
+          description: >-
+            Languages supported by the model.
+        version:
+          type: string
+          description: >-
+            Version of the model.
+        uuid:
+          type: string
+          description: >-
+            Unique identifier for the model.
+        metadata:
+          type: object
+          additionalProperties: true
+          description: >-
+            Additional metadata about the model.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: >-
+            Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: >-
+            Human-readable error message.
+        request_id:
+          type: string
+          description: >-
+            Unique identifier for the request that produced the error.

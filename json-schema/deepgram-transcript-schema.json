@@ -1,0 +1,515 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://deepgram.com/schemas/deepgram/transcript.json",
+  "title": "Deepgram Transcript",
+  "description": "Schema representing a Deepgram transcription response including metadata, channel results, utterances, and audio intelligence features such as sentiment, topics, intents, and summarization.",
+  "type": "object",
+  "required": ["metadata", "results"],
+  "properties": {
+    "metadata": {
+      "$ref": "#/$defs/Metadata"
+    },
+    "results": {
+      "$ref": "#/$defs/Results"
+    }
+  },
+  "$defs": {
+    "Metadata": {
+      "type": "object",
+      "description": "Metadata about the transcription request and audio file.",
+      "properties": {
+        "transaction_key": {
+          "type": "string",
+          "description": "Unique identifier for the transaction."
+        },
+        "request_id": {
+          "type": "string",
+          "description": "Unique identifier for the API request."
+        },
+        "sha256": {
+          "type": "string",
+          "description": "SHA-256 hash of the submitted audio."
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the request was created."
+        },
+        "duration": {
+          "type": "number",
+          "description": "Duration of the submitted audio in seconds.",
+          "minimum": 0
+        },
+        "channels": {
+          "type": "integer",
+          "description": "Number of audio channels detected.",
+          "minimum": 1
+        },
+        "models": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Model identifiers used for transcription."
+        },
+        "model_info": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/ModelInfo"
+          },
+          "description": "Detailed information about models used, keyed by model UUID."
+        }
+      }
+    },
+    "ModelInfo": {
+      "type": "object",
+      "description": "Information about a specific model used for transcription.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the model."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the model."
+        },
+        "arch": {
+          "type": "string",
+          "description": "Architecture of the model."
+        }
+      }
+    },
+    "Results": {
+      "type": "object",
+      "description": "Transcription results and audio intelligence analysis.",
+      "properties": {
+        "channels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Channel"
+          },
+          "description": "Transcription results organized by audio channel."
+        },
+        "utterances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Utterance"
+          },
+          "description": "Transcription results organized by utterance."
+        },
+        "summary": {
+          "$ref": "#/$defs/Summary"
+        },
+        "sentiments": {
+          "$ref": "#/$defs/SentimentResults"
+        },
+        "topics": {
+          "$ref": "#/$defs/TopicResults"
+        },
+        "intents": {
+          "$ref": "#/$defs/IntentResults"
+        }
+      }
+    },
+    "Channel": {
+      "type": "object",
+      "description": "Transcription data for a single audio channel.",
+      "properties": {
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Alternative"
+          },
+          "description": "Alternative transcriptions ordered by confidence."
+        },
+        "detected_language": {
+          "type": "string",
+          "description": "Detected language of the audio in this channel.",
+          "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+        },
+        "language_confidence": {
+          "type": "number",
+          "description": "Confidence score for the detected language.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "Alternative": {
+      "type": "object",
+      "description": "A single transcription alternative with confidence score.",
+      "properties": {
+        "transcript": {
+          "type": "string",
+          "description": "Full transcript text for this alternative."
+        },
+        "confidence": {
+          "type": "number",
+          "description": "Confidence score for this alternative.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "words": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Word"
+          },
+          "description": "Individual words with timing and confidence information."
+        },
+        "paragraphs": {
+          "$ref": "#/$defs/ParagraphGroup"
+        }
+      }
+    },
+    "Word": {
+      "type": "object",
+      "description": "A single transcribed word with timing and metadata.",
+      "required": ["word", "start", "end", "confidence"],
+      "properties": {
+        "word": {
+          "type": "string",
+          "description": "The transcribed word."
+        },
+        "start": {
+          "type": "number",
+          "description": "Start time of the word in seconds.",
+          "minimum": 0
+        },
+        "end": {
+          "type": "number",
+          "description": "End time of the word in seconds.",
+          "minimum": 0
+        },
+        "confidence": {
+          "type": "number",
+          "description": "Confidence score for this word.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "speaker": {
+          "type": "integer",
+          "description": "Speaker identifier when diarization is enabled.",
+          "minimum": 0
+        },
+        "punctuated_word": {
+          "type": "string",
+          "description": "The word with punctuation applied."
+        },
+        "sentiment": {
+          "type": "string",
+          "enum": ["positive", "negative", "neutral"],
+          "description": "Sentiment of the word when sentiment analysis is enabled."
+        },
+        "sentiment_score": {
+          "type": "number",
+          "description": "Sentiment confidence score for this word.",
+          "minimum": -1,
+          "maximum": 1
+        }
+      }
+    },
+    "ParagraphGroup": {
+      "type": "object",
+      "description": "Transcript organized into paragraphs.",
+      "properties": {
+        "transcript": {
+          "type": "string",
+          "description": "Full transcript organized into paragraphs."
+        },
+        "paragraphs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Paragraph"
+          },
+          "description": "Individual paragraph objects."
+        }
+      }
+    },
+    "Paragraph": {
+      "type": "object",
+      "description": "A paragraph segment of the transcript.",
+      "properties": {
+        "sentences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Sentence"
+          },
+          "description": "Sentences within this paragraph."
+        },
+        "start": {
+          "type": "number",
+          "description": "Start time of the paragraph in seconds.",
+          "minimum": 0
+        },
+        "end": {
+          "type": "number",
+          "description": "End time of the paragraph in seconds.",
+          "minimum": 0
+        },
+        "num_words": {
+          "type": "integer",
+          "description": "Number of words in this paragraph.",
+          "minimum": 0
+        },
+        "speaker": {
+          "type": "integer",
+          "description": "Speaker identifier for this paragraph.",
+          "minimum": 0
+        }
+      }
+    },
+    "Sentence": {
+      "type": "object",
+      "description": "A sentence within a paragraph.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Sentence text."
+        },
+        "start": {
+          "type": "number",
+          "description": "Start time of the sentence in seconds.",
+          "minimum": 0
+        },
+        "end": {
+          "type": "number",
+          "description": "End time of the sentence in seconds.",
+          "minimum": 0
+        }
+      }
+    },
+    "Utterance": {
+      "type": "object",
+      "description": "A speech utterance segment with speaker and timing information.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this utterance."
+        },
+        "start": {
+          "type": "number",
+          "description": "Start time of the utterance in seconds.",
+          "minimum": 0
+        },
+        "end": {
+          "type": "number",
+          "description": "End time of the utterance in seconds.",
+          "minimum": 0
+        },
+        "confidence": {
+          "type": "number",
+          "description": "Confidence score for this utterance.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "channel": {
+          "type": "integer",
+          "description": "Audio channel index for this utterance.",
+          "minimum": 0
+        },
+        "transcript": {
+          "type": "string",
+          "description": "Transcript text for this utterance."
+        },
+        "words": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Word"
+          },
+          "description": "Individual words within this utterance."
+        },
+        "speaker": {
+          "type": "integer",
+          "description": "Speaker identifier for this utterance.",
+          "minimum": 0
+        }
+      }
+    },
+    "Summary": {
+      "type": "object",
+      "description": "Summary of the transcribed or analyzed content.",
+      "properties": {
+        "short": {
+          "type": "string",
+          "description": "Short summary of the content."
+        }
+      }
+    },
+    "SentimentResults": {
+      "type": "object",
+      "description": "Sentiment analysis results for the content.",
+      "properties": {
+        "segments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SentimentSegment"
+          },
+          "description": "Sentiment analysis for individual segments."
+        },
+        "average": {
+          "$ref": "#/$defs/SentimentAverage"
+        }
+      }
+    },
+    "SentimentSegment": {
+      "type": "object",
+      "description": "Sentiment analysis for a single content segment.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text of the segment."
+        },
+        "start_word": {
+          "type": "integer",
+          "description": "Index of the first word in this segment.",
+          "minimum": 0
+        },
+        "end_word": {
+          "type": "integer",
+          "description": "Index of the last word in this segment.",
+          "minimum": 0
+        },
+        "sentiment": {
+          "type": "string",
+          "enum": ["positive", "negative", "neutral"],
+          "description": "Overall sentiment of the segment."
+        },
+        "sentiment_score": {
+          "type": "number",
+          "description": "Confidence score for the sentiment classification.",
+          "minimum": -1,
+          "maximum": 1
+        }
+      }
+    },
+    "SentimentAverage": {
+      "type": "object",
+      "description": "Average sentiment across all segments.",
+      "properties": {
+        "sentiment": {
+          "type": "string",
+          "enum": ["positive", "negative", "neutral"],
+          "description": "Overall average sentiment."
+        },
+        "sentiment_score": {
+          "type": "number",
+          "description": "Average sentiment score.",
+          "minimum": -1,
+          "maximum": 1
+        }
+      }
+    },
+    "TopicResults": {
+      "type": "object",
+      "description": "Topic detection results for the content.",
+      "properties": {
+        "segments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TopicSegment"
+          },
+          "description": "Topic detection for individual segments."
+        }
+      }
+    },
+    "TopicSegment": {
+      "type": "object",
+      "description": "Topic detection for a single content segment.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text of the segment."
+        },
+        "start_word": {
+          "type": "integer",
+          "description": "Index of the first word in this segment.",
+          "minimum": 0
+        },
+        "end_word": {
+          "type": "integer",
+          "description": "Index of the last word in this segment.",
+          "minimum": 0
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Topic"
+          },
+          "description": "Topics detected in this segment."
+        }
+      }
+    },
+    "Topic": {
+      "type": "object",
+      "description": "A detected topic with confidence score.",
+      "properties": {
+        "topic": {
+          "type": "string",
+          "description": "Detected topic label."
+        },
+        "confidence_score": {
+          "type": "number",
+          "description": "Confidence score for the topic detection.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "IntentResults": {
+      "type": "object",
+      "description": "Intent recognition results for the content.",
+      "properties": {
+        "segments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/IntentSegment"
+          },
+          "description": "Intent recognition for individual segments."
+        }
+      }
+    },
+    "IntentSegment": {
+      "type": "object",
+      "description": "Intent recognition for a single content segment.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text of the segment."
+        },
+        "start_word": {
+          "type": "integer",
+          "description": "Index of the first word in this segment.",
+          "minimum": 0
+        },
+        "end_word": {
+          "type": "integer",
+          "description": "Index of the last word in this segment.",
+          "minimum": 0
+        },
+        "intents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Intent"
+          },
+          "description": "Intents detected in this segment."
+        }
+      }
+    },
+    "Intent": {
+      "type": "object",
+      "description": "A detected intent with confidence score.",
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "Detected intent label."
+        },
+        "confidence_score": {
+          "type": "number",
+          "description": "Confidence score for the intent recognition.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "dg": "https://deepgram.com/schemas/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Transcript": {
+      "@id": "dg:Transcript",
+      "@context": {
+        "requestId": "dg:requestId",
+        "transactionKey": "dg:transactionKey",
+        "duration": {
+          "@id": "schema:duration",
+          "@type": "xsd:float"
+        },
+        "channels": {
+          "@id": "dg:channels",
+          "@type": "xsd:integer"
+        },
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "sha256": "dg:sha256",
+        "model": "dg:model",
+        "transcript": "dg:transcript",
+        "confidence": {
+          "@id": "dg:confidence",
+          "@type": "xsd:float"
+        }
+      }
+    },
+
+    "Word": {
+      "@id": "dg:Word",
+      "@context": {
+        "word": "dg:word",
+        "start": {
+          "@id": "dg:startTime",
+          "@type": "xsd:float"
+        },
+        "end": {
+          "@id": "dg:endTime",
+          "@type": "xsd:float"
+        },
+        "confidence": {
+          "@id": "dg:confidence",
+          "@type": "xsd:float"
+        },
+        "speaker": {
+          "@id": "dg:speaker",
+          "@type": "xsd:integer"
+        },
+        "punctuatedWord": "dg:punctuatedWord"
+      }
+    },
+
+    "Utterance": {
+      "@id": "dg:Utterance",
+      "@context": {
+        "start": {
+          "@id": "dg:startTime",
+          "@type": "xsd:float"
+        },
+        "end": {
+          "@id": "dg:endTime",
+          "@type": "xsd:float"
+        },
+        "transcript": "dg:transcript",
+        "confidence": {
+          "@id": "dg:confidence",
+          "@type": "xsd:float"
+        },
+        "speaker": {
+          "@id": "dg:speaker",
+          "@type": "xsd:integer"
+        },
+        "channel": {
+          "@id": "dg:channel",
+          "@type": "xsd:integer"
+        },
+        "words": {
+          "@id": "dg:words",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "SentimentAnalysis": {
+      "@id": "dg:SentimentAnalysis",
+      "@context": {
+        "sentiment": "dg:sentiment",
+        "sentimentScore": {
+          "@id": "dg:sentimentScore",
+          "@type": "xsd:float"
+        },
+        "text": "schema:text",
+        "segments": {
+          "@id": "dg:segments",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "TopicDetection": {
+      "@id": "dg:TopicDetection",
+      "@context": {
+        "topic": "dg:topic",
+        "confidenceScore": {
+          "@id": "dg:confidenceScore",
+          "@type": "xsd:float"
+        },
+        "text": "schema:text",
+        "segments": {
+          "@id": "dg:segments",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "IntentRecognition": {
+      "@id": "dg:IntentRecognition",
+      "@context": {
+        "intent": "dg:intent",
+        "confidenceScore": {
+          "@id": "dg:confidenceScore",
+          "@type": "xsd:float"
+        },
+        "text": "schema:text",
+        "segments": {
+          "@id": "dg:segments",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "VoiceAgent": {
+      "@id": "dg:VoiceAgent",
+      "@context": {
+        "sessionId": "dg:sessionId",
+        "instructions": "dg:instructions",
+        "listenModel": "dg:listenModel",
+        "thinkModel": "dg:thinkModel",
+        "speakModel": "dg:speakModel",
+        "provider": "dg:provider"
+      }
+    },
+
+    "Model": {
+      "@id": "dg:Model",
+      "@context": {
+        "name": "schema:name",
+        "canonicalName": "dg:canonicalName",
+        "architecture": "dg:architecture",
+        "version": "schema:version",
+        "uuid": "dg:uuid",
+        "languages": {
+          "@id": "schema:inLanguage",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Project": {
+      "@id": "dg:Project",
+      "@context": {
+        "projectId": "dg:projectId",
+        "name": "schema:name",
+        "company": "schema:Organization"
+      }
+    },
+
+    "ApiKey": {
+      "@id": "dg:ApiKey",
+      "@context": {
+        "apiKeyId": "dg:apiKeyId",
+        "comment": "schema:description",
+        "scopes": {
+          "@id": "dg:scopes",
+          "@container": "@set"
+        },
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "expirationDate": {
+          "@id": "schema:expires",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "SpeechSynthesis": {
+      "@id": "dg:SpeechSynthesis",
+      "@context": {
+        "text": "schema:text",
+        "model": "dg:model",
+        "encoding": "dg:encoding",
+        "sampleRate": {
+          "@id": "dg:sampleRate",
+          "@type": "xsd:integer"
+        },
+        "container": "dg:container"
+      }
+    }
+  }
+}

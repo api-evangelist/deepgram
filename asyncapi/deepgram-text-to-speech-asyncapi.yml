@@ -1,0 +1,241 @@
+asyncapi: 2.6.0
+info:
+  title: Deepgram Text-to-Speech Streaming Events
+  description: >-
+    The Deepgram Text-to-Speech streaming API provides real-time speech
+    synthesis over a WebSocket connection. Text is sent as JSON messages
+    and audio data is returned as binary WebSocket messages, enabling
+    continuous streaming text-to-speech for conversational AI applications,
+    voice agents, and real-time voice interfaces.
+  version: '1.0'
+  contact:
+    name: Deepgram Support
+    url: https://developers.deepgram.com
+servers:
+  production:
+    url: 'wss://api.deepgram.com/v1/speak'
+    protocol: wss
+    description: >-
+      Deepgram production WebSocket server for real-time text-to-speech
+      streaming. Connect with query parameters to configure the voice model,
+      encoding, and sample rate.
+    security:
+      - bearerAuth: []
+  eu:
+    url: 'wss://api.eu.deepgram.com/v1/speak'
+    protocol: wss
+    description: >-
+      Deepgram EU WebSocket server for real-time text-to-speech streaming.
+    security:
+      - bearerAuth: []
+channels:
+  /v1/speak:
+    description: >-
+      WebSocket channel for real-time text-to-speech streaming. The client
+      sends text as JSON messages and receives synthesized audio as binary
+      frames. Connection parameters include model, encoding, sample_rate,
+      and container settings.
+    publish:
+      operationId: sendTextForSpeech
+      summary: Send text for speech synthesis
+      description: >-
+        Client sends JSON messages containing text to be synthesized into
+        speech. Supports continuous streaming of text segments.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/TextInput'
+          - $ref: '#/components/messages/Flush'
+          - $ref: '#/components/messages/Reset'
+          - $ref: '#/components/messages/Close'
+    subscribe:
+      operationId: receiveSpeechAudio
+      summary: Receive synthesized speech audio
+      description: >-
+        Server sends binary audio frames and JSON control messages as
+        speech is synthesized from the input text.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/AudioData'
+          - $ref: '#/components/messages/Flushed'
+          - $ref: '#/components/messages/Warning'
+          - $ref: '#/components/messages/TTSError'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Deepgram API key passed as a token query parameter or Authorization
+        header when establishing the WebSocket connection.
+  messages:
+    TextInput:
+      name: TextInput
+      title: Text Input
+      summary: Text to synthesize into speech
+      description: >-
+        JSON message containing text to be converted to speech audio. Text
+        is synthesized incrementally as it is received.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/TextInputPayload'
+    Flush:
+      name: Flush
+      title: Flush
+      summary: Flush pending text
+      description: >-
+        Signals the server to immediately synthesize any buffered text and
+        return audio for it.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/FlushPayload'
+    Reset:
+      name: Reset
+      title: Reset
+      summary: Reset the synthesis state
+      description: >-
+        Resets the text-to-speech synthesis state, clearing any buffered
+        text that has not yet been synthesized.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ResetPayload'
+    Close:
+      name: Close
+      title: Close
+      summary: Close the streaming session
+      description: >-
+        Signals the server to finalize synthesis and close the connection
+        after all pending audio has been returned.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ClosePayload'
+    AudioData:
+      name: AudioData
+      title: Audio Data
+      summary: Synthesized speech audio data
+      description: >-
+        Binary WebSocket message containing synthesized speech audio in the
+        encoding format configured at connection time.
+      contentType: application/octet-stream
+      payload:
+        type: string
+        format: binary
+        description: >-
+          Raw binary audio data in the configured encoding format.
+    Flushed:
+      name: Flushed
+      title: Flushed
+      summary: Flush confirmation
+      description: >-
+        Confirmation that all buffered text has been synthesized and the
+        corresponding audio has been sent.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/FlushedPayload'
+    Warning:
+      name: Warning
+      title: Warning
+      summary: Warning message
+      description: >-
+        Non-fatal warning about the streaming session.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WarningPayload'
+    TTSError:
+      name: TTSError
+      title: Error
+      summary: Error message
+      description: >-
+        Error event indicating an issue with the text-to-speech session.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/TTSErrorPayload'
+  schemas:
+    TextInputPayload:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          const: Speak
+          description: >-
+            Message type identifier.
+        text:
+          type: string
+          description: >-
+            Text content to synthesize into speech.
+    FlushPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: Flush
+          description: >-
+            Message type identifier.
+    ResetPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: Reset
+          description: >-
+            Message type identifier.
+    ClosePayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: Close
+          description: >-
+            Message type identifier.
+    FlushedPayload:
+      type: object
+      properties:
+        type:
+          type: string
+          const: Flushed
+          description: >-
+            Message type identifier.
+        sequence_id:
+          type: integer
+          description: >-
+            Sequence identifier for the flush operation.
+    WarningPayload:
+      type: object
+      properties:
+        type:
+          type: string
+          const: Warning
+          description: >-
+            Message type identifier.
+        warn_code:
+          type: string
+          description: >-
+            Warning code.
+        warn_msg:
+          type: string
+          description: >-
+            Human-readable warning message.
+    TTSErrorPayload:
+      type: object
+      properties:
+        type:
+          type: string
+          const: Error
+          description: >-
+            Message type identifier.
+        err_code:
+          type: string
+          description: >-
+            Error code.
+        err_msg:
+          type: string
+          description: >-
+            Human-readable error message.
