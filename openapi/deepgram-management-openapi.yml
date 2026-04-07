@@ -20,30 +20,30 @@ servers:
   - url: https://api.deepgram.com
     description: Deepgram Production Server
 tags:
-  - name: Projects
+  - name: Balances
     description: >-
-      Manage Deepgram projects and project settings.
+      Retrieve billing balance information for projects.
+  - name: Invitations
+    description: >-
+      Manage project invitations.
   - name: Keys
     description: >-
       Create, list, and manage API keys for projects.
   - name: Members
     description: >-
       Manage project team members.
-  - name: Invitations
+  - name: Models
     description: >-
-      Manage project invitations.
+      Retrieve available model metadata.
+  - name: Projects
+    description: >-
+      Manage Deepgram projects and project settings.
   - name: Scopes
     description: >-
       Manage member scopes and permissions within projects.
   - name: Usage
     description: >-
       Retrieve usage data and request logs for projects.
-  - name: Balances
-    description: >-
-      Retrieve billing balance information for projects.
-  - name: Models
-    description: >-
-      Retrieve available model metadata.
 security:
   - bearerAuth: []
 paths:

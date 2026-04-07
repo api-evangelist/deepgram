@@ -5,12 +5,11 @@ apis:
   - aid: deepgram:speech-to-text-api
     name: Deepgram Speech-To-Text API
     tags:
-      - Speech-to-Text
-      - Transcription
       - Audio
       - Speech Recognition
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Speech-To-Text
+      - Transcription
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.deepgram.com
     humanURL: https://developers.deepgram.com/docs/stt/getting-started
     properties:
@@ -29,12 +28,11 @@ apis:
   - aid: deepgram:text-to-speech-api
     name: Deepgram Text-To-Speech API
     tags:
-      - Text-to-Speech
-      - Speech Synthesis
       - Audio
+      - Speech Synthesis
+      - Text-To-Speech
       - Voice
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.deepgram.com
     humanURL: https://developers.deepgram.com/reference/text-to-speech-api/speak
     properties:
@@ -55,12 +53,11 @@ apis:
   - aid: deepgram:voice-agent-api
     name: Deepgram Voice Agent API
     tags:
-      - Voice Agent
       - Conversational AI
-      - Voice AI
       - Real-Time
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Voice Agent
+      - Voice AI
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.deepgram.com
     humanURL: https://deepgram.com/product/voice-agent-api
     properties:
@@ -82,8 +79,7 @@ apis:
       - Sentiment Analysis
       - Summarization
       - Topic Detection
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.deepgram.com
     humanURL: https://developers.deepgram.com/docs/audio-intelligence
     properties:
@@ -101,12 +97,11 @@ apis:
   - aid: deepgram:management-api
     name: Deepgram Management API
     tags:
-      - Management
-      - API Keys
-      - Projects
       - Administration
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - API Keys
+      - Management
+      - Projects
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.deepgram.com
     humanURL: https://developers.deepgram.com/docs/create-additional-api-keys
     properties:
@@ -123,14 +118,13 @@ apis:
       and infrastructure tooling.
 name: Deepgram
 tags:
-  - Speech-to-Text
-  - Text-to-Speech
-  - Voice AI
-  - Transcription
   - Artificial Intelligence
+  - Speech-To-Text
+  - Text-To-Speech
+  - Transcription
+  - Voice AI
 type: Contract
-image: 
-  https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
   - url: https://developers.deepgram.com/home

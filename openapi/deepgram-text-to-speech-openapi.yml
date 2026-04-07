@@ -23,7 +23,7 @@ servers:
   - url: https://api.eu.deepgram.com
     description: Deepgram EU Server
 tags:
-  - name: Text-to-Speech
+  - name: Text-To-Speech
     description: >-
       Convert text into natural-sounding speech audio.
 security:
@@ -39,7 +39,7 @@ paths:
         encoding format. Supports multiple voices and configurable audio
         output settings including encoding, sample rate, and container format.
       tags:
-        - Text-to-Speech
+        - Text-To-Speech
       parameters:
         - $ref: '#/components/parameters/model'
         - $ref: '#/components/parameters/encoding'
