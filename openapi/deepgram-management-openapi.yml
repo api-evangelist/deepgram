@@ -50,7 +50,7 @@ paths:
   /v1/projects:
     get:
       operationId: listProjects
-      summary: List all projects
+      summary: Deepgram List all projects
       description: >-
         Retrieves basic information about all projects associated with the
         authenticated API key.
@@ -72,7 +72,7 @@ paths:
   /v1/projects/{project_id}:
     get:
       operationId: getProject
-      summary: Get a project
+      summary: Deepgram Get a project
       description: >-
         Retrieves detailed information about a specific project.
       tags:
@@ -100,7 +100,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     patch:
       operationId: updateProject
-      summary: Update a project
+      summary: Deepgram Update a project
       description: >-
         Updates settings for a specific project.
       tags:
@@ -134,7 +134,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       operationId: deleteProject
-      summary: Delete a project
+      summary: Deepgram Delete a project
       description: >-
         Permanently deletes a specific project and all associated resources.
       tags:
@@ -159,7 +159,7 @@ paths:
   /v1/projects/{project_id}/keys:
     get:
       operationId: listProjectKeys
-      summary: List project API keys
+      summary: Deepgram List project API keys
       description: >-
         Retrieves all API keys associated with the specified project.
       tags:
@@ -181,7 +181,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     post:
       operationId: createProjectKey
-      summary: Create a project API key
+      summary: Deepgram Create a project API key
       description: >-
         Creates a new API key for the specified project with the given scopes.
         Requires the keys:write scope on the authenticating key.
@@ -217,7 +217,7 @@ paths:
   /v1/projects/{project_id}/keys/{key_id}:
     get:
       operationId: getProjectKey
-      summary: Get a project API key
+      summary: Deepgram Get a project API key
       description: >-
         Retrieves details about a specific API key in the project.
       tags:
@@ -246,7 +246,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       operationId: deleteProjectKey
-      summary: Delete a project API key
+      summary: Deepgram Delete a project API key
       description: >-
         Permanently deletes a specific API key from the project.
       tags:
@@ -272,7 +272,7 @@ paths:
   /v1/projects/{project_id}/members:
     get:
       operationId: listProjectMembers
-      summary: List project members
+      summary: Deepgram List project members
       description: >-
         Retrieves a list of account objects for members of the specified project.
       tags:
@@ -295,7 +295,7 @@ paths:
   /v1/projects/{project_id}/members/{member_id}:
     delete:
       operationId: removeProjectMember
-      summary: Remove a project member
+      summary: Deepgram Remove a project member
       description: >-
         Removes a member from the specified project.
       tags:
@@ -321,7 +321,7 @@ paths:
   /v1/projects/{project_id}/invites:
     get:
       operationId: listProjectInvitations
-      summary: List project invitations
+      summary: Deepgram List project invitations
       description: >-
         Retrieves a list of pending invitations for the specified project.
       tags:
@@ -343,7 +343,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     post:
       operationId: sendProjectInvitation
-      summary: Send a project invitation
+      summary: Deepgram Send a project invitation
       description: >-
         Sends an invitation to the specified email address to join the project.
       tags:
@@ -374,7 +374,7 @@ paths:
   /v1/projects/{project_id}/invites/{email}:
     delete:
       operationId: deleteProjectInvitation
-      summary: Delete a project invitation
+      summary: Deepgram Delete a project invitation
       description: >-
         Removes a pending invitation for the specified email address from
         the project.
@@ -408,7 +408,7 @@ paths:
   /v1/projects/{project_id}/members/{member_id}/scopes:
     get:
       operationId: getMemberScopes
-      summary: Get member scopes
+      summary: Deepgram Get member scopes
       description: >-
         Retrieves the scopes assigned to a specific member within a project.
       tags:
@@ -431,7 +431,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       operationId: updateMemberScopes
-      summary: Update member scopes
+      summary: Deepgram Update member scopes
       description: >-
         Updates the scopes assigned to a specific member within a project.
       tags:
@@ -457,7 +457,7 @@ paths:
   /v1/projects/{project_id}/usage:
     get:
       operationId: getProjectUsage
-      summary: Get project usage
+      summary: Deepgram Get project usage
       description: >-
         Retrieves usage data for the specified project over a given time range.
       tags:
@@ -494,7 +494,7 @@ paths:
   /v1/projects/{project_id}/requests:
     get:
       operationId: listProjectRequests
-      summary: List project requests
+      summary: Deepgram List project requests
       description: >-
         Retrieves a paginated list of API requests made to the specified
         project over a given time range.
@@ -545,7 +545,7 @@ paths:
   /v1/projects/{project_id}/balances:
     get:
       operationId: listProjectBalances
-      summary: List project balances
+      summary: Deepgram List project balances
       description: >-
         Retrieves billing balance information for the specified project.
       tags:
@@ -568,7 +568,7 @@ paths:
   /v1/projects/{project_id}/balances/{balance_id}:
     get:
       operationId: getProjectBalance
-      summary: Get a project balance
+      summary: Deepgram Get a project balance
       description: >-
         Retrieves details about a specific billing balance for the project.
       tags:
@@ -604,7 +604,7 @@ paths:
   /v1/models:
     get:
       operationId: listModels
-      summary: List all available models
+      summary: Deepgram List all available models
       description: >-
         Retrieves metadata on all the latest public models available on
         the Deepgram platform, including both speech-to-text and
@@ -635,7 +635,7 @@ paths:
   /v1/models/{model_id}:
     get:
       operationId: getModel
-      summary: Get a model
+      summary: Deepgram Get a model
       description: >-
         Retrieves metadata for a specific model by its identifier.
       tags:

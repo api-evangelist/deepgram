@@ -3,13 +3,14 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/deepgram/refs/heads/main/apis.yml
 apis:
   - aid: deepgram:speech-to-text-api
-    name: Deepgram Speech-to-Text API
+    name: Deepgram Speech-To-Text API
     tags:
       - Speech-to-Text
       - Transcription
       - Audio
       - Speech Recognition
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.deepgram.com
     humanURL: https://developers.deepgram.com/docs/stt/getting-started
     properties:
@@ -20,21 +21,20 @@ apis:
       - url: asyncapi/deepgram-speech-to-text-asyncapi.yml
         type: AsyncAPI
     description: >-
-      The Deepgram Speech-to-Text API provides accurate, fast transcription of
-      audio content using advanced AI models. It supports both pre-recorded audio
-      files and real-time streaming audio, delivering transcripts in under 300
-      milliseconds. The API includes features such as punctuation, diarization,
-      language detection, smart formatting, and support for multiple languages
-      and audio formats. Deepgram's Nova model family powers the transcription
-      engine, offering high accuracy for conversational and professional audio.
+      The Deepgram Speech-to-Text API provides accurate, fast transcription of audio
+      content using advanced AI models. It supports both pre-recorded audio files
+      and real-time streaming audio, delivering transcripts in under 300 milliseconds.
+      The API includes features such as punctuation, diarization, language detection,
+      smart formatting, and support for multiple languages and audio formats.
   - aid: deepgram:text-to-speech-api
-    name: Deepgram Text-to-Speech API
+    name: Deepgram Text-To-Speech API
     tags:
       - Text-to-Speech
       - Speech Synthesis
       - Audio
       - Voice
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.deepgram.com
     humanURL: https://developers.deepgram.com/reference/text-to-speech-api/speak
     properties:
@@ -59,7 +59,8 @@ apis:
       - Conversational AI
       - Voice AI
       - Real-Time
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.deepgram.com
     humanURL: https://deepgram.com/product/voice-agent-api
     properties:
@@ -68,14 +69,12 @@ apis:
       - url: asyncapi/deepgram-voice-agent-asyncapi.yml
         type: AsyncAPI
     description: >-
-      The Deepgram Voice Agent API is an end-to-end solution that combines
-      speech-to-text, LLM orchestration, and text-to-speech into a single
-      real-time API. It simplifies the development of conversational voice
-      agents by eliminating the need to stitch together multiple services.
-      The API includes built-in barge-in detection, turn-taking prediction,
-      function calling, and mid-session control to ensure smooth, natural
-      conversations without pauses or interruptions. It supports integration
-      with multiple LLM providers for flexible voice agent development.
+      The Deepgram Voice Agent API is an end-to-end solution that combines speech-to-text,
+      LLM orchestration, and text-to-speech into a single real-time API. It simplifies
+      the development of conversational voice agents by eliminating the need to stitch
+      together multiple services. The API includes built-in barge-in detection, turn-taking
+      prediction, function calling, and mid-session control to ensure smooth, natural
+      conversations without pauses or interruptions.
   - aid: deepgram:audio-intelligence-api
     name: Deepgram Audio Intelligence API
     tags:
@@ -83,7 +82,8 @@ apis:
       - Sentiment Analysis
       - Summarization
       - Topic Detection
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.deepgram.com
     humanURL: https://developers.deepgram.com/docs/audio-intelligence
     properties:
@@ -93,13 +93,11 @@ apis:
         type: OpenAPI
     description: >-
       The Deepgram Audio Intelligence API provides advanced analysis capabilities
-      for audio and text content. It offers features including sentiment
-      analysis, summarization, topic detection, and intent recognition. These
-      capabilities allow developers to extract structured insights from
-      transcribed audio or text input, enabling use cases such as call center
-      analytics, meeting summarization, and content categorization. The API
-      works alongside Deepgram's transcription services to provide a complete
-      audio understanding pipeline.
+      for audio and text content. It offers features including sentiment analysis,
+      summarization, topic detection, and intent recognition. These capabilities allow
+      developers to extract structured insights from transcribed audio or text input,
+      enabling use cases such as call center analytics, meeting summarization, and
+      content categorization.
   - aid: deepgram:management-api
     name: Deepgram Management API
     tags:
@@ -107,7 +105,8 @@ apis:
       - API Keys
       - Projects
       - Administration
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.deepgram.com
     humanURL: https://developers.deepgram.com/docs/create-additional-api-keys
     properties:
@@ -130,7 +129,8 @@ tags:
   - Transcription
   - Artificial Intelligence
 type: Contract
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: 
+  https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
   - url: https://developers.deepgram.com/home
@@ -171,15 +171,11 @@ created: '2026-03-20'
 modified: '2026-03-20'
 position: Consuming
 description: >-
-  Deepgram is an enterprise voice AI platform that provides speech-to-text,
-  text-to-speech, and voice agent APIs powered by advanced AI models. The
-  platform offers real-time and batch transcription through its Nova model
-  family, natural-sounding speech synthesis through its Aura model family,
-  and an end-to-end Voice Agent API that combines STT, LLM orchestration,
-  and TTS into a single real-time interface. Deepgram serves developers and
-  enterprises building voice-enabled applications including conversational AI
-  agents, call center analytics, transcription services, and accessibility
-  tools, with a focus on low latency and high accuracy.
+  Deepgram is an enterprise voice AI platform that provides speech-to-text, text-to-speech,
+  and voice agent APIs powered by advanced AI models. The platform offers real-time
+  and batch transcription through its Nova model family, natural-sounding speech synthesis
+  through its Aura model family, and an end-to-end Voice Agent API that combines STT,
+  LLM orchestration, and TTS into a single real-time interface.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

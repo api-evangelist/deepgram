@@ -32,7 +32,7 @@ paths:
   /v1/speak:
     post:
       operationId: synthesizeSpeech
-      summary: Convert text to speech
+      summary: Deepgram Convert text to speech
       description: >-
         Converts text content into natural-sounding speech audio using
         Deepgram's Aura model family. Returns audio data in the specified
