@@ -1,0 +1,39 @@
+name: Deepgram Vocabulary
+description: >-
+  Shared vocabulary of terms used across Deepgram's voice AI APIs.
+terms:
+  - term: Transcript
+    definition: The textual representation of spoken audio produced by Deepgram's STT models.
+  - term: Streaming Transcription
+    definition: >-
+      Low-latency, partial-then-final transcript emission over a
+      WebSocket session.
+  - term: Pre-Recorded Transcription
+    definition: >-
+      Batch transcription of an uploaded or URL-referenced audio file.
+  - term: Diarization
+    definition: >-
+      The process of attributing transcript segments to distinct
+      speakers.
+  - term: Smart Format
+    definition: >-
+      Automatic punctuation, capitalization, and formatting applied to
+      raw transcripts.
+  - term: Nova
+    definition: Deepgram's primary family of speech-to-text models.
+  - term: Aura
+    definition: Deepgram's family of text-to-speech voices.
+  - term: Voice Agent
+    definition: >-
+      An end-to-end conversational interface combining STT, LLM
+      orchestration, and TTS in a single API.
+  - term: Audio Intelligence
+    definition: >-
+      Post-transcription analysis features such as sentiment,
+      summarization, topic detection, and intent recognition.
+  - term: Project
+    definition: >-
+      A Deepgram organizational unit holding API keys, members, usage,
+      and balances.
+  - term: API Key
+    definition: A token used to authenticate requests, scoped to a project.

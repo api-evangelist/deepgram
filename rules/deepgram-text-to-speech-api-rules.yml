@@ -1,0 +1,33 @@
+extends:
+  - spectral:oas
+rules:
+  deepgram-tts-info-contact:
+    description: TTS API info should include a Deepgram developer contact.
+    given: $.info
+    severity: warn
+    then:
+      field: contact
+      function: truthy
+  deepgram-tts-base-url:
+    description: Servers should reference api.deepgram.com.
+    given: $.servers[*].url
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "api\\.deepgram\\.com"
+  deepgram-tts-speak-resource:
+    description: API should expose /v1/speak for text-to-speech.
+    given: $.paths
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "/v1/speak"
+  deepgram-tts-token-security:
+    description: API should declare Token-based bearer authentication.
+    given: $.components.securitySchemes
+    severity: error
+    then:
+      field: TokenAuth
+      function: truthy

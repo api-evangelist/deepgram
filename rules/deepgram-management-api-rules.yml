@@ -1,0 +1,34 @@
+extends:
+  - spectral:oas
+rules:
+  deepgram-mgmt-info-contact:
+    description: Management API info should include a Deepgram developer contact.
+    given: $.info
+    severity: warn
+    then:
+      field: contact
+      function: truthy
+  deepgram-mgmt-base-url:
+    description: Servers should reference api.deepgram.com.
+    given: $.servers[*].url
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "api\\.deepgram\\.com"
+  deepgram-mgmt-projects-resource:
+    description: API should expose /v1/projects for project management.
+    given: $.paths
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "/v1/projects"
+  deepgram-mgmt-keys-resource:
+    description: API should expose API key management endpoints.
+    given: $.paths
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "/keys"

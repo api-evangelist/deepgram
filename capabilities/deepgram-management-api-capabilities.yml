@@ -1,0 +1,42 @@
+name: Deepgram Management API Capabilities
+description: >-
+  Capabilities exposed by Deepgram's Management API for projects, API
+  keys, members, usage, and balances.
+capabilities:
+  - name: List Projects
+    description: List Deepgram projects accessible to the caller.
+    operationId: listProjects
+    method: GET
+    path: /v1/projects
+  - name: Create API Key
+    description: Create an API key scoped to a project.
+    operationId: createApiKey
+    method: POST
+    path: /v1/projects/{projectId}/keys
+  - name: Revoke API Key
+    description: Revoke a project API key.
+    operationId: revokeApiKey
+    method: DELETE
+    path: /v1/projects/{projectId}/keys/{keyId}
+  - name: List Members
+    description: List members of a project.
+    operationId: listMembers
+    method: GET
+    path: /v1/projects/{projectId}/members
+  - name: Get Usage
+    description: Retrieve project-level usage and quota information.
+    operationId: getUsage
+    method: GET
+    path: /v1/projects/{projectId}/usage
+  - name: Get Balance
+    description: Retrieve project balance information.
+    operationId: getBalance
+    method: GET
+    path: /v1/projects/{projectId}/balances
+use_cases:
+  - name: Multi-tenant key isolation
+    description: Issue and rotate scoped API keys per customer or workload.
+  - name: Cost monitoring
+    description: Track usage and balances to manage spend and run alerting.
+  - name: Team administration
+    description: Provision and offboard team members programmatically.

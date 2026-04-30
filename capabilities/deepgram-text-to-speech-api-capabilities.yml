@@ -1,0 +1,29 @@
+name: Deepgram Text-to-Speech API Capabilities
+description: >-
+  Capabilities exposed by Deepgram's Text-to-Speech API powered by the
+  Aura model family.
+capabilities:
+  - name: Synthesize Speech
+    description: Convert a text request into spoken audio.
+    operationId: synthesizeSpeech
+    method: POST
+    path: /v1/speak
+  - name: Stream Speech
+    description: Stream synthesized speech as text arrives over WebSocket.
+    operationId: streamSpeech
+    method: WEBSOCKET
+    path: /v1/speak
+  - name: Choose Voice
+    description: Select an Aura voice via the model parameter.
+    operationId: selectVoice
+    method: POST
+    path: /v1/speak
+use_cases:
+  - name: Voice agents and IVR
+    description: Power conversational voice agents and interactive voice response systems.
+  - name: Accessibility
+    description: Read web pages, articles, and notifications aloud for accessibility.
+  - name: Voicebot prompts
+    description: Generate dynamic spoken prompts in chatbots, kiosks, and devices.
+  - name: Audio content production
+    description: Produce narration for podcasts, videos, and training material.

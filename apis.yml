@@ -19,6 +19,10 @@ apis:
         type: OpenAPI
       - url: asyncapi/deepgram-speech-to-text-asyncapi.yml
         type: AsyncAPI
+      - url: rules/deepgram-speech-to-text-api-rules.yml
+        type: Rules
+      - url: capabilities/deepgram-speech-to-text-api-capabilities.yml
+        type: Capabilities
     description: >-
       The Deepgram Speech-to-Text API provides accurate, fast transcription of audio
       content using advanced AI models. It supports both pre-recorded audio files
@@ -42,6 +46,10 @@ apis:
         type: OpenAPI
       - url: asyncapi/deepgram-text-to-speech-asyncapi.yml
         type: AsyncAPI
+      - url: rules/deepgram-text-to-speech-api-rules.yml
+        type: Rules
+      - url: capabilities/deepgram-text-to-speech-api-capabilities.yml
+        type: Capabilities
     description: >-
       The Deepgram Text-to-Speech API converts text into natural-sounding speech
       using the Aura model family. It supports both single text requests and
@@ -109,6 +117,10 @@ apis:
         type: Documentation
       - url: openapi/deepgram-management-openapi.yml
         type: OpenAPI
+      - url: rules/deepgram-management-api-rules.yml
+        type: Rules
+      - url: capabilities/deepgram-management-api-capabilities.yml
+        type: Capabilities
     description: >-
       The Deepgram Management API allows developers to programmatically manage
       their Deepgram account resources. It provides endpoints for creating and
@@ -161,8 +173,11 @@ common:
     type: JSON-LD
   - url: json-schema/deepgram-transcript-schema.json
     type: JSONSchema
+  - url: vocabulary/deepgram-vocabulary.yml
+    type: Vocabulary
 created: '2026-03-20'
-modified: '2026-03-20'
+modified: '2026-04-28'
+xType: company
 position: Consuming
 description: >-
   Deepgram is an enterprise voice AI platform that provides speech-to-text, text-to-speech,

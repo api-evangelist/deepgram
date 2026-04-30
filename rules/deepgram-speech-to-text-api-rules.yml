@@ -1,0 +1,40 @@
+extends:
+  - spectral:oas
+rules:
+  deepgram-info-contact:
+    description: API info should include a Deepgram developer contact.
+    given: $.info
+    severity: warn
+    then:
+      field: contact
+      function: truthy
+  deepgram-base-url:
+    description: Servers should reference api.deepgram.com.
+    given: $.servers[*].url
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "api\\.deepgram\\.com"
+  deepgram-token-security:
+    description: API should declare Token-based bearer authentication.
+    given: $.components.securitySchemes
+    severity: error
+    then:
+      field: TokenAuth
+      function: truthy
+  deepgram-listen-resource:
+    description: API should expose /v1/listen for transcription.
+    given: $.paths
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "/v1/listen"
+  deepgram-operation-tags:
+    description: Operations should be tagged Transcription, Speak, or Read.
+    given: $.paths[*][*]
+    severity: warn
+    then:
+      field: tags
+      function: truthy
