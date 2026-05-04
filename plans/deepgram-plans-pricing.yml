@@ -1,0 +1,125 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Deepgram
+providerId: deepgram
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - AI
+  - Speech-to-Text
+  - Text-to-Speech
+description: Deepgram per-minute speech recognition and per-character text-to-speech pricing.
+sources:
+  - https://deepgram.com/pricing
+plans:
+  - id: deepgram-nova3-mono
+    name: Nova-3 Monolingual STT
+    type: usage-based
+    description: $0.0048/min.
+    entries:
+      - label: Per minute
+        name: minute
+        type: metered
+        metric: minute
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.0048'
+        userMultiplied: false
+    elements:
+      - name: Streaming and pre-recorded
+      - name: English
+      - name: Diarization, smart formatting
+  - id: deepgram-nova3-multi
+    name: Nova-3 Multilingual STT
+    type: usage-based
+    description: $0.0058/min.
+    entries:
+      - label: Per minute
+        name: minute
+        type: metered
+        metric: minute
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.0058'
+        userMultiplied: false
+    elements:
+      - name: 30+ languages
+      - name: Streaming and pre-recorded
+  - id: deepgram-flux-en
+    name: Flux English STT
+    type: usage-based
+    description: $0.0065/min.
+    entries:
+      - label: Per minute
+        name: minute
+        type: metered
+        metric: minute
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.0065'
+        userMultiplied: false
+    elements:
+      - name: Latest English model
+      - name: Highest accuracy
+  - id: deepgram-flux-multi
+    name: Flux Multilingual STT
+    type: usage-based
+    description: $0.0078/min.
+    entries:
+      - label: Per minute
+        name: minute
+        type: metered
+        metric: minute
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.0078'
+        userMultiplied: false
+    elements:
+      - name: Latest multilingual model
+      - name: Highest accuracy
+  - id: deepgram-aura1
+    name: Aura-1 TTS
+    type: usage-based
+    description: $0.015/1k characters.
+    entries:
+      - label: Per 1k characters
+        name: characters
+        type: metered
+        metric: characters
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1000
+        price: '0.0150'
+        userMultiplied: false
+    elements:
+      - name: Voice cloning
+      - name: Streaming output
+  - id: deepgram-aura2
+    name: Aura-2 TTS
+    type: usage-based
+    description: $0.030/1k characters.
+    entries:
+      - label: Per 1k characters
+        name: characters
+        type: metered
+        metric: characters
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1000
+        price: '0.030'
+        userMultiplied: false
+    elements:
+      - name: Higher fidelity voices
+      - name: Studio-quality output

@@ -1,0 +1,37 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Deepgram
+providerId: deepgram
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Speech
+description: Deepgram concurrent connection limits.
+sources:
+  - https://deepgram.com/pricing
+  - https://developers.deepgram.com/docs/working-with-concurrency-rate-limits
+headers:
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+  concurrencyExceeded: 429
+limits:
+  - name: Streaming concurrent (Pay-as-you-go)
+    scope: project
+    metric: concurrent
+    limit: 50
+  - name: Pre-recorded concurrent (Pay-as-you-go)
+    scope: project
+    metric: concurrent
+    limit: 100
+  - name: Streaming concurrent (Growth)
+    scope: project
+    metric: concurrent
+    limit: 100
+  - name: Streaming concurrent (Enterprise)
+    scope: project
+    metric: concurrent
+    limit: custom

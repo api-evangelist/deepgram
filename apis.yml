@@ -1,6 +1,5 @@
 aid: deepgram
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/deepgram/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/deepgram/refs/heads/main/apis.yml
 apis:
   - aid: deepgram:speech-to-text-api
     name: Deepgram Speech-To-Text API
@@ -23,12 +22,11 @@ apis:
         type: Rules
       - url: capabilities/deepgram-speech-to-text-api-capabilities.yml
         type: Capabilities
-    description: >-
-      The Deepgram Speech-to-Text API provides accurate, fast transcription of audio
-      content using advanced AI models. It supports both pre-recorded audio files
-      and real-time streaming audio, delivering transcripts in under 300 milliseconds.
-      The API includes features such as punctuation, diarization, language detection,
-      smart formatting, and support for multiple languages and audio formats.
+    description: The Deepgram Speech-to-Text API provides accurate, fast transcription of audio content
+      using advanced AI models. It supports both pre-recorded audio files and real-time streaming audio,
+      delivering transcripts in under 300 milliseconds. The API includes features such as punctuation,
+      diarization, language detection, smart formatting, and support for multiple languages and audio
+      formats.
   - aid: deepgram:text-to-speech-api
     name: Deepgram Text-To-Speech API
     tags:
@@ -50,14 +48,11 @@ apis:
         type: Rules
       - url: capabilities/deepgram-text-to-speech-api-capabilities.yml
         type: Capabilities
-    description: >-
-      The Deepgram Text-to-Speech API converts text into natural-sounding speech
-      using the Aura model family. It supports both single text requests and
-      continuous streaming text-to-speech, delivering sub-200 millisecond
-      latency suitable for real-time voice agents and conversational AI
-      applications. The API offers multiple voice options and is designed for
-      enterprise-grade deployments including voicebots, IVR systems, and
-      interactive voice applications.
+    description: The Deepgram Text-to-Speech API converts text into natural-sounding speech using the
+      Aura model family. It supports both single text requests and continuous streaming text-to-speech,
+      delivering sub-200 millisecond latency suitable for real-time voice agents and conversational AI
+      applications. The API offers multiple voice options and is designed for enterprise-grade deployments
+      including voicebots, IVR systems, and interactive voice applications.
   - aid: deepgram:voice-agent-api
     name: Deepgram Voice Agent API
     tags:
@@ -73,13 +68,11 @@ apis:
         type: Documentation
       - url: asyncapi/deepgram-voice-agent-asyncapi.yml
         type: AsyncAPI
-    description: >-
-      The Deepgram Voice Agent API is an end-to-end solution that combines speech-to-text,
-      LLM orchestration, and text-to-speech into a single real-time API. It simplifies
-      the development of conversational voice agents by eliminating the need to stitch
-      together multiple services. The API includes built-in barge-in detection, turn-taking
-      prediction, function calling, and mid-session control to ensure smooth, natural
-      conversations without pauses or interruptions.
+    description: The Deepgram Voice Agent API is an end-to-end solution that combines speech-to-text,
+      LLM orchestration, and text-to-speech into a single real-time API. It simplifies the development
+      of conversational voice agents by eliminating the need to stitch together multiple services. The
+      API includes built-in barge-in detection, turn-taking prediction, function calling, and mid-session
+      control to ensure smooth, natural conversations without pauses or interruptions.
   - aid: deepgram:audio-intelligence-api
     name: Deepgram Audio Intelligence API
     tags:
@@ -95,13 +88,11 @@ apis:
         type: Documentation
       - url: openapi/deepgram-speech-to-text-openapi.yml
         type: OpenAPI
-    description: >-
-      The Deepgram Audio Intelligence API provides advanced analysis capabilities
-      for audio and text content. It offers features including sentiment analysis,
-      summarization, topic detection, and intent recognition. These capabilities allow
-      developers to extract structured insights from transcribed audio or text input,
-      enabling use cases such as call center analytics, meeting summarization, and
-      content categorization.
+    description: The Deepgram Audio Intelligence API provides advanced analysis capabilities for audio
+      and text content. It offers features including sentiment analysis, summarization, topic detection,
+      and intent recognition. These capabilities allow developers to extract structured insights from
+      transcribed audio or text input, enabling use cases such as call center analytics, meeting summarization,
+      and content categorization.
   - aid: deepgram:management-api
     name: Deepgram Management API
     tags:
@@ -121,13 +112,10 @@ apis:
         type: Rules
       - url: capabilities/deepgram-management-api-capabilities.yml
         type: Capabilities
-    description: >-
-      The Deepgram Management API allows developers to programmatically manage
-      their Deepgram account resources. It provides endpoints for creating and
-      managing API keys, configuring projects, managing team members, and
-      monitoring usage. This API enables automation of administrative tasks
-      and integration of Deepgram account management into existing workflows
-      and infrastructure tooling.
+    description: The Deepgram Management API allows developers to programmatically manage their Deepgram
+      account resources. It provides endpoints for creating and managing API keys, configuring projects,
+      managing team members, and monitoring usage. This API enables automation of administrative tasks
+      and integration of Deepgram account management into existing workflows and infrastructure tooling.
 name: Deepgram
 tags:
   - Artificial Intelligence
@@ -175,16 +163,36 @@ common:
     type: JSONSchema
   - url: vocabulary/deepgram-vocabulary.yml
     type: Vocabulary
+  - type: Features
+    data:
+      - 'Nova-3 STT: $0.0048/min mono, $0.0058/min multilingual'
+      - 'Flux STT: $0.0065/min English, $0.0078/min multilingual'
+      - Aura-1 TTS at $0.015/1k characters
+      - Aura-2 TTS at $0.030/1k characters with studio quality
+      - Streaming and pre-recorded transcription
+      - Speaker diarization, smart formatting
+      - Default 50 streaming concurrent (PAYG), 100 pre-recorded
+      - Voice cloning on Aura models
+      - Voice agents combining STT + LLM + TTS
+      - 30+ language support on multilingual models
+      - WebSocket streaming for real-time STT
+      - REST API for pre-recorded files
+      - 'Audio Intelligence: summarization, topics, sentiment, entities'
+      - Custom model training (Enterprise)
+      - Self-hosted on-prem option (Enterprise)
+      - OAuth 2.0 + API keys
+    sources:
+      - https://deepgram.com/pricing
+    updated: '2026-05-04'
 created: '2026-03-20'
-modified: '2026-04-28'
+modified: '2026-05-04'
 xType: company
 position: Consuming
-description: >-
-  Deepgram is an enterprise voice AI platform that provides speech-to-text, text-to-speech,
-  and voice agent APIs powered by advanced AI models. The platform offers real-time
-  and batch transcription through its Nova model family, natural-sounding speech synthesis
-  through its Aura model family, and an end-to-end Voice Agent API that combines STT,
-  LLM orchestration, and TTS into a single real-time interface.
+description: Deepgram is an enterprise voice AI platform that provides speech-to-text, text-to-speech,
+  and voice agent APIs powered by advanced AI models. The platform offers real-time and batch transcription
+  through its Nova model family, natural-sounding speech synthesis through its Aura model family, and
+  an end-to-end Voice Agent API that combines STT, LLM orchestration, and TTS into a single real-time
+  interface.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
