@@ -184,6 +184,8 @@ common:
     sources:
       - https://deepgram.com/pricing
     updated: '2026-05-04'
+  - type: Integrations
+    url: https://deepgram.com/partners
 created: '2026-03-20'
 modified: '2026-05-04'
 xType: company
@@ -193,6 +195,36 @@ description: Deepgram is an enterprise voice AI platform that provides speech-to
   through its Nova model family, natural-sounding speech synthesis through its Aura model family, and
   an end-to-end Voice Agent API that combines STT, LLM orchestration, and TTS into a single real-time
   interface.
+integrations:
+  - name: Technology
+  - name: Development
+  - name: Vonage Technology
+  - name: Cloudflare Technology
+  - name: Daily.co Technology
+  - name: Stream Technology
+  - name: Kore Technology
+  - name: Google Cloud Technology
+  - name: AudioCodes Technology
+  - name: Vida Technology
+  - name: Recall.ai Technology
+  - name: Porter Technology
+  - name: Perlon AI Development
+  - name: OneSix Solutions Development
+  - name: Lumio AI Development
+  - name: LucidPoint Development
+  - name: Lindy Technology
+  - name: InfoCap Development
+  - name: Five9 Technology
+  - name: Caylent Development
+  - name: APrime Development
+  - name: AI Heroes Development
+  - name: AICG Technology
+  - name: Deepgram & Vercel Next.js Templates Technology
+  - name: AWS Technology
+  - name: Abby Connect Technology
+  - name: Voximplant Technology
+  - name: Cognigy Technology
+  - name: Enterprise Bot Technology
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
