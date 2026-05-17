@@ -123,7 +123,7 @@ tags:
   - Text-To-Speech
   - Transcription
   - Voice AI
-type: Contract
+kind: contract
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
@@ -158,7 +158,7 @@ common:
     name: Terms of Service
     type: TermsOfService
   - url: json-ld/deepgram-context.jsonld
-    type: JSON-LD
+    type: JSONLD
   - url: json-schema/deepgram-transcript-schema.json
     type: JSONSchema
   - url: vocabulary/deepgram-vocabulary.yml
@@ -188,7 +188,7 @@ common:
     url: https://deepgram.com/partners
 created: '2026-03-20'
 modified: '2026-05-04'
-xType: company
+kind: company
 position: Consuming
 description: Deepgram is an enterprise voice AI platform that provides speech-to-text, text-to-speech,
   and voice agent APIs powered by advanced AI models. The platform offers real-time and batch transcription
