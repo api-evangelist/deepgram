@@ -1,0 +1,147 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Deepgram Management API — Invitations
+  description: 'Deepgram Management API — Invitations. 3 operations. Lead operation: Deepgram List project invitations. Self-contained
+    Naftiko capability covering one Deepgram business surface.'
+  tags:
+  - Deepgram
+  - Invitations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DEEPGRAM_API_KEY: DEEPGRAM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: management-invitations
+    baseUri: https://api.deepgram.com
+    description: Deepgram Management API — Invitations business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-projects-project_id-invites
+      path: /v1/projects/{project_id}/invites
+      operations:
+      - name: listprojectinvitations
+        method: GET
+        description: Deepgram List project invitations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: sendprojectinvitation
+        method: POST
+        description: Deepgram Send a project invitation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-projects-project_id-invites-email
+      path: /v1/projects/{project_id}/invites/{email}
+      operations:
+      - name: deleteprojectinvitation
+        method: DELETE
+        description: Deepgram Delete a project invitation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: email
+          in: path
+          type: string
+          description: Email address of the invitation to remove.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.DEEPGRAM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: management-invitations-rest
+    port: 8080
+    description: REST adapter for Deepgram Management API — Invitations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/projects/{project-id}/invites
+      name: v1-projects-project-id-invites
+      description: REST surface for v1-projects-project_id-invites.
+      operations:
+      - method: GET
+        name: listprojectinvitations
+        description: Deepgram List project invitations
+        call: management-invitations.listprojectinvitations
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: sendprojectinvitation
+        description: Deepgram Send a project invitation
+        call: management-invitations.sendprojectinvitation
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/projects/{project-id}/invites/{email}
+      name: v1-projects-project-id-invites-email
+      description: REST surface for v1-projects-project_id-invites-email.
+      operations:
+      - method: DELETE
+        name: deleteprojectinvitation
+        description: Deepgram Delete a project invitation
+        call: management-invitations.deleteprojectinvitation
+        with:
+          email: rest.email
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: management-invitations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Deepgram Management API — Invitations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: deepgram-list-project-invitations
+      description: Deepgram List project invitations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: management-invitations.listprojectinvitations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deepgram-send-project-invitation
+      description: Deepgram Send a project invitation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: management-invitations.sendprojectinvitation
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deepgram-delete-project-invitation
+      description: Deepgram Delete a project invitation
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: management-invitations.deleteprojectinvitation
+      with:
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.

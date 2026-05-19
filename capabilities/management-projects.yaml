@@ -1,0 +1,162 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Deepgram Management API — Projects
+  description: 'Deepgram Management API — Projects. 4 operations. Lead operation: Deepgram List all projects. Self-contained
+    Naftiko capability covering one Deepgram business surface.'
+  tags:
+  - Deepgram
+  - Projects
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DEEPGRAM_API_KEY: DEEPGRAM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: management-projects
+    baseUri: https://api.deepgram.com
+    description: Deepgram Management API — Projects business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-projects
+      path: /v1/projects
+      operations:
+      - name: listprojects
+        method: GET
+        description: Deepgram List all projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-projects-project_id
+      path: /v1/projects/{project_id}
+      operations:
+      - name: getproject
+        method: GET
+        description: Deepgram Get a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateproject
+        method: PATCH
+        description: Deepgram Update a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteproject
+        method: DELETE
+        description: Deepgram Delete a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.DEEPGRAM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: management-projects-rest
+    port: 8080
+    description: REST adapter for Deepgram Management API — Projects. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/projects
+      name: v1-projects
+      description: REST surface for v1-projects.
+      operations:
+      - method: GET
+        name: listprojects
+        description: Deepgram List all projects
+        call: management-projects.listprojects
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/projects/{project-id}
+      name: v1-projects-project-id
+      description: REST surface for v1-projects-project_id.
+      operations:
+      - method: GET
+        name: getproject
+        description: Deepgram Get a project
+        call: management-projects.getproject
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateproject
+        description: Deepgram Update a project
+        call: management-projects.updateproject
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteproject
+        description: Deepgram Delete a project
+        call: management-projects.deleteproject
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: management-projects-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Deepgram Management API — Projects. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: deepgram-list-all-projects
+      description: Deepgram List all projects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: management-projects.listprojects
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deepgram-get-project
+      description: Deepgram Get a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: management-projects.getproject
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deepgram-update-project
+      description: Deepgram Update a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: management-projects.updateproject
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deepgram-delete-project
+      description: Deepgram Delete a project
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: management-projects.deleteproject
+      outputParameters:
+      - type: object
+        mapping: $.
