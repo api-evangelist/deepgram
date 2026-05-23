@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Results",
+  "title": "Results",
+  "type": "object",
+  "properties": {
+    "channels": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Channel"
+      },
+      "description": "Transcription results organized by audio channel."
+    },
+    "utterances": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Utterance"
+      },
+      "description": "Transcription results organized by utterance when utterances parameter is enabled."
+    },
+    "summary": {
+      "$ref": "#/components/schemas/Summary"
+    },
+    "sentiments": {
+      "$ref": "#/components/schemas/SentimentResults"
+    },
+    "topics": {
+      "$ref": "#/components/schemas/TopicResults"
+    },
+    "intents": {
+      "$ref": "#/components/schemas/IntentResults"
+    }
+  }
+}

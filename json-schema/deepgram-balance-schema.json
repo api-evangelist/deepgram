@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Balance",
+  "title": "Balance",
+  "type": "object",
+  "properties": {
+    "balance_id": {
+      "type": "string",
+      "description": "Unique identifier for the balance."
+    },
+    "amount": {
+      "type": "number",
+      "format": "float",
+      "description": "Current balance amount."
+    },
+    "units": {
+      "type": "string",
+      "description": "Units of the balance amount."
+    },
+    "purchase": {
+      "type": "string",
+      "description": "Purchase method or plan name."
+    }
+  }
+}

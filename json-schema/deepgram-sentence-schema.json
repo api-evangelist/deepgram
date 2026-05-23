@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Sentence",
+  "title": "Sentence",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string",
+      "description": "Sentence text."
+    },
+    "start": {
+      "type": "number",
+      "format": "float",
+      "description": "Start time of the sentence in seconds."
+    },
+    "end": {
+      "type": "number",
+      "format": "float",
+      "description": "End time of the sentence in seconds."
+    }
+  }
+}

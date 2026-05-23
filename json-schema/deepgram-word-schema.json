@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Word",
+  "title": "Word",
+  "type": "object",
+  "properties": {
+    "word": {
+      "type": "string",
+      "description": "The transcribed word."
+    },
+    "start": {
+      "type": "number",
+      "format": "float",
+      "description": "Start time of the word in seconds."
+    },
+    "end": {
+      "type": "number",
+      "format": "float",
+      "description": "End time of the word in seconds."
+    },
+    "confidence": {
+      "type": "number",
+      "format": "float",
+      "description": "Confidence score for this word.",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "speaker": {
+      "type": "integer",
+      "description": "Speaker identifier when diarization is enabled."
+    },
+    "punctuated_word": {
+      "type": "string",
+      "description": "The word with punctuation applied when punctuate is enabled."
+    },
+    "sentiment": {
+      "type": "string",
+      "enum": [
+        "positive",
+        "negative",
+        "neutral"
+      ],
+      "description": "Sentiment of the word when sentiment analysis is enabled."
+    },
+    "sentiment_score": {
+      "type": "number",
+      "format": "float",
+      "description": "Sentiment confidence score for this word."
+    }
+  }
+}

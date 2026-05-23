@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ModelInfo",
+  "title": "ModelInfo",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the model."
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the model."
+    },
+    "arch": {
+      "type": "string",
+      "description": "Architecture of the model."
+    }
+  }
+}

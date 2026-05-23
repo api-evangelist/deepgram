@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Key",
+  "title": "Key",
+  "type": "object",
+  "properties": {
+    "api_key_id": {
+      "type": "string",
+      "description": "Unique identifier for the API key."
+    },
+    "key": {
+      "type": "string",
+      "description": "Masked API key value."
+    },
+    "comment": {
+      "type": "string",
+      "description": "Description or comment for the API key."
+    },
+    "scopes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Scopes assigned to this API key."
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the key was created."
+    },
+    "expiration_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Expiration date of the key, if set."
+    }
+  }
+}

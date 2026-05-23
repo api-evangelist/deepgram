@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/IntentResults",
+  "title": "IntentResults",
+  "type": "object",
+  "properties": {
+    "segments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/IntentSegment"
+      },
+      "description": "Intent recognition results for content segments."
+    }
+  }
+}

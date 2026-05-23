@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/KeyCreate",
+  "title": "KeyCreate",
+  "type": "object",
+  "required": [
+    "comment",
+    "scopes"
+  ],
+  "properties": {
+    "comment": {
+      "type": "string",
+      "description": "Description or name for the API key."
+    },
+    "scopes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Scopes to assign to this API key."
+    },
+    "expiration_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Optional expiration date for the key."
+    },
+    "time_to_live_in_seconds": {
+      "type": "integer",
+      "description": "Optional time-to-live in seconds for the key."
+    }
+  }
+}

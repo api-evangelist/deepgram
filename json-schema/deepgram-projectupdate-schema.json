@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ProjectUpdate",
+  "title": "ProjectUpdate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "New name for the project."
+    },
+    "company": {
+      "type": "string",
+      "description": "New company name for the project."
+    }
+  }
+}

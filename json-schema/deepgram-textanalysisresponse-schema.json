@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TextAnalysisResponse",
+  "title": "TextAnalysisResponse",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "request_id": {
+          "type": "string",
+          "description": "Unique identifier for the API request."
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the request was created."
+        }
+      }
+    },
+    "results": {
+      "type": "object",
+      "properties": {
+        "summary": {
+          "$ref": "#/components/schemas/Summary"
+        },
+        "sentiments": {
+          "$ref": "#/components/schemas/SentimentResults"
+        },
+        "topics": {
+          "$ref": "#/components/schemas/TopicResults"
+        },
+        "intents": {
+          "$ref": "#/components/schemas/IntentResults"
+        }
+      }
+    }
+  }
+}

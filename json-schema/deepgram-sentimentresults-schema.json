@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SentimentResults",
+  "title": "SentimentResults",
+  "type": "object",
+  "properties": {
+    "segments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SentimentSegment"
+      },
+      "description": "Sentiment analysis results for content segments."
+    },
+    "average": {
+      "$ref": "#/components/schemas/SentimentAverage"
+    }
+  }
+}

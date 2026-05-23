@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Metadata",
+  "title": "Metadata",
+  "type": "object",
+  "properties": {
+    "transaction_key": {
+      "type": "string",
+      "description": "Unique identifier for the transaction."
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Unique identifier for the API request."
+    },
+    "sha256": {
+      "type": "string",
+      "description": "SHA-256 hash of the submitted audio."
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the request was created."
+    },
+    "duration": {
+      "type": "number",
+      "format": "float",
+      "description": "Duration of the submitted audio in seconds."
+    },
+    "channels": {
+      "type": "integer",
+      "description": "Number of audio channels detected."
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Model identifiers used for transcription."
+    },
+    "model_info": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/components/schemas/ModelInfo"
+      },
+      "description": "Detailed information about models used."
+    }
+  }
+}

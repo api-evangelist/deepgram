@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TopicResults",
+  "title": "TopicResults",
+  "type": "object",
+  "properties": {
+    "segments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/TopicSegment"
+      },
+      "description": "Topic detection results for content segments."
+    }
+  }
+}

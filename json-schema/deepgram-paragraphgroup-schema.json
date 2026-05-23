@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ParagraphGroup",
+  "title": "ParagraphGroup",
+  "type": "object",
+  "properties": {
+    "transcript": {
+      "type": "string",
+      "description": "Full transcript organized into paragraphs."
+    },
+    "paragraphs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Paragraph"
+      },
+      "description": "Individual paragraph objects."
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Alternative",
+  "title": "Alternative",
+  "type": "object",
+  "properties": {
+    "transcript": {
+      "type": "string",
+      "description": "Full transcript text for this alternative."
+    },
+    "confidence": {
+      "type": "number",
+      "format": "float",
+      "description": "Confidence score for this alternative.",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "words": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Word"
+      },
+      "description": "Individual words with timing and confidence information."
+    },
+    "paragraphs": {
+      "$ref": "#/components/schemas/ParagraphGroup"
+    }
+  }
+}

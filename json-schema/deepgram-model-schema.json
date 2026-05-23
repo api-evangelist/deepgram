@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Model",
+  "title": "Model",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the model."
+    },
+    "canonical_name": {
+      "type": "string",
+      "description": "Canonical identifier for the model."
+    },
+    "architecture": {
+      "type": "string",
+      "description": "Architecture of the model."
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Languages supported by the model."
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the model."
+    },
+    "uuid": {
+      "type": "string",
+      "description": "Unique identifier for the model."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Additional metadata about the model."
+    }
+  }
+}

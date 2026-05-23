@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Utterance",
+  "title": "Utterance",
+  "type": "object",
+  "properties": {
+    "start": {
+      "type": "number",
+      "format": "float",
+      "description": "Start time of the utterance in seconds."
+    },
+    "end": {
+      "type": "number",
+      "format": "float",
+      "description": "End time of the utterance in seconds."
+    },
+    "confidence": {
+      "type": "number",
+      "format": "float",
+      "description": "Confidence score for this utterance."
+    },
+    "channel": {
+      "type": "integer",
+      "description": "Audio channel index for this utterance."
+    },
+    "transcript": {
+      "type": "string",
+      "description": "Transcript text for this utterance."
+    },
+    "words": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Word"
+      },
+      "description": "Individual words within this utterance."
+    },
+    "speaker": {
+      "type": "integer",
+      "description": "Speaker identifier for this utterance."
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this utterance."
+    }
+  }
+}

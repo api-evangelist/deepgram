@@ -1,0 +1,335 @@
+{
+  "provider": "Deepgram",
+  "providerId": "deepgram",
+  "kind": "json-structure",
+  "description": "Structural overview of the Deepgram API surface; extracted from openapi/.",
+  "schemaCount": 21,
+  "operationCount": 21,
+  "schemas": [
+    {
+      "name": "ProjectList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Project",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "ProjectUpdate",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "KeyList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Key",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "KeyWithSecret",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "KeyCreate",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "comment",
+        "scopes"
+      ]
+    },
+    {
+      "name": "MemberList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Member",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "InvitationList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Invitation",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "InvitationCreate",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "email",
+        "scope"
+      ]
+    },
+    {
+      "name": "ScopeList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "ScopeUpdate",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "scope"
+      ]
+    },
+    {
+      "name": "UsageSummary",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "RequestList",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "BalanceList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Balance",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ModelList",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "Model",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "Error",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/v1/projects",
+      "operationId": "listProjects",
+      "summary": "Deepgram List all projects",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/{project_id}",
+      "operationId": "getProject",
+      "summary": "Deepgram Get a project",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/projects/{project_id}",
+      "operationId": "deleteProject",
+      "summary": "Deepgram Delete a project",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/projects/{project_id}",
+      "operationId": "updateProject",
+      "summary": "Deepgram Update a project",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/{project_id}/keys",
+      "operationId": "listProjectKeys",
+      "summary": "Deepgram List project API keys",
+      "tags": [
+        "Keys"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v1/projects/{project_id}/keys",
+      "operationId": "createProjectKey",
+      "summary": "Deepgram Create a project API key",
+      "tags": [
+        "Keys"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/{project_id}/keys/{key_id}",
+      "operationId": "getProjectKey",
+      "summary": "Deepgram Get a project API key",
+      "tags": [
+        "Keys"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/projects/{project_id}/keys/{key_id}",
+      "operationId": "deleteProjectKey",
+      "summary": "Deepgram Delete a project API key",
+      "tags": [
+        "Keys"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/{project_id}/members",
+      "operationId": "listProjectMembers",
+      "summary": "Deepgram List project members",
+      "tags": [
+        "Members"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/projects/{project_id}/members/{member_id}",
+      "operationId": "removeProjectMember",
+      "summary": "Deepgram Remove a project member",
+      "tags": [
+        "Members"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/{project_id}/invites",
+      "operationId": "listProjectInvitations",
+      "summary": "Deepgram List project invitations",
+      "tags": [
+        "Invitations"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v1/projects/{project_id}/invites",
+      "operationId": "sendProjectInvitation",
+      "summary": "Deepgram Send a project invitation",
+      "tags": [
+        "Invitations"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/projects/{project_id}/invites/{email}",
+      "operationId": "deleteProjectInvitation",
+      "summary": "Deepgram Delete a project invitation",
+      "tags": [
+        "Invitations"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/{project_id}/members/{member_id}/scopes",
+      "operationId": "getMemberScopes",
+      "summary": "Deepgram Get member scopes",
+      "tags": [
+        "Scopes"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/projects/{project_id}/members/{member_id}/scopes",
+      "operationId": "updateMemberScopes",
+      "summary": "Deepgram Update member scopes",
+      "tags": [
+        "Scopes"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/{project_id}/usage",
+      "operationId": "getProjectUsage",
+      "summary": "Deepgram Get project usage",
+      "tags": [
+        "Usage"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/{project_id}/requests",
+      "operationId": "listProjectRequests",
+      "summary": "Deepgram List project requests",
+      "tags": [
+        "Usage"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/{project_id}/balances",
+      "operationId": "listProjectBalances",
+      "summary": "Deepgram List project balances",
+      "tags": [
+        "Balances"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/{project_id}/balances/{balance_id}",
+      "operationId": "getProjectBalance",
+      "summary": "Deepgram Get a project balance",
+      "tags": [
+        "Balances"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "operationId": "listModels",
+      "summary": "Deepgram List all available models",
+      "tags": [
+        "Models"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models/{model_id}",
+      "operationId": "getModel",
+      "summary": "Deepgram Get a model",
+      "tags": [
+        "Models"
+      ]
+    }
+  ]
+}

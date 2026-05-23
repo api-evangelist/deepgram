@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Project",
+  "title": "Project",
+  "type": "object",
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "description": "Unique identifier for the project."
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the project."
+    },
+    "company": {
+      "type": "string",
+      "description": "Company name associated with the project."
+    }
+  }
+}

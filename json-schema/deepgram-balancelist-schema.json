@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BalanceList",
+  "title": "BalanceList",
+  "type": "object",
+  "properties": {
+    "balances": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Balance"
+      },
+      "description": "List of billing balances."
+    }
+  }
+}

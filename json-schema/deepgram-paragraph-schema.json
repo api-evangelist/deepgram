@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Paragraph",
+  "title": "Paragraph",
+  "type": "object",
+  "properties": {
+    "sentences": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Sentence"
+      },
+      "description": "Sentences within this paragraph."
+    },
+    "start": {
+      "type": "number",
+      "format": "float",
+      "description": "Start time of the paragraph in seconds."
+    },
+    "end": {
+      "type": "number",
+      "format": "float",
+      "description": "End time of the paragraph in seconds."
+    },
+    "num_words": {
+      "type": "integer",
+      "description": "Number of words in this paragraph."
+    },
+    "speaker": {
+      "type": "integer",
+      "description": "Speaker identifier for this paragraph."
+    }
+  }
+}

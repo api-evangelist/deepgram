@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ScopeList",
+  "title": "ScopeList",
+  "type": "object",
+  "properties": {
+    "scopes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of scopes assigned to the member."
+    }
+  }
+}

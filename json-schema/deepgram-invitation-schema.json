@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Invitation",
+  "title": "Invitation",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email address of the invitee."
+    },
+    "scope": {
+      "type": "string",
+      "description": "Scope assigned to the invitation."
+    }
+  }
+}

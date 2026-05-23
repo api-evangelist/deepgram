@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ScopeUpdate",
+  "title": "ScopeUpdate",
+  "type": "object",
+  "required": [
+    "scope"
+  ],
+  "properties": {
+    "scope": {
+      "type": "string",
+      "description": "New scope to assign to the member."
+    }
+  }
+}

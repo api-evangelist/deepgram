@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MemberList",
+  "title": "MemberList",
+  "type": "object",
+  "properties": {
+    "members": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Member"
+      },
+      "description": "List of project members."
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Summary",
+  "title": "Summary",
+  "type": "object",
+  "properties": {
+    "short": {
+      "type": "string",
+      "description": "Short summary of the content."
+    }
+  }
+}

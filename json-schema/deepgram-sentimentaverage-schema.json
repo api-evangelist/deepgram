@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SentimentAverage",
+  "title": "SentimentAverage",
+  "type": "object",
+  "properties": {
+    "sentiment": {
+      "type": "string",
+      "enum": [
+        "positive",
+        "negative",
+        "neutral"
+      ],
+      "description": "Overall average sentiment."
+    },
+    "sentiment_score": {
+      "type": "number",
+      "format": "float",
+      "description": "Average sentiment score."
+    }
+  }
+}

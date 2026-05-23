@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/InvitationList",
+  "title": "InvitationList",
+  "type": "object",
+  "properties": {
+    "invites": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Invitation"
+      },
+      "description": "List of pending invitations."
+    }
+  }
+}

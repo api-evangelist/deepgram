@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TextAnalysisRequest",
+  "title": "TextAnalysisRequest",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string",
+      "description": "Text content to analyze."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of a text document to analyze."
+    }
+  }
+}

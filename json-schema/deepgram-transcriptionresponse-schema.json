@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TranscriptionResponse",
+  "title": "TranscriptionResponse",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "$ref": "#/components/schemas/Metadata"
+    },
+    "results": {
+      "$ref": "#/components/schemas/Results"
+    }
+  }
+}

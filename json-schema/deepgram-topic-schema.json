@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Topic",
+  "title": "Topic",
+  "type": "object",
+  "properties": {
+    "topic": {
+      "type": "string",
+      "description": "Detected topic label."
+    },
+    "confidence_score": {
+      "type": "number",
+      "format": "float",
+      "description": "Confidence score for the topic detection."
+    }
+  }
+}

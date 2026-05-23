@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ModelList",
+  "title": "ModelList",
+  "type": "object",
+  "properties": {
+    "stt": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Model"
+      },
+      "description": "Available speech-to-text models."
+    },
+    "tts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Model"
+      },
+      "description": "Available text-to-speech models."
+    }
+  }
+}

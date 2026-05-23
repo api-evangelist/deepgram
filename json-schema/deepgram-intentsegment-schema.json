@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/IntentSegment",
+  "title": "IntentSegment",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string",
+      "description": "Text of the segment."
+    },
+    "start_word": {
+      "type": "integer",
+      "description": "Index of the first word in this segment."
+    },
+    "end_word": {
+      "type": "integer",
+      "description": "Index of the last word in this segment."
+    },
+    "intents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Intent"
+      },
+      "description": "Intents detected in this segment."
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UsageSummary",
+  "title": "UsageSummary",
+  "type": "object",
+  "properties": {
+    "start": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Start of the usage period."
+    },
+    "end": {
+      "type": "string",
+      "format": "date-time",
+      "description": "End of the usage period."
+    },
+    "resolution": {
+      "type": "object",
+      "properties": {
+        "units": {
+          "type": "string",
+          "description": "Time unit for the resolution."
+        },
+        "amount": {
+          "type": "integer",
+          "description": "Number of time units per resolution period."
+        }
+      },
+      "description": "Resolution of the usage data."
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Start of the period."
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time",
+            "description": "End of the period."
+          },
+          "hours": {
+            "type": "number",
+            "format": "float",
+            "description": "Total audio hours processed."
+          },
+          "requests": {
+            "type": "integer",
+            "description": "Total number of API requests."
+          }
+        }
+      },
+      "description": "Usage data broken down by resolution period."
+    }
+  }
+}

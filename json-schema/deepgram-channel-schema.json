@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Channel",
+  "title": "Channel",
+  "type": "object",
+  "properties": {
+    "alternatives": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Alternative"
+      },
+      "description": "Alternative transcriptions for this channel, ordered by confidence."
+    },
+    "detected_language": {
+      "type": "string",
+      "description": "Detected language of the audio in this channel."
+    },
+    "language_confidence": {
+      "type": "number",
+      "format": "float",
+      "description": "Confidence score for the detected language."
+    }
+  }
+}

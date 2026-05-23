@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RequestList",
+  "title": "RequestList",
+  "type": "object",
+  "properties": {
+    "page": {
+      "type": "integer",
+      "description": "Current page number."
+    },
+    "limit": {
+      "type": "integer",
+      "description": "Number of results per page."
+    },
+    "requests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "description": "Unique identifier for the request."
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the request was made."
+          },
+          "path": {
+            "type": "string",
+            "description": "API path of the request."
+          },
+          "api_key_id": {
+            "type": "string",
+            "description": "API key used for the request."
+          }
+        }
+      },
+      "description": "List of API requests."
+    }
+  }
+}
