@@ -206,6 +206,8 @@ common:
   updated: '2026-05-04'
 - type: Integrations
   url: https://deepgram.com/partners
+- type: LLMsTxt
+  url: https://deepgram.com/llms.txt
 created: '2026-03-20'
 modified: '2026-05-19'
 position: Consuming
