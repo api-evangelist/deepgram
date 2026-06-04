@@ -1,0 +1,131 @@
+arazzo: 1.0.1
+info:
+  title: Deepgram Balance-Gated Transcription
+  summary: Check a project's billing balance and only transcribe audio when sufficient credit remains.
+  description: >-
+    A cost-guarded transcription flow. The workflow lists the project's billing
+    balances, reads the detail of the primary balance, and branches: when the
+    balance amount is above zero it submits the audio for transcription, and
+    when the balance is depleted it ends the workflow without spending. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: managementApi
+  url: ../openapi/deepgram-management-openapi.yml
+  type: openapi
+- name: speechToTextApi
+  url: ../openapi/deepgram-speech-to-text-openapi.yml
+  type: openapi
+workflows:
+- workflowId: balance-gated-transcription
+  summary: Gate a transcription on the project having a positive billing balance.
+  description: >-
+    Lists balances, reads the chosen balance detail, and only transcribes the
+    supplied audio when the balance amount is greater than zero.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectId
+    - balanceId
+    - audioUrl
+    properties:
+      apiKey:
+        type: string
+        description: Deepgram API key used to authenticate requests.
+      projectId:
+        type: string
+        description: The project whose balance gates the transcription.
+      balanceId:
+        type: string
+        description: The billing balance to inspect before transcribing.
+      audioUrl:
+        type: string
+        description: Publicly accessible URL of the audio file to transcribe.
+      model:
+        type: string
+        description: Speech-to-text model to use for transcription.
+        default: nova-3
+  steps:
+  - stepId: listBalances
+    description: >-
+      List the project's billing balances to confirm a balance exists before
+      inspecting its detail.
+    operationId: listProjectBalances
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      balances: $response.body#/balances
+  - stepId: getBalance
+    description: >-
+      Read the chosen balance detail and branch on whether credit remains: a
+      positive amount proceeds to transcription, a depleted balance ends the
+      workflow.
+    operationId: getProjectBalance
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    - name: balance_id
+      in: path
+      value: $inputs.balanceId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      amount: $response.body#/amount
+      units: $response.body#/units
+    onSuccess:
+    - name: hasCredit
+      type: goto
+      stepId: transcribeAudio
+      criteria:
+      - context: $response.body
+        condition: $.amount > 0
+        type: jsonpath
+    - name: noCredit
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.amount <= 0
+        type: jsonpath
+  - stepId: transcribeAudio
+    description: >-
+      Submit the hosted audio file for transcription now that the project has a
+      positive billing balance.
+    operationId: transcribePreRecordedAudio
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: model
+      in: query
+      value: $inputs.model
+    - name: punctuate
+      in: query
+      value: true
+    - name: smart_format
+      in: query
+      value: true
+    requestBody:
+      contentType: application/json
+      payload:
+        url: $inputs.audioUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      transcript: $response.body#/results/channels/0/alternatives/0/transcript
+      requestId: $response.body#/metadata/request_id
+  outputs:
+    balanceAmount: $steps.getBalance.outputs.amount
+    transcript: $steps.transcribeAudio.outputs.transcript

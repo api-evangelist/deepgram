@@ -1,0 +1,118 @@
+arazzo: 1.0.1
+info:
+  title: Deepgram Update a Member's Scopes
+  summary: Locate a project member, read their current scopes, update them, and confirm the new scopes took effect.
+  description: >-
+    A permissions management flow for Deepgram project members. The workflow
+    lists the project's members to anchor the target member, reads that member's
+    current scopes, applies an updated scope, and re-reads the scopes to confirm
+    the change took effect. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: managementApi
+  url: ../openapi/deepgram-management-openapi.yml
+  type: openapi
+workflows:
+- workflowId: update-member-scopes
+  summary: Read a member's scopes, update them, and verify the change.
+  description: >-
+    Lists members for context, reads the target member's current scopes,
+    updates the scope, and re-reads the scopes to confirm the update.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectId
+    - memberId
+    - newScope
+    properties:
+      apiKey:
+        type: string
+        description: Deepgram API key used to authenticate requests.
+      projectId:
+        type: string
+        description: The project the member belongs to.
+      memberId:
+        type: string
+        description: The member whose scopes are being updated.
+      newScope:
+        type: string
+        description: The new scope to assign to the member (e.g. admin).
+  steps:
+  - stepId: listMembers
+    description: >-
+      List the project's members to anchor the target member in the project's
+      access roster.
+    operationId: listProjectMembers
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      members: $response.body#/members
+  - stepId: getCurrentScopes
+    description: >-
+      Read the member's current scopes so the change can be compared before and
+      after the update.
+    operationId: getMemberScopes
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    - name: member_id
+      in: path
+      value: $inputs.memberId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      previousScopes: $response.body#/scopes
+  - stepId: updateScopes
+    description: >-
+      Apply the new scope to the member.
+    operationId: updateMemberScopes
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    - name: member_id
+      in: path
+      value: $inputs.memberId
+    requestBody:
+      contentType: application/json
+      payload:
+        scope: $inputs.newScope
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: verifyScopes
+    description: >-
+      Re-read the member's scopes to confirm the new scope was applied.
+    operationId: getMemberScopes
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    - name: member_id
+      in: path
+      value: $inputs.memberId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updatedScopes: $response.body#/scopes
+  outputs:
+    previousScopes: $steps.getCurrentScopes.outputs.previousScopes
+    updatedScopes: $steps.verifyScopes.outputs.updatedScopes

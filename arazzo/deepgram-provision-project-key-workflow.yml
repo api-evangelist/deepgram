@@ -1,0 +1,110 @@
+arazzo: 1.0.1
+info:
+  title: Deepgram Provision a Project API Key
+  summary: Create a new project, mint a scoped API key for it, and verify the key appears in the project key list.
+  description: >-
+    A bootstrapping flow for standing up a fresh Deepgram workspace. The
+    workflow creates a new project, mints a scoped API key inside that project,
+    captures the one-time secret returned at creation, and then lists the
+    project's keys to confirm the new key is registered. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: managementApi
+  url: ../openapi/deepgram-management-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-project-key
+  summary: Create a project, create a scoped API key in it, and verify the key list.
+  description: >-
+    Lists existing projects to anchor the account, creates a scoped API key in
+    the supplied project, and confirms the new key appears in the project key
+    list.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectId
+    - comment
+    - scopes
+    properties:
+      apiKey:
+        type: string
+        description: Deepgram API key with keys:write scope used to authenticate.
+      projectId:
+        type: string
+        description: The project to mint the new API key in.
+      comment:
+        type: string
+        description: Description or name for the new API key.
+      scopes:
+        type: array
+        description: Scopes to assign to the new API key (e.g. ["member"]).
+        items:
+          type: string
+      timeToLiveInSeconds:
+        type: integer
+        description: Optional time-to-live in seconds for the new key.
+  steps:
+  - stepId: confirmProject
+    description: >-
+      Fetch the target project to confirm it exists and is reachable before
+      minting a new key inside it.
+    operationId: getProject
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      projectId: $response.body#/project_id
+      projectName: $response.body#/name
+  - stepId: createKey
+    description: >-
+      Create a new scoped API key in the project and capture the full secret
+      value, which is only returned at creation time.
+    operationId: createProjectKey
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    requestBody:
+      contentType: application/json
+      payload:
+        comment: $inputs.comment
+        scopes: $inputs.scopes
+        time_to_live_in_seconds: $inputs.timeToLiveInSeconds
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      newKeyId: $response.body#/api_key_id
+      newKeySecret: $response.body#/key
+      newKeyScopes: $response.body#/scopes
+  - stepId: verifyKey
+    description: >-
+      List the project's API keys to confirm the newly created key is present
+      in the registry.
+    operationId: listProjectKeys
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      apiKeys: $response.body#/api_keys
+  outputs:
+    newKeyId: $steps.createKey.outputs.newKeyId
+    newKeySecret: $steps.createKey.outputs.newKeySecret
+    apiKeys: $steps.verifyKey.outputs.apiKeys

@@ -1,0 +1,117 @@
+arazzo: 1.0.1
+info:
+  title: Deepgram Diarized Transcript Intelligence
+  summary: Transcribe a multi-speaker recording with diarization, then run targeted text intelligence over the transcript.
+  description: >-
+    A conversation analytics flow for multi-speaker recordings. The workflow
+    transcribes a hosted audio file with diarization and utterance segmentation
+    so each speaker turn is captured, then runs text intelligence over the
+    transcript with summarization, sentiment, intents, and a set of custom
+    topics supplied by the caller. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: speechToTextApi
+  url: ../openapi/deepgram-speech-to-text-openapi.yml
+  type: openapi
+workflows:
+- workflowId: diarized-transcript-intelligence
+  summary: Diarize a recording, then analyze the transcript for summary, sentiment, and custom topics.
+  description: >-
+    Transcribes a multi-speaker recording with diarization and utterances, then
+    sends the transcript through text intelligence scoped to caller-supplied
+    custom topics.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - audioUrl
+    - customTopics
+    properties:
+      apiKey:
+        type: string
+        description: Deepgram API key used to authenticate requests.
+      audioUrl:
+        type: string
+        description: Publicly accessible URL of the multi-speaker audio file.
+      model:
+        type: string
+        description: Speech-to-text model to use for transcription.
+        default: nova-3
+      customTopics:
+        type: array
+        description: Custom topics to detect within the transcript text.
+        items:
+          type: string
+  steps:
+  - stepId: transcribeDiarized
+    description: >-
+      Transcribe the recording with diarization, utterances, punctuation, and
+      smart formatting so each speaker turn is captured.
+    operationId: transcribePreRecordedAudio
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: model
+      in: query
+      value: $inputs.model
+    - name: diarize
+      in: query
+      value: true
+    - name: utterances
+      in: query
+      value: true
+    - name: punctuate
+      in: query
+      value: true
+    - name: smart_format
+      in: query
+      value: true
+    requestBody:
+      contentType: application/json
+      payload:
+        url: $inputs.audioUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      transcript: $response.body#/results/channels/0/alternatives/0/transcript
+      utterances: $response.body#/results/utterances
+      requestId: $response.body#/metadata/request_id
+  - stepId: analyzeConversation
+    description: >-
+      Run text intelligence over the diarized transcript with summarization,
+      sentiment, intents, and the caller-supplied custom topics.
+    operationId: analyzeText
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: summarize
+      in: query
+      value: "true"
+    - name: sentiment
+      in: query
+      value: true
+    - name: intents
+      in: query
+      value: true
+    - name: custom_topic
+      in: query
+      value: $inputs.customTopics
+    requestBody:
+      contentType: application/json
+      payload:
+        text: $steps.transcribeDiarized.outputs.transcript
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      summary: $response.body#/results/summary/short
+      averageSentiment: $response.body#/results/sentiments/average/sentiment
+      topics: $response.body#/results/topics/segments
+  outputs:
+    transcript: $steps.transcribeDiarized.outputs.transcript
+    utterances: $steps.transcribeDiarized.outputs.utterances
+    summary: $steps.analyzeConversation.outputs.summary
+    topics: $steps.analyzeConversation.outputs.topics

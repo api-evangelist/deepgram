@@ -1,0 +1,100 @@
+arazzo: 1.0.1
+info:
+  title: Deepgram Invite and Confirm a Project Member
+  summary: Send a project invitation, confirm it appears in the pending invitation list, and list current members.
+  description: >-
+    A team onboarding flow for Deepgram projects. The workflow sends an
+    invitation to a prospective member at a given scope, confirms the invitation
+    now appears in the project's pending invitation list, and lists the current
+    members so the caller can see who already has access. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: managementApi
+  url: ../openapi/deepgram-management-openapi.yml
+  type: openapi
+workflows:
+- workflowId: invite-and-confirm-member
+  summary: Send a member invitation and confirm it against pending invites and members.
+  description: >-
+    Sends a scoped invitation to an email address, lists pending invitations to
+    confirm the invite was queued, and lists current members for context.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectId
+    - email
+    - scope
+    properties:
+      apiKey:
+        type: string
+        description: Deepgram API key used to authenticate requests.
+      projectId:
+        type: string
+        description: The project to invite the new member into.
+      email:
+        type: string
+        description: Email address of the person being invited.
+      scope:
+        type: string
+        description: Scope to grant the invited member (e.g. member).
+  steps:
+  - stepId: sendInvitation
+    description: >-
+      Send an invitation to the supplied email address at the requested scope.
+    operationId: sendProjectInvitation
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    requestBody:
+      contentType: application/json
+      payload:
+        email: $inputs.email
+        scope: $inputs.scope
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      invitedEmail: $inputs.email
+  - stepId: confirmInvitation
+    description: >-
+      List the project's pending invitations to confirm the new invitation is
+      queued for the supplied email address.
+    operationId: listProjectInvitations
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      invites: $response.body#/invites
+      firstInviteEmail: $response.body#/invites/0/email
+  - stepId: listMembers
+    description: >-
+      List the project's current members so the caller can see who already has
+      access alongside the new pending invitation.
+    operationId: listProjectMembers
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      members: $response.body#/members
+  outputs:
+    invitedEmail: $steps.sendInvitation.outputs.invitedEmail
+    invites: $steps.confirmInvitation.outputs.invites
+    members: $steps.listMembers.outputs.members

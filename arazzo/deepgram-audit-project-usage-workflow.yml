@@ -1,0 +1,126 @@
+arazzo: 1.0.1
+info:
+  title: Deepgram Audit Project Usage and Billing
+  summary: Pull a project's details, usage summary, request log, and billing balances into a single audit snapshot.
+  description: >-
+    A billing and consumption audit for a Deepgram project. The workflow loads
+    the project's details, retrieves the aggregated usage summary for a time
+    window, lists the individual API requests in that window, and reads the
+    project's billing balances so an operator can reconcile spend against
+    activity. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: managementApi
+  url: ../openapi/deepgram-management-openapi.yml
+  type: openapi
+workflows:
+- workflowId: audit-project-usage
+  summary: Snapshot a project's usage, request log, and billing balances.
+  description: >-
+    Reads project metadata, the usage summary for a window, the request log, and
+    the billing balances so usage can be reconciled against spend.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectId
+    properties:
+      apiKey:
+        type: string
+        description: Deepgram API key used to authenticate requests.
+      projectId:
+        type: string
+        description: The project to audit.
+      start:
+        type: string
+        description: Start of the usage/request window in ISO 8601 format.
+      end:
+        type: string
+        description: End of the usage/request window in ISO 8601 format.
+  steps:
+  - stepId: getProject
+    description: >-
+      Load the project metadata to anchor the audit and confirm the project is
+      reachable.
+    operationId: getProject
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      projectName: $response.body#/name
+      company: $response.body#/company
+  - stepId: getUsage
+    description: >-
+      Retrieve the aggregated usage summary for the project over the supplied
+      window.
+    operationId: getProjectUsage
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    - name: start
+      in: query
+      value: $inputs.start
+    - name: end
+      in: query
+      value: $inputs.end
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      usageResults: $response.body#/results
+  - stepId: listRequests
+    description: >-
+      List the individual API requests for the same window to back the usage
+      totals with a per-request audit trail.
+    operationId: listProjectRequests
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    - name: start
+      in: query
+      value: $inputs.start
+    - name: end
+      in: query
+      value: $inputs.end
+    - name: limit
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      requests: $response.body#/requests
+  - stepId: listBalances
+    description: >-
+      Read the project's billing balances so remaining credits can be compared
+      against the audited usage.
+    operationId: listProjectBalances
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      balances: $response.body#/balances
+  outputs:
+    projectName: $steps.getProject.outputs.projectName
+    usageResults: $steps.getUsage.outputs.usageResults
+    requests: $steps.listRequests.outputs.requests
+    balances: $steps.listBalances.outputs.balances

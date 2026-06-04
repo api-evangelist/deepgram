@@ -1,0 +1,132 @@
+arazzo: 1.0.1
+info:
+  title: Deepgram Transcribe, Analyze, and Synthesize
+  summary: Transcribe audio to text, run text intelligence on the transcript, then synthesize a spoken response.
+  description: >-
+    An end-to-end voice round-trip that chains all three Deepgram speech AI
+    surfaces. The workflow transcribes a pre-recorded audio file, runs text
+    intelligence (summarization, sentiment, topics, intents) over the resulting
+    transcript, and finally converts a chosen piece of text back into spoken
+    audio with the Aura text-to-speech model. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: speechToTextApi
+  url: ../openapi/deepgram-speech-to-text-openapi.yml
+  type: openapi
+- name: textToSpeechApi
+  url: ../openapi/deepgram-text-to-speech-openapi.yml
+  type: openapi
+workflows:
+- workflowId: transcribe-analyze-synthesize
+  summary: Transcribe audio, analyze the transcript text, and synthesize speech.
+  description: >-
+    Transcribes a hosted audio file, sends the transcript through text
+    intelligence for a summary and sentiment, then synthesizes the summary back
+    into speech audio.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - audioUrl
+    properties:
+      apiKey:
+        type: string
+        description: Deepgram API key used to authenticate all requests.
+      audioUrl:
+        type: string
+        description: Publicly accessible URL of the audio file to transcribe.
+      sttModel:
+        type: string
+        description: Speech-to-text model to use for transcription.
+        default: nova-3
+      ttsModel:
+        type: string
+        description: Text-to-speech Aura voice to synthesize the response with.
+        default: aura-asteria-en
+  steps:
+  - stepId: transcribeAudio
+    description: >-
+      Transcribe the hosted audio file with punctuation and smart formatting so
+      the transcript is ready for text intelligence.
+    operationId: transcribePreRecordedAudio
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: model
+      in: query
+      value: $inputs.sttModel
+    - name: punctuate
+      in: query
+      value: true
+    - name: smart_format
+      in: query
+      value: true
+    requestBody:
+      contentType: application/json
+      payload:
+        url: $inputs.audioUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      transcript: $response.body#/results/channels/0/alternatives/0/transcript
+      requestId: $response.body#/metadata/request_id
+  - stepId: analyzeTranscript
+    description: >-
+      Run text intelligence over the transcript to produce a summary along with
+      sentiment, topics, and intents.
+    operationId: analyzeText
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: summarize
+      in: query
+      value: "true"
+    - name: sentiment
+      in: query
+      value: true
+    - name: topics
+      in: query
+      value: true
+    - name: intents
+      in: query
+      value: true
+    requestBody:
+      contentType: application/json
+      payload:
+        text: $steps.transcribeAudio.outputs.transcript
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      summary: $response.body#/results/summary/short
+      averageSentiment: $response.body#/results/sentiments/average/sentiment
+  - stepId: synthesizeSummary
+    description: >-
+      Convert the generated summary text back into natural-sounding speech audio
+      using the selected Aura voice.
+    operationId: synthesizeSpeech
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: model
+      in: query
+      value: $inputs.ttsModel
+    - name: encoding
+      in: query
+      value: mp3
+    requestBody:
+      contentType: application/json
+      payload:
+        text: $steps.analyzeTranscript.outputs.summary
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      audioRequestId: $response.headers.x-request-id
+  outputs:
+    transcript: $steps.transcribeAudio.outputs.transcript
+    summary: $steps.analyzeTranscript.outputs.summary
+    averageSentiment: $steps.analyzeTranscript.outputs.averageSentiment

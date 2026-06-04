@@ -145,6 +145,39 @@ kind: company
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/deepgram-audit-project-usage-workflow.yml
+    name: Deepgram Audit Project Usage and Billing
+    summary: Pull a project's details, usage summary, request log, and billing balances into a single audit snapshot.
+  - url: arazzo/deepgram-balance-gated-transcription-workflow.yml
+    name: Deepgram Balance-Gated Transcription
+    summary: Check a project's billing balance and only transcribe audio when sufficient credit remains.
+  - url: arazzo/deepgram-diarized-transcript-intelligence-workflow.yml
+    name: Deepgram Diarized Transcript Intelligence
+    summary: Transcribe a multi-speaker recording with diarization, then run targeted text intelligence over the transcript.
+  - url: arazzo/deepgram-invite-and-confirm-member-workflow.yml
+    name: Deepgram Invite and Confirm a Project Member
+    summary: Send a project invitation, confirm it appears in the pending invitation list, and list current members.
+  - url: arazzo/deepgram-provision-project-key-workflow.yml
+    name: Deepgram Provision a Project API Key
+    summary: Create a new project, mint a scoped API key for it, and verify the key appears in the project key list.
+  - url: arazzo/deepgram-rotate-project-key-workflow.yml
+    name: Deepgram Rotate a Project API Key
+    summary: Mint a replacement API key in a project, verify it, then delete the old key to complete a rotation.
+  - url: arazzo/deepgram-select-model-and-transcribe-workflow.yml
+    name: Deepgram Select a Model and Transcribe
+    summary: Browse available models, read the metadata for a chosen model, then transcribe audio with that model.
+  - url: arazzo/deepgram-transcribe-analyze-synthesize-workflow.yml
+    name: Deepgram Transcribe, Analyze, and Synthesize
+    summary: Transcribe audio to text, run text intelligence on the transcript, then synthesize a spoken response.
+  - url: arazzo/deepgram-transcribe-and-track-usage-workflow.yml
+    name: Deepgram Transcribe Audio and Track Usage
+    summary: Transcribe a pre-recorded audio URL and then reconcile the request against project usage and request logs.
+  - url: arazzo/deepgram-update-member-scopes-workflow.yml
+    name: Deepgram Update a Member's Scopes
+    summary: Locate a project member, read their current scopes, update them, and confirm the new scopes took effect.
 - type: LinkedIn
   url: https://www.linkedin.com/company/deepgram
 - url: https://developers.deepgram.com/home

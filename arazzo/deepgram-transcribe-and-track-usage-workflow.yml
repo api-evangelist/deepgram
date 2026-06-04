@@ -1,0 +1,136 @@
+arazzo: 1.0.1
+info:
+  title: Deepgram Transcribe Audio and Track Usage
+  summary: Transcribe a pre-recorded audio URL and then reconcile the request against project usage and request logs.
+  description: >-
+    A common observability pattern for speech-to-text pipelines. The workflow
+    submits a pre-recorded audio URL for transcription, captures the returned
+    request_id, and then queries the project's usage summary and request log so
+    the freshly submitted transcription can be reconciled against billing and
+    audit data. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: speechToTextApi
+  url: ../openapi/deepgram-speech-to-text-openapi.yml
+  type: openapi
+- name: managementApi
+  url: ../openapi/deepgram-management-openapi.yml
+  type: openapi
+workflows:
+- workflowId: transcribe-and-track-usage
+  summary: Transcribe an audio URL then reconcile it against project usage and requests.
+  description: >-
+    Transcribes a hosted audio file, then retrieves the project usage summary
+    and the recent request log for the time window so the transcription can be
+    audited against billing data.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectId
+    - audioUrl
+    properties:
+      apiKey:
+        type: string
+        description: Deepgram API key used to authenticate requests.
+      projectId:
+        type: string
+        description: The Deepgram project the usage and request logs belong to.
+      audioUrl:
+        type: string
+        description: Publicly accessible URL of the audio file to transcribe.
+      model:
+        type: string
+        description: Speech-to-text model to use for transcription (e.g. nova-3).
+        default: nova-3
+      start:
+        type: string
+        description: Start of the usage/request window in ISO 8601 format.
+      end:
+        type: string
+        description: End of the usage/request window in ISO 8601 format.
+  steps:
+  - stepId: transcribeAudio
+    description: >-
+      Submit the hosted audio URL for transcription with punctuation and smart
+      formatting enabled, capturing the request identifier from the metadata.
+    operationId: transcribePreRecordedAudio
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: model
+      in: query
+      value: $inputs.model
+    - name: punctuate
+      in: query
+      value: true
+    - name: smart_format
+      in: query
+      value: true
+    requestBody:
+      contentType: application/json
+      payload:
+        url: $inputs.audioUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      requestId: $response.body#/metadata/request_id
+      duration: $response.body#/metadata/duration
+      transcript: $response.body#/results/channels/0/alternatives/0/transcript
+  - stepId: getUsage
+    description: >-
+      Retrieve the aggregated usage summary for the project over the supplied
+      time window to confirm the audio hours were recorded.
+    operationId: getProjectUsage
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    - name: start
+      in: query
+      value: $inputs.start
+    - name: end
+      in: query
+      value: $inputs.end
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      usageStart: $response.body#/start
+      usageEnd: $response.body#/end
+      usageResults: $response.body#/results
+  - stepId: listRequests
+    description: >-
+      List the project's recent API requests for the same window so the
+      transcription request_id can be located in the audit log.
+    operationId: listProjectRequests
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    - name: start
+      in: query
+      value: $inputs.start
+    - name: end
+      in: query
+      value: $inputs.end
+    - name: limit
+      in: query
+      value: 50
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      requests: $response.body#/requests
+      firstRequestId: $response.body#/requests/0/request_id
+  outputs:
+    requestId: $steps.transcribeAudio.outputs.requestId
+    transcript: $steps.transcribeAudio.outputs.transcript
+    usageResults: $steps.getUsage.outputs.usageResults
+    requests: $steps.listRequests.outputs.requests

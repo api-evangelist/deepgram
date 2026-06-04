@@ -1,0 +1,111 @@
+arazzo: 1.0.1
+info:
+  title: Deepgram Rotate a Project API Key
+  summary: Mint a replacement API key in a project, verify it, then delete the old key to complete a rotation.
+  description: >-
+    A secure key-rotation pattern for Deepgram projects. The workflow creates a
+    fresh scoped API key inside the project, confirms the replacement key is
+    registered in the key list, and then deletes the outgoing key so only the
+    new credential remains active. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: managementApi
+  url: ../openapi/deepgram-management-openapi.yml
+  type: openapi
+workflows:
+- workflowId: rotate-project-key
+  summary: Create a replacement key, verify it, and delete the old key.
+  description: >-
+    Creates a new scoped API key in the project, lists the keys to confirm the
+    replacement is present, and then deletes the previous key to finish the
+    rotation.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectId
+    - oldKeyId
+    - comment
+    - scopes
+    properties:
+      apiKey:
+        type: string
+        description: Deepgram API key with keys:write scope used to authenticate.
+      projectId:
+        type: string
+        description: The project whose key is being rotated.
+      oldKeyId:
+        type: string
+        description: The identifier of the outgoing key to delete after rotation.
+      comment:
+        type: string
+        description: Description or name for the replacement API key.
+      scopes:
+        type: array
+        description: Scopes to assign to the replacement API key.
+        items:
+          type: string
+  steps:
+  - stepId: createReplacementKey
+    description: >-
+      Create the replacement scoped API key and capture its one-time secret
+      value and new identifier.
+    operationId: createProjectKey
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    requestBody:
+      contentType: application/json
+      payload:
+        comment: $inputs.comment
+        scopes: $inputs.scopes
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      newKeyId: $response.body#/api_key_id
+      newKeySecret: $response.body#/key
+  - stepId: verifyReplacement
+    description: >-
+      List the project keys to confirm the replacement key is registered before
+      removing the old credential.
+    operationId: listProjectKeys
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      apiKeys: $response.body#/api_keys
+  - stepId: deleteOldKey
+    description: >-
+      Delete the outgoing API key now that the replacement has been verified,
+      leaving only the new credential active.
+    operationId: deleteProjectKey
+    parameters:
+    - name: Authorization
+      in: header
+      value: Token $inputs.apiKey
+    - name: project_id
+      in: path
+      value: $inputs.projectId
+    - name: key_id
+      in: path
+      value: $inputs.oldKeyId
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      deletedKeyId: $inputs.oldKeyId
+  outputs:
+    newKeyId: $steps.createReplacementKey.outputs.newKeyId
+    newKeySecret: $steps.createReplacementKey.outputs.newKeySecret
+    deletedKeyId: $steps.deleteOldKey.outputs.deletedKeyId
