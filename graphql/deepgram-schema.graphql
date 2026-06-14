@@ -1,0 +1,1069 @@
+"""
+Deepgram GraphQL Schema
+AI voice platform providing speech-to-text, text-to-speech, voice agents, and audio intelligence.
+Developer Portal: https://developers.deepgram.com
+"""
+
+# ---------------------------------------------------------------------------
+# Root Types
+# ---------------------------------------------------------------------------
+
+type Query {
+  """Retrieve a completed transcription job by ID."""
+  transcription(id: ID!): Transcription
+
+  """List transcription jobs for a project."""
+  transcriptions(projectId: ID!, limit: Int, offset: Int): [Transcription!]!
+
+  """List all models available for transcription."""
+  models(language: LanguageCode): [Model!]!
+
+  """Retrieve a specific model by ID."""
+  model(id: ID!): Model
+
+  """List all available TTS voices."""
+  voices: [Voice!]!
+
+  """Retrieve a specific voice by name."""
+  voice(name: String!): VoiceDetails
+
+  """Retrieve a project by ID."""
+  project(id: ID!): Project
+
+  """List all projects for the authenticated account."""
+  projects: [Project!]!
+
+  """List API keys for a project."""
+  apiKeys(projectId: ID!): [APIKey!]!
+
+  """Retrieve a single API key."""
+  apiKey(projectId: ID!, keyId: ID!): APIKey
+
+  """List members of a project."""
+  members(projectId: ID!): [Member!]!
+
+  """Retrieve usage summary for a project."""
+  usage(projectId: ID!, start: String, end: String): Usage
+
+  """Retrieve usage request log for a project."""
+  usageRequests(projectId: ID!, start: String, end: String, limit: Int, offset: Int): UsageDetails
+
+  """List balances for a project."""
+  balances(projectId: ID!): [Balance!]!
+
+  """Retrieve a specific balance record."""
+  balance(projectId: ID!, balanceId: ID!): Balance
+
+  """List all supported languages."""
+  languages: [Language!]!
+
+  """Retrieve a voice agent session by ID."""
+  agent(sessionId: ID!): Agent
+}
+
+type Mutation {
+  """Submit a pre-recorded audio file or URL for transcription."""
+  transcribePrerecorded(input: PrerecordedInput!): PrerecordedResult!
+
+  """Synthesize speech from text using a specified Aura voice."""
+  synthesizeSpeech(input: TextToSpeechInput!): SpeechResult!
+
+  """Create a new project."""
+  createProject(name: String!): Project!
+
+  """Update a project's name or settings."""
+  updateProject(projectId: ID!, name: String): Project!
+
+  """Delete a project."""
+  deleteProject(projectId: ID!): Boolean!
+
+  """Create a new API key for a project."""
+  createAPIKey(projectId: ID!, input: APIKeyInput!): APIKey!
+
+  """Delete an API key."""
+  deleteAPIKey(projectId: ID!, keyId: ID!): Boolean!
+
+  """Invite a member to a project by email."""
+  inviteMember(projectId: ID!, email: String!, scope: String): Boolean!
+
+  """Remove a member from a project."""
+  removeMember(projectId: ID!, memberId: ID!): Boolean!
+
+  """Update scopes for a project member."""
+  updateMemberScopes(projectId: ID!, memberId: ID!, scopes: [String!]!): Member!
+
+  """Initialize a voice agent session (returns session config; streaming via Subscription)."""
+  createAgentSession(input: AgentConfigInput!): Agent!
+
+  """Send a control message to an active voice agent session."""
+  sendAgentControl(sessionId: ID!, message: AgentControlMessage!): Boolean!
+}
+
+type Subscription {
+  """Stream real-time transcription results for a live audio session."""
+  streamingTranscription(sessionId: ID!): StreamingResult!
+
+  """Stream voice agent session events (speech, responses, function calls)."""
+  agentEvents(sessionId: ID!): AgentEvent!
+}
+
+# ---------------------------------------------------------------------------
+# Transcription Types
+# ---------------------------------------------------------------------------
+
+"""Top-level transcription job result."""
+type Transcription {
+  id: ID!
+  status: TranscriptionStatus!
+  details: TranscriptionDetails
+  results: PrerecordedResult
+  createdAt: String!
+  updatedAt: String!
+}
+
+"""Metadata describing a transcription request."""
+type TranscriptionDetails {
+  requestId: ID!
+  sha256: String
+  created: String!
+  duration: Float
+  channels: Int
+  models: [String!]
+  modelInfo: ModelInfo
+  warnings: [TranscriptionWarning!]
+}
+
+"""Warning emitted during transcription processing."""
+type TranscriptionWarning {
+  parameter: String!
+  type: String!
+  message: String!
+}
+
+"""Enum of transcription job states."""
+enum TranscriptionStatus {
+  QUEUED
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+"""Full result payload for a pre-recorded audio transcription."""
+type PrerecordedResult {
+  metadata: TranscriptionDetails
+  channels: [ChannelResult!]!
+  utterances: [Utterance!]
+  summary: Summary
+  topics: [Topic!]
+  intents: [Intent!]
+  sentiment: Sentiment
+  entities: [Entity!]
+}
+
+"""Incremental result from a real-time streaming transcription session."""
+type StreamingResult {
+  channelIndex: [Int!]!
+  duration: Float
+  start: Float
+  isFinal: Boolean!
+  speechFinal: Boolean
+  channel: ChannelResult!
+  metadata: StreamingMetadata
+}
+
+"""Metadata attached to a streaming transcription result."""
+type StreamingMetadata {
+  requestId: ID!
+  modelInfo: ModelInfo
+  modelUuid: String
+}
+
+"""One transcript hypothesis returned by the model."""
+type Alternative {
+  transcript: String!
+  confidence: Float!
+  details: AlternativeDetails
+  words: [Word!]!
+  paragraphs: ParagraphCollection
+}
+
+"""Metadata for a single transcript alternative."""
+type AlternativeDetails {
+  confidence: Float!
+  languages: [String!]
+}
+
+"""A recognized word within a transcript alternative."""
+type Word {
+  word: String!
+  start: WordStart!
+  end: WordEnd!
+  confidence: WordConfidence!
+  details: WordDetails
+}
+
+"""Extended metadata for a recognized word."""
+type WordDetails {
+  punctuatedWord: String
+  speaker: Int
+  speakerConfidence: Float
+  sentiment: SentimentType
+}
+
+"""Confidence score (0.0–1.0) for a word recognition."""
+scalar WordConfidence
+
+"""Start timestamp in seconds for a recognized word."""
+scalar WordStart
+
+"""End timestamp in seconds for a recognized word."""
+scalar WordEnd
+
+"""Collection of paragraphs produced by smart formatting."""
+type ParagraphCollection {
+  transcript: String!
+  paragraphs: [Paragraph!]!
+}
+
+"""A group of sentences identified by smart formatting."""
+type Paragraph {
+  sentences: [Sentence!]!
+  start: Float!
+  end: Float!
+  details: ParagraphDetails
+}
+
+"""Metadata for a paragraph segment."""
+type ParagraphDetails {
+  numWords: Int
+  speaker: Int
+}
+
+"""A single sentence within a paragraph."""
+type Sentence {
+  text: String!
+  start: Float!
+  end: Float!
+}
+
+"""A contiguous speech segment attributed to one speaker."""
+type Utterance {
+  start: Float!
+  end: Float!
+  confidence: Float!
+  channel: Int!
+  transcript: String!
+  words: [Word!]!
+  details: UtteranceDetails
+  id: ID
+}
+
+"""Timing and attribution metadata for an utterance."""
+type UtteranceDetails {
+  speaker: UtteranceSpeaker!
+  speakerConfidence: Float
+}
+
+"""Speaker identifier assigned during diarization."""
+scalar UtteranceSpeaker
+
+# ---------------------------------------------------------------------------
+# Speaker Diarization Types
+# ---------------------------------------------------------------------------
+
+"""Diarization result mapping speakers to their utterances."""
+type SpeakerDiarization {
+  speakers: Int!
+  utterances: [Utterance!]!
+}
+
+# ---------------------------------------------------------------------------
+# Channel Types
+# ---------------------------------------------------------------------------
+
+"""An audio channel in a multi-channel recording."""
+type Channel {
+  index: Int!
+  details: ChannelDetails
+}
+
+"""Index and search metadata for an audio channel."""
+type ChannelDetails {
+  index: Int!
+  searchResults: [SearchResult!]
+}
+
+"""Transcription alternatives for a specific audio channel."""
+type ChannelResult {
+  alternatives: [Alternative!]!
+  detectedLanguage: String
+  languageConfidence: Float
+  search: [SearchResult!]
+}
+
+"""A search result hit within a channel."""
+type SearchResult {
+  query: String!
+  hits: [SearchHit!]!
+}
+
+"""A single hit for a search query within the transcript."""
+type SearchHit {
+  confidence: Float!
+  start: Float!
+  end: Float!
+  snippet: String!
+}
+
+# ---------------------------------------------------------------------------
+# Audio Types
+# ---------------------------------------------------------------------------
+
+"""Reference to an audio source submitted for transcription."""
+type Audio {
+  url: String
+  mimetype: String
+  details: AudioDetails
+}
+
+"""Format, sample rate, and channel metadata for an audio source."""
+type AudioDetails {
+  format: AudioFormat
+  sampleRate: AudioSampleRate
+  channels: Int
+  duration: Float
+  bitrate: Int
+}
+
+"""Supported audio container formats."""
+enum AudioFormat {
+  MP3
+  WAV
+  FLAC
+  OGG
+  WEBM
+  MP4
+  M4A
+  AAC
+  OPUS
+  LINEAR16
+}
+
+"""Audio sample rate in Hz."""
+scalar AudioSampleRate
+
+# ---------------------------------------------------------------------------
+# Language Types
+# ---------------------------------------------------------------------------
+
+"""A transcription language supported by Deepgram."""
+type Language {
+  code: LanguageCode!
+  name: String!
+  models: [Model!]
+}
+
+"""BCP-47 language code (e.g. en-US, es, fr, de, ja, zh, pt, ru, nl, tr)."""
+scalar LanguageCode
+
+# ---------------------------------------------------------------------------
+# Model Types
+# ---------------------------------------------------------------------------
+
+"""A Deepgram transcription model."""
+type Model {
+  name: String!
+  canonicalName: String!
+  uuid: ID!
+  architecture: String
+  tier: ModelTier
+  languages: [String!]!
+  version: String
+  metadata: ModelInfo
+}
+
+"""Tier classification for Deepgram models."""
+enum ModelTier {
+  NOVA
+  NOVA_2
+  NOVA_3
+  ENHANCED
+  BASE
+  WHISPER
+}
+
+"""Model identifier block embedded in transcription results."""
+type ModelInfo {
+  name: String!
+  version: String!
+  arch: String
+}
+
+# ---------------------------------------------------------------------------
+# Feature Types
+# ---------------------------------------------------------------------------
+
+"""A Deepgram transcription feature configuration."""
+type Feature {
+  name: String!
+  enabled: Boolean!
+  details: FeatureDetails
+}
+
+"""Configuration parameters for an enabled transcription feature."""
+type FeatureDetails {
+  value: String
+  options: [String!]
+}
+
+"""Smart formatting configuration (dates, times, numbers, currencies)."""
+type SmartFormat {
+  enabled: Boolean!
+}
+
+"""Punctuation insertion feature configuration."""
+type Punctuate {
+  enabled: Boolean!
+}
+
+"""Spoken-number-to-numeral conversion feature."""
+type Numerals {
+  enabled: Boolean!
+}
+
+"""Profanity filter feature configuration."""
+type Profanity {
+  enabled: Boolean!
+  replacementChar: String
+}
+
+"""PII redaction feature configuration."""
+type Redact {
+  enabled: Boolean!
+  redact: [RedactType!]!
+}
+
+"""Types of PII that can be redacted."""
+enum RedactType {
+  NUMBERS
+  SSN
+  CREDIT_CARD
+  PHONE
+  EMAIL
+  ADDRESS
+}
+
+"""Keyword boosting configuration to improve domain-specific accuracy."""
+type Keywords {
+  keywords: [KeywordBoost!]!
+}
+
+"""A single keyword with an optional boost factor."""
+type KeywordBoost {
+  keyword: String!
+  intensifier: Float
+}
+
+"""Term replacement configuration for post-processing transcripts."""
+type Replace {
+  replacements: [Replacement!]!
+}
+
+"""A find-and-replace pair for transcript post-processing."""
+type Replacement {
+  find: String!
+  replace: String!
+}
+
+"""A search term with matching hits in the transcript."""
+type SearchTerm {
+  term: String!
+  hits: [SearchHit!]!
+}
+
+# ---------------------------------------------------------------------------
+# Audio Intelligence / NLP Types
+# ---------------------------------------------------------------------------
+
+"""Container for all audio intelligence analysis results."""
+type NLP {
+  sentiment: Sentiment
+  sentimentsBySegment: [SegmentSentiment!]
+  topics: [Topic!]
+  intents: [Intent!]
+  entities: [Entity!]
+  summary: Summary
+}
+
+"""Overall or segment-level sentiment result."""
+type Sentiment {
+  average: SentimentScore!
+  segments: [SegmentSentiment!]
+}
+
+"""Sentiment score for a transcript segment."""
+type SegmentSentiment {
+  text: String!
+  startWord: Int
+  endWord: Int
+  sentiment: SentimentType!
+  sentimentScore: Float!
+}
+
+"""Sentiment classification label."""
+enum SentimentType {
+  POSITIVE
+  NEGATIVE
+  NEUTRAL
+  MIXED
+}
+
+"""Numeric sentiment score ranging from -1.0 (negative) to 1.0 (positive)."""
+type SentimentScore {
+  sentiment: SentimentType!
+  sentimentScore: Float!
+}
+
+"""A detected topic with confidence score."""
+type Topic {
+  topic: String!
+  confidence: Float!
+  segments: [TopicSegment!]
+}
+
+"""A text segment associated with a topic detection."""
+type TopicSegment {
+  text: String!
+  startWord: Int!
+  endWord: Int!
+}
+
+"""A detected user intent with confidence score."""
+type Intent {
+  intent: String!
+  confidence: Float!
+  details: IntentDetails
+}
+
+"""Text segment and confidence metadata for an intent."""
+type IntentDetails {
+  text: String!
+  startWord: Int!
+  endWord: Int!
+}
+
+"""A named entity extracted from the transcript."""
+type Entity {
+  label: EntityType!
+  value: EntityValue!
+  confidence: Float!
+  startWord: Int!
+  endWord: Int!
+}
+
+"""Categories of named entities that Deepgram can extract."""
+enum EntityType {
+  PERSON
+  ORGANIZATION
+  LOCATION
+  DATE
+  TIME
+  MONEY
+  QUANTITY
+  PRODUCT
+  EVENT
+  OTHER
+}
+
+"""Raw text value of an extracted named entity."""
+scalar EntityValue
+
+"""An abstractive or extractive summary of the transcript."""
+type Summary {
+  short: String
+  result: String
+  type: SummaryType
+}
+
+"""Method used to generate the summary."""
+enum SummaryType {
+  ABSTRACTIVE
+  EXTRACTIVE
+}
+
+"""A highlighted segment identified as significant in the transcript."""
+type Highlight {
+  text: String!
+  start: Float!
+  end: Float!
+  details: HighlightDetails
+}
+
+"""Start/end timing and confidence for a highlight segment."""
+type HighlightDetails {
+  confidence: Float!
+  sentiment: SentimentType
+}
+
+# ---------------------------------------------------------------------------
+# Voice Agent Types
+# ---------------------------------------------------------------------------
+
+"""A Deepgram voice agent session."""
+type Agent {
+  sessionId: ID!
+  status: AgentStatus!
+  details: AgentDetails
+  config: AgentConfig
+  createdAt: String!
+}
+
+"""Status of a voice agent session."""
+enum AgentStatus {
+  INITIALIZING
+  LISTENING
+  THINKING
+  SPEAKING
+  IDLE
+  CLOSED
+  ERROR
+}
+
+"""Model, voice, LLM, and function metadata for an agent session."""
+type AgentDetails {
+  sttModel: String
+  ttsVoice: String
+  llmProvider: String
+  llmModel: String
+  functions: [AgentFunction!]
+}
+
+"""Full configuration for a voice agent session."""
+type AgentConfig {
+  audio: AgentAudioConfig
+  agent: AgentBehaviorConfig
+}
+
+"""Audio input/output configuration for a voice agent."""
+type AgentAudioConfig {
+  input: AudioInputConfig
+  output: AudioOutputConfig
+}
+
+"""Input audio format settings for a voice agent."""
+type AudioInputConfig {
+  encoding: String
+  sampleRate: Int
+}
+
+"""Output audio format settings for a voice agent."""
+type AudioOutputConfig {
+  encoding: String
+  sampleRate: Int
+  bitrate: Int
+  container: String
+}
+
+"""Behavioral configuration for the voice agent's AI pipeline."""
+type AgentBehaviorConfig {
+  listen: AgentListenConfig
+  think: AgentThinkConfig
+  speak: AgentSpeakConfig
+}
+
+"""STT configuration for the agent listening stage."""
+type AgentListenConfig {
+  provider: AgentListenProvider
+}
+
+"""STT provider settings for voice agent listening."""
+type AgentListenProvider {
+  type: String
+  model: String
+  keyterms: [String!]
+}
+
+"""LLM configuration for the agent thinking stage."""
+type AgentThinkConfig {
+  provider: AgentThinkProvider
+  functions: [AgentFunction!]
+}
+
+"""LLM provider settings for the voice agent thinking stage."""
+type AgentThinkProvider {
+  type: String
+  model: String
+  instructions: String
+  params: AgentThinkParams
+}
+
+"""Sampling parameters for the agent's LLM."""
+type AgentThinkParams {
+  temperature: Float
+  maxTokens: Int
+}
+
+"""TTS configuration for the agent speaking stage."""
+type AgentSpeakConfig {
+  provider: AgentSpeakProvider
+}
+
+"""TTS provider settings for the voice agent speaking stage."""
+type AgentSpeakProvider {
+  type: String
+  model: String
+}
+
+"""A function (tool) available to the voice agent during a session."""
+type AgentFunction {
+  name: String!
+  description: String
+  parameters: String
+  url: String
+  method: String
+  headers: [AgentFunctionHeader!]
+}
+
+"""An HTTP header included in function call requests from the agent."""
+type AgentFunctionHeader {
+  key: String!
+  value: String!
+}
+
+"""An event emitted by a voice agent session over WebSocket."""
+type AgentEvent {
+  type: AgentEventType!
+  sessionId: ID!
+  payload: String
+  timestamp: String
+}
+
+"""Types of events emitted during a voice agent session."""
+enum AgentEventType {
+  WELCOME
+  SETTINGS_APPLIED
+  USER_STARTED_SPEAKING
+  USER_STOPPED_SPEAKING
+  CONVERSATION_TEXT
+  AGENT_THINKING
+  FUNCTION_CALLING
+  FUNCTION_CALL_REQUEST
+  AGENT_STARTED_SPEAKING
+  AGENT_AUDIO_DONE
+  INJECTED_AGENT_SPEECH
+  END_OF_THOUGHT
+  WARNING
+  ERROR
+  CLOSE
+}
+
+"""Control message sent to a voice agent session."""
+input AgentControlMessage {
+  type: String!
+  payload: String
+}
+
+"""Input for initializing a voice agent session."""
+input AgentConfigInput {
+  projectId: ID!
+  audio: AgentAudioConfigInput
+  agent: AgentBehaviorConfigInput
+}
+
+"""Input for agent audio configuration."""
+input AgentAudioConfigInput {
+  input: AudioInputConfigInput
+  output: AudioOutputConfigInput
+}
+
+"""Input for audio input settings."""
+input AudioInputConfigInput {
+  encoding: String
+  sampleRate: Int
+}
+
+"""Input for audio output settings."""
+input AudioOutputConfigInput {
+  encoding: String
+  sampleRate: Int
+  bitrate: Int
+  container: String
+}
+
+"""Input for agent behavioral configuration."""
+input AgentBehaviorConfigInput {
+  listen: AgentListenConfigInput
+  think: AgentThinkConfigInput
+  speak: AgentSpeakConfigInput
+}
+
+"""Input for agent listen stage."""
+input AgentListenConfigInput {
+  model: String
+  keyterms: [String!]
+}
+
+"""Input for agent think stage."""
+input AgentThinkConfigInput {
+  model: String
+  instructions: String
+  temperature: Float
+  maxTokens: Int
+}
+
+"""Input for agent speak stage."""
+input AgentSpeakConfigInput {
+  model: String
+}
+
+# ---------------------------------------------------------------------------
+# Text-to-Speech Types
+# ---------------------------------------------------------------------------
+
+"""An Aura TTS voice available for speech synthesis."""
+type Voice {
+  name: String!
+  canonicalName: String!
+  details: VoiceDetails
+}
+
+"""Language, gender, accent, and latency metadata for a TTS voice."""
+type VoiceDetails {
+  language: String!
+  gender: VoiceGender
+  accent: String
+  description: String
+  sampleAudioUrl: String
+  tags: [String!]
+}
+
+"""Gender classification for a TTS voice."""
+enum VoiceGender {
+  MALE
+  FEMALE
+  NEUTRAL
+}
+
+"""A text-to-speech synthesis request."""
+type TextToSpeech {
+  requestId: ID!
+  model: String!
+  text: String!
+  result: SpeechResult
+  createdAt: String!
+}
+
+"""Synthesized audio result from a TTS request."""
+type SpeechResult {
+  requestId: ID!
+  modelUuid: String
+  modelName: String
+  characterCount: Int!
+  transferEncoding: String
+  date: String
+  audioData: String
+}
+
+"""Input for a pre-recorded transcription request."""
+input PrerecordedInput {
+  projectId: ID
+  url: String
+  model: String
+  language: String
+  tier: String
+  version: String
+  punctuate: Boolean
+  diarize: Boolean
+  smartFormat: Boolean
+  utterances: Boolean
+  paragraphs: Boolean
+  summarize: Boolean
+  detectTopics: Boolean
+  detectLanguage: Boolean
+  detectEntities: Boolean
+  sentiment: Boolean
+  intents: Boolean
+  redact: [String!]
+  replace: [ReplacementInput!]
+  keywords: [String!]
+  search: [String!]
+  callback: String
+  callbackMethod: String
+  numerals: Boolean
+  profanityFilter: Boolean
+  fillerWords: Boolean
+  multichannel: Boolean
+  channels: Int
+  encoding: String
+  sampleRate: Int
+  bitratetarget: Int
+  measurements: Boolean
+  extra: String
+}
+
+"""Input for a replacement pair in transcription post-processing."""
+input ReplacementInput {
+  find: String!
+  replace: String!
+}
+
+"""Input for a text-to-speech request."""
+input TextToSpeechInput {
+  projectId: ID
+  text: String!
+  model: String!
+  encoding: String
+  sampleRate: Int
+  bitrate: Int
+  container: String
+}
+
+# ---------------------------------------------------------------------------
+# Management Types
+# ---------------------------------------------------------------------------
+
+"""A Deepgram project (workspace for API keys, members, and usage)."""
+type Project {
+  projectId: ID!
+  name: String!
+  company: String
+  members: [Member!]
+  apiKeys: [APIKey!]
+  usage: Usage
+  balances: [Balance!]
+}
+
+"""A member of a Deepgram project."""
+type Member {
+  memberId: ID!
+  firstName: String
+  lastName: String
+  email: String!
+  scopes: [String!]!
+}
+
+"""A Deepgram API key associated with a project."""
+type APIKey {
+  apiKeyId: ID!
+  key: String
+  comment: String
+  scopes: [String!]!
+  created: String!
+  expirationDate: String
+  tags: [String!]
+}
+
+"""Input for creating a new API key."""
+input APIKeyInput {
+  comment: String
+  scopes: [String!]!
+  expirationDate: String
+  tags: [String!]
+}
+
+"""An authentication token."""
+type Token {
+  token: String!
+  expires: String
+  scopes: [String!]!
+}
+
+"""API error with code, message, and optional field details."""
+type Error {
+  err_code: String!
+  err_msg: String!
+  request_id: String
+  details: [ErrorDetail!]
+}
+
+"""Field-level error detail."""
+type ErrorDetail {
+  field: String!
+  message: String!
+}
+
+"""Aggregated usage summary for a Deepgram project."""
+type Usage {
+  start: String!
+  end: String!
+  resolution: UsageResolution
+  results: [UsageSummaryResult!]!
+}
+
+"""Time resolution for usage aggregation."""
+type UsageResolution {
+  units: String!
+  amount: Int!
+}
+
+"""A single usage summary data point."""
+type UsageSummaryResult {
+  start: String!
+  end: String!
+  hours: Float
+  totalHours: Float
+  requests: Int!
+}
+
+"""Detailed usage request log for a project."""
+type UsageDetails {
+  page: Int
+  limit: Int
+  requestsTotal: Int
+  requests: [UsageRequest!]!
+}
+
+"""A single transcription request record in the usage log."""
+type UsageRequest {
+  requestId: ID!
+  created: String!
+  path: String
+  accessor: String
+  response: UsageRequestResponse
+  callback: UsageCallback
+}
+
+"""Summary of the response for a logged usage request."""
+type UsageRequestResponse {
+  details: UsageRequestDetails
+  code: Int
+  completed: String
+}
+
+"""Duration and processing metadata for a usage request response."""
+type UsageRequestDetails {
+  usdCost: Float
+  durationHours: Float
+  durationSeconds: Float
+  transcriptionDuration: Float
+  numberOfRequests: Int
+  model: String
+  tier: String
+  models: [String!]
+  features: [String!]
+  tags: [String!]
+}
+
+"""Callback details for an async transcription usage request."""
+type UsageCallback {
+  code: Int
+  completed: String
+}
+
+"""A billing balance entry for a project."""
+type Balance {
+  balanceId: ID!
+  amount: Float!
+  units: String!
+  purchaseOrderId: String
+}
+
+# ---------------------------------------------------------------------------
+# Input Mutations Helpers
+# ---------------------------------------------------------------------------
+
+"""Generic key-value pair for extensible metadata."""
+type KeyValue {
+  key: String!
+  value: String!
+}
