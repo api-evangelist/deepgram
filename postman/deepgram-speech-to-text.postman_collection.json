@@ -1,0 +1,1406 @@
+{
+  "info": {
+    "_postman_id": "55d49afe-6cbd-4239-9886-e9b25d6984a5",
+    "name": "Deepgram Speech-to-Text API",
+    "description": "The Deepgram Speech-to-Text API provides accurate, fast transcription of audio content using advanced AI models. It supports pre-recorded audio files, delivering transcripts with features such as punctuation, diarization, language detection, smart formatting, summarization, sentiment analysis, topic detection, and intent recognition. Deepgram's Nova model family powers the transcription engine, offering high accuracy for conversational and professional audio across multiple languages and audio formats.\n\nContact Support:\n Name: Deepgram Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:07:44.000Z",
+    "updatedAt": "2026-06-05T15:07:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-55d49afe-6cbd-4239-9886-e9b25d6984a5"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "listen",
+          "item": [
+            {
+              "name": "Deepgram Transcribe pre-recorded audio",
+              "id": "10404167-1b7b-4735-b9e5-5f84487a65e9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/listen?model=nova-3&language=<string>&punctuate=false&diarize=false&diarize_version=<string>&smart_format=false&utterances=false&utt_split=<float>&keywords=<string>&keywords=<string>&search=<string>&search=<string>&replace=<string>&replace=<string>&redact=<string>&redact=<string>&paragraphs=false&detect_language=false&filler_words=false&multichannel=false&alternatives=<integer>&numerals=false&tag=<string>&tag=<string>&callback=<uri>&callback_method=POST&sentiment=false&summarize=<string>&topics=false&intents=false&extra=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "listen"
+                  ],
+                  "query": [
+                    {
+                      "description": "AI model used to process the audio. Options include nova-3, nova-2, nova, enhanced, and base.",
+                      "key": "model",
+                      "value": "nova-3"
+                    },
+                    {
+                      "description": "BCP-47 language tag for the primary spoken language in the audio.",
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates whether to add punctuation and capitalization to the transcript.",
+                      "key": "punctuate",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Indicates whether to recognize speaker changes in the transcript.",
+                      "key": "diarize",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Version of the diarization feature to use.",
+                      "key": "diarize_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates whether to apply smart formatting which synchronizes punctuation, diarization, and intelligent text normalization.",
+                      "key": "smart_format",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Indicates whether to segment speech into utterances.",
+                      "key": "utterances",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Length of time in seconds used to split utterances.",
+                      "key": "utt_split",
+                      "value": "<float>"
+                    },
+                    {
+                      "description": "Keywords to boost in the transcription results.",
+                      "key": "keywords",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Keywords to boost in the transcription results.",
+                      "key": "keywords",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Terms to search for in the submitted audio.",
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Terms to search for in the submitted audio.",
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Terms or phrases to search for in the submitted audio and replace.",
+                      "key": "replace",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Terms or phrases to search for in the submitted audio and replace.",
+                      "key": "replace",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates whether to redact sensitive information from the transcript. Accepts boolean or specific entity types such as pci, numbers, ssn.",
+                      "key": "redact",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates whether to redact sensitive information from the transcript. Accepts boolean or specific entity types such as pci, numbers, ssn.",
+                      "key": "redact",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates whether to split the transcript into paragraphs.",
+                      "key": "paragraphs",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Indicates whether to detect the language of the audio.",
+                      "key": "detect_language",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Indicates whether to include filler words such as um and uh in the transcript.",
+                      "key": "filler_words",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Indicates whether to transcribe each audio channel independently.",
+                      "key": "multichannel",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Maximum number of transcript alternatives to return.",
+                      "key": "alternatives",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Indicates whether to convert numbers from written format to numerical format.",
+                      "key": "numerals",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Tag to associate with the request for tracking purposes.",
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Tag to associate with the request for tracking purposes.",
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "URL to which Deepgram will make a callback request when processing is complete.",
+                      "key": "callback",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "HTTP method for the callback request.",
+                      "key": "callback_method",
+                      "value": "POST"
+                    },
+                    {
+                      "description": "Indicates whether to perform sentiment analysis on the content.",
+                      "key": "sentiment",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.",
+                      "key": "summarize",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates whether to detect topics in the content.",
+                      "key": "topics",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Indicates whether to detect intents in the content.",
+                      "key": "intents",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Arbitrary key-value pairs to associate with the request.",
+                      "key": "extra",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Transcribes and optionally analyzes pre-recorded audio. Accepts audio as a URL reference in the request body or as raw binary audio data. Supports a wide range of audio formats and provides options for punctuation, diarization, smart formatting, language detection, summarization, sentiment analysis, topic detection, and intent recognition through query parameters."
+              },
+              "response": [
+                {
+                  "id": "7be99f42-5109-4339-b7a2-dc9501f6711c",
+                  "name": "Transcription completed successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"url\": \"<uri>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/listen?model=nova-3&language=<string>&punctuate=false&diarize=false&diarize_version=<string>&smart_format=false&utterances=false&utt_split=<float>&keywords=<string>&search=<string>&replace=<string>&redact=<string>&paragraphs=false&detect_language=false&filler_words=false&multichannel=false&alternatives=<integer>&numerals=false&tag=<string>&callback=<uri>&callback_method=POST&sentiment=false&summarize=<string>&topics=false&intents=false&extra=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "listen"
+                      ],
+                      "query": [
+                        {
+                          "description": "AI model used to process the audio. Options include nova-3, nova-2, nova, enhanced, and base.",
+                          "key": "model",
+                          "value": "nova-3"
+                        },
+                        {
+                          "description": "BCP-47 language tag for the primary spoken language in the audio.",
+                          "key": "language",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to add punctuation and capitalization to the transcript.",
+                          "key": "punctuate",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to recognize speaker changes in the transcript.",
+                          "key": "diarize",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Version of the diarization feature to use.",
+                          "key": "diarize_version",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to apply smart formatting which synchronizes punctuation, diarization, and intelligent text normalization.",
+                          "key": "smart_format",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to segment speech into utterances.",
+                          "key": "utterances",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Length of time in seconds used to split utterances.",
+                          "key": "utt_split",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Keywords to boost in the transcription results.",
+                          "key": "keywords",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Terms to search for in the submitted audio.",
+                          "key": "search",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Terms or phrases to search for in the submitted audio and replace.",
+                          "key": "replace",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to redact sensitive information from the transcript. Accepts boolean or specific entity types such as pci, numbers, ssn.",
+                          "key": "redact",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to split the transcript into paragraphs.",
+                          "key": "paragraphs",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to detect the language of the audio.",
+                          "key": "detect_language",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to include filler words such as um and uh in the transcript.",
+                          "key": "filler_words",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to transcribe each audio channel independently.",
+                          "key": "multichannel",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Maximum number of transcript alternatives to return.",
+                          "key": "alternatives",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Indicates whether to convert numbers from written format to numerical format.",
+                          "key": "numerals",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Tag to associate with the request for tracking purposes.",
+                          "key": "tag",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "URL to which Deepgram will make a callback request when processing is complete.",
+                          "key": "callback",
+                          "value": "<uri>"
+                        },
+                        {
+                          "description": "HTTP method for the callback request.",
+                          "key": "callback_method",
+                          "value": "POST"
+                        },
+                        {
+                          "description": "Indicates whether to perform sentiment analysis on the content.",
+                          "key": "sentiment",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.",
+                          "key": "summarize",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to detect topics in the content.",
+                          "key": "topics",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to detect intents in the content.",
+                          "key": "intents",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Arbitrary key-value pairs to associate with the request.",
+                          "key": "extra",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"metadata\": {\n    \"transaction_key\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"sha256\": \"<string>\",\n    \"created\": \"<dateTime>\",\n    \"duration\": \"<float>\",\n    \"channels\": \"<integer>\",\n    \"models\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"model_info\": {\n      \"minim_f7\": {\n        \"name\": \"<string>\",\n        \"version\": \"<string>\",\n        \"arch\": \"<string>\"\n      },\n      \"officia_89\": {\n        \"name\": \"<string>\",\n        \"version\": \"<string>\",\n        \"arch\": \"<string>\"\n      },\n      \"adf8\": {\n        \"name\": \"<string>\",\n        \"version\": \"<string>\",\n        \"arch\": \"<string>\"\n      }\n    }\n  },\n  \"results\": {\n    \"channels\": [\n      {\n        \"alternatives\": [\n          {\n            \"transcript\": \"<string>\",\n            \"confidence\": \"<float>\",\n            \"words\": [\n              {\n                \"word\": \"<string>\",\n                \"start\": \"<float>\",\n                \"end\": \"<float>\",\n                \"confidence\": \"<float>\",\n                \"speaker\": \"<integer>\",\n                \"punctuated_word\": \"<string>\",\n                \"sentiment\": \"neutral\",\n                \"sentiment_score\": \"<float>\"\n              },\n              {\n                \"word\": \"<string>\",\n                \"start\": \"<float>\",\n                \"end\": \"<float>\",\n                \"confidence\": \"<float>\",\n                \"speaker\": \"<integer>\",\n                \"punctuated_word\": \"<string>\",\n                \"sentiment\": \"negative\",\n                \"sentiment_score\": \"<float>\"\n              }\n            ],\n            \"paragraphs\": {\n              \"transcript\": \"<string>\",\n              \"paragraphs\": [\n                {\n                  \"sentences\": [\n                    {\n                      \"text\": \"<string>\",\n                      \"start\": \"<float>\",\n                      \"end\": \"<float>\"\n                    },\n                    {\n                      \"text\": \"<string>\",\n                      \"start\": \"<float>\",\n                      \"end\": \"<float>\"\n                    }\n                  ],\n                  \"start\": \"<float>\",\n                  \"end\": \"<float>\",\n                  \"num_words\": \"<integer>\",\n                  \"speaker\": \"<integer>\"\n                },\n                {\n                  \"sentences\": [\n                    {\n                      \"text\": \"<string>\",\n                      \"start\": \"<float>\",\n                      \"end\": \"<float>\"\n                    },\n                    {\n                      \"text\": \"<string>\",\n                      \"start\": \"<float>\",\n                      \"end\": \"<float>\"\n                    }\n                  ],\n                  \"start\": \"<float>\",\n                  \"end\": \"<float>\",\n                  \"num_words\": \"<integer>\",\n                  \"speaker\": \"<integer>\"\n                }\n              ]\n            }\n          },\n          {\n            \"transcript\": \"<string>\",\n            \"confidence\": \"<float>\",\n            \"words\": [\n              {\n                \"word\": \"<string>\",\n                \"start\": \"<float>\",\n                \"end\": \"<float>\",\n                \"confidence\": \"<float>\",\n                \"speaker\": \"<integer>\",\n                \"punctuated_word\": \"<string>\",\n                \"sentiment\": \"negative\",\n                \"sentiment_score\": \"<float>\"\n              },\n              {\n                \"word\": \"<string>\",\n                \"start\": \"<float>\",\n                \"end\": \"<float>\",\n                \"confidence\": \"<float>\",\n                \"speaker\": \"<integer>\",\n                \"punctuated_word\": \"<string>\",\n                \"sentiment\": \"positive\",\n                \"sentiment_score\": \"<float>\"\n              }\n            ],\n            \"paragraphs\": {\n              \"transcript\": \"<string>\",\n              \"paragraphs\": [\n                {\n                  \"sentences\": [\n                    {\n                      \"text\": \"<string>\",\n                      \"start\": \"<float>\",\n                      \"end\": \"<float>\"\n                    },\n                    {\n                      \"text\": \"<string>\",\n                      \"start\": \"<float>\",\n                      \"end\": \"<float>\"\n                    }\n                  ],\n                  \"start\": \"<float>\",\n                  \"end\": \"<float>\",\n                  \"num_words\": \"<integer>\",\n                  \"speaker\": \"<integer>\"\n                },\n                {\n                  \"sentences\": [\n                    {\n                      \"text\": \"<string>\",\n                      \"start\": \"<float>\",\n                      \"end\": \"<float>\"\n                    },\n                    {\n                      \"text\": \"<string>\",\n                      \"start\": \"<float>\",\n                      \"end\": \"<float>\"\n                    }\n                  ],\n                  \"start\": \"<float>\",\n                  \"end\": \"<float>\",\n                  \"num_words\": \"<integer>\",\n                  \"speaker\": \"<integer>\"\n                }\n              ]\n            }\n          }\n        ],\n        \"detected_language\": \"<string>\",\n        \"language_confidence\": \"<float>\"\n      },\n      {\n        \"alternatives\": [\n          {\n            \"transcript\": \"<string>\",\n            \"confidence\": \"<float>\",\n            \"words\": [\n              {\n                \"word\": \"<string>\",\n                \"start\": \"<float>\",\n                \"end\": \"<float>\",\n                \"confidence\": \"<float>\",\n                \"speaker\": \"<integer>\",\n                \"punctuated_word\": \"<string>\",\n                \"sentiment\": \"positive\",\n                \"sentiment_score\": \"<float>\"\n              },\n              {\n                \"word\": \"<string>\",\n                \"start\": \"<float>\",\n                \"end\": \"<float>\",\n                \"confidence\": \"<float>\",\n                \"speaker\": \"<integer>\",\n                \"punctuated_word\": \"<string>\",\n                \"sentiment\": \"positive\",\n                \"sentiment_score\": \"<float>\"\n              }\n            ],\n            \"paragraphs\": {\n              \"transcript\": \"<string>\",\n              \"paragraphs\": [\n                {\n                  \"sentences\": [\n                    {\n                      \"text\": \"<string>\",\n                      \"start\": \"<float>\",\n                      \"end\": \"<float>\"\n                    },\n                    {\n                      \"text\": \"<string>\",\n                      \"start\": \"<float>\",\n                      \"end\": \"<float>\"\n                    }\n                  ],\n                  \"start\": \"<float>\",\n                  \"end\": \"<float>\",\n                  \"num_words\": \"<integer>\",\n                  \"speaker\": \"<integer>\"\n                },\n                {\n                  \"sentences\": [\n                    {\n                      \"text\": \"<string>\",\n                      \"start\": \"<float>\",\n                      \"end\": \"<float>\"\n                    },\n                    {\n                      \"text\": \"<string>\",\n                      \"start\": \"<float>\",\n                      \"end\": \"<float>\"\n                    }\n                  ],\n                  \"start\": \"<float>\",\n                  \"end\": \"<float>\",\n                  \"num_words\": \"<integer>\",\n                  \"speaker\": \"<integer>\"\n                }\n              ]\n            }\n          },\n          {\n            \"transcript\": \"<string>\",\n            \"confidence\": \"<float>\",\n            \"words\": [\n              {\n                \"word\": \"<string>\",\n                \"start\": \"<float>\",\n                \"end\": \"<float>\",\n                \"confidence\": \"<float>\",\n                \"speaker\": \"<integer>\",\n                \"punctuated_word\": \"<string>\",\n                \"sentiment\": \"negative\",\n                \"sentiment_score\": \"<float>\"\n              },\n              {\n                \"word\": \"<string>\",\n                \"start\": \"<float>\",\n                \"end\": \"<float>\",\n                \"confidence\": \"<float>\",\n                \"speaker\": \"<integer>\",\n                \"punctuated_word\": \"<string>\",\n                \"sentiment\": \"neutral\",\n                \"sentiment_score\": \"<float>\"\n              }\n            ],\n            \"paragraphs\": {\n              \"transcript\": \"<string>\",\n              \"paragraphs\": [\n                {\n                  \"sentences\": [\n                    {\n                      \"text\": \"<string>\",\n                      \"start\": \"<float>\",\n                      \"end\": \"<float>\"\n                    },\n                    {\n                      \"text\": \"<string>\",\n                      \"start\": \"<float>\",\n                      \"end\": \"<float>\"\n                    }\n                  ],\n                  \"start\": \"<float>\",\n                  \"end\": \"<float>\",\n                  \"num_words\": \"<integer>\",\n                  \"speaker\": \"<integer>\"\n                },\n                {\n                  \"sentences\": [\n                    {\n                      \"text\": \"<string>\",\n                      \"start\": \"<float>\",\n                      \"end\": \"<float>\"\n                    },\n                    {\n                      \"text\": \"<string>\",\n                      \"start\": \"<float>\",\n                      \"end\": \"<float>\"\n                    }\n                  ],\n                  \"start\": \"<float>\",\n                  \"end\": \"<float>\",\n                  \"num_words\": \"<integer>\",\n                  \"speaker\": \"<integer>\"\n                }\n              ]\n            }\n          }\n        ],\n        \"detected_language\": \"<string>\",\n        \"language_confidence\": \"<float>\"\n      }\n    ],\n    \"utterances\": [\n      {\n        \"start\": \"<float>\",\n        \"end\": \"<float>\",\n        \"confidence\": \"<float>\",\n        \"channel\": \"<integer>\",\n        \"transcript\": \"<string>\",\n        \"words\": [\n          {\n            \"word\": \"<string>\",\n            \"start\": \"<float>\",\n            \"end\": \"<float>\",\n            \"confidence\": \"<float>\",\n            \"speaker\": \"<integer>\",\n            \"punctuated_word\": \"<string>\",\n            \"sentiment\": \"neutral\",\n            \"sentiment_score\": \"<float>\"\n          },\n          {\n            \"word\": \"<string>\",\n            \"start\": \"<float>\",\n            \"end\": \"<float>\",\n            \"confidence\": \"<float>\",\n            \"speaker\": \"<integer>\",\n            \"punctuated_word\": \"<string>\",\n            \"sentiment\": \"neutral\",\n            \"sentiment_score\": \"<float>\"\n          }\n        ],\n        \"speaker\": \"<integer>\",\n        \"id\": \"<string>\"\n      },\n      {\n        \"start\": \"<float>\",\n        \"end\": \"<float>\",\n        \"confidence\": \"<float>\",\n        \"channel\": \"<integer>\",\n        \"transcript\": \"<string>\",\n        \"words\": [\n          {\n            \"word\": \"<string>\",\n            \"start\": \"<float>\",\n            \"end\": \"<float>\",\n            \"confidence\": \"<float>\",\n            \"speaker\": \"<integer>\",\n            \"punctuated_word\": \"<string>\",\n            \"sentiment\": \"neutral\",\n            \"sentiment_score\": \"<float>\"\n          },\n          {\n            \"word\": \"<string>\",\n            \"start\": \"<float>\",\n            \"end\": \"<float>\",\n            \"confidence\": \"<float>\",\n            \"speaker\": \"<integer>\",\n            \"punctuated_word\": \"<string>\",\n            \"sentiment\": \"negative\",\n            \"sentiment_score\": \"<float>\"\n          }\n        ],\n        \"speaker\": \"<integer>\",\n        \"id\": \"<string>\"\n      }\n    ],\n    \"summary\": {\n      \"short\": \"<string>\"\n    },\n    \"sentiments\": {\n      \"segments\": [\n        {\n          \"text\": \"<string>\",\n          \"start_word\": \"<integer>\",\n          \"end_word\": \"<integer>\",\n          \"sentiment\": \"positive\",\n          \"sentiment_score\": \"<float>\"\n        },\n        {\n          \"text\": \"<string>\",\n          \"start_word\": \"<integer>\",\n          \"end_word\": \"<integer>\",\n          \"sentiment\": \"negative\",\n          \"sentiment_score\": \"<float>\"\n        }\n      ],\n      \"average\": {\n        \"sentiment\": \"positive\",\n        \"sentiment_score\": \"<float>\"\n      }\n    },\n    \"topics\": {\n      \"segments\": [\n        {\n          \"text\": \"<string>\",\n          \"start_word\": \"<integer>\",\n          \"end_word\": \"<integer>\",\n          \"topics\": [\n            {\n              \"topic\": \"<string>\",\n              \"confidence_score\": \"<float>\"\n            },\n            {\n              \"topic\": \"<string>\",\n              \"confidence_score\": \"<float>\"\n            }\n          ]\n        },\n        {\n          \"text\": \"<string>\",\n          \"start_word\": \"<integer>\",\n          \"end_word\": \"<integer>\",\n          \"topics\": [\n            {\n              \"topic\": \"<string>\",\n              \"confidence_score\": \"<float>\"\n            },\n            {\n              \"topic\": \"<string>\",\n              \"confidence_score\": \"<float>\"\n            }\n          ]\n        }\n      ]\n    },\n    \"intents\": {\n      \"segments\": [\n        {\n          \"text\": \"<string>\",\n          \"start_word\": \"<integer>\",\n          \"end_word\": \"<integer>\",\n          \"intents\": [\n            {\n              \"intent\": \"<string>\",\n              \"confidence_score\": \"<float>\"\n            },\n            {\n              \"intent\": \"<string>\",\n              \"confidence_score\": \"<float>\"\n            }\n          ]\n        },\n        {\n          \"text\": \"<string>\",\n          \"start_word\": \"<integer>\",\n          \"end_word\": \"<integer>\",\n          \"intents\": [\n            {\n              \"intent\": \"<string>\",\n              \"confidence_score\": \"<float>\"\n            },\n            {\n              \"intent\": \"<string>\",\n              \"confidence_score\": \"<float>\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:07:44.000Z",
+                  "updatedAt": "2026-06-05T15:07:44.000Z",
+                  "uid": "35240-7be99f42-5109-4339-b7a2-dc9501f6711c"
+                },
+                {
+                  "id": "67f06faf-fe12-4c24-951a-fa198e749428",
+                  "name": "Bad request due to invalid parameters or audio format",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"url\": \"<uri>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/listen?model=nova-3&language=<string>&punctuate=false&diarize=false&diarize_version=<string>&smart_format=false&utterances=false&utt_split=<float>&keywords=<string>&search=<string>&replace=<string>&redact=<string>&paragraphs=false&detect_language=false&filler_words=false&multichannel=false&alternatives=<integer>&numerals=false&tag=<string>&callback=<uri>&callback_method=POST&sentiment=false&summarize=<string>&topics=false&intents=false&extra=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "listen"
+                      ],
+                      "query": [
+                        {
+                          "description": "AI model used to process the audio. Options include nova-3, nova-2, nova, enhanced, and base.",
+                          "key": "model",
+                          "value": "nova-3"
+                        },
+                        {
+                          "description": "BCP-47 language tag for the primary spoken language in the audio.",
+                          "key": "language",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to add punctuation and capitalization to the transcript.",
+                          "key": "punctuate",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to recognize speaker changes in the transcript.",
+                          "key": "diarize",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Version of the diarization feature to use.",
+                          "key": "diarize_version",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to apply smart formatting which synchronizes punctuation, diarization, and intelligent text normalization.",
+                          "key": "smart_format",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to segment speech into utterances.",
+                          "key": "utterances",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Length of time in seconds used to split utterances.",
+                          "key": "utt_split",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Keywords to boost in the transcription results.",
+                          "key": "keywords",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Terms to search for in the submitted audio.",
+                          "key": "search",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Terms or phrases to search for in the submitted audio and replace.",
+                          "key": "replace",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to redact sensitive information from the transcript. Accepts boolean or specific entity types such as pci, numbers, ssn.",
+                          "key": "redact",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to split the transcript into paragraphs.",
+                          "key": "paragraphs",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to detect the language of the audio.",
+                          "key": "detect_language",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to include filler words such as um and uh in the transcript.",
+                          "key": "filler_words",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to transcribe each audio channel independently.",
+                          "key": "multichannel",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Maximum number of transcript alternatives to return.",
+                          "key": "alternatives",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Indicates whether to convert numbers from written format to numerical format.",
+                          "key": "numerals",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Tag to associate with the request for tracking purposes.",
+                          "key": "tag",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "URL to which Deepgram will make a callback request when processing is complete.",
+                          "key": "callback",
+                          "value": "<uri>"
+                        },
+                        {
+                          "description": "HTTP method for the callback request.",
+                          "key": "callback_method",
+                          "value": "POST"
+                        },
+                        {
+                          "description": "Indicates whether to perform sentiment analysis on the content.",
+                          "key": "sentiment",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.",
+                          "key": "summarize",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to detect topics in the content.",
+                          "key": "topics",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to detect intents in the content.",
+                          "key": "intents",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Arbitrary key-value pairs to associate with the request.",
+                          "key": "extra",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:07:44.000Z",
+                  "updatedAt": "2026-06-05T15:07:44.000Z",
+                  "uid": "35240-67f06faf-fe12-4c24-951a-fa198e749428"
+                },
+                {
+                  "id": "49d558f5-1781-43f3-bb26-226bb8ece578",
+                  "name": "Unauthorized due to missing or invalid API key",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"url\": \"<uri>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/listen?model=nova-3&language=<string>&punctuate=false&diarize=false&diarize_version=<string>&smart_format=false&utterances=false&utt_split=<float>&keywords=<string>&search=<string>&replace=<string>&redact=<string>&paragraphs=false&detect_language=false&filler_words=false&multichannel=false&alternatives=<integer>&numerals=false&tag=<string>&callback=<uri>&callback_method=POST&sentiment=false&summarize=<string>&topics=false&intents=false&extra=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "listen"
+                      ],
+                      "query": [
+                        {
+                          "description": "AI model used to process the audio. Options include nova-3, nova-2, nova, enhanced, and base.",
+                          "key": "model",
+                          "value": "nova-3"
+                        },
+                        {
+                          "description": "BCP-47 language tag for the primary spoken language in the audio.",
+                          "key": "language",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to add punctuation and capitalization to the transcript.",
+                          "key": "punctuate",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to recognize speaker changes in the transcript.",
+                          "key": "diarize",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Version of the diarization feature to use.",
+                          "key": "diarize_version",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to apply smart formatting which synchronizes punctuation, diarization, and intelligent text normalization.",
+                          "key": "smart_format",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to segment speech into utterances.",
+                          "key": "utterances",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Length of time in seconds used to split utterances.",
+                          "key": "utt_split",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Keywords to boost in the transcription results.",
+                          "key": "keywords",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Terms to search for in the submitted audio.",
+                          "key": "search",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Terms or phrases to search for in the submitted audio and replace.",
+                          "key": "replace",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to redact sensitive information from the transcript. Accepts boolean or specific entity types such as pci, numbers, ssn.",
+                          "key": "redact",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to split the transcript into paragraphs.",
+                          "key": "paragraphs",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to detect the language of the audio.",
+                          "key": "detect_language",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to include filler words such as um and uh in the transcript.",
+                          "key": "filler_words",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to transcribe each audio channel independently.",
+                          "key": "multichannel",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Maximum number of transcript alternatives to return.",
+                          "key": "alternatives",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Indicates whether to convert numbers from written format to numerical format.",
+                          "key": "numerals",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Tag to associate with the request for tracking purposes.",
+                          "key": "tag",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "URL to which Deepgram will make a callback request when processing is complete.",
+                          "key": "callback",
+                          "value": "<uri>"
+                        },
+                        {
+                          "description": "HTTP method for the callback request.",
+                          "key": "callback_method",
+                          "value": "POST"
+                        },
+                        {
+                          "description": "Indicates whether to perform sentiment analysis on the content.",
+                          "key": "sentiment",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.",
+                          "key": "summarize",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to detect topics in the content.",
+                          "key": "topics",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to detect intents in the content.",
+                          "key": "intents",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Arbitrary key-value pairs to associate with the request.",
+                          "key": "extra",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:07:44.000Z",
+                  "updatedAt": "2026-06-05T15:07:44.000Z",
+                  "uid": "35240-49d558f5-1781-43f3-bb26-226bb8ece578"
+                },
+                {
+                  "id": "73999a22-7395-4e87-95ea-bed05cf325a3",
+                  "name": "Insufficient credits",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"url\": \"<uri>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/listen?model=nova-3&language=<string>&punctuate=false&diarize=false&diarize_version=<string>&smart_format=false&utterances=false&utt_split=<float>&keywords=<string>&search=<string>&replace=<string>&redact=<string>&paragraphs=false&detect_language=false&filler_words=false&multichannel=false&alternatives=<integer>&numerals=false&tag=<string>&callback=<uri>&callback_method=POST&sentiment=false&summarize=<string>&topics=false&intents=false&extra=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "listen"
+                      ],
+                      "query": [
+                        {
+                          "description": "AI model used to process the audio. Options include nova-3, nova-2, nova, enhanced, and base.",
+                          "key": "model",
+                          "value": "nova-3"
+                        },
+                        {
+                          "description": "BCP-47 language tag for the primary spoken language in the audio.",
+                          "key": "language",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to add punctuation and capitalization to the transcript.",
+                          "key": "punctuate",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to recognize speaker changes in the transcript.",
+                          "key": "diarize",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Version of the diarization feature to use.",
+                          "key": "diarize_version",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to apply smart formatting which synchronizes punctuation, diarization, and intelligent text normalization.",
+                          "key": "smart_format",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to segment speech into utterances.",
+                          "key": "utterances",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Length of time in seconds used to split utterances.",
+                          "key": "utt_split",
+                          "value": "<float>"
+                        },
+                        {
+                          "description": "Keywords to boost in the transcription results.",
+                          "key": "keywords",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Terms to search for in the submitted audio.",
+                          "key": "search",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Terms or phrases to search for in the submitted audio and replace.",
+                          "key": "replace",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to redact sensitive information from the transcript. Accepts boolean or specific entity types such as pci, numbers, ssn.",
+                          "key": "redact",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to split the transcript into paragraphs.",
+                          "key": "paragraphs",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to detect the language of the audio.",
+                          "key": "detect_language",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to include filler words such as um and uh in the transcript.",
+                          "key": "filler_words",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to transcribe each audio channel independently.",
+                          "key": "multichannel",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Maximum number of transcript alternatives to return.",
+                          "key": "alternatives",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Indicates whether to convert numbers from written format to numerical format.",
+                          "key": "numerals",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Tag to associate with the request for tracking purposes.",
+                          "key": "tag",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "URL to which Deepgram will make a callback request when processing is complete.",
+                          "key": "callback",
+                          "value": "<uri>"
+                        },
+                        {
+                          "description": "HTTP method for the callback request.",
+                          "key": "callback_method",
+                          "value": "POST"
+                        },
+                        {
+                          "description": "Indicates whether to perform sentiment analysis on the content.",
+                          "key": "sentiment",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.",
+                          "key": "summarize",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to detect topics in the content.",
+                          "key": "topics",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to detect intents in the content.",
+                          "key": "intents",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Arbitrary key-value pairs to associate with the request.",
+                          "key": "extra",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Payment Required",
+                  "code": 402,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:07:44.000Z",
+                  "updatedAt": "2026-06-05T15:07:44.000Z",
+                  "uid": "35240-73999a22-7395-4e87-95ea-bed05cf325a3"
+                }
+              ],
+              "createdAt": "2026-06-05T15:07:44.000Z",
+              "updatedAt": "2026-06-05T15:07:44.000Z",
+              "uid": "35240-10404167-1b7b-4735-b9e5-5f84487a65e9"
+            }
+          ],
+          "id": "cf8aedbd-f33f-42a6-9d13-77bb525f45a2",
+          "createdAt": "2026-06-05T15:07:44.000Z",
+          "updatedAt": "2026-06-05T15:07:44.000Z",
+          "uid": "35240-cf8aedbd-f33f-42a6-9d13-77bb525f45a2"
+        },
+        {
+          "name": "read",
+          "item": [
+            {
+              "name": "Deepgram Analyze text content",
+              "id": "529fc3d8-a5c4-40f1-a93c-6d8d78568007",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/read?sentiment=false&summarize=<string>&topics=false&intents=false&language=<string>&callback=<uri>&callback_method=POST&custom_topic=<string>&custom_topic=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "read"
+                  ],
+                  "query": [
+                    {
+                      "description": "Indicates whether to perform sentiment analysis on the content.",
+                      "key": "sentiment",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.",
+                      "key": "summarize",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates whether to detect topics in the content.",
+                      "key": "topics",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Indicates whether to detect intents in the content.",
+                      "key": "intents",
+                      "value": "false"
+                    },
+                    {
+                      "description": "BCP-47 language tag for the primary spoken language in the audio.",
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "URL to which Deepgram will make a callback request when processing is complete.",
+                      "key": "callback",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "HTTP method for the callback request.",
+                      "key": "callback_method",
+                      "value": "POST"
+                    },
+                    {
+                      "description": "Custom topics to detect within the input content. Up to 100 custom topics are allowed.",
+                      "key": "custom_topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Custom topics to detect within the input content. Up to 100 custom topics are allowed.",
+                      "key": "custom_topic",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Analyzes text content for summarization, sentiment analysis, topic detection, and intent recognition using Deepgram's text intelligence models. Accepts text as a string in a JSON request body, a local file, or a hosted URL."
+              },
+              "response": [
+                {
+                  "id": "761d44a4-e298-48d9-99ea-eccef1e34a98",
+                  "name": "Text analysis completed successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"text\": \"<string>\",\n  \"url\": \"<uri>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/read?sentiment=false&summarize=<string>&topics=false&intents=false&language=<string>&callback=<uri>&callback_method=POST&custom_topic=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "read"
+                      ],
+                      "query": [
+                        {
+                          "description": "Indicates whether to perform sentiment analysis on the content.",
+                          "key": "sentiment",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.",
+                          "key": "summarize",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to detect topics in the content.",
+                          "key": "topics",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to detect intents in the content.",
+                          "key": "intents",
+                          "value": "false"
+                        },
+                        {
+                          "description": "BCP-47 language tag for the primary spoken language in the audio.",
+                          "key": "language",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "URL to which Deepgram will make a callback request when processing is complete.",
+                          "key": "callback",
+                          "value": "<uri>"
+                        },
+                        {
+                          "description": "HTTP method for the callback request.",
+                          "key": "callback_method",
+                          "value": "POST"
+                        },
+                        {
+                          "description": "Custom topics to detect within the input content. Up to 100 custom topics are allowed.",
+                          "key": "custom_topic",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"metadata\": {\n    \"request_id\": \"<string>\",\n    \"created\": \"<dateTime>\"\n  },\n  \"results\": {\n    \"summary\": {\n      \"short\": \"<string>\"\n    },\n    \"sentiments\": {\n      \"segments\": [\n        {\n          \"text\": \"<string>\",\n          \"start_word\": \"<integer>\",\n          \"end_word\": \"<integer>\",\n          \"sentiment\": \"neutral\",\n          \"sentiment_score\": \"<float>\"\n        },\n        {\n          \"text\": \"<string>\",\n          \"start_word\": \"<integer>\",\n          \"end_word\": \"<integer>\",\n          \"sentiment\": \"negative\",\n          \"sentiment_score\": \"<float>\"\n        }\n      ],\n      \"average\": {\n        \"sentiment\": \"positive\",\n        \"sentiment_score\": \"<float>\"\n      }\n    },\n    \"topics\": {\n      \"segments\": [\n        {\n          \"text\": \"<string>\",\n          \"start_word\": \"<integer>\",\n          \"end_word\": \"<integer>\",\n          \"topics\": [\n            {\n              \"topic\": \"<string>\",\n              \"confidence_score\": \"<float>\"\n            },\n            {\n              \"topic\": \"<string>\",\n              \"confidence_score\": \"<float>\"\n            }\n          ]\n        },\n        {\n          \"text\": \"<string>\",\n          \"start_word\": \"<integer>\",\n          \"end_word\": \"<integer>\",\n          \"topics\": [\n            {\n              \"topic\": \"<string>\",\n              \"confidence_score\": \"<float>\"\n            },\n            {\n              \"topic\": \"<string>\",\n              \"confidence_score\": \"<float>\"\n            }\n          ]\n        }\n      ]\n    },\n    \"intents\": {\n      \"segments\": [\n        {\n          \"text\": \"<string>\",\n          \"start_word\": \"<integer>\",\n          \"end_word\": \"<integer>\",\n          \"intents\": [\n            {\n              \"intent\": \"<string>\",\n              \"confidence_score\": \"<float>\"\n            },\n            {\n              \"intent\": \"<string>\",\n              \"confidence_score\": \"<float>\"\n            }\n          ]\n        },\n        {\n          \"text\": \"<string>\",\n          \"start_word\": \"<integer>\",\n          \"end_word\": \"<integer>\",\n          \"intents\": [\n            {\n              \"intent\": \"<string>\",\n              \"confidence_score\": \"<float>\"\n            },\n            {\n              \"intent\": \"<string>\",\n              \"confidence_score\": \"<float>\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:07:44.000Z",
+                  "updatedAt": "2026-06-05T15:07:44.000Z",
+                  "uid": "35240-761d44a4-e298-48d9-99ea-eccef1e34a98"
+                },
+                {
+                  "id": "43edbff6-2474-4291-8825-a0e3d3a5e8d8",
+                  "name": "Bad request due to invalid parameters or input",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"text\": \"<string>\",\n  \"url\": \"<uri>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/read?sentiment=false&summarize=<string>&topics=false&intents=false&language=<string>&callback=<uri>&callback_method=POST&custom_topic=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "read"
+                      ],
+                      "query": [
+                        {
+                          "description": "Indicates whether to perform sentiment analysis on the content.",
+                          "key": "sentiment",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.",
+                          "key": "summarize",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to detect topics in the content.",
+                          "key": "topics",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to detect intents in the content.",
+                          "key": "intents",
+                          "value": "false"
+                        },
+                        {
+                          "description": "BCP-47 language tag for the primary spoken language in the audio.",
+                          "key": "language",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "URL to which Deepgram will make a callback request when processing is complete.",
+                          "key": "callback",
+                          "value": "<uri>"
+                        },
+                        {
+                          "description": "HTTP method for the callback request.",
+                          "key": "callback_method",
+                          "value": "POST"
+                        },
+                        {
+                          "description": "Custom topics to detect within the input content. Up to 100 custom topics are allowed.",
+                          "key": "custom_topic",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:07:44.000Z",
+                  "updatedAt": "2026-06-05T15:07:44.000Z",
+                  "uid": "35240-43edbff6-2474-4291-8825-a0e3d3a5e8d8"
+                },
+                {
+                  "id": "9badc75a-f930-4aab-b96b-b6d0bffe3915",
+                  "name": "Unauthorized due to missing or invalid API key",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"text\": \"<string>\",\n  \"url\": \"<uri>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/read?sentiment=false&summarize=<string>&topics=false&intents=false&language=<string>&callback=<uri>&callback_method=POST&custom_topic=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "read"
+                      ],
+                      "query": [
+                        {
+                          "description": "Indicates whether to perform sentiment analysis on the content.",
+                          "key": "sentiment",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.",
+                          "key": "summarize",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Indicates whether to detect topics in the content.",
+                          "key": "topics",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Indicates whether to detect intents in the content.",
+                          "key": "intents",
+                          "value": "false"
+                        },
+                        {
+                          "description": "BCP-47 language tag for the primary spoken language in the audio.",
+                          "key": "language",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "URL to which Deepgram will make a callback request when processing is complete.",
+                          "key": "callback",
+                          "value": "<uri>"
+                        },
+                        {
+                          "description": "HTTP method for the callback request.",
+                          "key": "callback_method",
+                          "value": "POST"
+                        },
+                        {
+                          "description": "Custom topics to detect within the input content. Up to 100 custom topics are allowed.",
+                          "key": "custom_topic",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:07:44.000Z",
+                  "updatedAt": "2026-06-05T15:07:44.000Z",
+                  "uid": "35240-9badc75a-f930-4aab-b96b-b6d0bffe3915"
+                }
+              ],
+              "createdAt": "2026-06-05T15:07:44.000Z",
+              "updatedAt": "2026-06-05T15:07:44.000Z",
+              "uid": "35240-529fc3d8-a5c4-40f1-a93c-6d8d78568007"
+            }
+          ],
+          "id": "a3326369-a945-408a-ac32-690146e1044b",
+          "createdAt": "2026-06-05T15:07:44.000Z",
+          "updatedAt": "2026-06-05T15:07:44.000Z",
+          "uid": "35240-a3326369-a945-408a-ac32-690146e1044b"
+        }
+      ],
+      "id": "7d1ea7ac-da92-4dfc-873e-315f937429c7",
+      "createdAt": "2026-06-05T15:07:44.000Z",
+      "updatedAt": "2026-06-05T15:07:44.000Z",
+      "uid": "35240-7d1ea7ac-da92-4dfc-873e-315f937429c7"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.deepgram.com"
+    }
+  ]
+}

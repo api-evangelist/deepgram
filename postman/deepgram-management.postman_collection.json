@@ -1,0 +1,4052 @@
+{
+  "info": {
+    "_postman_id": "cfbe1378-05f5-4e56-a996-c750bc8741b8",
+    "name": "Deepgram Management API",
+    "description": "The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.\n\nContact Support:\n Name: Deepgram Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:07:46.000Z",
+    "updatedAt": "2026-06-05T15:07:46.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-cfbe1378-05f5-4e56-a996-c750bc8741b8"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{project_id}",
+              "item": [
+                {
+                  "name": "keys",
+                  "item": [
+                    {
+                      "name": "{key_id}",
+                      "item": [
+                        {
+                          "name": "Deepgram Get a project API key",
+                          "id": "5e59b23e-b195-42d6-9185-a4ce4328ec95",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/keys/:key_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "keys",
+                                ":key_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a04bbbef-db81-4bcc-ace0-a8bc7ce52bd5",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier of the project."
+                                },
+                                {
+                                  "id": "623ebb2d-74f1-4680-afce-1a14720cfb87",
+                                  "key": "key_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier of the API key."
+                                }
+                              ]
+                            },
+                            "description": "Retrieves details about a specific API key in the project."
+                          },
+                          "response": [
+                            {
+                              "id": "4c78e359-3abd-4201-a10f-60fe7117faf8",
+                              "name": "API key details retrieved successfully",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/keys/:key_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "keys",
+                                    ":key_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "key_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"api_key_id\": \"<string>\",\n  \"key\": \"<string>\",\n  \"comment\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"created\": \"<dateTime>\",\n  \"expiration_date\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-4c78e359-3abd-4201-a10f-60fe7117faf8"
+                            },
+                            {
+                              "id": "8c1e11f4-ff84-4643-9a92-c80ccb7ac9f0",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/keys/:key_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "keys",
+                                    ":key_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "key_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-8c1e11f4-ff84-4643-9a92-c80ccb7ac9f0"
+                            },
+                            {
+                              "id": "431cf0a3-fd3b-40ef-a733-62def3b3db70",
+                              "name": "Key not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/keys/:key_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "keys",
+                                    ":key_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "key_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-431cf0a3-fd3b-40ef-a733-62def3b3db70"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-5e59b23e-b195-42d6-9185-a4ce4328ec95"
+                        },
+                        {
+                          "name": "Deepgram Delete a project API key",
+                          "id": "ca266a89-cf61-4a70-9e88-fcbbe6818f70",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/keys/:key_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "keys",
+                                ":key_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b4f60d6a-8a1c-4efa-ae71-8dcad12101b5",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier of the project."
+                                },
+                                {
+                                  "id": "483c14fe-504f-47b8-8025-794dba784890",
+                                  "key": "key_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier of the API key."
+                                }
+                              ]
+                            },
+                            "description": "Permanently deletes a specific API key from the project."
+                          },
+                          "response": [
+                            {
+                              "id": "94b0e6e8-0a6a-44f9-900c-d0d47eb5c75b",
+                              "name": "API key deleted successfully",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/keys/:key_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "keys",
+                                    ":key_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "key_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-94b0e6e8-0a6a-44f9-900c-d0d47eb5c75b"
+                            },
+                            {
+                              "id": "59f363af-351c-4467-bba1-c8e7bef3d246",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/keys/:key_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "keys",
+                                    ":key_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "key_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-59f363af-351c-4467-bba1-c8e7bef3d246"
+                            },
+                            {
+                              "id": "3efde19e-d5a4-455e-a14b-89143c77d4be",
+                              "name": "Key not found",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/keys/:key_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "keys",
+                                    ":key_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "key_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-3efde19e-d5a4-455e-a14b-89143c77d4be"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-ca266a89-cf61-4a70-9e88-fcbbe6818f70"
+                        }
+                      ],
+                      "id": "560e390d-c10d-4a92-ab3b-5079123d2987",
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-560e390d-c10d-4a92-ab3b-5079123d2987"
+                    },
+                    {
+                      "name": "Deepgram List project API keys",
+                      "id": "194ff994-a8d6-4fe3-ae39-bd01577ce44f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id/keys",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id",
+                            "keys"
+                          ],
+                          "variable": [
+                            {
+                              "id": "f7713324-808b-442f-b79e-f7e276cd2aca",
+                              "key": "project_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the project."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves all API keys associated with the specified project."
+                      },
+                      "response": [
+                        {
+                          "id": "4ca842be-880a-4f66-bcf5-55e14f47c90b",
+                          "name": "List of API keys retrieved successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/keys",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "keys"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"api_keys\": [\n    {\n      \"api_key_id\": \"<string>\",\n      \"key\": \"<string>\",\n      \"comment\": \"<string>\",\n      \"scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"created\": \"<dateTime>\",\n      \"expiration_date\": \"<dateTime>\"\n    },\n    {\n      \"api_key_id\": \"<string>\",\n      \"key\": \"<string>\",\n      \"comment\": \"<string>\",\n      \"scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"created\": \"<dateTime>\",\n      \"expiration_date\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-4ca842be-880a-4f66-bcf5-55e14f47c90b"
+                        },
+                        {
+                          "id": "d83ec13a-0ca6-429b-9360-94c70e769d2b",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/keys",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "keys"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-d83ec13a-0ca6-429b-9360-94c70e769d2b"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-194ff994-a8d6-4fe3-ae39-bd01577ce44f"
+                    },
+                    {
+                      "name": "Deepgram Create a project API key",
+                      "id": "c1da077c-2f25-448e-9b9d-b0509efc34eb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"comment\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"expiration_date\": \"<dateTime>\",\n  \"time_to_live_in_seconds\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id/keys",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id",
+                            "keys"
+                          ],
+                          "variable": [
+                            {
+                              "id": "676c972f-9f3d-47f3-b838-570022d9620f",
+                              "key": "project_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the project."
+                            }
+                          ]
+                        },
+                        "description": "Creates a new API key for the specified project with the given scopes. Requires the keys:write scope on the authenticating key."
+                      },
+                      "response": [
+                        {
+                          "id": "cb55b08b-7473-4ff2-b753-1c9ab483a433",
+                          "name": "API key created successfully",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"comment\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"expiration_date\": \"<dateTime>\",\n  \"time_to_live_in_seconds\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/keys",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "keys"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"api_key_id\": \"<string>\",\n  \"key\": \"<string>\",\n  \"comment\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"created\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-cb55b08b-7473-4ff2-b753-1c9ab483a433"
+                        },
+                        {
+                          "id": "a1de89b7-dd6d-48d7-af5f-cc859ad86508",
+                          "name": "Bad request",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"comment\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"expiration_date\": \"<dateTime>\",\n  \"time_to_live_in_seconds\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/keys",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "keys"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-a1de89b7-dd6d-48d7-af5f-cc859ad86508"
+                        },
+                        {
+                          "id": "8fde9420-a75d-4edb-a1e2-ab836ceaab8b",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"comment\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"expiration_date\": \"<dateTime>\",\n  \"time_to_live_in_seconds\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/keys",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "keys"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-8fde9420-a75d-4edb-a1e2-ab836ceaab8b"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-c1da077c-2f25-448e-9b9d-b0509efc34eb"
+                    }
+                  ],
+                  "id": "a5db8dc1-f2f8-4dbf-89e9-b4ac5d1d9489",
+                  "createdAt": "2026-06-05T15:07:46.000Z",
+                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                  "uid": "35240-a5db8dc1-f2f8-4dbf-89e9-b4ac5d1d9489"
+                },
+                {
+                  "name": "members",
+                  "item": [
+                    {
+                      "name": "{member_id}",
+                      "item": [
+                        {
+                          "name": "scopes",
+                          "item": [
+                            {
+                              "name": "Deepgram Get member scopes",
+                              "id": "2d543f5e-eb83-4c05-b292-e6d2c65156f3",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/members/:member_id/scopes",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "members",
+                                    ":member_id",
+                                    "scopes"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "82b0d952-b5a6-47d6-873c-5cfa28b90308",
+                                      "key": "project_id",
+                                      "value": "<string>",
+                                      "description": "(Required) Unique identifier of the project."
+                                    },
+                                    {
+                                      "id": "384db8fd-904e-4159-98d8-e03f0b454b08",
+                                      "key": "member_id",
+                                      "value": "<string>",
+                                      "description": "(Required) Unique identifier of the member."
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves the scopes assigned to a specific member within a project."
+                              },
+                              "response": [
+                                {
+                                  "id": "1f07419a-4a83-4e91-9d85-a7593723cd5a",
+                                  "name": "Member scopes retrieved successfully",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:project_id/members/:member_id/scopes",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":project_id",
+                                        "members",
+                                        ":member_id",
+                                        "scopes"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "member_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                  "createdAt": "2026-06-05T15:07:46.000Z",
+                                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                                  "uid": "35240-1f07419a-4a83-4e91-9d85-a7593723cd5a"
+                                },
+                                {
+                                  "id": "8d348094-7052-47e6-b4a0-082de5d90ca3",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:project_id/members/:member_id/scopes",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":project_id",
+                                        "members",
+                                        ":member_id",
+                                        "scopes"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "member_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                                  "createdAt": "2026-06-05T15:07:46.000Z",
+                                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                                  "uid": "35240-8d348094-7052-47e6-b4a0-082de5d90ca3"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-2d543f5e-eb83-4c05-b292-e6d2c65156f3"
+                            },
+                            {
+                              "name": "Deepgram Update member scopes",
+                              "id": "77fe0ede-f957-4d7d-b0c2-f6f990a8c7d4",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"scope\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/members/:member_id/scopes",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "members",
+                                    ":member_id",
+                                    "scopes"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "976491bb-1ce9-47fe-b75c-88cf8be54ed6",
+                                      "key": "project_id",
+                                      "value": "<string>",
+                                      "description": "(Required) Unique identifier of the project."
+                                    },
+                                    {
+                                      "id": "c53cf2da-86d0-4fac-9f09-648dd6d96cb9",
+                                      "key": "member_id",
+                                      "value": "<string>",
+                                      "description": "(Required) Unique identifier of the member."
+                                    }
+                                  ]
+                                },
+                                "description": "Updates the scopes assigned to a specific member within a project."
+                              },
+                              "response": [
+                                {
+                                  "id": "31d7fb51-4cd3-43b6-9034-5ce936ec2dbc",
+                                  "name": "Member scopes updated successfully",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"scope\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:project_id/members/:member_id/scopes",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":project_id",
+                                        "members",
+                                        ":member_id",
+                                        "scopes"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "member_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:07:46.000Z",
+                                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                                  "uid": "35240-31d7fb51-4cd3-43b6-9034-5ce936ec2dbc"
+                                },
+                                {
+                                  "id": "d34b3b80-64ce-429a-b4d0-15a8b01d8e65",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"scope\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/projects/:project_id/members/:member_id/scopes",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "projects",
+                                        ":project_id",
+                                        "members",
+                                        ":member_id",
+                                        "scopes"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "member_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                                  "createdAt": "2026-06-05T15:07:46.000Z",
+                                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                                  "uid": "35240-d34b3b80-64ce-429a-b4d0-15a8b01d8e65"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-77fe0ede-f957-4d7d-b0c2-f6f990a8c7d4"
+                            }
+                          ],
+                          "id": "b00eb84c-b2fc-4b65-833c-53fb86cbb35a",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-b00eb84c-b2fc-4b65-833c-53fb86cbb35a"
+                        },
+                        {
+                          "name": "Deepgram Remove a project member",
+                          "id": "e17e74f1-4bb2-4220-b1e3-6476f44a6d4c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/members/:member_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "members",
+                                ":member_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "2245359b-8da9-4cce-b11a-b5b119967829",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier of the project."
+                                },
+                                {
+                                  "id": "a90c355e-f615-49e7-b7cf-cb9de3d07a27",
+                                  "key": "member_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier of the member."
+                                }
+                              ]
+                            },
+                            "description": "Removes a member from the specified project."
+                          },
+                          "response": [
+                            {
+                              "id": "3a3a6d0e-6633-4c90-ad1e-baf51a10728c",
+                              "name": "Member removed successfully",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/members/:member_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "members",
+                                    ":member_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "member_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-3a3a6d0e-6633-4c90-ad1e-baf51a10728c"
+                            },
+                            {
+                              "id": "f92d3c3b-ae0b-4136-b43c-17a22eb98459",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/members/:member_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "members",
+                                    ":member_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "member_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-f92d3c3b-ae0b-4136-b43c-17a22eb98459"
+                            },
+                            {
+                              "id": "a78f6b3b-ad9d-4a7d-ac94-3293a7e5141b",
+                              "name": "Member not found",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/members/:member_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "members",
+                                    ":member_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "member_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-a78f6b3b-ad9d-4a7d-ac94-3293a7e5141b"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-e17e74f1-4bb2-4220-b1e3-6476f44a6d4c"
+                        }
+                      ],
+                      "id": "41821626-dd45-40a3-b6d9-c6b7916cd21f",
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-41821626-dd45-40a3-b6d9-c6b7916cd21f"
+                    },
+                    {
+                      "name": "Deepgram List project members",
+                      "id": "ac377258-5351-4a4f-b804-cd281848f8fc",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id/members",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id",
+                            "members"
+                          ],
+                          "variable": [
+                            {
+                              "id": "8992db78-3844-4801-b2b4-2ca8b54a7219",
+                              "key": "project_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the project."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a list of account objects for members of the specified project."
+                      },
+                      "response": [
+                        {
+                          "id": "57f34e9f-2fff-49a0-a951-3bacad0ccd99",
+                          "name": "List of members retrieved successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/members",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "members"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"members\": [\n    {\n      \"member_id\": \"<string>\",\n      \"email\": \"<email>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"member_id\": \"<string>\",\n      \"email\": \"<email>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-57f34e9f-2fff-49a0-a951-3bacad0ccd99"
+                        },
+                        {
+                          "id": "4bd41561-f479-4969-a8da-ee71f16822c6",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/members",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "members"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-4bd41561-f479-4969-a8da-ee71f16822c6"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-ac377258-5351-4a4f-b804-cd281848f8fc"
+                    }
+                  ],
+                  "id": "c3ebb6f8-54cf-4d1d-8b44-6906d22af108",
+                  "createdAt": "2026-06-05T15:07:46.000Z",
+                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                  "uid": "35240-c3ebb6f8-54cf-4d1d-8b44-6906d22af108"
+                },
+                {
+                  "name": "invites",
+                  "item": [
+                    {
+                      "name": "{email}",
+                      "item": [
+                        {
+                          "name": "Deepgram Delete a project invitation",
+                          "id": "5c4898a4-3494-4cd7-b492-af5fa1ec2ca5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/invites/:email",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "invites",
+                                ":email"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "2d3431e8-ca52-47b0-b9d6-ba0f73fca323",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier of the project."
+                                },
+                                {
+                                  "id": "4fb1f4dc-acb1-41a6-8c5f-a580e6ddeb90",
+                                  "key": "email",
+                                  "value": "<email>",
+                                  "description": "(Required) Email address of the invitation to remove."
+                                }
+                              ]
+                            },
+                            "description": "Removes a pending invitation for the specified email address from the project."
+                          },
+                          "response": [
+                            {
+                              "id": "c9dd139e-5775-4321-82f4-4df010c8d572",
+                              "name": "Invitation deleted successfully",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/invites/:email",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "invites",
+                                    ":email"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "email"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-c9dd139e-5775-4321-82f4-4df010c8d572"
+                            },
+                            {
+                              "id": "e7a1abd9-1998-4d65-b84c-d7dab0c78de9",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/invites/:email",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "invites",
+                                    ":email"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "email"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-e7a1abd9-1998-4d65-b84c-d7dab0c78de9"
+                            },
+                            {
+                              "id": "a44433a8-c2b4-41e2-9da4-c01078564b4a",
+                              "name": "Invitation not found",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/invites/:email",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "invites",
+                                    ":email"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "email"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-a44433a8-c2b4-41e2-9da4-c01078564b4a"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-5c4898a4-3494-4cd7-b492-af5fa1ec2ca5"
+                        }
+                      ],
+                      "id": "42686286-8c39-459f-8431-6c781cafb10c",
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-42686286-8c39-459f-8431-6c781cafb10c"
+                    },
+                    {
+                      "name": "Deepgram List project invitations",
+                      "id": "1f0ab4a6-23ad-4281-98cf-e783f21e0841",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id/invites",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id",
+                            "invites"
+                          ],
+                          "variable": [
+                            {
+                              "id": "b1044b57-5557-4a33-94c4-7cf86785ecbd",
+                              "key": "project_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the project."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a list of pending invitations for the specified project."
+                      },
+                      "response": [
+                        {
+                          "id": "420b4d6c-5807-4e31-becc-94ce052628a5",
+                          "name": "List of invitations retrieved successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/invites",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "invites"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"invites\": [\n    {\n      \"email\": \"<email>\",\n      \"scope\": \"<string>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"scope\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-420b4d6c-5807-4e31-becc-94ce052628a5"
+                        },
+                        {
+                          "id": "b06d35d5-6c73-45bf-8115-91cc0adbf2c0",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/invites",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "invites"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-b06d35d5-6c73-45bf-8115-91cc0adbf2c0"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-1f0ab4a6-23ad-4281-98cf-e783f21e0841"
+                    },
+                    {
+                      "name": "Deepgram Send a project invitation",
+                      "id": "eeade778-f80c-4207-9097-301973632dc4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<email>\",\n  \"scope\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id/invites",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id",
+                            "invites"
+                          ],
+                          "variable": [
+                            {
+                              "id": "946f6b9f-bfdf-499c-95f8-2468d8f54a30",
+                              "key": "project_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the project."
+                            }
+                          ]
+                        },
+                        "description": "Sends an invitation to the specified email address to join the project."
+                      },
+                      "response": [
+                        {
+                          "id": "fe07ae50-e0c2-4bec-ac90-86060ee1572a",
+                          "name": "Invitation sent successfully",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"email\": \"<email>\",\n  \"scope\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/invites",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "invites"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-fe07ae50-e0c2-4bec-ac90-86060ee1572a"
+                        },
+                        {
+                          "id": "f688aac7-ed32-4ade-8524-9dbaffd457b8",
+                          "name": "Bad request",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"email\": \"<email>\",\n  \"scope\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/invites",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "invites"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-f688aac7-ed32-4ade-8524-9dbaffd457b8"
+                        },
+                        {
+                          "id": "56cd3afc-c1ad-4fde-822f-7545d22b56b7",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"email\": \"<email>\",\n  \"scope\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/invites",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "invites"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-56cd3afc-c1ad-4fde-822f-7545d22b56b7"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-eeade778-f80c-4207-9097-301973632dc4"
+                    }
+                  ],
+                  "id": "4d89c369-3ead-4283-ad56-a67a51091649",
+                  "createdAt": "2026-06-05T15:07:46.000Z",
+                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                  "uid": "35240-4d89c369-3ead-4283-ad56-a67a51091649"
+                },
+                {
+                  "name": "usage",
+                  "item": [
+                    {
+                      "name": "Deepgram Get project usage",
+                      "id": "981780c0-92cd-4584-a423-be2caa73223b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id/usage?start=<dateTime>&end=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id",
+                            "usage"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start date for the usage period in ISO 8601 format.",
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for the usage period in ISO 8601 format.",
+                              "key": "end",
+                              "value": "<dateTime>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "c9790aac-99d7-43e8-a03f-dc3e7c1bbab6",
+                              "key": "project_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the project."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves usage data for the specified project over a given time range."
+                      },
+                      "response": [
+                        {
+                          "id": "f64cf04e-3b48-4777-a793-dbd01a8adfec",
+                          "name": "Usage data retrieved successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/usage?start=<dateTime>&end=<dateTime>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "usage"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Start date for the usage period in ISO 8601 format.",
+                                  "key": "start",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "End date for the usage period in ISO 8601 format.",
+                                  "key": "end",
+                                  "value": "<dateTime>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"start\": \"<dateTime>\",\n  \"end\": \"<dateTime>\",\n  \"resolution\": {\n    \"units\": \"<string>\",\n    \"amount\": \"<integer>\"\n  },\n  \"results\": [\n    {\n      \"start\": \"<dateTime>\",\n      \"end\": \"<dateTime>\",\n      \"hours\": \"<float>\",\n      \"requests\": \"<integer>\"\n    },\n    {\n      \"start\": \"<dateTime>\",\n      \"end\": \"<dateTime>\",\n      \"hours\": \"<float>\",\n      \"requests\": \"<integer>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-f64cf04e-3b48-4777-a793-dbd01a8adfec"
+                        },
+                        {
+                          "id": "ac356c7f-327d-440e-a484-fd7a858a8fb7",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/usage?start=<dateTime>&end=<dateTime>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "usage"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Start date for the usage period in ISO 8601 format.",
+                                  "key": "start",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "End date for the usage period in ISO 8601 format.",
+                                  "key": "end",
+                                  "value": "<dateTime>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-ac356c7f-327d-440e-a484-fd7a858a8fb7"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-981780c0-92cd-4584-a423-be2caa73223b"
+                    }
+                  ],
+                  "id": "bb025fb0-730e-4ee2-a7bf-35fc4afc5e58",
+                  "createdAt": "2026-06-05T15:07:46.000Z",
+                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                  "uid": "35240-bb025fb0-730e-4ee2-a7bf-35fc4afc5e58"
+                },
+                {
+                  "name": "requests",
+                  "item": [
+                    {
+                      "name": "Deepgram List project requests",
+                      "id": "1898b880-36d5-4f93-b6a9-e1ee11442dec",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id/requests?start=<dateTime>&end=<dateTime>&limit=<integer>&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id",
+                            "requests"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start date for the request period in ISO 8601 format.",
+                              "key": "start",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for the request period in ISO 8601 format.",
+                              "key": "end",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Maximum number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Pagination cursor for retrieving the next page of results.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "a051533b-8b1e-415b-9274-5862fcd1838b",
+                              "key": "project_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the project."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a paginated list of API requests made to the specified project over a given time range."
+                      },
+                      "response": [
+                        {
+                          "id": "83a454a9-6e30-490d-9ad2-3229db55c996",
+                          "name": "Request list retrieved successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/requests?start=<dateTime>&end=<dateTime>&limit=<integer>&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "requests"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Start date for the request period in ISO 8601 format.",
+                                  "key": "start",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "End date for the request period in ISO 8601 format.",
+                                  "key": "end",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "Maximum number of results to return per page.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Pagination cursor for retrieving the next page of results.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"page\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"requests\": [\n    {\n      \"request_id\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"path\": \"<string>\",\n      \"api_key_id\": \"<string>\"\n    },\n    {\n      \"request_id\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"path\": \"<string>\",\n      \"api_key_id\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-83a454a9-6e30-490d-9ad2-3229db55c996"
+                        },
+                        {
+                          "id": "fe865a01-8a91-4a2c-b0e9-a7f07b446a9b",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/requests?start=<dateTime>&end=<dateTime>&limit=<integer>&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "requests"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Start date for the request period in ISO 8601 format.",
+                                  "key": "start",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "End date for the request period in ISO 8601 format.",
+                                  "key": "end",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "Maximum number of results to return per page.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Pagination cursor for retrieving the next page of results.",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-fe865a01-8a91-4a2c-b0e9-a7f07b446a9b"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-1898b880-36d5-4f93-b6a9-e1ee11442dec"
+                    }
+                  ],
+                  "id": "96dda264-b7d3-4463-a1b7-5d23a69663be",
+                  "createdAt": "2026-06-05T15:07:46.000Z",
+                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                  "uid": "35240-96dda264-b7d3-4463-a1b7-5d23a69663be"
+                },
+                {
+                  "name": "balances",
+                  "item": [
+                    {
+                      "name": "{balance_id}",
+                      "item": [
+                        {
+                          "name": "Deepgram Get a project balance",
+                          "id": "4eb7a3aa-68b4-4ffe-b3a3-30c03a47f5e0",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/balances/:balance_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "balances",
+                                ":balance_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b227b99a-a3e4-45e4-bd43-81702bd1c546",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier of the project."
+                                },
+                                {
+                                  "id": "7f33bf7a-a1ad-42f5-ab3b-e48dfb0079fa",
+                                  "key": "balance_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier of the balance."
+                                }
+                              ]
+                            },
+                            "description": "Retrieves details about a specific billing balance for the project."
+                          },
+                          "response": [
+                            {
+                              "id": "c56fea4a-1ab3-4af3-8965-0b4244039e47",
+                              "name": "Balance details retrieved successfully",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/balances/:balance_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "balances",
+                                    ":balance_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "balance_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"balance_id\": \"<string>\",\n  \"amount\": \"<float>\",\n  \"units\": \"<string>\",\n  \"purchase\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-c56fea4a-1ab3-4af3-8965-0b4244039e47"
+                            },
+                            {
+                              "id": "c18170ca-20cc-4208-a815-6f19b1864357",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/balances/:balance_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "balances",
+                                    ":balance_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "balance_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-c18170ca-20cc-4208-a815-6f19b1864357"
+                            },
+                            {
+                              "id": "ca5c06fd-5194-4620-83ca-c8b00de8fada",
+                              "name": "Balance not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/projects/:project_id/balances/:balance_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "balances",
+                                    ":balance_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "balance_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:07:46.000Z",
+                              "updatedAt": "2026-06-05T15:07:46.000Z",
+                              "uid": "35240-ca5c06fd-5194-4620-83ca-c8b00de8fada"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-4eb7a3aa-68b4-4ffe-b3a3-30c03a47f5e0"
+                        }
+                      ],
+                      "id": "c843d4c6-7031-4042-85bd-537e23aff8aa",
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-c843d4c6-7031-4042-85bd-537e23aff8aa"
+                    },
+                    {
+                      "name": "Deepgram List project balances",
+                      "id": "1a61f5d1-a1c5-4d87-81d3-530b12576940",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id/balances",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id",
+                            "balances"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ea434028-6b29-4e3a-884f-20ff9ffc74f2",
+                              "key": "project_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the project."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves billing balance information for the specified project."
+                      },
+                      "response": [
+                        {
+                          "id": "e158d0ac-1b81-4ccf-9d0a-bd8b8af3a097",
+                          "name": "Balance information retrieved successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/balances",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "balances"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"balances\": [\n    {\n      \"balance_id\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"units\": \"<string>\",\n      \"purchase\": \"<string>\"\n    },\n    {\n      \"balance_id\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"units\": \"<string>\",\n      \"purchase\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-e158d0ac-1b81-4ccf-9d0a-bd8b8af3a097"
+                        },
+                        {
+                          "id": "9820046b-51da-41ef-abd8-fde0c0e37240",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/projects/:project_id/balances",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "balances"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:07:46.000Z",
+                          "updatedAt": "2026-06-05T15:07:46.000Z",
+                          "uid": "35240-9820046b-51da-41ef-abd8-fde0c0e37240"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-1a61f5d1-a1c5-4d87-81d3-530b12576940"
+                    }
+                  ],
+                  "id": "f622787d-c9e4-425d-ace4-6e3520f208f7",
+                  "createdAt": "2026-06-05T15:07:46.000Z",
+                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                  "uid": "35240-f622787d-c9e4-425d-ace4-6e3520f208f7"
+                },
+                {
+                  "name": "Deepgram Get a project",
+                  "id": "6886ec69-cac9-4951-8089-ff699d8b91d9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/projects/:project_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "projects",
+                        ":project_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "136ab00a-bf28-4711-a678-a7d2e4549216",
+                          "key": "project_id",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the project."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves detailed information about a specific project."
+                  },
+                  "response": [
+                    {
+                      "id": "6ddabd16-4b97-40d4-8afd-9d3ce6ebe103",
+                      "name": "Project details retrieved successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"project_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"company\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-6ddabd16-4b97-40d4-8afd-9d3ce6ebe103"
+                    },
+                    {
+                      "id": "3e57ff49-abce-495a-94d8-c36f2e917d40",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-3e57ff49-abce-495a-94d8-c36f2e917d40"
+                    },
+                    {
+                      "id": "ede11789-3bb2-4879-a4ea-d445d845c05b",
+                      "name": "Project not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-ede11789-3bb2-4879-a4ea-d445d845c05b"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:07:46.000Z",
+                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                  "uid": "35240-6886ec69-cac9-4951-8089-ff699d8b91d9"
+                },
+                {
+                  "name": "Deepgram Update a project",
+                  "id": "b61ab625-9b90-4722-ae4d-011022e47042",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"company\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/projects/:project_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "projects",
+                        ":project_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a9ca5817-0071-4e48-812e-e7b6d60fe0b0",
+                          "key": "project_id",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the project."
+                        }
+                      ]
+                    },
+                    "description": "Updates settings for a specific project."
+                  },
+                  "response": [
+                    {
+                      "id": "3d702e92-615a-49f7-b0a1-8371cf57d89e",
+                      "name": "Project updated successfully",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"company\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"project_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"company\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-3d702e92-615a-49f7-b0a1-8371cf57d89e"
+                    },
+                    {
+                      "id": "b53aeb9b-0b41-487f-ab66-ab84c7ecd13b",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"company\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-b53aeb9b-0b41-487f-ab66-ab84c7ecd13b"
+                    },
+                    {
+                      "id": "733ddb39-c4d3-47bc-a75e-b03710edd49f",
+                      "name": "Project not found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"company\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-733ddb39-c4d3-47bc-a75e-b03710edd49f"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:07:46.000Z",
+                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                  "uid": "35240-b61ab625-9b90-4722-ae4d-011022e47042"
+                },
+                {
+                  "name": "Deepgram Delete a project",
+                  "id": "66e40559-74df-4d72-8954-39b25ea17b90",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/projects/:project_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "projects",
+                        ":project_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "19ad41a9-17d6-4a8d-b677-06d13a133f3a",
+                          "key": "project_id",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the project."
+                        }
+                      ]
+                    },
+                    "description": "Permanently deletes a specific project and all associated resources."
+                  },
+                  "response": [
+                    {
+                      "id": "bd648918-0a49-4247-bc4b-ad969c953224",
+                      "name": "Project deleted successfully",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-bd648918-0a49-4247-bc4b-ad969c953224"
+                    },
+                    {
+                      "id": "b8abe1db-3423-441b-b1fd-ba82386042b4",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-b8abe1db-3423-441b-b1fd-ba82386042b4"
+                    },
+                    {
+                      "id": "321d8b48-8c75-4ab2-bf3b-68936f4f883b",
+                      "name": "Project not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/projects/:project_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "projects",
+                            ":project_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-321d8b48-8c75-4ab2-bf3b-68936f4f883b"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:07:46.000Z",
+                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                  "uid": "35240-66e40559-74df-4d72-8954-39b25ea17b90"
+                }
+              ],
+              "id": "4f20ddfd-dd61-4d18-9e38-06bbf5496c6d",
+              "createdAt": "2026-06-05T15:07:46.000Z",
+              "updatedAt": "2026-06-05T15:07:46.000Z",
+              "uid": "35240-4f20ddfd-dd61-4d18-9e38-06bbf5496c6d"
+            },
+            {
+              "name": "Deepgram List all projects",
+              "id": "1895d2eb-fd29-4288-a28a-ce2be9807118",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/projects",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "projects"
+                  ]
+                },
+                "description": "Retrieves basic information about all projects associated with the authenticated API key."
+              },
+              "response": [
+                {
+                  "id": "7f5a8166-2198-4647-92ec-4648d828b40f",
+                  "name": "List of projects retrieved successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/projects",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "projects"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"projects\": [\n    {\n      \"project_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"company\": \"<string>\"\n    },\n    {\n      \"project_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"company\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:07:46.000Z",
+                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                  "uid": "35240-7f5a8166-2198-4647-92ec-4648d828b40f"
+                },
+                {
+                  "id": "0b2f1eb5-c783-40d7-9e72-f30016b9ac75",
+                  "name": "Unauthorized due to missing or invalid API key",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/projects",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "projects"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:07:46.000Z",
+                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                  "uid": "35240-0b2f1eb5-c783-40d7-9e72-f30016b9ac75"
+                }
+              ],
+              "createdAt": "2026-06-05T15:07:46.000Z",
+              "updatedAt": "2026-06-05T15:07:46.000Z",
+              "uid": "35240-1895d2eb-fd29-4288-a28a-ce2be9807118"
+            }
+          ],
+          "id": "407891fb-a0a2-4086-84d2-97dbfeec1942",
+          "createdAt": "2026-06-05T15:07:46.000Z",
+          "updatedAt": "2026-06-05T15:07:46.000Z",
+          "uid": "35240-407891fb-a0a2-4086-84d2-97dbfeec1942"
+        },
+        {
+          "name": "models",
+          "item": [
+            {
+              "name": "{model_id}",
+              "item": [
+                {
+                  "name": "Deepgram Get a model",
+                  "id": "9a0014f5-fbba-426b-9730-aec2b0160a37",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/models/:model_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "models",
+                        ":model_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "46daa800-8db9-4f39-b70b-5f010fde3cad",
+                          "key": "model_id",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the model."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves metadata for a specific model by its identifier."
+                  },
+                  "response": [
+                    {
+                      "id": "5207e8e3-b1b5-472e-9eb5-6cd5eb82c624",
+                      "name": "Model details retrieved successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/models/:model_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "models",
+                            ":model_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "model_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"canonical_name\": \"<string>\",\n  \"architecture\": \"<string>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"version\": \"<string>\",\n  \"uuid\": \"<string>\",\n  \"metadata\": {\n    \"sed_1bc\": 95865912,\n    \"eiusmod_d\": false,\n    \"laboriscb_\": -71320964,\n    \"Ut_01\": \"ut id et\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-5207e8e3-b1b5-472e-9eb5-6cd5eb82c624"
+                    },
+                    {
+                      "id": "9a466ac7-1662-4848-939c-0ef443003d8d",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/models/:model_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "models",
+                            ":model_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "model_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-9a466ac7-1662-4848-939c-0ef443003d8d"
+                    },
+                    {
+                      "id": "fa09cee8-294c-4a13-b9ac-1e16ccb87ed0",
+                      "name": "Model not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/models/:model_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "models",
+                            ":model_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "model_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:07:46.000Z",
+                      "updatedAt": "2026-06-05T15:07:46.000Z",
+                      "uid": "35240-fa09cee8-294c-4a13-b9ac-1e16ccb87ed0"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:07:46.000Z",
+                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                  "uid": "35240-9a0014f5-fbba-426b-9730-aec2b0160a37"
+                }
+              ],
+              "id": "c4efc115-b012-442d-a6c9-bdbc18ca53be",
+              "createdAt": "2026-06-05T15:07:46.000Z",
+              "updatedAt": "2026-06-05T15:07:46.000Z",
+              "uid": "35240-c4efc115-b012-442d-a6c9-bdbc18ca53be"
+            },
+            {
+              "name": "Deepgram List all available models",
+              "id": "61ec3f5e-951c-41da-a415-58308acd42b2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/models?include_outdated=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "models"
+                  ],
+                  "query": [
+                    {
+                      "description": "Include non-latest versions of models in the response.",
+                      "key": "include_outdated",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "description": "Retrieves metadata on all the latest public models available on the Deepgram platform, including both speech-to-text and text-to-speech models."
+              },
+              "response": [
+                {
+                  "id": "be132140-f344-4ace-8682-57953991d70b",
+                  "name": "Model list retrieved successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/models?include_outdated=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "models"
+                      ],
+                      "query": [
+                        {
+                          "description": "Include non-latest versions of models in the response.",
+                          "key": "include_outdated",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"stt\": [\n    {\n      \"name\": \"<string>\",\n      \"canonical_name\": \"<string>\",\n      \"architecture\": \"<string>\",\n      \"languages\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"version\": \"<string>\",\n      \"uuid\": \"<string>\",\n      \"metadata\": {\n        \"aliquipfbc\": -52284996,\n        \"dolore_7e3\": \"enim\",\n        \"sit40\": \"ipsum enim\",\n        \"adipisicing_e5\": \"occaecat reprehenderit\",\n        \"nostrud_\": \"ad veniam laboris cupidatat consequat\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"canonical_name\": \"<string>\",\n      \"architecture\": \"<string>\",\n      \"languages\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"version\": \"<string>\",\n      \"uuid\": \"<string>\",\n      \"metadata\": {\n        \"labore0a6\": \"occaecat aliquip Duis nisi\"\n      }\n    }\n  ],\n  \"tts\": [\n    {\n      \"name\": \"<string>\",\n      \"canonical_name\": \"<string>\",\n      \"architecture\": \"<string>\",\n      \"languages\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"version\": \"<string>\",\n      \"uuid\": \"<string>\",\n      \"metadata\": {\n        \"qui_7f\": 93557710.22376081\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"canonical_name\": \"<string>\",\n      \"architecture\": \"<string>\",\n      \"languages\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"version\": \"<string>\",\n      \"uuid\": \"<string>\",\n      \"metadata\": {\n        \"nulla_4\": -54757494.515499026,\n        \"anim_f14\": -13430053.650398448\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:07:46.000Z",
+                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                  "uid": "35240-be132140-f344-4ace-8682-57953991d70b"
+                },
+                {
+                  "id": "391255dd-dd93-45dd-aee4-5f36b6987b59",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/models?include_outdated=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "models"
+                      ],
+                      "query": [
+                        {
+                          "description": "Include non-latest versions of models in the response.",
+                          "key": "include_outdated",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"err_code\": \"<string>\",\n  \"err_msg\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:07:46.000Z",
+                  "updatedAt": "2026-06-05T15:07:46.000Z",
+                  "uid": "35240-391255dd-dd93-45dd-aee4-5f36b6987b59"
+                }
+              ],
+              "createdAt": "2026-06-05T15:07:46.000Z",
+              "updatedAt": "2026-06-05T15:07:46.000Z",
+              "uid": "35240-61ec3f5e-951c-41da-a415-58308acd42b2"
+            }
+          ],
+          "id": "52fe2402-fba2-493b-9565-e118d7e110f2",
+          "createdAt": "2026-06-05T15:07:46.000Z",
+          "updatedAt": "2026-06-05T15:07:46.000Z",
+          "uid": "35240-52fe2402-fba2-493b-9565-e118d7e110f2"
+        }
+      ],
+      "id": "8c9417fa-f247-49f8-8605-f49a8861af34",
+      "createdAt": "2026-06-05T15:07:46.000Z",
+      "updatedAt": "2026-06-05T15:07:46.000Z",
+      "uid": "35240-8c9417fa-f247-49f8-8605-f49a8861af34"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.deepgram.com"
+    }
+  ]
+}

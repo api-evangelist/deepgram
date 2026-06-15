@@ -1,0 +1,463 @@
+{
+  "item": [
+    {
+      "id": "7185e07f-1f01-4d6a-be01-d8ee6d0bb148",
+      "name": "Text-To-Speech",
+      "description": {
+        "content": "Convert text into natural-sounding speech audio.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f44dd506-9768-4589-9a0c-a9dc7db5e868",
+          "name": "Deepgram Convert text to speech",
+          "request": {
+            "name": "Deepgram Convert text to speech",
+            "description": {
+              "content": "Converts text content into natural-sounding speech audio using Deepgram's Aura model family. Returns audio data in the specified encoding format. Supports multiple voices and configurable audio output settings including encoding, sample rate, and container format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "speak"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "model",
+                  "value": "aura-asteria-en",
+                  "description": "Voice model to use for speech synthesis. Aura model family voices include aura-asteria-en, aura-luna-en, aura-stella-en, aura-athena-en, aura-hera-en, aura-orion-en, aura-arcas-en, aura-perseus-en, aura-angus-en, aura-orpheus-en, aura-helios-en, and aura-zeus-en."
+                },
+                {
+                  "disabled": false,
+                  "key": "encoding",
+                  "value": "linear16",
+                  "description": "Audio encoding format for the output. Options include linear16, mulaw, alaw, mp3, opus, flac, and aac."
+                },
+                {
+                  "disabled": false,
+                  "key": "container",
+                  "value": "wav",
+                  "description": "File format container for the output audio. The default depends on the encoding selected."
+                },
+                {
+                  "disabled": false,
+                  "key": "sample_rate",
+                  "value": "24000",
+                  "description": "Sample rate in Hertz for the output audio. Default is 24000. Valid values depend on the selected encoding."
+                },
+                {
+                  "disabled": false,
+                  "key": "bit_rate",
+                  "value": "<integer>",
+                  "description": "Bit rate for compressed audio formats such as MP3 and Opus."
+                },
+                {
+                  "disabled": false,
+                  "key": "callback",
+                  "value": "<uri>",
+                  "description": "URL to which Deepgram will send the audio when processing is complete."
+                },
+                {
+                  "disabled": false,
+                  "key": "callback_method",
+                  "value": "POST",
+                  "description": "HTTP method for the callback request."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "audio/wav"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "830a9536-d329-47a7-89f7-7426df96125a",
+              "name": "Speech audio generated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speak"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "aura-asteria-en"
+                    },
+                    {
+                      "key": "encoding",
+                      "value": "linear16"
+                    },
+                    {
+                      "key": "container",
+                      "value": "wav"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "24000"
+                    },
+                    {
+                      "key": "bit_rate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "callback_method",
+                      "value": "POST"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "audio/wav"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for the request.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "audio/wav"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "96563dbc-3258-4333-95f3-f90f2cffe4c5",
+              "name": "Bad request due to invalid parameters or text content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speak"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "aura-asteria-en"
+                    },
+                    {
+                      "key": "encoding",
+                      "value": "linear16"
+                    },
+                    {
+                      "key": "container",
+                      "value": "wav"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "24000"
+                    },
+                    {
+                      "key": "bit_rate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "callback_method",
+                      "value": "POST"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err_code\": \"string\",\n  \"err_msg\": \"string\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df609cf6-3dbf-4023-ac5f-46f1898f15ee",
+              "name": "Unauthorized due to missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speak"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "aura-asteria-en"
+                    },
+                    {
+                      "key": "encoding",
+                      "value": "linear16"
+                    },
+                    {
+                      "key": "container",
+                      "value": "wav"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "24000"
+                    },
+                    {
+                      "key": "bit_rate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "callback_method",
+                      "value": "POST"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err_code\": \"string\",\n  \"err_msg\": \"string\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "332a0dac-809c-4a9c-b201-8ab98279a7bf",
+              "name": "Insufficient credits",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speak"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "aura-asteria-en"
+                    },
+                    {
+                      "key": "encoding",
+                      "value": "linear16"
+                    },
+                    {
+                      "key": "container",
+                      "value": "wav"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "24000"
+                    },
+                    {
+                      "key": "bit_rate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "callback_method",
+                      "value": "POST"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err_code\": \"string\",\n  \"err_msg\": \"string\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.deepgram.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "15a76ef7-0343-495c-a19d-a697578aaef2",
+    "name": "Deepgram Text-to-Speech API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Deepgram Text-to-Speech API converts text into natural-sounding speech using the Aura model family. It supports single text requests via a REST endpoint, delivering sub-200 millisecond latency suitable for real-time voice agents and conversational AI applications. The API offers multiple voice options with configurable encoding, sample rate, and container format settings for enterprise-grade deployments including voicebots, IVR systems, and interactive voice applications.\n\nContact Support:\n Name: Deepgram Support",
+      "type": "text/plain"
+    }
+  }
+}
