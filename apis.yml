@@ -8,7 +8,7 @@ apis:
   - Speech Recognition
   - Speech-To-Text
   - Transcription
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.deepgram.com
   humanURL: https://developers.deepgram.com/docs/stt/getting-started
   properties:
@@ -36,7 +36,7 @@ apis:
   - Speech Synthesis
   - Text-To-Speech
   - Voice
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.deepgram.com
   humanURL: https://developers.deepgram.com/reference/text-to-speech-api/speak
   properties:
@@ -63,7 +63,7 @@ apis:
   - Real-Time
   - Voice Agent
   - Voice AI
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.deepgram.com
   humanURL: https://deepgram.com/product/voice-agent-api
   properties:
@@ -84,7 +84,7 @@ apis:
   - Sentiment Analysis
   - Summarization
   - Topic Detection
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.deepgram.com
   humanURL: https://developers.deepgram.com/docs/audio-intelligence
   properties:
@@ -104,7 +104,7 @@ apis:
   - API Keys
   - Management
   - Projects
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.deepgram.com
   humanURL: https://developers.deepgram.com/docs/create-additional-api-keys
   properties:
@@ -129,7 +129,7 @@ tags:
 - Transcription
 - Voice AI
 kind: company
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
 - type: PostmanWorkspace
