@@ -1,0 +1,118 @@
+openapi: 3.1.0
+info:
+  title: Deepgram Management Balances Scopes API
+  description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
+  version: '1.0'
+  contact:
+    name: Deepgram Support
+    url: https://developers.deepgram.com
+  termsOfService: https://deepgram.com/tos
+servers:
+- url: https://api.deepgram.com
+  description: Deepgram Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Scopes
+  description: Manage member scopes and permissions within projects.
+paths:
+  /v1/projects/{project_id}/members/{member_id}/scopes:
+    get:
+      operationId: getMemberScopes
+      summary: Deepgram Get member scopes
+      description: Retrieves the scopes assigned to a specific member within a project.
+      tags:
+      - Scopes
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      - $ref: '#/components/parameters/member_id'
+      responses:
+        '200':
+          description: Member scopes retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScopeList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: updateMemberScopes
+      summary: Deepgram Update member scopes
+      description: Updates the scopes assigned to a specific member within a project.
+      tags:
+      - Scopes
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      - $ref: '#/components/parameters/member_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScopeUpdate'
+      responses:
+        '200':
+          description: Member scopes updated successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  parameters:
+    member_id:
+      name: member_id
+      in: path
+      required: true
+      description: Unique identifier of the member.
+      schema:
+        type: string
+    project_id:
+      name: project_id
+      in: path
+      required: true
+      description: Unique identifier of the project.
+      schema:
+        type: string
+  schemas:
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
+    ScopeUpdate:
+      type: object
+      required:
+      - scope
+      properties:
+        scope:
+          type: string
+          description: New scope to assign to the member.
+    ScopeList:
+      type: object
+      properties:
+        scopes:
+          type: array
+          items:
+            type: string
+          description: List of scopes assigned to the member.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Deepgram API key passed as a bearer token in the Authorization header.
+externalDocs:
+  description: Deepgram Management API Documentation
+  url: https://developers.deepgram.com/docs/create-additional-api-keys

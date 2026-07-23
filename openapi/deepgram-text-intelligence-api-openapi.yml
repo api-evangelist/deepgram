@@ -1,0 +1,299 @@
+openapi: 3.1.0
+info:
+  title: Deepgram Management Balances Text Intelligence API
+  description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
+  version: '1.0'
+  contact:
+    name: Deepgram Support
+    url: https://developers.deepgram.com
+  termsOfService: https://deepgram.com/tos
+servers:
+- url: https://api.deepgram.com
+  description: Deepgram Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Text Intelligence
+  description: Analyze text content for summarization, sentiment, topics, and intents.
+paths:
+  /v1/read:
+    post:
+      operationId: analyzeText
+      summary: Deepgram Analyze text content
+      description: Analyzes text content for summarization, sentiment analysis, topic detection, and intent recognition using Deepgram's text intelligence models. Accepts text as a string in a JSON request body, a local file, or a hosted URL.
+      tags:
+      - Text Intelligence
+      parameters:
+      - $ref: '#/components/parameters/sentiment'
+      - $ref: '#/components/parameters/summarize'
+      - $ref: '#/components/parameters/topics'
+      - $ref: '#/components/parameters/intents'
+      - $ref: '#/components/parameters/language'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/callback_method'
+      - $ref: '#/components/parameters/custom_topic'
+      requestBody:
+        description: Text content to analyze. Can be a JSON object with a text string or a URL to a text document.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextAnalysisRequest'
+      responses:
+        '200':
+          description: Text analysis completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextAnalysisResponse'
+        '400':
+          description: Bad request due to invalid parameters or input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized due to missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  parameters:
+    topics:
+      name: topics
+      in: query
+      description: Indicates whether to detect topics in the content.
+      schema:
+        type: boolean
+        default: false
+    callback:
+      name: callback
+      in: query
+      description: URL to which Deepgram will make a callback request when processing is complete.
+      schema:
+        type: string
+        format: uri
+    intents:
+      name: intents
+      in: query
+      description: Indicates whether to detect intents in the content.
+      schema:
+        type: boolean
+        default: false
+    callback_method:
+      name: callback_method
+      in: query
+      description: HTTP method for the callback request.
+      schema:
+        type: string
+        enum:
+        - POST
+        - PUT
+        default: POST
+    language:
+      name: language
+      in: query
+      description: BCP-47 language tag for the primary spoken language in the audio.
+      schema:
+        type: string
+        example: en
+    custom_topic:
+      name: custom_topic
+      in: query
+      description: Custom topics to detect within the input content. Up to 100 custom topics are allowed.
+      schema:
+        type: array
+        items:
+          type: string
+    summarize:
+      name: summarize
+      in: query
+      description: Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.
+      schema:
+        type: string
+    sentiment:
+      name: sentiment
+      in: query
+      description: Indicates whether to perform sentiment analysis on the content.
+      schema:
+        type: boolean
+        default: false
+  schemas:
+    SentimentSegment:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Text of the segment.
+        start_word:
+          type: integer
+          description: Index of the first word in this segment.
+        end_word:
+          type: integer
+          description: Index of the last word in this segment.
+        sentiment:
+          type: string
+          enum:
+          - positive
+          - negative
+          - neutral
+          description: Overall sentiment of the segment.
+        sentiment_score:
+          type: number
+          format: float
+          description: Confidence score for the sentiment classification.
+    TopicResults:
+      type: object
+      properties:
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicSegment'
+          description: Topic detection results for content segments.
+    TextAnalysisResponse:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            request_id:
+              type: string
+              description: Unique identifier for the API request.
+            created:
+              type: string
+              format: date-time
+              description: Timestamp when the request was created.
+        results:
+          type: object
+          properties:
+            summary:
+              $ref: '#/components/schemas/Summary'
+            sentiments:
+              $ref: '#/components/schemas/SentimentResults'
+            topics:
+              $ref: '#/components/schemas/TopicResults'
+            intents:
+              $ref: '#/components/schemas/IntentResults'
+    TopicSegment:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Text of the segment.
+        start_word:
+          type: integer
+          description: Index of the first word in this segment.
+        end_word:
+          type: integer
+          description: Index of the last word in this segment.
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/Topic'
+          description: Topics detected in this segment.
+    Intent:
+      type: object
+      properties:
+        intent:
+          type: string
+          description: Detected intent label.
+        confidence_score:
+          type: number
+          format: float
+          description: Confidence score for the intent recognition.
+    IntentSegment:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Text of the segment.
+        start_word:
+          type: integer
+          description: Index of the first word in this segment.
+        end_word:
+          type: integer
+          description: Index of the last word in this segment.
+        intents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Intent'
+          description: Intents detected in this segment.
+    SentimentAverage:
+      type: object
+      properties:
+        sentiment:
+          type: string
+          enum:
+          - positive
+          - negative
+          - neutral
+          description: Overall average sentiment.
+        sentiment_score:
+          type: number
+          format: float
+          description: Average sentiment score.
+    Summary:
+      type: object
+      properties:
+        short:
+          type: string
+          description: Short summary of the content.
+    TextAnalysisRequest:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Text content to analyze.
+        url:
+          type: string
+          format: uri
+          description: URL of a text document to analyze.
+    SentimentResults:
+      type: object
+      properties:
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SentimentSegment'
+          description: Sentiment analysis results for content segments.
+        average:
+          $ref: '#/components/schemas/SentimentAverage'
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
+    IntentResults:
+      type: object
+      properties:
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntentSegment'
+          description: Intent recognition results for content segments.
+    Topic:
+      type: object
+      properties:
+        topic:
+          type: string
+          description: Detected topic label.
+        confidence_score:
+          type: number
+          format: float
+          description: Confidence score for the topic detection.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Deepgram API key passed as a bearer token in the Authorization header.
+externalDocs:
+  description: Deepgram Management API Documentation
+  url: https://developers.deepgram.com/docs/create-additional-api-keys

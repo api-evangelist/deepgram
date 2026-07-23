@@ -1,0 +1,131 @@
+openapi: 3.1.0
+info:
+  title: Deepgram Management Balances Members API
+  description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
+  version: '1.0'
+  contact:
+    name: Deepgram Support
+    url: https://developers.deepgram.com
+  termsOfService: https://deepgram.com/tos
+servers:
+- url: https://api.deepgram.com
+  description: Deepgram Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Members
+  description: Manage project team members.
+paths:
+  /v1/projects/{project_id}/members:
+    get:
+      operationId: listProjectMembers
+      summary: Deepgram List project members
+      description: Retrieves a list of account objects for members of the specified project.
+      tags:
+      - Members
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      responses:
+        '200':
+          description: List of members retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}/members/{member_id}:
+    delete:
+      operationId: removeProjectMember
+      summary: Deepgram Remove a project member
+      description: Removes a member from the specified project.
+      tags:
+      - Members
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      - $ref: '#/components/parameters/member_id'
+      responses:
+        '204':
+          description: Member removed successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Member not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Member:
+      type: object
+      properties:
+        member_id:
+          type: string
+          description: Unique identifier for the member.
+        email:
+          type: string
+          format: email
+          description: Email address of the member.
+        first_name:
+          type: string
+          description: First name of the member.
+        last_name:
+          type: string
+          description: Last name of the member.
+        scopes:
+          type: array
+          items:
+            type: string
+          description: Scopes assigned to this member.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
+    MemberList:
+      type: object
+      properties:
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+          description: List of project members.
+  parameters:
+    member_id:
+      name: member_id
+      in: path
+      required: true
+      description: Unique identifier of the member.
+      schema:
+        type: string
+    project_id:
+      name: project_id
+      in: path
+      required: true
+      description: Unique identifier of the project.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Deepgram API key passed as a bearer token in the Authorization header.
+externalDocs:
+  description: Deepgram Management API Documentation
+  url: https://developers.deepgram.com/docs/create-additional-api-keys

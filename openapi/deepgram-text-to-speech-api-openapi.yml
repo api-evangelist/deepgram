@@ -1,0 +1,191 @@
+openapi: 3.1.0
+info:
+  title: Deepgram Management Balances Text-To-Speech API
+  description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
+  version: '1.0'
+  contact:
+    name: Deepgram Support
+    url: https://developers.deepgram.com
+  termsOfService: https://deepgram.com/tos
+servers:
+- url: https://api.deepgram.com
+  description: Deepgram Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Text-To-Speech
+  description: Convert text into natural-sounding speech audio.
+paths:
+  /v1/speak:
+    post:
+      operationId: synthesizeSpeech
+      summary: Deepgram Convert text to speech
+      description: Converts text content into natural-sounding speech audio using Deepgram's Aura model family. Returns audio data in the specified encoding format. Supports multiple voices and configurable audio output settings including encoding, sample rate, and container format.
+      tags:
+      - Text-To-Speech
+      parameters:
+      - $ref: '#/components/parameters/model'
+      - $ref: '#/components/parameters/encoding'
+      - $ref: '#/components/parameters/container'
+      - $ref: '#/components/parameters/sample_rate'
+      - $ref: '#/components/parameters/bit_rate'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/callback_method'
+      requestBody:
+        description: Text content to convert to speech.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpeakRequest'
+      responses:
+        '200':
+          description: Speech audio generated successfully
+          content:
+            audio/wav:
+              schema:
+                type: string
+                format: binary
+                description: Generated speech audio in WAV format.
+            audio/mpeg:
+              schema:
+                type: string
+                format: binary
+                description: Generated speech audio in MP3 format.
+            audio/opus:
+              schema:
+                type: string
+                format: binary
+                description: Generated speech audio in Opus format.
+            audio/flac:
+              schema:
+                type: string
+                format: binary
+                description: Generated speech audio in FLAC format.
+            audio/aac:
+              schema:
+                type: string
+                format: binary
+                description: Generated speech audio in AAC format.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+              description: Unique identifier for the request.
+            content-type:
+              schema:
+                type: string
+              description: MIME type of the returned audio.
+        '400':
+          description: Bad request due to invalid parameters or text content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized due to missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  parameters:
+    callback_method:
+      name: callback_method
+      in: query
+      description: HTTP method for the callback request.
+      schema:
+        type: string
+        enum:
+        - POST
+        - PUT
+        default: POST
+    encoding:
+      name: encoding
+      in: query
+      description: Audio encoding format for the output. Options include linear16, mulaw, alaw, mp3, opus, flac, and aac.
+      schema:
+        type: string
+        enum:
+        - linear16
+        - mulaw
+        - alaw
+        - mp3
+        - opus
+        - flac
+        - aac
+        default: linear16
+    model:
+      name: model
+      in: query
+      description: Voice model to use for speech synthesis. Aura model family voices include aura-asteria-en, aura-luna-en, aura-stella-en, aura-athena-en, aura-hera-en, aura-orion-en, aura-arcas-en, aura-perseus-en, aura-angus-en, aura-orpheus-en, aura-helios-en, and aura-zeus-en.
+      schema:
+        type: string
+        default: aura-asteria-en
+    sample_rate:
+      name: sample_rate
+      in: query
+      description: Sample rate in Hertz for the output audio. Default is 24000. Valid values depend on the selected encoding.
+      schema:
+        type: integer
+        default: 24000
+    callback:
+      name: callback
+      in: query
+      description: URL to which Deepgram will send the audio when processing is complete.
+      schema:
+        type: string
+        format: uri
+    container:
+      name: container
+      in: query
+      description: File format container for the output audio. The default depends on the encoding selected.
+      schema:
+        type: string
+        enum:
+        - wav
+        - ogg
+        - none
+        default: wav
+    bit_rate:
+      name: bit_rate
+      in: query
+      description: Bit rate for compressed audio formats such as MP3 and Opus.
+      schema:
+        type: integer
+  schemas:
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
+    SpeakRequest:
+      type: object
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          description: Text content to convert to speech.
+          minLength: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Deepgram API key passed as a bearer token in the Authorization header.
+externalDocs:
+  description: Deepgram Management API Documentation
+  url: https://developers.deepgram.com/docs/create-additional-api-keys

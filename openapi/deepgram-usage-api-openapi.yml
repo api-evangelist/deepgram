@@ -1,0 +1,197 @@
+openapi: 3.1.0
+info:
+  title: Deepgram Management Balances Usage API
+  description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
+  version: '1.0'
+  contact:
+    name: Deepgram Support
+    url: https://developers.deepgram.com
+  termsOfService: https://deepgram.com/tos
+servers:
+- url: https://api.deepgram.com
+  description: Deepgram Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Usage
+  description: Retrieve usage data and request logs for projects.
+paths:
+  /v1/projects/{project_id}/usage:
+    get:
+      operationId: getProjectUsage
+      summary: Deepgram Get project usage
+      description: Retrieves usage data for the specified project over a given time range.
+      tags:
+      - Usage
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      - name: start
+        in: query
+        description: Start date for the usage period in ISO 8601 format.
+        schema:
+          type: string
+          format: date-time
+      - name: end
+        in: query
+        description: End date for the usage period in ISO 8601 format.
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Usage data retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageSummary'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}/requests:
+    get:
+      operationId: listProjectRequests
+      summary: Deepgram List project requests
+      description: Retrieves a paginated list of API requests made to the specified project over a given time range.
+      tags:
+      - Usage
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      - name: start
+        in: query
+        description: Start date for the request period in ISO 8601 format.
+        schema:
+          type: string
+          format: date-time
+      - name: end
+        in: query
+        description: End date for the request period in ISO 8601 format.
+        schema:
+          type: string
+          format: date-time
+      - name: limit
+        in: query
+        description: Maximum number of results to return per page.
+        schema:
+          type: integer
+          minimum: 1
+      - name: cursor
+        in: query
+        description: Pagination cursor for retrieving the next page of results.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Request list retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
+    RequestList:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: Current page number.
+        limit:
+          type: integer
+          description: Number of results per page.
+        requests:
+          type: array
+          items:
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: Unique identifier for the request.
+              created:
+                type: string
+                format: date-time
+                description: Timestamp when the request was made.
+              path:
+                type: string
+                description: API path of the request.
+              api_key_id:
+                type: string
+                description: API key used for the request.
+          description: List of API requests.
+    UsageSummary:
+      type: object
+      properties:
+        start:
+          type: string
+          format: date-time
+          description: Start of the usage period.
+        end:
+          type: string
+          format: date-time
+          description: End of the usage period.
+        resolution:
+          type: object
+          properties:
+            units:
+              type: string
+              description: Time unit for the resolution.
+            amount:
+              type: integer
+              description: Number of time units per resolution period.
+          description: Resolution of the usage data.
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              start:
+                type: string
+                format: date-time
+                description: Start of the period.
+              end:
+                type: string
+                format: date-time
+                description: End of the period.
+              hours:
+                type: number
+                format: float
+                description: Total audio hours processed.
+              requests:
+                type: integer
+                description: Total number of API requests.
+          description: Usage data broken down by resolution period.
+  parameters:
+    project_id:
+      name: project_id
+      in: path
+      required: true
+      description: Unique identifier of the project.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Deepgram API key passed as a bearer token in the Authorization header.
+externalDocs:
+  description: Deepgram Management API Documentation
+  url: https://developers.deepgram.com/docs/create-additional-api-keys

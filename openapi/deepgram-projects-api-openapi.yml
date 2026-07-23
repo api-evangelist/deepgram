@@ -1,0 +1,181 @@
+openapi: 3.1.0
+info:
+  title: Deepgram Management Balances Projects API
+  description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
+  version: '1.0'
+  contact:
+    name: Deepgram Support
+    url: https://developers.deepgram.com
+  termsOfService: https://deepgram.com/tos
+servers:
+- url: https://api.deepgram.com
+  description: Deepgram Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Projects
+  description: Manage Deepgram projects and project settings.
+paths:
+  /v1/projects:
+    get:
+      operationId: listProjects
+      summary: Deepgram List all projects
+      description: Retrieves basic information about all projects associated with the authenticated API key.
+      tags:
+      - Projects
+      responses:
+        '200':
+          description: List of projects retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectList'
+        '401':
+          description: Unauthorized due to missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}:
+    get:
+      operationId: getProject
+      summary: Deepgram Get a project
+      description: Retrieves detailed information about a specific project.
+      tags:
+      - Projects
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      responses:
+        '200':
+          description: Project details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      operationId: updateProject
+      summary: Deepgram Update a project
+      description: Updates settings for a specific project.
+      tags:
+      - Projects
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUpdate'
+      responses:
+        '200':
+          description: Project updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: deleteProject
+      summary: Deepgram Delete a project
+      description: Permanently deletes a specific project and all associated resources.
+      tags:
+      - Projects
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      responses:
+        '204':
+          description: Project deleted successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ProjectUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: New name for the project.
+        company:
+          type: string
+          description: New company name for the project.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
+    Project:
+      type: object
+      properties:
+        project_id:
+          type: string
+          description: Unique identifier for the project.
+        name:
+          type: string
+          description: Name of the project.
+        company:
+          type: string
+          description: Company name associated with the project.
+    ProjectList:
+      type: object
+      properties:
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+          description: List of projects.
+  parameters:
+    project_id:
+      name: project_id
+      in: path
+      required: true
+      description: Unique identifier of the project.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Deepgram API key passed as a bearer token in the Authorization header.
+externalDocs:
+  description: Deepgram Management API Documentation
+  url: https://developers.deepgram.com/docs/create-additional-api-keys

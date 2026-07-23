@@ -1,0 +1,161 @@
+openapi: 3.1.0
+info:
+  title: Deepgram Management Balances Invitations API
+  description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
+  version: '1.0'
+  contact:
+    name: Deepgram Support
+    url: https://developers.deepgram.com
+  termsOfService: https://deepgram.com/tos
+servers:
+- url: https://api.deepgram.com
+  description: Deepgram Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Invitations
+  description: Manage project invitations.
+paths:
+  /v1/projects/{project_id}/invites:
+    get:
+      operationId: listProjectInvitations
+      summary: Deepgram List project invitations
+      description: Retrieves a list of pending invitations for the specified project.
+      tags:
+      - Invitations
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      responses:
+        '200':
+          description: List of invitations retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvitationList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: sendProjectInvitation
+      summary: Deepgram Send a project invitation
+      description: Sends an invitation to the specified email address to join the project.
+      tags:
+      - Invitations
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvitationCreate'
+      responses:
+        '200':
+          description: Invitation sent successfully
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}/invites/{email}:
+    delete:
+      operationId: deleteProjectInvitation
+      summary: Deepgram Delete a project invitation
+      description: Removes a pending invitation for the specified email address from the project.
+      tags:
+      - Invitations
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      - name: email
+        in: path
+        required: true
+        description: Email address of the invitation to remove.
+        schema:
+          type: string
+          format: email
+      responses:
+        '204':
+          description: Invitation deleted successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Invitation not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Invitation:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email address of the invitee.
+        scope:
+          type: string
+          description: Scope assigned to the invitation.
+    InvitationCreate:
+      type: object
+      required:
+      - email
+      - scope
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email address to send the invitation to.
+        scope:
+          type: string
+          description: Scope to assign to the invited member.
+    InvitationList:
+      type: object
+      properties:
+        invites:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invitation'
+          description: List of pending invitations.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
+  parameters:
+    project_id:
+      name: project_id
+      in: path
+      required: true
+      description: Unique identifier of the project.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Deepgram API key passed as a bearer token in the Authorization header.
+externalDocs:
+  description: Deepgram Management API Documentation
+  url: https://developers.deepgram.com/docs/create-additional-api-keys

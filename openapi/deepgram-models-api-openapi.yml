@@ -1,0 +1,140 @@
+openapi: 3.1.0
+info:
+  title: Deepgram Management Balances Models API
+  description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
+  version: '1.0'
+  contact:
+    name: Deepgram Support
+    url: https://developers.deepgram.com
+  termsOfService: https://deepgram.com/tos
+servers:
+- url: https://api.deepgram.com
+  description: Deepgram Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Models
+  description: Retrieve available model metadata.
+paths:
+  /v1/models:
+    get:
+      operationId: listModels
+      summary: Deepgram List all available models
+      description: Retrieves metadata on all the latest public models available on the Deepgram platform, including both speech-to-text and text-to-speech models.
+      tags:
+      - Models
+      parameters:
+      - name: include_outdated
+        in: query
+        description: Include non-latest versions of models in the response.
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Model list retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/models/{model_id}:
+    get:
+      operationId: getModel
+      summary: Deepgram Get a model
+      description: Retrieves metadata for a specific model by its identifier.
+      tags:
+      - Models
+      parameters:
+      - name: model_id
+        in: path
+        required: true
+        description: Unique identifier of the model.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Model details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Model not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ModelList:
+      type: object
+      properties:
+        stt:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+          description: Available speech-to-text models.
+        tts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+          description: Available text-to-speech models.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
+    Model:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the model.
+        canonical_name:
+          type: string
+          description: Canonical identifier for the model.
+        architecture:
+          type: string
+          description: Architecture of the model.
+        languages:
+          type: array
+          items:
+            type: string
+          description: Languages supported by the model.
+        version:
+          type: string
+          description: Version of the model.
+        uuid:
+          type: string
+          description: Unique identifier for the model.
+        metadata:
+          type: object
+          additionalProperties: true
+          description: Additional metadata about the model.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Deepgram API key passed as a bearer token in the Authorization header.
+externalDocs:
+  description: Deepgram Management API Documentation
+  url: https://developers.deepgram.com/docs/create-additional-api-keys

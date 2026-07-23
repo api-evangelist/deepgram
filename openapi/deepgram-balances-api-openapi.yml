@@ -1,0 +1,128 @@
+openapi: 3.1.0
+info:
+  title: Deepgram Management Balances API
+  description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
+  version: '1.0'
+  contact:
+    name: Deepgram Support
+    url: https://developers.deepgram.com
+  termsOfService: https://deepgram.com/tos
+servers:
+- url: https://api.deepgram.com
+  description: Deepgram Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Balances
+  description: Retrieve billing balance information for projects.
+paths:
+  /v1/projects/{project_id}/balances:
+    get:
+      operationId: listProjectBalances
+      summary: Deepgram List project balances
+      description: Retrieves billing balance information for the specified project.
+      tags:
+      - Balances
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      responses:
+        '200':
+          description: Balance information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalanceList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}/balances/{balance_id}:
+    get:
+      operationId: getProjectBalance
+      summary: Deepgram Get a project balance
+      description: Retrieves details about a specific billing balance for the project.
+      tags:
+      - Balances
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      - name: balance_id
+        in: path
+        required: true
+        description: Unique identifier of the balance.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Balance details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balance'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Balance not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    BalanceList:
+      type: object
+      properties:
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Balance'
+          description: List of billing balances.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
+    Balance:
+      type: object
+      properties:
+        balance_id:
+          type: string
+          description: Unique identifier for the balance.
+        amount:
+          type: number
+          format: float
+          description: Current balance amount.
+        units:
+          type: string
+          description: Units of the balance amount.
+        purchase:
+          type: string
+          description: Purchase method or plan name.
+  parameters:
+    project_id:
+      name: project_id
+      in: path
+      required: true
+      description: Unique identifier of the project.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Deepgram API key passed as a bearer token in the Authorization header.
+externalDocs:
+  description: Deepgram Management API Documentation
+  url: https://developers.deepgram.com/docs/create-additional-api-keys

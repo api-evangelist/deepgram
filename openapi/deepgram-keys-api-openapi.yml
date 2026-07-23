@@ -1,0 +1,238 @@
+openapi: 3.1.0
+info:
+  title: Deepgram Management Balances Keys API
+  description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
+  version: '1.0'
+  contact:
+    name: Deepgram Support
+    url: https://developers.deepgram.com
+  termsOfService: https://deepgram.com/tos
+servers:
+- url: https://api.deepgram.com
+  description: Deepgram Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Keys
+  description: Create, list, and manage API keys for projects.
+paths:
+  /v1/projects/{project_id}/keys:
+    get:
+      operationId: listProjectKeys
+      summary: Deepgram List project API keys
+      description: Retrieves all API keys associated with the specified project.
+      tags:
+      - Keys
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      responses:
+        '200':
+          description: List of API keys retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: createProjectKey
+      summary: Deepgram Create a project API key
+      description: Creates a new API key for the specified project with the given scopes. Requires the keys:write scope on the authenticating key.
+      tags:
+      - Keys
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KeyCreate'
+      responses:
+        '200':
+          description: API key created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyWithSecret'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/projects/{project_id}/keys/{key_id}:
+    get:
+      operationId: getProjectKey
+      summary: Deepgram Get a project API key
+      description: Retrieves details about a specific API key in the project.
+      tags:
+      - Keys
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      - $ref: '#/components/parameters/key_id'
+      responses:
+        '200':
+          description: API key details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Key'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Key not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: deleteProjectKey
+      summary: Deepgram Delete a project API key
+      description: Permanently deletes a specific API key from the project.
+      tags:
+      - Keys
+      parameters:
+      - $ref: '#/components/parameters/project_id'
+      - $ref: '#/components/parameters/key_id'
+      responses:
+        '204':
+          description: API key deleted successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Key not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  parameters:
+    key_id:
+      name: key_id
+      in: path
+      required: true
+      description: Unique identifier of the API key.
+      schema:
+        type: string
+    project_id:
+      name: project_id
+      in: path
+      required: true
+      description: Unique identifier of the project.
+      schema:
+        type: string
+  schemas:
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
+    KeyList:
+      type: object
+      properties:
+        api_keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/Key'
+          description: List of API keys.
+    KeyCreate:
+      type: object
+      required:
+      - comment
+      - scopes
+      properties:
+        comment:
+          type: string
+          description: Description or name for the API key.
+        scopes:
+          type: array
+          items:
+            type: string
+          description: Scopes to assign to this API key.
+        expiration_date:
+          type: string
+          format: date-time
+          description: Optional expiration date for the key.
+        time_to_live_in_seconds:
+          type: integer
+          description: Optional time-to-live in seconds for the key.
+    KeyWithSecret:
+      type: object
+      properties:
+        api_key_id:
+          type: string
+          description: Unique identifier for the API key.
+        key:
+          type: string
+          description: Full API key value. Only returned at creation time.
+        comment:
+          type: string
+          description: Description or comment for the API key.
+        scopes:
+          type: array
+          items:
+            type: string
+          description: Scopes assigned to this API key.
+        created:
+          type: string
+          format: date-time
+          description: Timestamp when the key was created.
+    Key:
+      type: object
+      properties:
+        api_key_id:
+          type: string
+          description: Unique identifier for the API key.
+        key:
+          type: string
+          description: Masked API key value.
+        comment:
+          type: string
+          description: Description or comment for the API key.
+        scopes:
+          type: array
+          items:
+            type: string
+          description: Scopes assigned to this API key.
+        created:
+          type: string
+          format: date-time
+          description: Timestamp when the key was created.
+        expiration_date:
+          type: string
+          format: date-time
+          description: Expiration date of the key, if set.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Deepgram API key passed as a bearer token in the Authorization header.
+externalDocs:
+  description: Deepgram Management API Documentation
+  url: https://developers.deepgram.com/docs/create-additional-api-keys
