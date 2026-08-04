@@ -1,0 +1,34 @@
+{
+  "provider": "deepgram",
+  "sources": [
+    "deepgram-balances-api-openapi.yml",
+    "deepgram-invitations-api-openapi.yml",
+    "deepgram-keys-api-openapi.yml",
+    "deepgram-members-api-openapi.yml",
+    "deepgram-models-api-openapi.yml",
+    "deepgram-pre-recorded-api-openapi.yml",
+    "deepgram-projects-api-openapi.yml",
+    "deepgram-scopes-api-openapi.yml",
+    "deepgram-text-intelligence-api-openapi.yml",
+    "deepgram-text-to-speech-api-openapi.yml",
+    "deepgram-usage-api-openapi.yml"
+  ],
+  "outputs": [
+    "deepgram-balances-api-openapi.yml",
+    "deepgram-invitations-api-openapi.yml",
+    "deepgram-keys-api-openapi.yml",
+    "deepgram-members-api-openapi.yml",
+    "deepgram-models-api-openapi.yml",
+    "deepgram-pre-recorded-api-openapi.yml",
+    "deepgram-projects-api-openapi.yml",
+    "deepgram-scopes-api-openapi.yml",
+    "deepgram-text-intelligence-api-openapi.yml",
+    "deepgram-text-to-speech-api-openapi.yml",
+    "deepgram-usage-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
