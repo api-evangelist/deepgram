@@ -38,8 +38,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-speech-to-text-api-capabilities.yml
   - type: GraphQL
     url: graphql/deepgram-graphql.md
   - type: Documentation
@@ -48,16 +46,12 @@ apis:
     url: asyncapi/deepgram-text-to-speech-asyncapi.yml
   - type: Rules
     url: rules/deepgram-text-to-speech-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-text-to-speech-api-capabilities.yml
   - type: Documentation
     url: https://developers.deepgram.com/docs/audio-intelligence
   - type: Documentation
     url: https://developers.deepgram.com/docs/create-additional-api-keys
   - type: Rules
     url: rules/deepgram-management-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-management-api-capabilities.yml
 - aid: deepgram:deepgram-invitations-api
   name: Deepgram Invitations API
   description: Manage project invitations.
@@ -74,8 +68,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-speech-to-text-api-capabilities.yml
   - type: GraphQL
     url: graphql/deepgram-graphql.md
   - type: Documentation
@@ -84,16 +76,12 @@ apis:
     url: asyncapi/deepgram-text-to-speech-asyncapi.yml
   - type: Rules
     url: rules/deepgram-text-to-speech-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-text-to-speech-api-capabilities.yml
   - type: Documentation
     url: https://developers.deepgram.com/docs/audio-intelligence
   - type: Documentation
     url: https://developers.deepgram.com/docs/create-additional-api-keys
   - type: Rules
     url: rules/deepgram-management-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-management-api-capabilities.yml
 - aid: deepgram:deepgram-keys-api
   name: Deepgram Keys API
   description: Create, list, and manage API keys for projects.
@@ -110,8 +98,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-speech-to-text-api-capabilities.yml
   - type: GraphQL
     url: graphql/deepgram-graphql.md
   - type: Documentation
@@ -120,16 +106,12 @@ apis:
     url: asyncapi/deepgram-text-to-speech-asyncapi.yml
   - type: Rules
     url: rules/deepgram-text-to-speech-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-text-to-speech-api-capabilities.yml
   - type: Documentation
     url: https://developers.deepgram.com/docs/audio-intelligence
   - type: Documentation
     url: https://developers.deepgram.com/docs/create-additional-api-keys
   - type: Rules
     url: rules/deepgram-management-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-management-api-capabilities.yml
 - aid: deepgram:deepgram-members-api
   name: Deepgram Members API
   description: Manage project team members.
@@ -146,8 +128,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-speech-to-text-api-capabilities.yml
   - type: GraphQL
     url: graphql/deepgram-graphql.md
   - type: Documentation
@@ -156,16 +136,12 @@ apis:
     url: asyncapi/deepgram-text-to-speech-asyncapi.yml
   - type: Rules
     url: rules/deepgram-text-to-speech-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-text-to-speech-api-capabilities.yml
   - type: Documentation
     url: https://developers.deepgram.com/docs/audio-intelligence
   - type: Documentation
     url: https://developers.deepgram.com/docs/create-additional-api-keys
   - type: Rules
     url: rules/deepgram-management-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-management-api-capabilities.yml
 - aid: deepgram:deepgram-models-api
   name: Deepgram Models API
   description: Retrieve available model metadata.
@@ -182,8 +158,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-speech-to-text-api-capabilities.yml
   - type: GraphQL
     url: graphql/deepgram-graphql.md
   - type: Documentation
@@ -192,16 +166,12 @@ apis:
     url: asyncapi/deepgram-text-to-speech-asyncapi.yml
   - type: Rules
     url: rules/deepgram-text-to-speech-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-text-to-speech-api-capabilities.yml
   - type: Documentation
     url: https://developers.deepgram.com/docs/audio-intelligence
   - type: Documentation
     url: https://developers.deepgram.com/docs/create-additional-api-keys
   - type: Rules
     url: rules/deepgram-management-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-management-api-capabilities.yml
 - aid: deepgram:deepgram-pre-recorded-api
   name: Deepgram Pre-Recorded API
   description: Transcribe pre-recorded audio files or audio from URLs.
@@ -218,8 +188,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-speech-to-text-api-capabilities.yml
   - type: GraphQL
     url: graphql/deepgram-graphql.md
   - type: Documentation
@@ -228,16 +196,12 @@ apis:
     url: asyncapi/deepgram-text-to-speech-asyncapi.yml
   - type: Rules
     url: rules/deepgram-text-to-speech-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-text-to-speech-api-capabilities.yml
   - type: Documentation
     url: https://developers.deepgram.com/docs/audio-intelligence
   - type: Documentation
     url: https://developers.deepgram.com/docs/create-additional-api-keys
   - type: Rules
     url: rules/deepgram-management-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-management-api-capabilities.yml
 - aid: deepgram:deepgram-projects-api
   name: Deepgram Projects API
   description: Manage Deepgram projects and project settings.
@@ -254,8 +218,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-speech-to-text-api-capabilities.yml
   - type: GraphQL
     url: graphql/deepgram-graphql.md
   - type: Documentation
@@ -264,16 +226,12 @@ apis:
     url: asyncapi/deepgram-text-to-speech-asyncapi.yml
   - type: Rules
     url: rules/deepgram-text-to-speech-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-text-to-speech-api-capabilities.yml
   - type: Documentation
     url: https://developers.deepgram.com/docs/audio-intelligence
   - type: Documentation
     url: https://developers.deepgram.com/docs/create-additional-api-keys
   - type: Rules
     url: rules/deepgram-management-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-management-api-capabilities.yml
 - aid: deepgram:deepgram-scopes-api
   name: Deepgram Scopes API
   description: Manage member scopes and permissions within projects.
@@ -290,8 +248,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-speech-to-text-api-capabilities.yml
   - type: GraphQL
     url: graphql/deepgram-graphql.md
   - type: Documentation
@@ -300,16 +256,12 @@ apis:
     url: asyncapi/deepgram-text-to-speech-asyncapi.yml
   - type: Rules
     url: rules/deepgram-text-to-speech-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-text-to-speech-api-capabilities.yml
   - type: Documentation
     url: https://developers.deepgram.com/docs/audio-intelligence
   - type: Documentation
     url: https://developers.deepgram.com/docs/create-additional-api-keys
   - type: Rules
     url: rules/deepgram-management-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-management-api-capabilities.yml
 - aid: deepgram:deepgram-text-intelligence-api
   name: Deepgram Text Intelligence API
   description: Analyze text content for summarization, sentiment, topics, and intents.
@@ -326,8 +278,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-speech-to-text-api-capabilities.yml
   - type: GraphQL
     url: graphql/deepgram-graphql.md
   - type: Documentation
@@ -336,16 +286,12 @@ apis:
     url: asyncapi/deepgram-text-to-speech-asyncapi.yml
   - type: Rules
     url: rules/deepgram-text-to-speech-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-text-to-speech-api-capabilities.yml
   - type: Documentation
     url: https://developers.deepgram.com/docs/audio-intelligence
   - type: Documentation
     url: https://developers.deepgram.com/docs/create-additional-api-keys
   - type: Rules
     url: rules/deepgram-management-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-management-api-capabilities.yml
 - aid: deepgram:deepgram-text-to-speech-api
   name: Deepgram Text-To-Speech API
   description: Convert text into natural-sounding speech audio.
@@ -362,8 +308,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-speech-to-text-api-capabilities.yml
   - type: GraphQL
     url: graphql/deepgram-graphql.md
   - type: Documentation
@@ -372,16 +316,12 @@ apis:
     url: asyncapi/deepgram-text-to-speech-asyncapi.yml
   - type: Rules
     url: rules/deepgram-text-to-speech-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-text-to-speech-api-capabilities.yml
   - type: Documentation
     url: https://developers.deepgram.com/docs/audio-intelligence
   - type: Documentation
     url: https://developers.deepgram.com/docs/create-additional-api-keys
   - type: Rules
     url: rules/deepgram-management-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-management-api-capabilities.yml
 - aid: deepgram:deepgram-usage-api
   name: Deepgram Usage API
   description: Retrieve usage data and request logs for projects.
@@ -398,8 +338,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-speech-to-text-api-capabilities.yml
   - type: GraphQL
     url: graphql/deepgram-graphql.md
   - type: Documentation
@@ -408,16 +346,12 @@ apis:
     url: asyncapi/deepgram-text-to-speech-asyncapi.yml
   - type: Rules
     url: rules/deepgram-text-to-speech-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-text-to-speech-api-capabilities.yml
   - type: Documentation
     url: https://developers.deepgram.com/docs/audio-intelligence
   - type: Documentation
     url: https://developers.deepgram.com/docs/create-additional-api-keys
   - type: Rules
     url: rules/deepgram-management-api-rules.yml
-  - type: Capabilities
-    url: capabilities/deepgram-management-api-capabilities.yml
 name: Deepgram
 tags:
 - Artificial Intelligence
