@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deepgram Management Balances Projects API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deepgram List all projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.deepgram.com/v1/projects"
+          },
+          "docs": "Retrieves basic information about all projects associated with the authenticated API key."
+        },
+        {
+          "info": {
+            "name": "Deepgram Get a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.deepgram.com/v1/projects/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific project."
+        },
+        {
+          "info": {
+            "name": "Deepgram Update a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.deepgram.com/v1/projects/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates settings for a specific project."
+        },
+        {
+          "info": {
+            "name": "Deepgram Delete a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.deepgram.com/v1/projects/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a specific project and all associated resources."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

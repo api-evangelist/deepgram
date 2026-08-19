@@ -1,0 +1,386 @@
+{
+  "item": [
+    {
+      "id": "a235535c-3779-4804-a8ae-2eeff177e351",
+      "name": "Models",
+      "description": {
+        "content": "Retrieve available model metadata.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "92ec22eb-3e46-44ca-8bc5-0d4664d46d78",
+          "name": "Deepgram List all available models",
+          "request": {
+            "name": "Deepgram List all available models",
+            "description": {
+              "content": "Retrieves metadata on all the latest public models available on the Deepgram platform, including both speech-to-text and text-to-speech models.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_outdated",
+                  "value": "false",
+                  "description": "Include non-latest versions of models in the response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "655aa895-5c1b-4870-9532-424eb42e74ff",
+              "name": "Model list retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_outdated",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"stt\": [\n    {\n      \"name\": \"string\",\n      \"canonical_name\": \"string\",\n      \"architecture\": \"string\",\n      \"languages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"version\": \"string\",\n      \"uuid\": \"string\",\n      \"metadata\": {\n        \"key_0\": 1879\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"canonical_name\": \"string\",\n      \"architecture\": \"string\",\n      \"languages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"version\": \"string\",\n      \"uuid\": \"string\",\n      \"metadata\": {\n        \"key_0\": 3744.20648797551,\n        \"key_1\": 7987.7979060596535,\n        \"key_2\": true\n      }\n    }\n  ],\n  \"tts\": [\n    {\n      \"name\": \"string\",\n      \"canonical_name\": \"string\",\n      \"architecture\": \"string\",\n      \"languages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"version\": \"string\",\n      \"uuid\": \"string\",\n      \"metadata\": {\n        \"key_0\": 7776.645601143878,\n        \"key_1\": 1736.3409824544008,\n        \"key_2\": 3232.8261035089376\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"canonical_name\": \"string\",\n      \"architecture\": \"string\",\n      \"languages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"version\": \"string\",\n      \"uuid\": \"string\",\n      \"metadata\": {\n        \"key_0\": false\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97c52cd4-9e5f-41d1-8c9e-65637dcc1f45",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_outdated",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err_code\": \"string\",\n  \"err_msg\": \"string\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3e46e47-51d0-499b-bd1e-c06175279945",
+          "name": "Deepgram Get a model",
+          "request": {
+            "name": "Deepgram Get a model",
+            "description": {
+              "content": "Retrieves metadata for a specific model by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "models",
+                ":model_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_id",
+                  "description": "(Required) Unique identifier of the model."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6c53a945-531c-4082-974b-3eb099c0c835",
+              "name": "Model details retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_id",
+                      "description": "(Required) Unique identifier of the model."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"canonical_name\": \"string\",\n  \"architecture\": \"string\",\n  \"languages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"version\": \"string\",\n  \"uuid\": \"string\",\n  \"metadata\": {\n    \"key_0\": 1827.4325966989059,\n    \"key_1\": 7481,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01ac03e0-623c-4a6b-857b-cd8a7191a364",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_id",
+                      "description": "(Required) Unique identifier of the model."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err_code\": \"string\",\n  \"err_msg\": \"string\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80ab88ff-132f-4fe4-8215-0775612ab445",
+              "name": "Model not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_id",
+                      "description": "(Required) Unique identifier of the model."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err_code\": \"string\",\n  \"err_msg\": \"string\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.deepgram.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a41dc6db-129e-4247-adb0-0ae4814044cf",
+    "name": "Deepgram Management Balances Models API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.\n\nContact Support:\n Name: Deepgram Support",
+      "type": "text/plain"
+    }
+  }
+}

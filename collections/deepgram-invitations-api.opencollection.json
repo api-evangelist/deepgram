@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deepgram Management Balances Invitations API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invitations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deepgram List project invitations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.deepgram.com/v1/projects/:project_id/invites",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of pending invitations for the specified project."
+        },
+        {
+          "info": {
+            "name": "Deepgram Send a project invitation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.deepgram.com/v1/projects/:project_id/invites",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends an invitation to the specified email address to join the project."
+        },
+        {
+          "info": {
+            "name": "Deepgram Delete a project invitation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.deepgram.com/v1/projects/:project_id/invites/:email",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "path",
+                "description": "Email address of the invitation to remove."
+              }
+            ]
+          },
+          "docs": "Removes a pending invitation for the specified email address from the project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

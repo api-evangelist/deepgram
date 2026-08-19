@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deepgram Management Balances Models API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deepgram List all available models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.deepgram.com/v1/models",
+            "params": [
+              {
+                "name": "include_outdated",
+                "value": "",
+                "type": "query",
+                "description": "Include non-latest versions of models in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves metadata on all the latest public models available on the Deepgram platform, including both speech-to-text and text-to-speech models."
+        },
+        {
+          "info": {
+            "name": "Deepgram Get a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.deepgram.com/v1/models/:model_id",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the model."
+              }
+            ]
+          },
+          "docs": "Retrieves metadata for a specific model by its identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

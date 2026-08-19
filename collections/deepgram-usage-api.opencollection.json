@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deepgram Management Balances Usage API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Usage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deepgram Get project usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.deepgram.com/v1/projects/:project_id/usage",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start date for the usage period in ISO 8601 format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End date for the usage period in ISO 8601 format."
+              }
+            ]
+          },
+          "docs": "Retrieves usage data for the specified project over a given time range."
+        },
+        {
+          "info": {
+            "name": "Deepgram List project requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.deepgram.com/v1/projects/:project_id/requests",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start date for the request period in ISO 8601 format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End date for the request period in ISO 8601 format."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor for retrieving the next page of results."
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of API requests made to the specified project over a given time range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

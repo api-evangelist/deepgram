@@ -1,0 +1,412 @@
+{
+  "item": [
+    {
+      "id": "edb42c49-68f1-4fee-a011-d19a123de8e4",
+      "name": "Text Intelligence",
+      "description": {
+        "content": "Analyze text content for summarization, sentiment, topics, and intents.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e5de7bdb-efa1-46c8-be49-a9e288772502",
+          "name": "Deepgram Analyze text content",
+          "request": {
+            "name": "Deepgram Analyze text content",
+            "description": {
+              "content": "Analyzes text content for summarization, sentiment analysis, topic detection, and intent recognition using Deepgram's text intelligence models. Accepts text as a string in a JSON request body, a local file, or a hosted URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "read"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sentiment",
+                  "value": "false",
+                  "description": "Indicates whether to perform sentiment analysis on the content."
+                },
+                {
+                  "disabled": false,
+                  "key": "summarize",
+                  "value": "<string>",
+                  "description": "Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format."
+                },
+                {
+                  "disabled": false,
+                  "key": "topics",
+                  "value": "false",
+                  "description": "Indicates whether to detect topics in the content."
+                },
+                {
+                  "disabled": false,
+                  "key": "intents",
+                  "value": "false",
+                  "description": "Indicates whether to detect intents in the content."
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "BCP-47 language tag for the primary spoken language in the audio."
+                },
+                {
+                  "disabled": false,
+                  "key": "callback",
+                  "value": "<uri>",
+                  "description": "URL to which Deepgram will make a callback request when processing is complete."
+                },
+                {
+                  "disabled": false,
+                  "key": "callback_method",
+                  "value": "POST",
+                  "description": "HTTP method for the callback request."
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_topic",
+                  "value": "<string>",
+                  "description": "Custom topics to detect within the input content. Up to 100 custom topics are allowed."
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_topic",
+                  "value": "<string>",
+                  "description": "Custom topics to detect within the input content. Up to 100 custom topics are allowed."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"url\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9be576ad-6beb-4a0f-9902-646428dc33b5",
+              "name": "Text analysis completed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "read"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sentiment",
+                      "value": "false"
+                    },
+                    {
+                      "key": "summarize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "topics",
+                      "value": "false"
+                    },
+                    {
+                      "key": "intents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "callback_method",
+                      "value": "POST"
+                    },
+                    {
+                      "key": "custom_topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_topic",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"request_id\": \"string\",\n    \"created\": \"1987-01-26T22:47:59.501Z\"\n  },\n  \"results\": {\n    \"summary\": {\n      \"short\": \"string\"\n    },\n    \"sentiments\": {\n      \"segments\": [\n        {\n          \"text\": \"string\",\n          \"start_word\": 4647,\n          \"end_word\": 1328,\n          \"sentiment\": \"negative\",\n          \"sentiment_score\": 6297.068611562716\n        },\n        {\n          \"text\": \"string\",\n          \"start_word\": 9872,\n          \"end_word\": 3878,\n          \"sentiment\": \"negative\",\n          \"sentiment_score\": 5469.477181740394\n        }\n      ],\n      \"average\": {\n        \"sentiment\": \"positive\",\n        \"sentiment_score\": 9682.635380223417\n      }\n    },\n    \"topics\": {\n      \"segments\": [\n        {\n          \"text\": \"string\",\n          \"start_word\": 7253,\n          \"end_word\": 4705,\n          \"topics\": [\n            {\n              \"topic\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confidence_score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"topic\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confidence_score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"text\": \"string\",\n          \"start_word\": 980,\n          \"end_word\": 3075,\n          \"topics\": [\n            {\n              \"topic\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confidence_score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"topic\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confidence_score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    \"intents\": {\n      \"segments\": [\n        {\n          \"text\": \"string\",\n          \"start_word\": 8551,\n          \"end_word\": 8665,\n          \"intents\": [\n            {\n              \"intent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confidence_score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"intent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confidence_score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"text\": \"string\",\n          \"start_word\": 4799,\n          \"end_word\": 4298,\n          \"intents\": [\n            {\n              \"intent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confidence_score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"intent\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confidence_score\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d684d7ee-a984-4b8c-aff6-7a11868a51c6",
+              "name": "Bad request due to invalid parameters or input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "read"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sentiment",
+                      "value": "false"
+                    },
+                    {
+                      "key": "summarize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "topics",
+                      "value": "false"
+                    },
+                    {
+                      "key": "intents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "callback_method",
+                      "value": "POST"
+                    },
+                    {
+                      "key": "custom_topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_topic",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err_code\": \"string\",\n  \"err_msg\": \"string\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5555beef-da35-4e14-8d88-a0905d17da98",
+              "name": "Unauthorized due to missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "read"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sentiment",
+                      "value": "false"
+                    },
+                    {
+                      "key": "summarize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "topics",
+                      "value": "false"
+                    },
+                    {
+                      "key": "intents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "callback_method",
+                      "value": "POST"
+                    },
+                    {
+                      "key": "custom_topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_topic",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err_code\": \"string\",\n  \"err_msg\": \"string\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.deepgram.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7f99c61c-207e-4a39-ba8f-d9a72e660766",
+    "name": "Deepgram Management Balances Text Intelligence API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.\n\nContact Support:\n Name: Deepgram Support",
+      "type": "text/plain"
+    }
+  }
+}

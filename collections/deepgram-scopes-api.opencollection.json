@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deepgram Management Balances Scopes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scopes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deepgram Get member scopes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.deepgram.com/v1/projects/:project_id/members/:member_id/scopes",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              },
+              {
+                "name": "member_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the member."
+              }
+            ]
+          },
+          "docs": "Retrieves the scopes assigned to a specific member within a project."
+        },
+        {
+          "info": {
+            "name": "Deepgram Update member scopes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.deepgram.com/v1/projects/:project_id/members/:member_id/scopes",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              },
+              {
+                "name": "member_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the member."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the scopes assigned to a specific member within a project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

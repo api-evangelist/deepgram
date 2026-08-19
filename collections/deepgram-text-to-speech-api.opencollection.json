@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deepgram Management Balances Text-To-Speech API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Text-To-Speech",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deepgram Convert text to speech",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.deepgram.com/v1/speak",
+            "params": [
+              {
+                "name": "model",
+                "value": "",
+                "type": "query",
+                "description": "Voice model to use for speech synthesis. Aura model family voices include aura-asteria-en, aura-luna-en, aura-stella-en, aura-athena-en, aura-hera-en, aura-orion-en, aura-arcas-en, aura-perseus-en, aura-angus-en, aura-orpheus-en, aura-helios-en, and aura-zeus-en."
+              },
+              {
+                "name": "encoding",
+                "value": "",
+                "type": "query",
+                "description": "Audio encoding format for the output. Options include linear16, mulaw, alaw, mp3, opus, flac, and aac."
+              },
+              {
+                "name": "container",
+                "value": "",
+                "type": "query",
+                "description": "File format container for the output audio. The default depends on the encoding selected."
+              },
+              {
+                "name": "sample_rate",
+                "value": "",
+                "type": "query",
+                "description": "Sample rate in Hertz for the output audio. Default is 24000. Valid values depend on the selected encoding."
+              },
+              {
+                "name": "bit_rate",
+                "value": "",
+                "type": "query",
+                "description": "Bit rate for compressed audio formats such as MP3 and Opus."
+              },
+              {
+                "name": "callback",
+                "value": "",
+                "type": "query",
+                "description": "URL to which Deepgram will send the audio when processing is complete."
+              },
+              {
+                "name": "callback_method",
+                "value": "",
+                "type": "query",
+                "description": "HTTP method for the callback request."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Converts text content into natural-sounding speech audio using Deepgram's Aura model family. Returns audio data in the specified encoding format. Supports multiple voices and configurable audio output settings including encoding, sample rate, and container format."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

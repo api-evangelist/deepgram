@@ -1,0 +1,59 @@
+# Deepgram Voice AI Platform
+
+> Deepgram is a foundational Voice AI platform for developers, offering unified APIs for Speech-to-Text (STT), Text-to-Speech (TTS), and autonomous Voice Agent orchestration. Available as a managed API (US, EU, and Australia endpoints), in-VPC, or self-hosted.
+
+## Products
+- [Voice Agent API](https://deepgram.com/product/voice-agent-api): A single WebSocket API unifying STT, LLM orchestration, and TTS with sub-300ms transcription latency. Flat-rate pricing from $4.50/hr, BYO LLM and BYO TTS options, function calling, barge-in, and mid-session reconfiguration ([docs](https://developers.deepgram.com/docs/voice-agent)).
+- [Speech-to-Text (STT)](https://deepgram.com/product/speech-to-text):
+    - **Flux**: Conversational speech recognition purpose-built for voice agents, with built-in end-of-turn detection, natural interruption handling, and word-level timestamps. Available in English (`flux-general-en`) and Multilingual (`flux-general-multi`, 10 languages with in-conversation language switching) ([docs](https://developers.deepgram.com/docs/flux/quickstart)).
+    - **Nova-3**: Flagship transcription model for batch and streaming, with 50+ languages, keyterm prompting, diarization, smart formatting, and noise robustness ([docs](https://developers.deepgram.com/docs/stt/getting-started)).
+    - **Industry-tuned & custom models**: Domain models including Nova-3 Medical, plus custom models trained on customer data.
+- [Text-to-Speech (TTS)](https://deepgram.com/product/text-to-speech):
+    - **Flux TTS**: Streaming-first, conversation-native TTS on `/v2/speak` (WebSocket and batch REST). Generally available and the default Voice Agent voice (`flux-kit-en`). Barge-in reporting of exactly what the user heard, mid-session speed control, and 36 English voices across seven accents ([docs](https://developers.deepgram.com/docs/flux-tts/overview)).
+- [Audio Intelligence](https://deepgram.com/product/audio-intelligence): Summarization, sentiment analysis, topic detection, and intent recognition ([docs](https://developers.deepgram.com/docs/audio-intelligence)).
+
+## [Pricing](https://deepgram.com/pricing)
+- **Pay As You Go**: $200 free credit, no credit card required, no minimums or expiration.
+- **Growth**: Pre-paid annual credits from $4K/year, saving up to 20% with higher concurrency limits.
+- **Enterprise**: Volume commitments, custom models, dedicated or self-hosted deployment, and SLAs — [contact sales](https://deepgram.com/contact-us).
+
+## Solutions
+- [Contact Centers](https://deepgram.com/solutions/contact-centers): STT, TTS, and audio intelligence for CCaaS and contact center platforms, with integrations including Five9, Genesys, Twilio, Vonage, Amazon Connect, AudioCodes, and Kore.ai.
+- [Conversational AI](https://deepgram.com/solutions/conversational-ai): Real-time STT, TTS, and orchestration for voicebots, assistants, and enterprise voice agents.
+- [Medical & Healthcare](https://deepgram.com/solutions/medical-transcription): HIPAA-compliant Nova-3 Medical models trained on clinical terminology, with on-prem and VPC deployment options.
+- [Restaurants](https://deepgram.com/solutions/restaurants): Voice AI ordering (drive-thru, phone, kiosk), employee assist, call center automation, and reservations for enterprise restaurant brands and restaurant technology companies.
+- [Speech Analytics](https://deepgram.com/solutions/speech-analytics): Conversation analytics, intent detection, and QA at scale.
+- [Media Transcription](https://deepgram.com/solutions/media-transcription): Captions, summaries, and searchable archives for podcasts, video, and broadcast.
+- [Partners](https://deepgram.com/partners): Technology and platform partners, including IBM — Deepgram provides the voice capabilities embedded in IBM watsonx Orchestrate's Agent Builder.
+
+## Technical Benchmarks & Comparisons
+Deepgram consistently outperforms legacy cloud and open-source models in latency and accuracy.
+
+- [OpenAI Whisper](https://deepgram.com/compare/openai-vs-deepgram-alternative): Deepgram is 36% more accurate, up to 5x faster, and 1.4x cheaper.
+- [Amazon Transcribe](https://deepgram.com/compare/amazon-vs-deepgram-alternative): Deepgram is 23% more accurate, 10x faster, and 5.6x more affordable.
+- [Google Cloud STT](https://deepgram.com/compare/google-vs-deepgram-alternative): Deepgram is 53% more accurate, nearly 40x faster, and 5x more affordable.
+- [Microsoft Azure](https://deepgram.com/compare/microsoft-vs-deepgram-alternative): Deepgram is 30% more accurate, more than 25x faster, and over 4x more affordable.
+- [AssemblyAI](https://deepgram.com/compare/assemblyai-vs-deepgram-alternative), [Speechmatics](https://deepgram.com/compare/speechmatics-vs-deepgram-alternative), and [ElevenLabs](https://deepgram.com/compare/elevenlabs-vs-deepgram) comparisons are also available.
+- [AI Voice Generator](https://deepgram.com/ai-voice-generator): Interactive tool for testing Deepgram voices in the browser.
+
+## Developer Resources
+- [API Documentation](https://developers.deepgram.com/home): Official guides, API references, and SDK tutorials.
+- [API Playground](https://playground.deepgram.com): In-browser testing environment for STT, TTS, and Voice Agent endpoints.
+- [SDKs](https://developers.deepgram.com/sdks): Official JavaScript, Python, .NET, Go, and Java SDKs for Deepgram's speech recognition, text-to-speech, and language understanding APIs.
+- [UI Components](https://ui.deepgram.com/): Prebuilt React components and browser agent widgets for voice interfaces.
+- [Deepgram CLI](https://developers.deepgram.com/developer-tools/cli/getting-started): Command-line access to STT, TTS, text intelligence, and account management, including a built-in [MCP server](https://developers.deepgram.com/developer-tools/cli/mcp-server) and [agentic developer tools](https://developers.deepgram.com/developer-tools/agentic-tools).
+- [Changelog](https://developers.deepgram.com/changelog): Latest model releases, new language support, and API updates.
+- [Self-Hosted Deployments](https://developers.deepgram.com/docs/self-hosted-introduction): Documentation for VPC and on-premise implementation.
+- [Rate Limits & Concurrency](https://developers.deepgram.com/reference/api-rate-limits): Concurrency limits by plan and endpoint.
+- [Community](https://community.deepgram.com) and [Support](https://developers.deepgram.com/support).
+
+## Trust, Security & Data Residency
+- SOC 2 Type 1 and Type 2 certified, HIPAA compliant (BAAs for Enterprise), GDPR ready, CCPA compliant, and PCI compliant.
+- Regional endpoints for data residency: US (default), EU (`api.eu.deepgram.com`), and Australia (`api.au.deepgram.com`).
+- [Security Policy](https://developers.deepgram.com/trust-security/security-policy), [Data Privacy Compliance](https://developers.deepgram.com/trust-security/data-privacy-compliance), and [Information Security & Privacy](https://developers.deepgram.com/trust-security/information-security-privacy).
+
+## Company & Learning
+- [Customer Stories](https://deepgram.com/customers) and [Powered by Deepgram](https://deepgram.com/powered-by-deepgram).
+- [Startup Program](https://deepgram.com/startup-program): Credits and support for early-stage companies.
+- [Resource Hub](https://deepgram.com/learn) and [AI Glossary](https://deepgram.com/ai-glossary).
+- [About](https://deepgram.com/about), [Careers](https://deepgram.com/careers), and [Newsroom](https://deepgram.com/company/newsroom).

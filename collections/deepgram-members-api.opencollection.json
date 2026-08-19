@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deepgram Management Balances Members API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Members",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deepgram List project members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.deepgram.com/v1/projects/:project_id/members",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of account objects for members of the specified project."
+        },
+        {
+          "info": {
+            "name": "Deepgram Remove a project member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.deepgram.com/v1/projects/:project_id/members/:member_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              },
+              {
+                "name": "member_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the member."
+              }
+            ]
+          },
+          "docs": "Removes a member from the specified project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

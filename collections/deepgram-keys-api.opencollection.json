@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deepgram Management Balances Keys API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deepgram List project API keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.deepgram.com/v1/projects/:project_id/keys",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              }
+            ]
+          },
+          "docs": "Retrieves all API keys associated with the specified project."
+        },
+        {
+          "info": {
+            "name": "Deepgram Create a project API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.deepgram.com/v1/projects/:project_id/keys",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new API key for the specified project with the given scopes. Requires the keys:write scope on the authenticating key."
+        },
+        {
+          "info": {
+            "name": "Deepgram Get a project API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.deepgram.com/v1/projects/:project_id/keys/:key_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              },
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API key."
+              }
+            ]
+          },
+          "docs": "Retrieves details about a specific API key in the project."
+        },
+        {
+          "info": {
+            "name": "Deepgram Delete a project API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.deepgram.com/v1/projects/:project_id/keys/:key_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              },
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API key."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a specific API key from the project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

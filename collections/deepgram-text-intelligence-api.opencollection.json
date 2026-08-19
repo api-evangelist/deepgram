@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deepgram Management Balances Text Intelligence API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Text Intelligence",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deepgram Analyze text content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.deepgram.com/v1/read",
+            "params": [
+              {
+                "name": "sentiment",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to perform sentiment analysis on the content."
+              },
+              {
+                "name": "summarize",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format."
+              },
+              {
+                "name": "topics",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to detect topics in the content."
+              },
+              {
+                "name": "intents",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to detect intents in the content."
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "BCP-47 language tag for the primary spoken language in the audio."
+              },
+              {
+                "name": "callback",
+                "value": "",
+                "type": "query",
+                "description": "URL to which Deepgram will make a callback request when processing is complete."
+              },
+              {
+                "name": "callback_method",
+                "value": "",
+                "type": "query",
+                "description": "HTTP method for the callback request."
+              },
+              {
+                "name": "custom_topic",
+                "value": "",
+                "type": "query",
+                "description": "Custom topics to detect within the input content. Up to 100 custom topics are allowed."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Analyzes text content for summarization, sentiment analysis, topic detection, and intent recognition using Deepgram's text intelligence models. Accepts text as a string in a JSON request body, a local file, or a hosted URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

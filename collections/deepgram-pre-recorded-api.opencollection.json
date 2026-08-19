@@ -1,0 +1,197 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deepgram Management Balances Pre-Recorded API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pre-Recorded",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deepgram Transcribe pre-recorded audio",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.deepgram.com/v1/listen",
+            "params": [
+              {
+                "name": "model",
+                "value": "",
+                "type": "query",
+                "description": "AI model used to process the audio. Options include nova-3, nova-2, nova, enhanced, and base."
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "BCP-47 language tag for the primary spoken language in the audio."
+              },
+              {
+                "name": "punctuate",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to add punctuation and capitalization to the transcript."
+              },
+              {
+                "name": "diarize",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to recognize speaker changes in the transcript."
+              },
+              {
+                "name": "diarize_version",
+                "value": "",
+                "type": "query",
+                "description": "Version of the diarization feature to use."
+              },
+              {
+                "name": "smart_format",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to apply smart formatting which synchronizes punctuation, diarization, and intelligent text normalization."
+              },
+              {
+                "name": "utterances",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to segment speech into utterances."
+              },
+              {
+                "name": "utt_split",
+                "value": "",
+                "type": "query",
+                "description": "Length of time in seconds used to split utterances."
+              },
+              {
+                "name": "keywords",
+                "value": "",
+                "type": "query",
+                "description": "Keywords to boost in the transcription results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Terms to search for in the submitted audio."
+              },
+              {
+                "name": "replace",
+                "value": "",
+                "type": "query",
+                "description": "Terms or phrases to search for in the submitted audio and replace."
+              },
+              {
+                "name": "redact",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to redact sensitive information from the transcript. Accepts boolean or specific entity types such as pci, numbers, ssn."
+              },
+              {
+                "name": "paragraphs",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to split the transcript into paragraphs."
+              },
+              {
+                "name": "detect_language",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to detect the language of the audio."
+              },
+              {
+                "name": "filler_words",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to include filler words such as um and uh in the transcript."
+              },
+              {
+                "name": "multichannel",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to transcribe each audio channel independently."
+              },
+              {
+                "name": "alternatives",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of transcript alternatives to return."
+              },
+              {
+                "name": "numerals",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to convert numbers from written format to numerical format."
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Tag to associate with the request for tracking purposes."
+              },
+              {
+                "name": "callback",
+                "value": "",
+                "type": "query",
+                "description": "URL to which Deepgram will make a callback request when processing is complete."
+              },
+              {
+                "name": "callback_method",
+                "value": "",
+                "type": "query",
+                "description": "HTTP method for the callback request."
+              },
+              {
+                "name": "sentiment",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to perform sentiment analysis on the content."
+              },
+              {
+                "name": "summarize",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format."
+              },
+              {
+                "name": "topics",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to detect topics in the content."
+              },
+              {
+                "name": "intents",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to detect intents in the content."
+              },
+              {
+                "name": "extra",
+                "value": "",
+                "type": "query",
+                "description": "Arbitrary key-value pairs to associate with the request."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transcribes and optionally analyzes pre-recorded audio. Accepts audio as a URL reference in the request body or as raw binary audio data. Supports a wide range of audio formats and provides options for punctuation, diarization, smart formatting, language detection, summarization, sentiment analysis, topic detection, and intent recognition through query parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

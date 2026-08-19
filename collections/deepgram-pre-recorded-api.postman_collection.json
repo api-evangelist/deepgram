@@ -1,0 +1,985 @@
+{
+  "item": [
+    {
+      "id": "c97c4a45-0853-4c54-a1af-8d768b3c4549",
+      "name": "Pre-Recorded",
+      "description": {
+        "content": "Transcribe pre-recorded audio files or audio from URLs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a35a5064-0a20-4106-a07b-83d89333b917",
+          "name": "Deepgram Transcribe pre-recorded audio",
+          "request": {
+            "name": "Deepgram Transcribe pre-recorded audio",
+            "description": {
+              "content": "Transcribes and optionally analyzes pre-recorded audio. Accepts audio as a URL reference in the request body or as raw binary audio data. Supports a wide range of audio formats and provides options for punctuation, diarization, smart formatting, language detection, summarization, sentiment analysis, topic detection, and intent recognition through query parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "listen"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "model",
+                  "value": "nova-3",
+                  "description": "AI model used to process the audio. Options include nova-3, nova-2, nova, enhanced, and base."
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "BCP-47 language tag for the primary spoken language in the audio."
+                },
+                {
+                  "disabled": false,
+                  "key": "punctuate",
+                  "value": "false",
+                  "description": "Indicates whether to add punctuation and capitalization to the transcript."
+                },
+                {
+                  "disabled": false,
+                  "key": "diarize",
+                  "value": "false",
+                  "description": "Indicates whether to recognize speaker changes in the transcript."
+                },
+                {
+                  "disabled": false,
+                  "key": "diarize_version",
+                  "value": "<string>",
+                  "description": "Version of the diarization feature to use."
+                },
+                {
+                  "disabled": false,
+                  "key": "smart_format",
+                  "value": "false",
+                  "description": "Indicates whether to apply smart formatting which synchronizes punctuation, diarization, and intelligent text normalization."
+                },
+                {
+                  "disabled": false,
+                  "key": "utterances",
+                  "value": "false",
+                  "description": "Indicates whether to segment speech into utterances."
+                },
+                {
+                  "disabled": false,
+                  "key": "utt_split",
+                  "value": "<float>",
+                  "description": "Length of time in seconds used to split utterances."
+                },
+                {
+                  "disabled": false,
+                  "key": "keywords",
+                  "value": "<string>",
+                  "description": "Keywords to boost in the transcription results."
+                },
+                {
+                  "disabled": false,
+                  "key": "keywords",
+                  "value": "<string>",
+                  "description": "Keywords to boost in the transcription results."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Terms to search for in the submitted audio."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Terms to search for in the submitted audio."
+                },
+                {
+                  "disabled": false,
+                  "key": "replace",
+                  "value": "<string>",
+                  "description": "Terms or phrases to search for in the submitted audio and replace."
+                },
+                {
+                  "disabled": false,
+                  "key": "replace",
+                  "value": "<string>",
+                  "description": "Terms or phrases to search for in the submitted audio and replace."
+                },
+                {
+                  "disabled": false,
+                  "key": "redact",
+                  "value": "<string>",
+                  "description": "Indicates whether to redact sensitive information from the transcript. Accepts boolean or specific entity types such as pci, numbers, ssn."
+                },
+                {
+                  "disabled": false,
+                  "key": "redact",
+                  "value": "<string>",
+                  "description": "Indicates whether to redact sensitive information from the transcript. Accepts boolean or specific entity types such as pci, numbers, ssn."
+                },
+                {
+                  "disabled": false,
+                  "key": "paragraphs",
+                  "value": "false",
+                  "description": "Indicates whether to split the transcript into paragraphs."
+                },
+                {
+                  "disabled": false,
+                  "key": "detect_language",
+                  "value": "false",
+                  "description": "Indicates whether to detect the language of the audio."
+                },
+                {
+                  "disabled": false,
+                  "key": "filler_words",
+                  "value": "false",
+                  "description": "Indicates whether to include filler words such as um and uh in the transcript."
+                },
+                {
+                  "disabled": false,
+                  "key": "multichannel",
+                  "value": "false",
+                  "description": "Indicates whether to transcribe each audio channel independently."
+                },
+                {
+                  "disabled": false,
+                  "key": "alternatives",
+                  "value": "<integer>",
+                  "description": "Maximum number of transcript alternatives to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "numerals",
+                  "value": "false",
+                  "description": "Indicates whether to convert numbers from written format to numerical format."
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "Tag to associate with the request for tracking purposes."
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "Tag to associate with the request for tracking purposes."
+                },
+                {
+                  "disabled": false,
+                  "key": "callback",
+                  "value": "<uri>",
+                  "description": "URL to which Deepgram will make a callback request when processing is complete."
+                },
+                {
+                  "disabled": false,
+                  "key": "callback_method",
+                  "value": "POST",
+                  "description": "HTTP method for the callback request."
+                },
+                {
+                  "disabled": false,
+                  "key": "sentiment",
+                  "value": "false",
+                  "description": "Indicates whether to perform sentiment analysis on the content."
+                },
+                {
+                  "disabled": false,
+                  "key": "summarize",
+                  "value": "<string>",
+                  "description": "Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format."
+                },
+                {
+                  "disabled": false,
+                  "key": "topics",
+                  "value": "false",
+                  "description": "Indicates whether to detect topics in the content."
+                },
+                {
+                  "disabled": false,
+                  "key": "intents",
+                  "value": "false",
+                  "description": "Indicates whether to detect intents in the content."
+                },
+                {
+                  "disabled": false,
+                  "key": "extra",
+                  "value": "<string>",
+                  "description": "Arbitrary key-value pairs to associate with the request."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7423e7a8-3d17-4f6b-8b75-687cd5e73e88",
+              "name": "Transcription completed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "listen"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "nova-3"
+                    },
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "punctuate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "smart_format",
+                      "value": "false"
+                    },
+                    {
+                      "key": "utterances",
+                      "value": "false"
+                    },
+                    {
+                      "key": "utt_split",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "keywords",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "keywords",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "replace",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "replace",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "redact",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "redact",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paragraphs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "detect_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filler_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "multichannel",
+                      "value": "false"
+                    },
+                    {
+                      "key": "alternatives",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "numerals",
+                      "value": "false"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "callback_method",
+                      "value": "POST"
+                    },
+                    {
+                      "key": "sentiment",
+                      "value": "false"
+                    },
+                    {
+                      "key": "summarize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "topics",
+                      "value": "false"
+                    },
+                    {
+                      "key": "intents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "extra",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"transaction_key\": \"string\",\n    \"request_id\": \"string\",\n    \"sha256\": \"string\",\n    \"created\": \"1994-01-10T02:58:06.009Z\",\n    \"duration\": 2552.4066818626643,\n    \"channels\": 53,\n    \"models\": [\n      \"string\",\n      \"string\"\n    ],\n    \"model_info\": {\n      \"key_0\": {\n        \"name\": \"string\",\n        \"version\": \"string\",\n        \"arch\": \"string\"\n      },\n      \"key_1\": {\n        \"name\": \"string\",\n        \"version\": \"string\",\n        \"arch\": \"string\"\n      },\n      \"key_2\": {\n        \"name\": \"string\",\n        \"version\": \"string\",\n        \"arch\": \"string\"\n      }\n    }\n  },\n  \"results\": {\n    \"channels\": [\n      {\n        \"alternatives\": [\n          {\n            \"transcript\": \"string\",\n            \"confidence\": 0.8109822918111341,\n            \"words\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"paragraphs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"transcript\": \"string\",\n            \"confidence\": 0.48045780145881256,\n            \"words\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"paragraphs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"detected_language\": \"string\",\n        \"language_confidence\": 1508.2945722660868\n      },\n      {\n        \"alternatives\": [\n          {\n            \"transcript\": \"string\",\n            \"confidence\": 0.5873119906386242,\n            \"words\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"paragraphs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"transcript\": \"string\",\n            \"confidence\": 0.09647665021227325,\n            \"words\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"paragraphs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"detected_language\": \"string\",\n        \"language_confidence\": 1682.9657815306232\n      }\n    ],\n    \"utterances\": [\n      {\n        \"start\": 2884.0779705656582,\n        \"end\": 1512.60230828969,\n        \"confidence\": 8344.408234170578,\n        \"channel\": 6035,\n        \"transcript\": \"string\",\n        \"words\": [\n          {\n            \"word\": \"string\",\n            \"start\": 1196.7615947062782,\n            \"end\": 9752.33787096257,\n            \"confidence\": 0.3883974951203323,\n            \"speaker\": 5188,\n            \"punctuated_word\": \"string\",\n            \"sentiment\": \"negative\",\n            \"sentiment_score\": 8459.063261568945\n          },\n          {\n            \"word\": \"string\",\n            \"start\": 3531.6955073932286,\n            \"end\": 1541.0911485766544,\n            \"confidence\": 0.930765845566233,\n            \"speaker\": 8056,\n            \"punctuated_word\": \"string\",\n            \"sentiment\": \"positive\",\n            \"sentiment_score\": 1918.8283806871575\n          }\n        ],\n        \"speaker\": 3073,\n        \"id\": \"string\"\n      },\n      {\n        \"start\": 8516.058889883116,\n        \"end\": 4903.342180243751,\n        \"confidence\": 4979.029090323027,\n        \"channel\": 9318,\n        \"transcript\": \"string\",\n        \"words\": [\n          {\n            \"word\": \"string\",\n            \"start\": 2511.134807248737,\n            \"end\": 8881.286539800669,\n            \"confidence\": 0.18587853364558637,\n            \"speaker\": 7067,\n            \"punctuated_word\": \"string\",\n            \"sentiment\": \"positive\",\n            \"sentiment_score\": 541.3270578481511\n          },\n          {\n            \"word\": \"string\",\n            \"start\": 4938.878373915467,\n            \"end\": 3461.7342298186572,\n            \"confidence\": 0.20585061922019465,\n            \"speaker\": 3882,\n            \"punctuated_word\": \"string\",\n            \"sentiment\": \"positive\",\n            \"sentiment_score\": 2410.8751256605833\n          }\n        ],\n        \"speaker\": 1130,\n        \"id\": \"string\"\n      }\n    ],\n    \"summary\": {\n      \"short\": \"string\"\n    },\n    \"sentiments\": {\n      \"segments\": [\n        {\n          \"text\": \"string\",\n          \"start_word\": 4784,\n          \"end_word\": 4731,\n          \"sentiment\": \"negative\",\n          \"sentiment_score\": 1344.5490138621885\n        },\n        {\n          \"text\": \"string\",\n          \"start_word\": 6371,\n          \"end_word\": 994,\n          \"sentiment\": \"negative\",\n          \"sentiment_score\": 5191.30198778224\n        }\n      ],\n      \"average\": {\n        \"sentiment\": \"negative\",\n        \"sentiment_score\": 63.019789819845904\n      }\n    },\n    \"topics\": {\n      \"segments\": [\n        {\n          \"text\": \"string\",\n          \"start_word\": 6796,\n          \"end_word\": 3429,\n          \"topics\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"text\": \"string\",\n          \"start_word\": 2242,\n          \"end_word\": 9172,\n          \"topics\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    },\n    \"intents\": {\n      \"segments\": [\n        {\n          \"text\": \"string\",\n          \"start_word\": 5579,\n          \"end_word\": 7055,\n          \"intents\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"text\": \"string\",\n          \"start_word\": 905,\n          \"end_word\": 3940,\n          \"intents\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67a02055-51a7-4faf-ac0d-c9159731c376",
+              "name": "Bad request due to invalid parameters or audio format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "listen"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "nova-3"
+                    },
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "punctuate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "smart_format",
+                      "value": "false"
+                    },
+                    {
+                      "key": "utterances",
+                      "value": "false"
+                    },
+                    {
+                      "key": "utt_split",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "keywords",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "keywords",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "replace",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "replace",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "redact",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "redact",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paragraphs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "detect_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filler_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "multichannel",
+                      "value": "false"
+                    },
+                    {
+                      "key": "alternatives",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "numerals",
+                      "value": "false"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "callback_method",
+                      "value": "POST"
+                    },
+                    {
+                      "key": "sentiment",
+                      "value": "false"
+                    },
+                    {
+                      "key": "summarize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "topics",
+                      "value": "false"
+                    },
+                    {
+                      "key": "intents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "extra",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err_code\": \"string\",\n  \"err_msg\": \"string\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5151104b-dd6b-4e8f-a6f0-52b33c1dcf62",
+              "name": "Unauthorized due to missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "listen"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "nova-3"
+                    },
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "punctuate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "smart_format",
+                      "value": "false"
+                    },
+                    {
+                      "key": "utterances",
+                      "value": "false"
+                    },
+                    {
+                      "key": "utt_split",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "keywords",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "keywords",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "replace",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "replace",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "redact",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "redact",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paragraphs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "detect_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filler_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "multichannel",
+                      "value": "false"
+                    },
+                    {
+                      "key": "alternatives",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "numerals",
+                      "value": "false"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "callback_method",
+                      "value": "POST"
+                    },
+                    {
+                      "key": "sentiment",
+                      "value": "false"
+                    },
+                    {
+                      "key": "summarize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "topics",
+                      "value": "false"
+                    },
+                    {
+                      "key": "intents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "extra",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err_code\": \"string\",\n  \"err_msg\": \"string\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a662090-0c22-4594-ae9e-0d572c370b33",
+              "name": "Insufficient credits",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "listen"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "nova-3"
+                    },
+                    {
+                      "key": "language",
+                      "value": "en"
+                    },
+                    {
+                      "key": "punctuate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "smart_format",
+                      "value": "false"
+                    },
+                    {
+                      "key": "utterances",
+                      "value": "false"
+                    },
+                    {
+                      "key": "utt_split",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "keywords",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "keywords",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "replace",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "replace",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "redact",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "redact",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paragraphs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "detect_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filler_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "multichannel",
+                      "value": "false"
+                    },
+                    {
+                      "key": "alternatives",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "numerals",
+                      "value": "false"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "callback_method",
+                      "value": "POST"
+                    },
+                    {
+                      "key": "sentiment",
+                      "value": "false"
+                    },
+                    {
+                      "key": "summarize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "topics",
+                      "value": "false"
+                    },
+                    {
+                      "key": "intents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "extra",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err_code\": \"string\",\n  \"err_msg\": \"string\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.deepgram.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ac1068ff-dcf4-4d05-a72b-bc321e703c1f",
+    "name": "Deepgram Management Balances Pre-Recorded API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.\n\nContact Support:\n Name: Deepgram Support",
+      "type": "text/plain"
+    }
+  }
+}
