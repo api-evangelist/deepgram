@@ -208,6 +208,8 @@ apis:
   humanURL: https://developers.deepgram.com/docs/stt/getting-started
   baseURL: https://api.deepgram.com
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -298,6 +300,8 @@ apis:
   humanURL: https://developers.deepgram.com/docs/stt/getting-started
   baseURL: https://api.deepgram.com
   tags:
+  - Text-to-Speech
+  tags_raw:
   - Text-To-Speech
   properties:
   - type: OpenAPI
@@ -354,6 +358,12 @@ apis:
     url: rules/deepgram-management-api-rules.yml
 name: Deepgram
 tags:
+- Artificial Intelligence
+- Speech-to-Text
+- Text-to-Speech
+- Transcription
+- Voice AI
+tags_raw:
 - Artificial Intelligence
 - Speech-To-Text
 - Text-To-Speech
