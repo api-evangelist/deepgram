@@ -10,8 +10,11 @@ info:
     can be read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: managementApi
-  url: ../openapi/deepgram-management-openapi.yml
+- name: membersApi
+  url: ../openapi/deepgram-members-api-openapi.yml
+  type: openapi
+- name: scopesApi
+  url: ../openapi/deepgram-scopes-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: update-member-scopes

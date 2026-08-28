@@ -11,11 +11,11 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: managementApi
-  url: ../openapi/deepgram-management-openapi.yml
+- name: balancesApi
+  url: ../openapi/deepgram-balances-api-openapi.yml
   type: openapi
-- name: speechToTextApi
-  url: ../openapi/deepgram-speech-to-text-openapi.yml
+- name: preRecordedApi
+  url: ../openapi/deepgram-pre-recorded-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: balance-gated-transcription

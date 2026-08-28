@@ -12,8 +12,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: speechToTextApi
-  url: ../openapi/deepgram-speech-to-text-openapi.yml
+- name: preRecordedApi
+  url: ../openapi/deepgram-pre-recorded-api-openapi.yml
+  type: openapi
+- name: textIntelligenceApi
+  url: ../openapi/deepgram-text-intelligence-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: diarized-transcript-intelligence

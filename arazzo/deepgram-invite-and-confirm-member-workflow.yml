@@ -11,8 +11,11 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: managementApi
-  url: ../openapi/deepgram-management-openapi.yml
+- name: invitationsApi
+  url: ../openapi/deepgram-invitations-api-openapi.yml
+  type: openapi
+- name: membersApi
+  url: ../openapi/deepgram-members-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: invite-and-confirm-member
