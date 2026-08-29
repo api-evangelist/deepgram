@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Deepgram Management Balances Models API
+  title: Deepgram Management Models API
   description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
   version: '1.0'
   contact:
@@ -78,31 +78,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ModelList:
-      type: object
-      properties:
-        stt:
-          type: array
-          items:
-            $ref: '#/components/schemas/Model'
-          description: Available speech-to-text models.
-        tts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Model'
-          description: Available text-to-speech models.
-    Error:
-      type: object
-      properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
     Model:
       type: object
       properties:
@@ -130,6 +105,31 @@ components:
           type: object
           additionalProperties: true
           description: Additional metadata about the model.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
+    ModelList:
+      type: object
+      properties:
+        stt:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+          description: Available speech-to-text models.
+        tts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+          description: Available text-to-speech models.
   securitySchemes:
     bearerAuth:
       type: http

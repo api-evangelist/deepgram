@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Deepgram Management Balances Invitations API
+  title: Deepgram Management Invitations API
   description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
   version: '1.0'
   contact:
@@ -100,16 +100,26 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Invitation:
+    Error:
       type: object
       properties:
-        email:
+        err_code:
           type: string
-          format: email
-          description: Email address of the invitee.
-        scope:
+          description: Error code identifying the type of error.
+        err_msg:
           type: string
-          description: Scope assigned to the invitation.
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
+    InvitationList:
+      type: object
+      properties:
+        invites:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invitation'
+          description: List of pending invitations.
     InvitationCreate:
       type: object
       required:
@@ -123,26 +133,16 @@ components:
         scope:
           type: string
           description: Scope to assign to the invited member.
-    InvitationList:
+    Invitation:
       type: object
       properties:
-        invites:
-          type: array
-          items:
-            $ref: '#/components/schemas/Invitation'
-          description: List of pending invitations.
-    Error:
-      type: object
-      properties:
-        err_code:
+        email:
           type: string
-          description: Error code identifying the type of error.
-        err_msg:
+          format: email
+          description: Email address of the invitee.
+        scope:
           type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
+          description: Scope assigned to the invitation.
   parameters:
     project_id:
       name: project_id

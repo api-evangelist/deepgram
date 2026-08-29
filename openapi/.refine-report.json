@@ -1,17 +1,9 @@
 {
   "provider": "deepgram",
   "sources": [
-    "deepgram-balances-api-openapi.yml",
-    "deepgram-invitations-api-openapi.yml",
-    "deepgram-keys-api-openapi.yml",
-    "deepgram-members-api-openapi.yml",
-    "deepgram-models-api-openapi.yml",
-    "deepgram-pre-recorded-api-openapi.yml",
-    "deepgram-projects-api-openapi.yml",
-    "deepgram-scopes-api-openapi.yml",
-    "deepgram-text-intelligence-api-openapi.yml",
-    "deepgram-text-to-speech-api-openapi.yml",
-    "deepgram-usage-api-openapi.yml"
+    "_original/deepgram-management-openapi.yml",
+    "_original/deepgram-speech-to-text-openapi.yml",
+    "_original/deepgram-text-to-speech-openapi.yml"
   ],
   "outputs": [
     "deepgram-balances-api-openapi.yml",
@@ -19,16 +11,33 @@
     "deepgram-keys-api-openapi.yml",
     "deepgram-members-api-openapi.yml",
     "deepgram-models-api-openapi.yml",
-    "deepgram-pre-recorded-api-openapi.yml",
     "deepgram-projects-api-openapi.yml",
     "deepgram-scopes-api-openapi.yml",
+    "deepgram-usage-api-openapi.yml",
+    "deepgram-pre-recorded-api-openapi.yml",
     "deepgram-text-intelligence-api-openapi.yml",
-    "deepgram-text-to-speech-api-openapi.yml",
-    "deepgram-usage-api-openapi.yml"
+    "deepgram-text-to-speech-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "deepgram-management-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "deepgram-speech-to-text-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "deepgram-text-to-speech-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "deepgram-balances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deepgram-invitations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deepgram-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deepgram-members-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deepgram-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deepgram-pre-recorded-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deepgram-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deepgram-scopes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deepgram-text-intelligence-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deepgram-text-to-speech-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "deepgram-usage-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
