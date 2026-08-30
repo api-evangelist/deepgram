@@ -300,7 +300,7 @@ apis:
   humanURL: https://developers.deepgram.com/docs/stt/getting-started
   baseURL: https://api.deepgram.com
   tags:
-  - Text-to-Speech
+  - Text-To-Speech
   tags_raw:
   - Text-To-Speech
   properties:
@@ -359,8 +359,8 @@ apis:
 name: Deepgram
 tags:
 - Artificial Intelligence
-- Speech-to-Text
-- Text-to-Speech
+- Speech-To-Text
+- Text-To-Speech
 - Transcription
 - Voice AI
 tags_raw:
