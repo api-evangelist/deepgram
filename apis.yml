@@ -1,9 +1,18 @@
 aid: deepgram
 url: https://raw.githubusercontent.com/api-evangelist/deepgram/refs/heads/main/apis.yml
+x-docs-platform: fern
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-17
+x-docs-hosting: vercel
 apis:
 - aid: deepgram:voice-agent-api
   name: Deepgram Voice Agent API
   tags:
+  - Conversational AI
+  - Real-Time
+  - Voice Agents
+  - Voice AI
+  tags_raw:
   - Conversational AI
   - Real-Time
   - Voice Agent
