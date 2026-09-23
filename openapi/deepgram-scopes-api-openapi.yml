@@ -64,19 +64,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  parameters:
+    member_id:
+      name: member_id
+      in: path
+      required: true
+      description: Unique identifier of the member.
+      schema:
+        type: string
+    project_id:
+      name: project_id
+      in: path
+      required: true
+      description: Unique identifier of the project.
+      schema:
+        type: string
   schemas:
-    Error:
-      type: object
-      properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
     ScopeUpdate:
       type: object
       required:
@@ -93,21 +96,18 @@ components:
           items:
             type: string
           description: List of scopes assigned to the member.
-  parameters:
-    member_id:
-      name: member_id
-      in: path
-      required: true
-      description: Unique identifier of the member.
-      schema:
-        type: string
-    project_id:
-      name: project_id
-      in: path
-      required: true
-      description: Unique identifier of the project.
-      schema:
-        type: string
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
   securitySchemes:
     bearerAuth:
       type: http

@@ -100,26 +100,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
-    InvitationList:
-      type: object
-      properties:
-        invites:
-          type: array
-          items:
-            $ref: '#/components/schemas/Invitation'
-          description: List of pending invitations.
     InvitationCreate:
       type: object
       required:
@@ -143,6 +123,26 @@ components:
         scope:
           type: string
           description: Scope assigned to the invitation.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
+    InvitationList:
+      type: object
+      properties:
+        invites:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invitation'
+          description: List of pending invitations.
   parameters:
     project_id:
       name: project_id

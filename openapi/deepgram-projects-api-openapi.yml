@@ -122,27 +122,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
-    ProjectUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: New name for the project.
-        company:
-          type: string
-          description: New company name for the project.
     Project:
       type: object
       properties:
@@ -155,6 +134,15 @@ components:
         company:
           type: string
           description: Company name associated with the project.
+    ProjectUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: New name for the project.
+        company:
+          type: string
+          description: New company name for the project.
     ProjectList:
       type: object
       properties:
@@ -163,6 +151,18 @@ components:
           items:
             $ref: '#/components/schemas/Project'
           description: List of projects.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
   parameters:
     project_id:
       name: project_id

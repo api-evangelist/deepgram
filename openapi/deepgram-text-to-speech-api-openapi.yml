@@ -15,7 +15,7 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- name: Text-To-Speech
+- name: Text To Speech
   description: Convert text into natural-sounding speech audio.
 paths:
   /v1/speak:
@@ -24,7 +24,7 @@ paths:
       summary: Deepgram Convert text to speech
       description: Converts text content into natural-sounding speech audio using Deepgram's Aura model family. Returns audio data in the specified encoding format. Supports multiple voices and configurable audio output settings including encoding, sample rate, and container format.
       tags:
-      - Text-To-Speech
+      - Text To Speech
       parameters:
       - $ref: '#/components/parameters/model'
       - $ref: '#/components/parameters/encoding'
@@ -97,29 +97,38 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
-  schemas:
-    Error:
-      type: object
-      properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
-    SpeakRequest:
-      type: object
-      required:
-      - text
-      properties:
-        text:
-          type: string
-          description: Text content to convert to speech.
-          minLength: 1
   parameters:
+    callback_method:
+      name: callback_method
+      in: query
+      description: HTTP method for the callback request.
+      schema:
+        type: string
+        enum:
+        - POST
+        - PUT
+        default: POST
+    bit_rate:
+      name: bit_rate
+      in: query
+      description: Bit rate for compressed audio formats such as MP3 and Opus.
+      schema:
+        type: integer
+    encoding:
+      name: encoding
+      in: query
+      description: Audio encoding format for the output. Options include linear16, mulaw, alaw, mp3, opus, flac, and aac.
+      schema:
+        type: string
+        enum:
+        - linear16
+        - mulaw
+        - alaw
+        - mp3
+        - opus
+        - flac
+        - aac
+        default: linear16
     callback:
       name: callback
       in: query
@@ -138,44 +147,6 @@ components:
         - ogg
         - none
         default: wav
-    model:
-      name: model
-      in: query
-      description: Voice model to use for speech synthesis. Aura model family voices include aura-asteria-en, aura-luna-en, aura-stella-en, aura-athena-en, aura-hera-en, aura-orion-en, aura-arcas-en, aura-perseus-en, aura-angus-en, aura-orpheus-en, aura-helios-en, and aura-zeus-en.
-      schema:
-        type: string
-        default: aura-asteria-en
-    bit_rate:
-      name: bit_rate
-      in: query
-      description: Bit rate for compressed audio formats such as MP3 and Opus.
-      schema:
-        type: integer
-    callback_method:
-      name: callback_method
-      in: query
-      description: HTTP method for the callback request.
-      schema:
-        type: string
-        enum:
-        - POST
-        - PUT
-        default: POST
-    encoding:
-      name: encoding
-      in: query
-      description: Audio encoding format for the output. Options include linear16, mulaw, alaw, mp3, opus, flac, and aac.
-      schema:
-        type: string
-        enum:
-        - linear16
-        - mulaw
-        - alaw
-        - mp3
-        - opus
-        - flac
-        - aac
-        default: linear16
     sample_rate:
       name: sample_rate
       in: query
@@ -183,6 +154,35 @@ components:
       schema:
         type: integer
         default: 24000
+    model:
+      name: model
+      in: query
+      description: Voice model to use for speech synthesis. Aura model family voices include aura-asteria-en, aura-luna-en, aura-stella-en, aura-athena-en, aura-hera-en, aura-orion-en, aura-arcas-en, aura-perseus-en, aura-angus-en, aura-orpheus-en, aura-helios-en, and aura-zeus-en.
+      schema:
+        type: string
+        default: aura-asteria-en
+  schemas:
+    SpeakRequest:
+      type: object
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          description: Text content to convert to speech.
+          minLength: 1
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
   securitySchemes:
     bearerAuth:
       type: http

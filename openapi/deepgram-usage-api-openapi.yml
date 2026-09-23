@@ -97,46 +97,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    RequestList:
-      type: object
-      properties:
-        page:
-          type: integer
-          description: Current page number.
-        limit:
-          type: integer
-          description: Number of results per page.
-        requests:
-          type: array
-          items:
-            type: object
-            properties:
-              request_id:
-                type: string
-                description: Unique identifier for the request.
-              created:
-                type: string
-                format: date-time
-                description: Timestamp when the request was made.
-              path:
-                type: string
-                description: API path of the request.
-              api_key_id:
-                type: string
-                description: API key used for the request.
-          description: List of API requests.
-    Error:
-      type: object
-      properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
     UsageSummary:
       type: object
       properties:
@@ -179,6 +139,46 @@ components:
                 type: integer
                 description: Total number of API requests.
           description: Usage data broken down by resolution period.
+    RequestList:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: Current page number.
+        limit:
+          type: integer
+          description: Number of results per page.
+        requests:
+          type: array
+          items:
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: Unique identifier for the request.
+              created:
+                type: string
+                format: date-time
+                description: Timestamp when the request was made.
+              path:
+                type: string
+                description: API path of the request.
+              api_key_id:
+                type: string
+                description: API key used for the request.
+          description: List of API requests.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
   parameters:
     project_id:
       name: project_id

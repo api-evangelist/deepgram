@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Deepgram Speech-to-Text Text Intelligence API
-  description: The Deepgram Speech-to-Text API provides accurate, fast transcription of audio content using advanced AI models. It supports pre-recorded audio files, delivering transcripts with features such as punctuation, diarization, language detection, smart formatting, summarization, sentiment analysis, topic detection, and intent recognition. Deepgram's Nova model family powers the transcription engine, offering high accuracy for conversational and professional audio across multiple languages and audio formats.
+  description: The Deepgram Speech-to-Text API provides accurate, fast transcription of audio content using advanced AI models.
   version: '1.0'
   contact:
     name: Deepgram Support
@@ -61,67 +61,99 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
-  parameters:
-    callback:
-      name: callback
-      in: query
-      description: URL to which Deepgram will make a callback request when processing is complete.
-      schema:
-        type: string
-        format: uri
-    sentiment:
-      name: sentiment
-      in: query
-      description: Indicates whether to perform sentiment analysis on the content.
-      schema:
-        type: boolean
-        default: false
-    language:
-      name: language
-      in: query
-      description: BCP-47 language tag for the primary spoken language in the audio.
-      schema:
-        type: string
-        example: en
-    intents:
-      name: intents
-      in: query
-      description: Indicates whether to detect intents in the content.
-      schema:
-        type: boolean
-        default: false
-    custom_topic:
-      name: custom_topic
-      in: query
-      description: Custom topics to detect within the input content. Up to 100 custom topics are allowed.
-      schema:
-        type: array
-        items:
-          type: string
-    callback_method:
-      name: callback_method
-      in: query
-      description: HTTP method for the callback request.
-      schema:
-        type: string
-        enum:
-        - POST
-        - PUT
-        default: POST
-    summarize:
-      name: summarize
-      in: query
-      description: Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.
-      schema:
-        type: string
-    topics:
-      name: topics
-      in: query
-      description: Indicates whether to detect topics in the content.
-      schema:
-        type: boolean
-        default: false
   schemas:
+    TextAnalysisRequest:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Text content to analyze.
+        url:
+          type: string
+          format: uri
+          description: URL of a text document to analyze.
+    IntentResults:
+      type: object
+      properties:
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntentSegment'
+          description: Intent recognition results for content segments.
+    SentimentSegment:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Text of the segment.
+        start_word:
+          type: integer
+          description: Index of the first word in this segment.
+        end_word:
+          type: integer
+          description: Index of the last word in this segment.
+        sentiment:
+          type: string
+          enum:
+          - positive
+          - negative
+          - neutral
+          description: Overall sentiment of the segment.
+        sentiment_score:
+          type: number
+          format: float
+          description: Confidence score for the sentiment classification.
+    TopicSegment:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Text of the segment.
+        start_word:
+          type: integer
+          description: Index of the first word in this segment.
+        end_word:
+          type: integer
+          description: Index of the last word in this segment.
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/Topic'
+          description: Topics detected in this segment.
+    TextAnalysisResponse:
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            request_id:
+              type: string
+              description: Unique identifier for the API request.
+            created:
+              type: string
+              format: date-time
+              description: Timestamp when the request was created.
+        results:
+          type: object
+          properties:
+            summary:
+              $ref: '#/components/schemas/Summary'
+            sentiments:
+              $ref: '#/components/schemas/SentimentResults'
+            topics:
+              $ref: '#/components/schemas/TopicResults'
+            intents:
+              $ref: '#/components/schemas/IntentResults'
+    Intent:
+      type: object
+      properties:
+        intent:
+          type: string
+          description: Detected intent label.
+        confidence_score:
+          type: number
+          format: float
+          description: Confidence score for the intent recognition.
     TopicResults:
       type: object
       properties:
@@ -130,6 +162,34 @@ components:
           items:
             $ref: '#/components/schemas/TopicSegment'
           description: Topic detection results for content segments.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
+    Topic:
+      type: object
+      properties:
+        topic:
+          type: string
+          description: Detected topic label.
+        confidence_score:
+          type: number
+          format: float
+          description: Confidence score for the topic detection.
+    Summary:
+      type: object
+      properties:
+        short:
+          type: string
+          description: Short summary of the content.
     IntentSegment:
       type: object
       properties:
@@ -157,45 +217,6 @@ components:
           description: Sentiment analysis results for content segments.
         average:
           $ref: '#/components/schemas/SentimentAverage'
-    Error:
-      type: object
-      properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
-    TopicSegment:
-      type: object
-      properties:
-        text:
-          type: string
-          description: Text of the segment.
-        start_word:
-          type: integer
-          description: Index of the first word in this segment.
-        end_word:
-          type: integer
-          description: Index of the last word in this segment.
-        topics:
-          type: array
-          items:
-            $ref: '#/components/schemas/Topic'
-          description: Topics detected in this segment.
-    Topic:
-      type: object
-      properties:
-        topic:
-          type: string
-          description: Detected topic label.
-        confidence_score:
-          type: number
-          format: float
-          description: Confidence score for the topic detection.
     SentimentAverage:
       type: object
       properties:
@@ -210,87 +231,66 @@ components:
           type: number
           format: float
           description: Average sentiment score.
-    Summary:
-      type: object
-      properties:
-        short:
+  parameters:
+    callback_method:
+      name: callback_method
+      in: query
+      description: HTTP method for the callback request.
+      schema:
+        type: string
+        enum:
+        - POST
+        - PUT
+        default: POST
+    intents:
+      name: intents
+      in: query
+      description: Indicates whether to detect intents in the content.
+      schema:
+        type: boolean
+        default: false
+    sentiment:
+      name: sentiment
+      in: query
+      description: Indicates whether to perform sentiment analysis on the content.
+      schema:
+        type: boolean
+        default: false
+    summarize:
+      name: summarize
+      in: query
+      description: Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.
+      schema:
+        type: string
+    topics:
+      name: topics
+      in: query
+      description: Indicates whether to detect topics in the content.
+      schema:
+        type: boolean
+        default: false
+    custom_topic:
+      name: custom_topic
+      in: query
+      description: Custom topics to detect within the input content. Up to 100 custom topics are allowed.
+      schema:
+        type: array
+        items:
           type: string
-          description: Short summary of the content.
-    Intent:
-      type: object
-      properties:
-        intent:
-          type: string
-          description: Detected intent label.
-        confidence_score:
-          type: number
-          format: float
-          description: Confidence score for the intent recognition.
-    TextAnalysisRequest:
-      type: object
-      properties:
-        text:
-          type: string
-          description: Text content to analyze.
-        url:
-          type: string
-          format: uri
-          description: URL of a text document to analyze.
-    SentimentSegment:
-      type: object
-      properties:
-        text:
-          type: string
-          description: Text of the segment.
-        start_word:
-          type: integer
-          description: Index of the first word in this segment.
-        end_word:
-          type: integer
-          description: Index of the last word in this segment.
-        sentiment:
-          type: string
-          enum:
-          - positive
-          - negative
-          - neutral
-          description: Overall sentiment of the segment.
-        sentiment_score:
-          type: number
-          format: float
-          description: Confidence score for the sentiment classification.
-    IntentResults:
-      type: object
-      properties:
-        segments:
-          type: array
-          items:
-            $ref: '#/components/schemas/IntentSegment'
-          description: Intent recognition results for content segments.
-    TextAnalysisResponse:
-      type: object
-      properties:
-        metadata:
-          type: object
-          properties:
-            request_id:
-              type: string
-              description: Unique identifier for the API request.
-            created:
-              type: string
-              format: date-time
-              description: Timestamp when the request was created.
-        results:
-          type: object
-          properties:
-            summary:
-              $ref: '#/components/schemas/Summary'
-            sentiments:
-              $ref: '#/components/schemas/SentimentResults'
-            topics:
-              $ref: '#/components/schemas/TopicResults'
-            intents:
-              $ref: '#/components/schemas/IntentResults'
+    language:
+      name: language
+      in: query
+      description: BCP-47 language tag for the primary spoken language in the audio.
+      schema:
+        type: string
+        example: en
+    callback:
+      name: callback
+      in: query
+      description: URL to which Deepgram will make a callback request when processing is complete.
+      schema:
+        type: string
+        format: uri
   securitySchemes:
     bearerAuth:
       type: http
