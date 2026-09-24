@@ -47,8 +47,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: GraphQL
-    url: graphql/deepgram-graphql.md
   - type: Documentation
     url: https://developers.deepgram.com/reference/text-to-speech-api/speak
   - type: AsyncAPI
@@ -77,8 +75,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: GraphQL
-    url: graphql/deepgram-graphql.md
   - type: Documentation
     url: https://developers.deepgram.com/reference/text-to-speech-api/speak
   - type: AsyncAPI
@@ -107,8 +103,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: GraphQL
-    url: graphql/deepgram-graphql.md
   - type: Documentation
     url: https://developers.deepgram.com/reference/text-to-speech-api/speak
   - type: AsyncAPI
@@ -137,8 +131,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: GraphQL
-    url: graphql/deepgram-graphql.md
   - type: Documentation
     url: https://developers.deepgram.com/reference/text-to-speech-api/speak
   - type: AsyncAPI
@@ -167,8 +159,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: GraphQL
-    url: graphql/deepgram-graphql.md
   - type: Documentation
     url: https://developers.deepgram.com/reference/text-to-speech-api/speak
   - type: AsyncAPI
@@ -197,8 +187,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: GraphQL
-    url: graphql/deepgram-graphql.md
   - type: Documentation
     url: https://developers.deepgram.com/reference/text-to-speech-api/speak
   - type: AsyncAPI
@@ -229,8 +217,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: GraphQL
-    url: graphql/deepgram-graphql.md
   - type: Documentation
     url: https://developers.deepgram.com/reference/text-to-speech-api/speak
   - type: AsyncAPI
@@ -259,8 +245,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: GraphQL
-    url: graphql/deepgram-graphql.md
   - type: Documentation
     url: https://developers.deepgram.com/reference/text-to-speech-api/speak
   - type: AsyncAPI
@@ -289,8 +273,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: GraphQL
-    url: graphql/deepgram-graphql.md
   - type: Documentation
     url: https://developers.deepgram.com/reference/text-to-speech-api/speak
   - type: AsyncAPI
@@ -321,8 +303,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: GraphQL
-    url: graphql/deepgram-graphql.md
   - type: Documentation
     url: https://developers.deepgram.com/reference/text-to-speech-api/speak
   - type: AsyncAPI
@@ -351,8 +331,6 @@ apis:
     url: asyncapi/deepgram-speech-to-text-asyncapi.yml
   - type: Rules
     url: rules/deepgram-speech-to-text-api-rules.yml
-  - type: GraphQL
-    url: graphql/deepgram-graphql.md
   - type: Documentation
     url: https://developers.deepgram.com/reference/text-to-speech-api/speak
   - type: AsyncAPI
@@ -372,12 +350,16 @@ tags:
 - Text-to-Speech
 - Transcription
 - Voice AI
+- Voice
+- Real-Time
 tags_raw:
 - Artificial Intelligence
 - Speech-To-Text
 - Text-To-Speech
 - Transcription
 - Voice AI
+- Voice
+- Real-Time
 kind: company
 deliveryModel:
   model: saas
