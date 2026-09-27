@@ -65,6 +65,26 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    MemberList:
+      type: object
+      properties:
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+          description: List of project members.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
     Member:
       type: object
       properties:
@@ -86,39 +106,19 @@ components:
           items:
             type: string
           description: Scopes assigned to this member.
-    MemberList:
-      type: object
-      properties:
-        members:
-          type: array
-          items:
-            $ref: '#/components/schemas/Member'
-          description: List of project members.
-    Error:
-      type: object
-      properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
   parameters:
-    member_id:
-      name: member_id
-      in: path
-      required: true
-      description: Unique identifier of the member.
-      schema:
-        type: string
     project_id:
       name: project_id
       in: path
       required: true
       description: Unique identifier of the project.
+      schema:
+        type: string
+    member_id:
+      name: member_id
+      in: path
+      required: true
+      description: Unique identifier of the member.
       schema:
         type: string
   securitySchemes:

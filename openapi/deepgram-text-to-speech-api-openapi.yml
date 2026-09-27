@@ -97,70 +97,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
-  parameters:
-    callback_method:
-      name: callback_method
-      in: query
-      description: HTTP method for the callback request.
-      schema:
-        type: string
-        enum:
-        - POST
-        - PUT
-        default: POST
-    bit_rate:
-      name: bit_rate
-      in: query
-      description: Bit rate for compressed audio formats such as MP3 and Opus.
-      schema:
-        type: integer
-    encoding:
-      name: encoding
-      in: query
-      description: Audio encoding format for the output. Options include linear16, mulaw, alaw, mp3, opus, flac, and aac.
-      schema:
-        type: string
-        enum:
-        - linear16
-        - mulaw
-        - alaw
-        - mp3
-        - opus
-        - flac
-        - aac
-        default: linear16
-    callback:
-      name: callback
-      in: query
-      description: URL to which Deepgram will send the audio when processing is complete.
-      schema:
-        type: string
-        format: uri
-    container:
-      name: container
-      in: query
-      description: File format container for the output audio. The default depends on the encoding selected.
-      schema:
-        type: string
-        enum:
-        - wav
-        - ogg
-        - none
-        default: wav
-    sample_rate:
-      name: sample_rate
-      in: query
-      description: Sample rate in Hertz for the output audio. Default is 24000. Valid values depend on the selected encoding.
-      schema:
-        type: integer
-        default: 24000
-    model:
-      name: model
-      in: query
-      description: Voice model to use for speech synthesis. Aura model family voices include aura-asteria-en, aura-luna-en, aura-stella-en, aura-athena-en, aura-hera-en, aura-orion-en, aura-arcas-en, aura-perseus-en, aura-angus-en, aura-orpheus-en, aura-helios-en, and aura-zeus-en.
-      schema:
-        type: string
-        default: aura-asteria-en
   schemas:
     SpeakRequest:
       type: object
@@ -183,6 +119,70 @@ components:
         request_id:
           type: string
           description: Unique identifier for the request that produced the error.
+  parameters:
+    container:
+      name: container
+      in: query
+      description: File format container for the output audio. The default depends on the encoding selected.
+      schema:
+        type: string
+        enum:
+        - wav
+        - ogg
+        - none
+        default: wav
+    bit_rate:
+      name: bit_rate
+      in: query
+      description: Bit rate for compressed audio formats such as MP3 and Opus.
+      schema:
+        type: integer
+    encoding:
+      name: encoding
+      in: query
+      description: Audio encoding format for the output. Options include linear16, mulaw, alaw, mp3, opus, flac, and aac.
+      schema:
+        type: string
+        enum:
+        - linear16
+        - mulaw
+        - alaw
+        - mp3
+        - opus
+        - flac
+        - aac
+        default: linear16
+    model:
+      name: model
+      in: query
+      description: Voice model to use for speech synthesis. Aura model family voices include aura-asteria-en, aura-luna-en, aura-stella-en, aura-athena-en, aura-hera-en, aura-orion-en, aura-arcas-en, aura-perseus-en, aura-angus-en, aura-orpheus-en, aura-helios-en, and aura-zeus-en.
+      schema:
+        type: string
+        default: aura-asteria-en
+    callback_method:
+      name: callback_method
+      in: query
+      description: HTTP method for the callback request.
+      schema:
+        type: string
+        enum:
+        - POST
+        - PUT
+        default: POST
+    sample_rate:
+      name: sample_rate
+      in: query
+      description: Sample rate in Hertz for the output audio. Default is 24000. Valid values depend on the selected encoding.
+      schema:
+        type: integer
+        default: 24000
+    callback:
+      name: callback
+      in: query
+      description: URL to which Deepgram will send the audio when processing is complete.
+      schema:
+        type: string
+        format: uri
   securitySchemes:
     bearerAuth:
       type: http

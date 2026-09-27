@@ -122,18 +122,14 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Project:
+    ProjectList:
       type: object
       properties:
-        project_id:
-          type: string
-          description: Unique identifier for the project.
-        name:
-          type: string
-          description: Name of the project.
-        company:
-          type: string
-          description: Company name associated with the project.
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+          description: List of projects.
     ProjectUpdate:
       type: object
       properties:
@@ -143,14 +139,6 @@ components:
         company:
           type: string
           description: New company name for the project.
-    ProjectList:
-      type: object
-      properties:
-        projects:
-          type: array
-          items:
-            $ref: '#/components/schemas/Project'
-          description: List of projects.
     Error:
       type: object
       properties:
@@ -163,6 +151,18 @@ components:
         request_id:
           type: string
           description: Unique identifier for the request that produced the error.
+    Project:
+      type: object
+      properties:
+        project_id:
+          type: string
+          description: Unique identifier for the project.
+        name:
+          type: string
+          description: Name of the project.
+        company:
+          type: string
+          description: Company name associated with the project.
   parameters:
     project_id:
       name: project_id

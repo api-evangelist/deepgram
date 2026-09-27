@@ -82,6 +82,22 @@ components:
       schema:
         type: string
   schemas:
+    Balance:
+      type: object
+      properties:
+        balance_id:
+          type: string
+          description: Unique identifier for the balance.
+        amount:
+          type: number
+          format: float
+          description: Current balance amount.
+        units:
+          type: string
+          description: Units of the balance amount.
+        purchase:
+          type: string
+          description: Purchase method or plan name.
     BalanceList:
       type: object
       properties:
@@ -102,22 +118,6 @@ components:
         request_id:
           type: string
           description: Unique identifier for the request that produced the error.
-    Balance:
-      type: object
-      properties:
-        balance_id:
-          type: string
-          description: Unique identifier for the balance.
-        amount:
-          type: number
-          format: float
-          description: Current balance amount.
-        units:
-          type: string
-          description: Units of the balance amount.
-        purchase:
-          type: string
-          description: Purchase method or plan name.
   securitySchemes:
     bearerAuth:
       type: http

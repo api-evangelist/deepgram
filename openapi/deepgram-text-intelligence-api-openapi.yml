@@ -62,24 +62,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    TextAnalysisRequest:
-      type: object
-      properties:
-        text:
-          type: string
-          description: Text content to analyze.
-        url:
-          type: string
-          format: uri
-          description: URL of a text document to analyze.
-    IntentResults:
-      type: object
-      properties:
-        segments:
-          type: array
-          items:
-            $ref: '#/components/schemas/IntentSegment'
-          description: Intent recognition results for content segments.
     SentimentSegment:
       type: object
       properties:
@@ -103,6 +85,24 @@ components:
           type: number
           format: float
           description: Confidence score for the sentiment classification.
+    TopicResults:
+      type: object
+      properties:
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicSegment'
+          description: Topic detection results for content segments.
+    SentimentResults:
+      type: object
+      properties:
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SentimentSegment'
+          description: Sentiment analysis results for content segments.
+        average:
+          $ref: '#/components/schemas/SentimentAverage'
     TopicSegment:
       type: object
       properties:
@@ -120,6 +120,83 @@ components:
           items:
             $ref: '#/components/schemas/Topic'
           description: Topics detected in this segment.
+    Summary:
+      type: object
+      properties:
+        short:
+          type: string
+          description: Short summary of the content.
+    IntentSegment:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Text of the segment.
+        start_word:
+          type: integer
+          description: Index of the first word in this segment.
+        end_word:
+          type: integer
+          description: Index of the last word in this segment.
+        intents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Intent'
+          description: Intents detected in this segment.
+    Topic:
+      type: object
+      properties:
+        topic:
+          type: string
+          description: Detected topic label.
+        confidence_score:
+          type: number
+          format: float
+          description: Confidence score for the topic detection.
+    IntentResults:
+      type: object
+      properties:
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntentSegment'
+          description: Intent recognition results for content segments.
+    Intent:
+      type: object
+      properties:
+        intent:
+          type: string
+          description: Detected intent label.
+        confidence_score:
+          type: number
+          format: float
+          description: Confidence score for the intent recognition.
+    SentimentAverage:
+      type: object
+      properties:
+        sentiment:
+          type: string
+          enum:
+          - positive
+          - negative
+          - neutral
+          description: Overall average sentiment.
+        sentiment_score:
+          type: number
+          format: float
+          description: Average sentiment score.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
     TextAnalysisResponse:
       type: object
       properties:
@@ -144,128 +221,21 @@ components:
               $ref: '#/components/schemas/TopicResults'
             intents:
               $ref: '#/components/schemas/IntentResults'
-    Intent:
-      type: object
-      properties:
-        intent:
-          type: string
-          description: Detected intent label.
-        confidence_score:
-          type: number
-          format: float
-          description: Confidence score for the intent recognition.
-    TopicResults:
-      type: object
-      properties:
-        segments:
-          type: array
-          items:
-            $ref: '#/components/schemas/TopicSegment'
-          description: Topic detection results for content segments.
-    Error:
-      type: object
-      properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
-    Topic:
-      type: object
-      properties:
-        topic:
-          type: string
-          description: Detected topic label.
-        confidence_score:
-          type: number
-          format: float
-          description: Confidence score for the topic detection.
-    Summary:
-      type: object
-      properties:
-        short:
-          type: string
-          description: Short summary of the content.
-    IntentSegment:
+    TextAnalysisRequest:
       type: object
       properties:
         text:
           type: string
-          description: Text of the segment.
-        start_word:
-          type: integer
-          description: Index of the first word in this segment.
-        end_word:
-          type: integer
-          description: Index of the last word in this segment.
-        intents:
-          type: array
-          items:
-            $ref: '#/components/schemas/Intent'
-          description: Intents detected in this segment.
-    SentimentResults:
-      type: object
-      properties:
-        segments:
-          type: array
-          items:
-            $ref: '#/components/schemas/SentimentSegment'
-          description: Sentiment analysis results for content segments.
-        average:
-          $ref: '#/components/schemas/SentimentAverage'
-    SentimentAverage:
-      type: object
-      properties:
-        sentiment:
+          description: Text content to analyze.
+        url:
           type: string
-          enum:
-          - positive
-          - negative
-          - neutral
-          description: Overall average sentiment.
-        sentiment_score:
-          type: number
-          format: float
-          description: Average sentiment score.
+          format: uri
+          description: URL of a text document to analyze.
   parameters:
-    callback_method:
-      name: callback_method
-      in: query
-      description: HTTP method for the callback request.
-      schema:
-        type: string
-        enum:
-        - POST
-        - PUT
-        default: POST
     intents:
       name: intents
       in: query
       description: Indicates whether to detect intents in the content.
-      schema:
-        type: boolean
-        default: false
-    sentiment:
-      name: sentiment
-      in: query
-      description: Indicates whether to perform sentiment analysis on the content.
-      schema:
-        type: boolean
-        default: false
-    summarize:
-      name: summarize
-      in: query
-      description: Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.
-      schema:
-        type: string
-    topics:
-      name: topics
-      in: query
-      description: Indicates whether to detect topics in the content.
       schema:
         type: boolean
         default: false
@@ -284,6 +254,16 @@ components:
       schema:
         type: string
         example: en
+    callback_method:
+      name: callback_method
+      in: query
+      description: HTTP method for the callback request.
+      schema:
+        type: string
+        enum:
+        - POST
+        - PUT
+        default: POST
     callback:
       name: callback
       in: query
@@ -291,6 +271,26 @@ components:
       schema:
         type: string
         format: uri
+    sentiment:
+      name: sentiment
+      in: query
+      description: Indicates whether to perform sentiment analysis on the content.
+      schema:
+        type: boolean
+        default: false
+    topics:
+      name: topics
+      in: query
+      description: Indicates whether to detect topics in the content.
+      schema:
+        type: boolean
+        default: false
+    summarize:
+      name: summarize
+      in: query
+      description: Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
