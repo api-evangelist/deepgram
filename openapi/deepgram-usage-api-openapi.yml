@@ -96,14 +96,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
-  parameters:
-    project_id:
-      name: project_id
-      in: path
-      required: true
-      description: Unique identifier of the project.
-      schema:
-        type: string
   schemas:
     UsageSummary:
       type: object
@@ -147,6 +139,18 @@ components:
                 type: integer
                 description: Total number of API requests.
           description: Usage data broken down by resolution period.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
     RequestList:
       type: object
       properties:
@@ -175,18 +179,14 @@ components:
                 type: string
                 description: API key used for the request.
           description: List of API requests.
-    Error:
-      type: object
-      properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
+  parameters:
+    project_id:
+      name: project_id
+      in: path
+      required: true
+      description: Unique identifier of the project.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

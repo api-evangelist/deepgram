@@ -91,6 +91,18 @@ components:
           items:
             $ref: '#/components/schemas/Model'
           description: Available text-to-speech models.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
     Model:
       type: object
       properties:
@@ -118,18 +130,6 @@ components:
           type: object
           additionalProperties: true
           description: Additional metadata about the model.
-    Error:
-      type: object
-      properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
   securitySchemes:
     bearerAuth:
       type: http

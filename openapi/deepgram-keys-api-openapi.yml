@@ -126,39 +126,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    KeyCreate:
-      type: object
-      required:
-      - comment
-      - scopes
-      properties:
-        comment:
-          type: string
-          description: Description or name for the API key.
-        scopes:
-          type: array
-          items:
-            type: string
-          description: Scopes to assign to this API key.
-        expiration_date:
-          type: string
-          format: date-time
-          description: Optional expiration date for the key.
-        time_to_live_in_seconds:
-          type: integer
-          description: Optional time-to-live in seconds for the key.
-    Error:
-      type: object
-      properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
     KeyWithSecret:
       type: object
       properties:
@@ -180,14 +147,18 @@ components:
           type: string
           format: date-time
           description: Timestamp when the key was created.
-    KeyList:
+    Error:
       type: object
       properties:
-        api_keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/Key'
-          description: List of API keys.
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
     Key:
       type: object
       properties:
@@ -213,19 +184,48 @@ components:
           type: string
           format: date-time
           description: Expiration date of the key, if set.
+    KeyCreate:
+      type: object
+      required:
+      - comment
+      - scopes
+      properties:
+        comment:
+          type: string
+          description: Description or name for the API key.
+        scopes:
+          type: array
+          items:
+            type: string
+          description: Scopes to assign to this API key.
+        expiration_date:
+          type: string
+          format: date-time
+          description: Optional expiration date for the key.
+        time_to_live_in_seconds:
+          type: integer
+          description: Optional time-to-live in seconds for the key.
+    KeyList:
+      type: object
+      properties:
+        api_keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/Key'
+          description: List of API keys.
   parameters:
-    project_id:
-      name: project_id
-      in: path
-      required: true
-      description: Unique identifier of the project.
-      schema:
-        type: string
     key_id:
       name: key_id
       in: path
       required: true
       description: Unique identifier of the API key.
+      schema:
+        type: string
+    project_id:
+      name: project_id
+      in: path
+      required: true
+      description: Unique identifier of the project.
       schema:
         type: string
   securitySchemes:

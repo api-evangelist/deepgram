@@ -107,18 +107,18 @@ components:
             type: string
           description: Scopes assigned to this member.
   parameters:
-    project_id:
-      name: project_id
-      in: path
-      required: true
-      description: Unique identifier of the project.
-      schema:
-        type: string
     member_id:
       name: member_id
       in: path
       required: true
       description: Unique identifier of the member.
+      schema:
+        type: string
+    project_id:
+      name: project_id
+      in: path
+      required: true
+      description: Unique identifier of the project.
       schema:
         type: string
   securitySchemes:

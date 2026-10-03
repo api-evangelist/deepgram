@@ -131,12 +131,6 @@ components:
         - ogg
         - none
         default: wav
-    bit_rate:
-      name: bit_rate
-      in: query
-      description: Bit rate for compressed audio formats such as MP3 and Opus.
-      schema:
-        type: integer
     encoding:
       name: encoding
       in: query
@@ -152,13 +146,13 @@ components:
         - flac
         - aac
         default: linear16
-    model:
-      name: model
+    callback:
+      name: callback
       in: query
-      description: Voice model to use for speech synthesis. Aura model family voices include aura-asteria-en, aura-luna-en, aura-stella-en, aura-athena-en, aura-hera-en, aura-orion-en, aura-arcas-en, aura-perseus-en, aura-angus-en, aura-orpheus-en, aura-helios-en, and aura-zeus-en.
+      description: URL to which Deepgram will send the audio when processing is complete.
       schema:
         type: string
-        default: aura-asteria-en
+        format: uri
     callback_method:
       name: callback_method
       in: query
@@ -176,13 +170,19 @@ components:
       schema:
         type: integer
         default: 24000
-    callback:
-      name: callback
+    model:
+      name: model
       in: query
-      description: URL to which Deepgram will send the audio when processing is complete.
+      description: Voice model to use for speech synthesis. Aura model family voices include aura-asteria-en, aura-luna-en, aura-stella-en, aura-athena-en, aura-hera-en, aura-orion-en, aura-arcas-en, aura-perseus-en, aura-angus-en, aura-orpheus-en, aura-helios-en, and aura-zeus-en.
       schema:
         type: string
-        format: uri
+        default: aura-asteria-en
+    bit_rate:
+      name: bit_rate
+      in: query
+      description: Bit rate for compressed audio formats such as MP3 and Opus.
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

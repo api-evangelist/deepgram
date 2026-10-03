@@ -130,15 +130,6 @@ components:
           items:
             $ref: '#/components/schemas/Project'
           description: List of projects.
-    ProjectUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: New name for the project.
-        company:
-          type: string
-          description: New company name for the project.
     Error:
       type: object
       properties:
@@ -163,6 +154,15 @@ components:
         company:
           type: string
           description: Company name associated with the project.
+    ProjectUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: New name for the project.
+        company:
+          type: string
+          description: New company name for the project.
   parameters:
     project_id:
       name: project_id
