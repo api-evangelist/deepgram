@@ -98,15 +98,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    SpeakRequest:
-      type: object
-      required:
-      - text
-      properties:
-        text:
-          type: string
-          description: Text content to convert to speech.
-          minLength: 1
     Error:
       type: object
       properties:
@@ -119,18 +110,16 @@ components:
         request_id:
           type: string
           description: Unique identifier for the request that produced the error.
+    SpeakRequest:
+      type: object
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          description: Text content to convert to speech.
+          minLength: 1
   parameters:
-    container:
-      name: container
-      in: query
-      description: File format container for the output audio. The default depends on the encoding selected.
-      schema:
-        type: string
-        enum:
-        - wav
-        - ogg
-        - none
-        default: wav
     encoding:
       name: encoding
       in: query
@@ -146,13 +135,6 @@ components:
         - flac
         - aac
         default: linear16
-    callback:
-      name: callback
-      in: query
-      description: URL to which Deepgram will send the audio when processing is complete.
-      schema:
-        type: string
-        format: uri
     callback_method:
       name: callback_method
       in: query
@@ -163,13 +145,12 @@ components:
         - POST
         - PUT
         default: POST
-    sample_rate:
-      name: sample_rate
+    bit_rate:
+      name: bit_rate
       in: query
-      description: Sample rate in Hertz for the output audio. Default is 24000. Valid values depend on the selected encoding.
+      description: Bit rate for compressed audio formats such as MP3 and Opus.
       schema:
         type: integer
-        default: 24000
     model:
       name: model
       in: query
@@ -177,12 +158,31 @@ components:
       schema:
         type: string
         default: aura-asteria-en
-    bit_rate:
-      name: bit_rate
+    sample_rate:
+      name: sample_rate
       in: query
-      description: Bit rate for compressed audio formats such as MP3 and Opus.
+      description: Sample rate in Hertz for the output audio. Default is 24000. Valid values depend on the selected encoding.
       schema:
         type: integer
+        default: 24000
+    container:
+      name: container
+      in: query
+      description: File format container for the output audio. The default depends on the encoding selected.
+      schema:
+        type: string
+        enum:
+        - wav
+        - ogg
+        - none
+        default: wav
+    callback:
+      name: callback
+      in: query
+      description: URL to which Deepgram will send the audio when processing is complete.
+      schema:
+        type: string
+        format: uri
   securitySchemes:
     bearerAuth:
       type: http

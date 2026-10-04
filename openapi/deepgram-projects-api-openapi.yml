@@ -122,6 +122,18 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Project:
+      type: object
+      properties:
+        project_id:
+          type: string
+          description: Unique identifier for the project.
+        name:
+          type: string
+          description: Name of the project.
+        company:
+          type: string
+          description: Company name associated with the project.
     ProjectList:
       type: object
       properties:
@@ -142,18 +154,6 @@ components:
         request_id:
           type: string
           description: Unique identifier for the request that produced the error.
-    Project:
-      type: object
-      properties:
-        project_id:
-          type: string
-          description: Unique identifier for the project.
-        name:
-          type: string
-          description: Name of the project.
-        company:
-          type: string
-          description: Company name associated with the project.
     ProjectUpdate:
       type: object
       properties:

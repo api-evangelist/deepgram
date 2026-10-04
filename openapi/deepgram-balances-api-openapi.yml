@@ -73,23 +73,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  parameters:
+    project_id:
+      name: project_id
+      in: path
+      required: true
+      description: Unique identifier of the project.
+      schema:
+        type: string
   schemas:
-    Balance:
-      type: object
-      properties:
-        balance_id:
-          type: string
-          description: Unique identifier for the balance.
-        amount:
-          type: number
-          format: float
-          description: Current balance amount.
-        units:
-          type: string
-          description: Units of the balance amount.
-        purchase:
-          type: string
-          description: Purchase method or plan name.
     Error:
       type: object
       properties:
@@ -110,14 +102,22 @@ components:
           items:
             $ref: '#/components/schemas/Balance'
           description: List of billing balances.
-  parameters:
-    project_id:
-      name: project_id
-      in: path
-      required: true
-      description: Unique identifier of the project.
-      schema:
-        type: string
+    Balance:
+      type: object
+      properties:
+        balance_id:
+          type: string
+          description: Unique identifier for the balance.
+        amount:
+          type: number
+          format: float
+          description: Current balance amount.
+        units:
+          type: string
+          description: Units of the balance amount.
+        purchase:
+          type: string
+          description: Purchase method or plan name.
   securitySchemes:
     bearerAuth:
       type: http

@@ -147,18 +147,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the key was created.
-    Error:
-      type: object
-      properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
     Key:
       type: object
       properties:
@@ -205,6 +193,18 @@ components:
         time_to_live_in_seconds:
           type: integer
           description: Optional time-to-live in seconds for the key.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
     KeyList:
       type: object
       properties:

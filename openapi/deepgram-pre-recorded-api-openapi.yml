@@ -91,10 +91,124 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   parameters:
+    tag:
+      name: tag
+      in: query
+      description: Tag to associate with the request for tracking purposes.
+      schema:
+        type: array
+        items:
+          type: string
+    topics:
+      name: topics
+      in: query
+      description: Indicates whether to detect topics in the content.
+      schema:
+        type: boolean
+        default: false
+    utterances:
+      name: utterances
+      in: query
+      description: Indicates whether to segment speech into utterances.
+      schema:
+        type: boolean
+        default: false
+    punctuate:
+      name: punctuate
+      in: query
+      description: Indicates whether to add punctuation and capitalization to the transcript.
+      schema:
+        type: boolean
+        default: false
+    intents:
+      name: intents
+      in: query
+      description: Indicates whether to detect intents in the content.
+      schema:
+        type: boolean
+        default: false
+    search:
+      name: search
+      in: query
+      description: Terms to search for in the submitted audio.
+      schema:
+        type: array
+        items:
+          type: string
+    numerals:
+      name: numerals
+      in: query
+      description: Indicates whether to convert numbers from written format to numerical format.
+      schema:
+        type: boolean
+        default: false
     filler_words:
       name: filler_words
       in: query
       description: Indicates whether to include filler words such as um and uh in the transcript.
+      schema:
+        type: boolean
+        default: false
+    multichannel:
+      name: multichannel
+      in: query
+      description: Indicates whether to transcribe each audio channel independently.
+      schema:
+        type: boolean
+        default: false
+    replace:
+      name: replace
+      in: query
+      description: Terms or phrases to search for in the submitted audio and replace.
+      schema:
+        type: array
+        items:
+          type: string
+    extra:
+      name: extra
+      in: query
+      description: Arbitrary key-value pairs to associate with the request.
+      schema:
+        type: string
+    paragraphs:
+      name: paragraphs
+      in: query
+      description: Indicates whether to split the transcript into paragraphs.
+      schema:
+        type: boolean
+        default: false
+    model:
+      name: model
+      in: query
+      description: AI model used to process the audio. Options include nova-3, nova-2, nova, enhanced, and base.
+      schema:
+        type: string
+        default: nova-3
+    diarize:
+      name: diarize
+      in: query
+      description: Indicates whether to recognize speaker changes in the transcript.
+      schema:
+        type: boolean
+        default: false
+    sentiment:
+      name: sentiment
+      in: query
+      description: Indicates whether to perform sentiment analysis on the content.
+      schema:
+        type: boolean
+        default: false
+    utt_split:
+      name: utt_split
+      in: query
+      description: Length of time in seconds used to split utterances.
+      schema:
+        type: number
+        format: float
+    detect_language:
+      name: detect_language
+      in: query
+      description: Indicates whether to detect the language of the audio.
       schema:
         type: boolean
         default: false
@@ -106,64 +220,17 @@ components:
         type: array
         items:
           type: string
-    language:
-      name: language
+    callback:
+      name: callback
       in: query
-      description: BCP-47 language tag for the primary spoken language in the audio.
+      description: URL to which Deepgram will make a callback request when processing is complete.
       schema:
         type: string
-        example: en
-    diarize_version:
-      name: diarize_version
+        format: uri
+    keywords:
+      name: keywords
       in: query
-      description: Version of the diarization feature to use.
-      schema:
-        type: string
-    detect_language:
-      name: detect_language
-      in: query
-      description: Indicates whether to detect the language of the audio.
-      schema:
-        type: boolean
-        default: false
-    extra:
-      name: extra
-      in: query
-      description: Arbitrary key-value pairs to associate with the request.
-      schema:
-        type: string
-    punctuate:
-      name: punctuate
-      in: query
-      description: Indicates whether to add punctuation and capitalization to the transcript.
-      schema:
-        type: boolean
-        default: false
-    summarize:
-      name: summarize
-      in: query
-      description: Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.
-      schema:
-        type: string
-    alternatives:
-      name: alternatives
-      in: query
-      description: Maximum number of transcript alternatives to return.
-      schema:
-        type: integer
-        minimum: 1
-    search:
-      name: search
-      in: query
-      description: Terms to search for in the submitted audio.
-      schema:
-        type: array
-        items:
-          type: string
-    tag:
-      name: tag
-      in: query
-      description: Tag to associate with the request for tracking purposes.
+      description: Keywords to boost in the transcription results.
       schema:
         type: array
         items:
@@ -178,84 +245,19 @@ components:
         - POST
         - PUT
         default: POST
-    sentiment:
-      name: sentiment
+    alternatives:
+      name: alternatives
       in: query
-      description: Indicates whether to perform sentiment analysis on the content.
+      description: Maximum number of transcript alternatives to return.
       schema:
-        type: boolean
-        default: false
-    diarize:
-      name: diarize
+        type: integer
+        minimum: 1
+    diarize_version:
+      name: diarize_version
       in: query
-      description: Indicates whether to recognize speaker changes in the transcript.
-      schema:
-        type: boolean
-        default: false
-    topics:
-      name: topics
-      in: query
-      description: Indicates whether to detect topics in the content.
-      schema:
-        type: boolean
-        default: false
-    utt_split:
-      name: utt_split
-      in: query
-      description: Length of time in seconds used to split utterances.
-      schema:
-        type: number
-        format: float
-    multichannel:
-      name: multichannel
-      in: query
-      description: Indicates whether to transcribe each audio channel independently.
-      schema:
-        type: boolean
-        default: false
-    utterances:
-      name: utterances
-      in: query
-      description: Indicates whether to segment speech into utterances.
-      schema:
-        type: boolean
-        default: false
-    numerals:
-      name: numerals
-      in: query
-      description: Indicates whether to convert numbers from written format to numerical format.
-      schema:
-        type: boolean
-        default: false
-    keywords:
-      name: keywords
-      in: query
-      description: Keywords to boost in the transcription results.
-      schema:
-        type: array
-        items:
-          type: string
-    model:
-      name: model
-      in: query
-      description: AI model used to process the audio. Options include nova-3, nova-2, nova, enhanced, and base.
+      description: Version of the diarization feature to use.
       schema:
         type: string
-        default: nova-3
-    callback:
-      name: callback
-      in: query
-      description: URL to which Deepgram will make a callback request when processing is complete.
-      schema:
-        type: string
-        format: uri
-    intents:
-      name: intents
-      in: query
-      description: Indicates whether to detect intents in the content.
-      schema:
-        type: boolean
-        default: false
     smart_format:
       name: smart_format
       in: query
@@ -263,138 +265,20 @@ components:
       schema:
         type: boolean
         default: false
-    paragraphs:
-      name: paragraphs
+    language:
+      name: language
       in: query
-      description: Indicates whether to split the transcript into paragraphs.
+      description: BCP-47 language tag for the primary spoken language in the audio.
       schema:
-        type: boolean
-        default: false
-    replace:
-      name: replace
+        type: string
+        example: en
+    summarize:
+      name: summarize
       in: query
-      description: Terms or phrases to search for in the submitted audio and replace.
+      description: Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.
       schema:
-        type: array
-        items:
-          type: string
+        type: string
   schemas:
-    Utterance:
-      type: object
-      properties:
-        start:
-          type: number
-          format: float
-          description: Start time of the utterance in seconds.
-        end:
-          type: number
-          format: float
-          description: End time of the utterance in seconds.
-        confidence:
-          type: number
-          format: float
-          description: Confidence score for this utterance.
-        channel:
-          type: integer
-          description: Audio channel index for this utterance.
-        transcript:
-          type: string
-          description: Transcript text for this utterance.
-        words:
-          type: array
-          items:
-            $ref: '#/components/schemas/Word'
-          description: Individual words within this utterance.
-        speaker:
-          type: integer
-          description: Speaker identifier for this utterance.
-        id:
-          type: string
-          description: Unique identifier for this utterance.
-    SentimentAverage:
-      type: object
-      properties:
-        sentiment:
-          type: string
-          enum:
-          - positive
-          - negative
-          - neutral
-          description: Overall average sentiment.
-        sentiment_score:
-          type: number
-          format: float
-          description: Average sentiment score.
-    ModelInfo:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the model.
-        version:
-          type: string
-          description: Version of the model.
-        arch:
-          type: string
-          description: Architecture of the model.
-    Metadata:
-      type: object
-      properties:
-        transaction_key:
-          type: string
-          description: Unique identifier for the transaction.
-        request_id:
-          type: string
-          description: Unique identifier for the API request.
-        sha256:
-          type: string
-          description: SHA-256 hash of the submitted audio.
-        created:
-          type: string
-          format: date-time
-          description: Timestamp when the request was created.
-        duration:
-          type: number
-          format: float
-          description: Duration of the submitted audio in seconds.
-        channels:
-          type: integer
-          description: Number of audio channels detected.
-        models:
-          type: array
-          items:
-            type: string
-          description: Model identifiers used for transcription.
-        model_info:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ModelInfo'
-          description: Detailed information about models used.
-    Topic:
-      type: object
-      properties:
-        topic:
-          type: string
-          description: Detected topic label.
-        confidence_score:
-          type: number
-          format: float
-          description: Confidence score for the topic detection.
-    Channel:
-      type: object
-      properties:
-        alternatives:
-          type: array
-          items:
-            $ref: '#/components/schemas/Alternative'
-          description: Alternative transcriptions for this channel, ordered by confidence.
-        detected_language:
-          type: string
-          description: Detected language of the audio in this channel.
-        language_confidence:
-          type: number
-          format: float
-          description: Confidence score for the detected language.
     Word:
       type: object
       properties:
@@ -432,6 +316,114 @@ components:
           type: number
           format: float
           description: Sentiment confidence score for this word.
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
+    SentimentAverage:
+      type: object
+      properties:
+        sentiment:
+          type: string
+          enum:
+          - positive
+          - negative
+          - neutral
+          description: Overall average sentiment.
+        sentiment_score:
+          type: number
+          format: float
+          description: Average sentiment score.
+    Summary:
+      type: object
+      properties:
+        short:
+          type: string
+          description: Short summary of the content.
+    TranscriptionResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        results:
+          $ref: '#/components/schemas/Results'
+    TopicSegment:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Text of the segment.
+        start_word:
+          type: integer
+          description: Index of the first word in this segment.
+        end_word:
+          type: integer
+          description: Index of the last word in this segment.
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/Topic'
+          description: Topics detected in this segment.
+    SentimentResults:
+      type: object
+      properties:
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SentimentSegment'
+          description: Sentiment analysis results for content segments.
+        average:
+          $ref: '#/components/schemas/SentimentAverage'
+    IntentResults:
+      type: object
+      properties:
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntentSegment'
+          description: Intent recognition results for content segments.
+    Channel:
+      type: object
+      properties:
+        alternatives:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alternative'
+          description: Alternative transcriptions for this channel, ordered by confidence.
+        detected_language:
+          type: string
+          description: Detected language of the audio in this channel.
+        language_confidence:
+          type: number
+          format: float
+          description: Confidence score for the detected language.
+    Alternative:
+      type: object
+      properties:
+        transcript:
+          type: string
+          description: Full transcript text for this alternative.
+        confidence:
+          type: number
+          format: float
+          description: Confidence score for this alternative.
+          minimum: 0
+          maximum: 1
+        words:
+          type: array
+          items:
+            $ref: '#/components/schemas/Word'
+          description: Individual words with timing and confidence information.
+        paragraphs:
+          $ref: '#/components/schemas/ParagraphGroup'
     AudioUrlRequest:
       type: object
       required:
@@ -441,14 +433,49 @@ components:
           type: string
           format: uri
           description: URL of the audio file to transcribe.
-    TopicResults:
+    Intent:
       type: object
       properties:
-        segments:
+        intent:
+          type: string
+          description: Detected intent label.
+        confidence_score:
+          type: number
+          format: float
+          description: Confidence score for the intent recognition.
+    Results:
+      type: object
+      properties:
+        channels:
           type: array
           items:
-            $ref: '#/components/schemas/TopicSegment'
-          description: Topic detection results for content segments.
+            $ref: '#/components/schemas/Channel'
+          description: Transcription results organized by audio channel.
+        utterances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Utterance'
+          description: Transcription results organized by utterance when utterances parameter is enabled.
+        summary:
+          $ref: '#/components/schemas/Summary'
+        sentiments:
+          $ref: '#/components/schemas/SentimentResults'
+        topics:
+          $ref: '#/components/schemas/TopicResults'
+        intents:
+          $ref: '#/components/schemas/IntentResults'
+    ModelInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the model.
+        version:
+          type: string
+          description: Version of the model.
+        arch:
+          type: string
+          description: Architecture of the model.
     SentimentSegment:
       type: object
       properties:
@@ -472,61 +499,109 @@ components:
           type: number
           format: float
           description: Confidence score for the sentiment classification.
-    Results:
+    Topic:
       type: object
       properties:
-        channels:
-          type: array
-          items:
-            $ref: '#/components/schemas/Channel'
-          description: Transcription results organized by audio channel.
-        utterances:
-          type: array
-          items:
-            $ref: '#/components/schemas/Utterance'
-          description: Transcription results organized by utterance when utterances parameter is enabled.
-        summary:
-          $ref: '#/components/schemas/Summary'
-        sentiments:
-          $ref: '#/components/schemas/SentimentResults'
-        topics:
-          $ref: '#/components/schemas/TopicResults'
-        intents:
-          $ref: '#/components/schemas/IntentResults'
-    SentimentResults:
-      type: object
-      properties:
-        segments:
-          type: array
-          items:
-            $ref: '#/components/schemas/SentimentSegment'
-          description: Sentiment analysis results for content segments.
-        average:
-          $ref: '#/components/schemas/SentimentAverage'
-    Intent:
-      type: object
-      properties:
-        intent:
+        topic:
           type: string
-          description: Detected intent label.
+          description: Detected topic label.
         confidence_score:
           type: number
           format: float
-          description: Confidence score for the intent recognition.
-    Summary:
+          description: Confidence score for the topic detection.
+    Metadata:
       type: object
       properties:
-        short:
+        transaction_key:
           type: string
-          description: Short summary of the content.
-    IntentResults:
-      type: object
-      properties:
-        segments:
+          description: Unique identifier for the transaction.
+        request_id:
+          type: string
+          description: Unique identifier for the API request.
+        sha256:
+          type: string
+          description: SHA-256 hash of the submitted audio.
+        created:
+          type: string
+          format: date-time
+          description: Timestamp when the request was created.
+        duration:
+          type: number
+          format: float
+          description: Duration of the submitted audio in seconds.
+        channels:
+          type: integer
+          description: Number of audio channels detected.
+        models:
           type: array
           items:
-            $ref: '#/components/schemas/IntentSegment'
-          description: Intent recognition results for content segments.
+            type: string
+          description: Model identifiers used for transcription.
+        model_info:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ModelInfo'
+          description: Detailed information about models used.
+    ParagraphGroup:
+      type: object
+      properties:
+        transcript:
+          type: string
+          description: Full transcript organized into paragraphs.
+        paragraphs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Paragraph'
+          description: Individual paragraph objects.
+    IntentSegment:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Text of the segment.
+        start_word:
+          type: integer
+          description: Index of the first word in this segment.
+        end_word:
+          type: integer
+          description: Index of the last word in this segment.
+        intents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Intent'
+          description: Intents detected in this segment.
+    Utterance:
+      type: object
+      properties:
+        start:
+          type: number
+          format: float
+          description: Start time of the utterance in seconds.
+        end:
+          type: number
+          format: float
+          description: End time of the utterance in seconds.
+        confidence:
+          type: number
+          format: float
+          description: Confidence score for this utterance.
+        channel:
+          type: integer
+          description: Audio channel index for this utterance.
+        transcript:
+          type: string
+          description: Transcript text for this utterance.
+        words:
+          type: array
+          items:
+            $ref: '#/components/schemas/Word'
+          description: Individual words within this utterance.
+        speaker:
+          type: integer
+          description: Speaker identifier for this utterance.
+        id:
+          type: string
+          description: Unique identifier for this utterance.
     Sentence:
       type: object
       properties:
@@ -563,89 +638,14 @@ components:
         speaker:
           type: integer
           description: Speaker identifier for this paragraph.
-    Error:
+    TopicResults:
       type: object
       properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
-    ParagraphGroup:
-      type: object
-      properties:
-        transcript:
-          type: string
-          description: Full transcript organized into paragraphs.
-        paragraphs:
+        segments:
           type: array
           items:
-            $ref: '#/components/schemas/Paragraph'
-          description: Individual paragraph objects.
-    Alternative:
-      type: object
-      properties:
-        transcript:
-          type: string
-          description: Full transcript text for this alternative.
-        confidence:
-          type: number
-          format: float
-          description: Confidence score for this alternative.
-          minimum: 0
-          maximum: 1
-        words:
-          type: array
-          items:
-            $ref: '#/components/schemas/Word'
-          description: Individual words with timing and confidence information.
-        paragraphs:
-          $ref: '#/components/schemas/ParagraphGroup'
-    IntentSegment:
-      type: object
-      properties:
-        text:
-          type: string
-          description: Text of the segment.
-        start_word:
-          type: integer
-          description: Index of the first word in this segment.
-        end_word:
-          type: integer
-          description: Index of the last word in this segment.
-        intents:
-          type: array
-          items:
-            $ref: '#/components/schemas/Intent'
-          description: Intents detected in this segment.
-    TranscriptionResponse:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-        results:
-          $ref: '#/components/schemas/Results'
-    TopicSegment:
-      type: object
-      properties:
-        text:
-          type: string
-          description: Text of the segment.
-        start_word:
-          type: integer
-          description: Index of the first word in this segment.
-        end_word:
-          type: integer
-          description: Index of the last word in this segment.
-        topics:
-          type: array
-          items:
-            $ref: '#/components/schemas/Topic'
-          description: Topics detected in this segment.
+            $ref: '#/components/schemas/TopicSegment'
+          description: Topic detection results for content segments.
   securitySchemes:
     bearerAuth:
       type: http

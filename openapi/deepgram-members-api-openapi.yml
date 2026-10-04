@@ -65,14 +65,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    MemberList:
-      type: object
-      properties:
-        members:
-          type: array
-          items:
-            $ref: '#/components/schemas/Member'
-          description: List of project members.
     Error:
       type: object
       properties:
@@ -106,6 +98,14 @@ components:
           items:
             type: string
           description: Scopes assigned to this member.
+    MemberList:
+      type: object
+      properties:
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+          description: List of project members.
   parameters:
     member_id:
       name: member_id

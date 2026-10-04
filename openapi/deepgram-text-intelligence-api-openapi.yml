@@ -62,6 +62,18 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: Error code identifying the type of error.
+        err_msg:
+          type: string
+          description: Human-readable error message.
+        request_id:
+          type: string
+          description: Unique identifier for the request that produced the error.
     TextAnalysisResponse:
       type: object
       properties:
@@ -100,24 +112,67 @@ components:
           type: number
           format: float
           description: Average sentiment score.
-    Topic:
+    Summary:
       type: object
       properties:
-        topic:
+        short:
           type: string
-          description: Detected topic label.
-        confidence_score:
-          type: number
-          format: float
-          description: Confidence score for the topic detection.
-    TopicResults:
+          description: Short summary of the content.
+    TopicSegment:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Text of the segment.
+        start_word:
+          type: integer
+          description: Index of the first word in this segment.
+        end_word:
+          type: integer
+          description: Index of the last word in this segment.
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/Topic'
+          description: Topics detected in this segment.
+    IntentResults:
       type: object
       properties:
         segments:
           type: array
           items:
-            $ref: '#/components/schemas/TopicSegment'
-          description: Topic detection results for content segments.
+            $ref: '#/components/schemas/IntentSegment'
+          description: Intent recognition results for content segments.
+    SentimentResults:
+      type: object
+      properties:
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SentimentSegment'
+          description: Sentiment analysis results for content segments.
+        average:
+          $ref: '#/components/schemas/SentimentAverage'
+    Intent:
+      type: object
+      properties:
+        intent:
+          type: string
+          description: Detected intent label.
+        confidence_score:
+          type: number
+          format: float
+          description: Confidence score for the intent recognition.
+    TextAnalysisRequest:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Text content to analyze.
+        url:
+          type: string
+          format: uri
+          description: URL of a text document to analyze.
     SentimentSegment:
       type: object
       properties:
@@ -141,62 +196,16 @@ components:
           type: number
           format: float
           description: Confidence score for the sentiment classification.
-    TextAnalysisRequest:
+    Topic:
       type: object
       properties:
-        text:
+        topic:
           type: string
-          description: Text content to analyze.
-        url:
-          type: string
-          format: uri
-          description: URL of a text document to analyze.
-    SentimentResults:
-      type: object
-      properties:
-        segments:
-          type: array
-          items:
-            $ref: '#/components/schemas/SentimentSegment'
-          description: Sentiment analysis results for content segments.
-        average:
-          $ref: '#/components/schemas/SentimentAverage'
-    Intent:
-      type: object
-      properties:
-        intent:
-          type: string
-          description: Detected intent label.
+          description: Detected topic label.
         confidence_score:
           type: number
           format: float
-          description: Confidence score for the intent recognition.
-    Summary:
-      type: object
-      properties:
-        short:
-          type: string
-          description: Short summary of the content.
-    IntentResults:
-      type: object
-      properties:
-        segments:
-          type: array
-          items:
-            $ref: '#/components/schemas/IntentSegment'
-          description: Intent recognition results for content segments.
-    Error:
-      type: object
-      properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
+          description: Confidence score for the topic detection.
     IntentSegment:
       type: object
       properties:
@@ -214,66 +223,33 @@ components:
           items:
             $ref: '#/components/schemas/Intent'
           description: Intents detected in this segment.
-    TopicSegment:
+    TopicResults:
       type: object
       properties:
-        text:
-          type: string
-          description: Text of the segment.
-        start_word:
-          type: integer
-          description: Index of the first word in this segment.
-        end_word:
-          type: integer
-          description: Index of the last word in this segment.
-        topics:
+        segments:
           type: array
           items:
-            $ref: '#/components/schemas/Topic'
-          description: Topics detected in this segment.
+            $ref: '#/components/schemas/TopicSegment'
+          description: Topic detection results for content segments.
   parameters:
-    language:
-      name: language
-      in: query
-      description: BCP-47 language tag for the primary spoken language in the audio.
-      schema:
-        type: string
-        example: en
-    custom_topic:
-      name: custom_topic
-      in: query
-      description: Custom topics to detect within the input content. Up to 100 custom topics are allowed.
-      schema:
-        type: array
-        items:
-          type: string
-    summarize:
-      name: summarize
-      in: query
-      description: Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.
-      schema:
-        type: string
-    callback_method:
-      name: callback_method
-      in: query
-      description: HTTP method for the callback request.
-      schema:
-        type: string
-        enum:
-        - POST
-        - PUT
-        default: POST
-    sentiment:
-      name: sentiment
-      in: query
-      description: Indicates whether to perform sentiment analysis on the content.
-      schema:
-        type: boolean
-        default: false
     topics:
       name: topics
       in: query
       description: Indicates whether to detect topics in the content.
+      schema:
+        type: boolean
+        default: false
+    intents:
+      name: intents
+      in: query
+      description: Indicates whether to detect intents in the content.
+      schema:
+        type: boolean
+        default: false
+    sentiment:
+      name: sentiment
+      in: query
+      description: Indicates whether to perform sentiment analysis on the content.
       schema:
         type: boolean
         default: false
@@ -284,13 +260,37 @@ components:
       schema:
         type: string
         format: uri
-    intents:
-      name: intents
+    custom_topic:
+      name: custom_topic
       in: query
-      description: Indicates whether to detect intents in the content.
+      description: Custom topics to detect within the input content. Up to 100 custom topics are allowed.
       schema:
-        type: boolean
-        default: false
+        type: array
+        items:
+          type: string
+    callback_method:
+      name: callback_method
+      in: query
+      description: HTTP method for the callback request.
+      schema:
+        type: string
+        enum:
+        - POST
+        - PUT
+        default: POST
+    language:
+      name: language
+      in: query
+      description: BCP-47 language tag for the primary spoken language in the audio.
+      schema:
+        type: string
+        example: en
+    summarize:
+      name: summarize
+      in: query
+      description: Indicates whether to generate a summary of the content. Can be a boolean or a specific summary format.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
