@@ -1,0 +1,25 @@
+slug: deepgram
+provider: Deepgram
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Scopes
+  spec_file: deepgram-scopes-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: PUT /v1/projects/{project_id}/members/{member_id}/scopes  updateMemberScopes  Deepgram Update
+    member scopes
+  reason: Reading and updating per-member permission scopes is authorisation/entitlement administration
+    over users, which is squarely Identity & Access Management.
