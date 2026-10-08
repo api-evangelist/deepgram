@@ -390,6 +390,10 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/deepgram.png
 access: 3rd-Party
 common:
+- type: RateLimits
+  url: rate-limits/deepgram-rate-limits.yml
+- type: FinOps
+  url: finops/deepgram-finops.yml
 - type: Plans
   url: plans/deepgram-plans-pricing.yml
 - type: CapabilityMap
