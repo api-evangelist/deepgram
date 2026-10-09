@@ -1,0 +1,13 @@
+generated: '2026-09-25'
+method: probed
+source: 'reconcile-ptr-only.py: an MCP server the provider serves through a vendor implementation'
+registry: all/0-working/vendors.yml
+vendors:
+- vendor: fern
+  area: mcp-hosting
+  host: developers.deepgram.com
+  evidence: mcp:https://developers.deepgram.com/_mcp/server
+  signal: mcp-handshake
+  confidence: high
+  kin_score:
+  - mcp_server

@@ -1,0 +1,32 @@
+# Front Door AI Index — deepgram — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: deepgram
+  lexicon_version: '1.0'
+  probed_at: '2026-09-25'
+  host: deepgram.com
+  final_host: deepgram.com
+  ownership: own
+  owner: deepgram
+  shares_host_with: null
+  inherited_from: null
+  alias_of: null
+  verdict: scored
+  score: 14
+  band: 5
+  band_label: prominent
+  host_score: 14
+  density: 33.18
+  words: 422
+  tiers:
+    agentic: 1
+    core: 13
+    model: 0
+  ambiguous: 9
+  top_terms:
+    AI: 11
+    agent: 8
+    LLMs: 2
+    embedding: 1
+    intelligence: 1
