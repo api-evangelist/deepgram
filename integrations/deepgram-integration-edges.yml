@@ -1,0 +1,23 @@
+generated: '2026-10-13'
+method: searched
+checked:
+- https://aws.amazon.com/marketplace/
+marketplace_apps: []
+edges:
+- partner_name: AWS Marketplace
+  partner: amazon-web-services
+  partner_match: aggregator
+  type: marketplace
+  marketplace: aws-marketplace
+  channel: distribution
+  relationship: platform-app
+  direction: provider-built
+  evidence: https://aws.amazon.com/marketplace/seller-profile?id=6efa21f9-9a33-4cae-ba44-756436fa71dd
+  listing_count: 3
+  apps:
+  - Speech-to-Text & Text-to-Speech GenAI API
+  - Speech-to-Text, Text-to-Speech, & Voice Agent API (Built on AWS)
+  - Speech-to-Text, Text-to-Speech, & Voice Agent API (DG Dedicated)
+  seller_name: Deepgram
+  detected_by: sweep-cloud-marketplaces.py
+  detected: '2026-10-13'
