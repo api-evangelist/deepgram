@@ -4,6 +4,8 @@ checked:
 - https://aws.amazon.com/marketplace/
 - https://developers.cloudflare.com/ai-gateway/usage/providers/
 - https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json
+- https://github.com/livekit/agents/tree/main/livekit-plugins
+- https://github.com/pipecat-ai/pipecat/tree/main/src/pipecat/services
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -59,3 +61,45 @@ edges:
   matched_by: verified-token-table
   detected_by: sweep-model-routing.py
   first_seen: '2026-10-13'
+- partner_name: Pipecat
+  partner: pipecat-ai
+  partner_match: framework
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://github.com/pipecat-ai/pipecat/tree/main/src/pipecat/services/deepgram
+  coverage_role:
+  - stt
+  - tts
+  framework_signals:
+    packages:
+    - deepgram
+    roles:
+    - stt
+    - tts
+    vendor_domain: deepgram.com
+  matched_by: verified-domain-table
+  detected_by: sweep-voice-ai.py
+  first_seen: '2026-10-15'
+- partner_name: LiveKit Agents
+  partner: livekit
+  partner_match: framework
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://github.com/livekit/agents/tree/main/livekit-plugins/livekit-plugins-deepgram
+  coverage_role:
+  - stt
+  - tts
+  framework_signals:
+    packages:
+    - livekit-plugins-deepgram
+    roles:
+    - stt
+    - tts
+    vendor_domain: deepgram.com
+  matched_by: verified-domain-table
+  detected_by: sweep-voice-ai.py
+  first_seen: '2026-10-15'
