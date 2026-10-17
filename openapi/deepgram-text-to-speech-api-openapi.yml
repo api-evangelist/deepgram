@@ -120,6 +120,13 @@ components:
           description: Text content to convert to speech.
           minLength: 1
   parameters:
+    sample_rate:
+      name: sample_rate
+      in: query
+      description: Sample rate in Hertz for the output audio. Default is 24000. Valid values depend on the selected encoding.
+      schema:
+        type: integer
+        default: 24000
     encoding:
       name: encoding
       in: query
@@ -135,16 +142,13 @@ components:
         - flac
         - aac
         default: linear16
-    callback_method:
-      name: callback_method
+    callback:
+      name: callback
       in: query
-      description: HTTP method for the callback request.
+      description: URL to which Deepgram will send the audio when processing is complete.
       schema:
         type: string
-        enum:
-        - POST
-        - PUT
-        default: POST
+        format: uri
     bit_rate:
       name: bit_rate
       in: query
@@ -158,13 +162,16 @@ components:
       schema:
         type: string
         default: aura-asteria-en
-    sample_rate:
-      name: sample_rate
+    callback_method:
+      name: callback_method
       in: query
-      description: Sample rate in Hertz for the output audio. Default is 24000. Valid values depend on the selected encoding.
+      description: HTTP method for the callback request.
       schema:
-        type: integer
-        default: 24000
+        type: string
+        enum:
+        - POST
+        - PUT
+        default: POST
     container:
       name: container
       in: query
@@ -176,13 +183,6 @@ components:
         - ogg
         - none
         default: wav
-    callback:
-      name: callback
-      in: query
-      description: URL to which Deepgram will send the audio when processing is complete.
-      schema:
-        type: string
-        format: uri
   securitySchemes:
     bearerAuth:
       type: http

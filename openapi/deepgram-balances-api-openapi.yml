@@ -73,14 +73,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
-  parameters:
-    project_id:
-      name: project_id
-      in: path
-      required: true
-      description: Unique identifier of the project.
-      schema:
-        type: string
   schemas:
     Error:
       type: object
@@ -118,6 +110,14 @@ components:
         purchase:
           type: string
           description: Purchase method or plan name.
+  parameters:
+    project_id:
+      name: project_id
+      in: path
+      required: true
+      description: Unique identifier of the project.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

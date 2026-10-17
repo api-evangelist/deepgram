@@ -78,19 +78,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ModelList:
-      type: object
-      properties:
-        stt:
-          type: array
-          items:
-            $ref: '#/components/schemas/Model'
-          description: Available speech-to-text models.
-        tts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Model'
-          description: Available text-to-speech models.
     Error:
       type: object
       properties:
@@ -130,6 +117,19 @@ components:
           type: object
           additionalProperties: true
           description: Additional metadata about the model.
+    ModelList:
+      type: object
+      properties:
+        stt:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+          description: Available speech-to-text models.
+        tts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+          description: Available text-to-speech models.
   securitySchemes:
     bearerAuth:
       type: http

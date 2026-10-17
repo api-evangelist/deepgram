@@ -100,14 +100,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    InvitationList:
-      type: object
-      properties:
-        invites:
-          type: array
-          items:
-            $ref: '#/components/schemas/Invitation'
-          description: List of pending invitations.
     Error:
       type: object
       properties:
@@ -120,6 +112,16 @@ components:
         request_id:
           type: string
           description: Unique identifier for the request that produced the error.
+    Invitation:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email address of the invitee.
+        scope:
+          type: string
+          description: Scope assigned to the invitation.
     InvitationCreate:
       type: object
       required:
@@ -133,16 +135,14 @@ components:
         scope:
           type: string
           description: Scope to assign to the invited member.
-    Invitation:
+    InvitationList:
       type: object
       properties:
-        email:
-          type: string
-          format: email
-          description: Email address of the invitee.
-        scope:
-          type: string
-          description: Scope assigned to the invitation.
+        invites:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invitation'
+          description: List of pending invitations.
   parameters:
     project_id:
       name: project_id
