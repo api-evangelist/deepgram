@@ -1,0 +1,307 @@
+openapi: 3.2.0
+info:
+  title: REST Variables API
+  version: 1.0.0
+servers:
+- url: https://agent.deepgram.com
+  description: Production
+- url: https://api.deepgram.com
+  description: Base
+tags:
+- name: Variables
+paths:
+  /v1/projects/{project_id}/agent-variables:
+    post:
+      operationId: variables_create
+      summary: Create an Agent Variable
+      description: Creates a new template variable. Variables follow the `DG_` naming format and can substitute any JSON value in an agent configuration.
+      tags:
+      - Variables
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Agent variable created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentVariableV1'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Agent variable details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAgentVariableV1Request'
+      security:
+      - ApiKeyAuth: []
+    get:
+      operationId: variables_list
+      summary: List Agent Variables
+      description: Returns all template variables for the specified project
+      tags:
+      - Variables
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of agent variables
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAgentVariablesV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+  /v1/projects/{project_id}/agent-variables/{variable_id}:
+    get:
+      operationId: variables_get
+      summary: Get an Agent Variable
+      description: Returns the specified template variable
+      tags:
+      - Variables
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: variable_id
+        in: path
+        description: The unique identifier of the agent variable
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An agent variable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentVariableV1'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+    patch:
+      operationId: variables_update
+      summary: Update an Agent Variable
+      description: Updates the value of an existing template variable
+      tags:
+      - Variables
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: variable_id
+        in: path
+        description: The unique identifier of the agent variable
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Agent variable updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentVariableV1'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Updated value for the agent variable
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAgentVariableV1Request'
+      security:
+      - ApiKeyAuth: []
+    delete:
+      operationId: variables_delete
+      summary: Delete an Agent Variable
+      description: Deletes the specified template variable
+      tags:
+      - Variables
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: variable_id
+        in: path
+        description: The unique identifier of the agent variable
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Agent variable deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAgentVariableV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+components:
+  schemas:
+    ListAgentVariablesV1Response:
+      type: object
+      properties:
+        variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentVariableV1'
+          description: A list of agent variables for the project
+      title: ListAgentVariablesV1Response
+    UpdateAgentVariableV1Request:
+      type: object
+      properties:
+        value:
+          description: The new value to substitute
+      required:
+      - value
+      description: Request body for updating an agent variable
+      title: UpdateAgentVariableV1Request
+    ErrorResponseTextError:
+      type: string
+      title: ErrorResponseTextError
+    ErrorResponseLegacyError:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: The error code
+        err_msg:
+          type: string
+          description: The error message
+        request_id:
+          type: string
+          description: The request ID
+      title: ErrorResponseLegacyError
+    ErrorResponse:
+      oneOf:
+      - $ref: '#/components/schemas/ErrorResponseTextError'
+      - $ref: '#/components/schemas/ErrorResponseLegacyError'
+      - $ref: '#/components/schemas/ErrorResponseModernError'
+      title: ErrorResponse
+    ErrorResponseModernError:
+      type: object
+      properties:
+        category:
+          type: string
+          description: The category of the error
+        message:
+          type: string
+          description: A message about the error
+        details:
+          type: string
+          description: A description of the error
+        request_id:
+          type: string
+          description: The unique identifier of the request
+      title: ErrorResponseModernError
+    DeleteAgentVariableV1Response:
+      type: object
+      properties: {}
+      description: Confirmation that the agent variable was deleted
+      title: DeleteAgentVariableV1Response
+    AgentVariableV1:
+      type: object
+      properties:
+        variable_id:
+          type: string
+          description: The unique identifier of the variable
+        key:
+          type: string
+          description: The variable name, following the DG_<VARIABLE_NAME> format
+        value:
+          description: The value to substitute. Can be any valid JSON type
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the variable was created
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the variable was last updated
+      required:
+      - variable_id
+      - key
+      - value
+      description: A template variable for agent configurations
+      title: AgentVariableV1
+    CreateAgentVariableV1Request:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The variable name, following the DG_<VARIABLE_NAME> format
+        value:
+          description: The value to substitute. Can be any valid JSON type (string, number, boolean, object, or array)
+        api_version:
+          type: integer
+          default: 1
+          description: API version. Defaults to 1
+      required:
+      - key
+      - value
+      description: Request body for creating an agent variable
+      title: CreateAgentVariableV1Request
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Use `Authorization: Token <API_KEY>`
+
+        Example: `Authorization: Token 12345abcdef`
+
+        '
+    JwtAuth:
+      type: http
+      scheme: bearer
+      description: 'Use `Authorization: Bearer <JWT>`
+
+        Example: `Authorization: Bearer eyJhbGciOiJ...`
+
+        '

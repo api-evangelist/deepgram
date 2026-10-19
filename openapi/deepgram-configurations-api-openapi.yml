@@ -1,0 +1,342 @@
+openapi: 3.2.0
+info:
+  title: REST Configurations API
+  version: 1.0.0
+servers:
+- url: https://agent.deepgram.com
+  description: Production
+- url: https://api.deepgram.com
+  description: Base
+tags:
+- name: Configurations
+paths:
+  /v1/projects/{project_id}/agents:
+    post:
+      operationId: configurations_create
+      summary: Create an Agent Configuration
+      description: Creates a new reusable agent configuration. The `config` field must be a valid JSON string representing the `agent` block of a Settings message. The returned `agent_id` can be passed in place of the full `agent` object in future Settings messages.
+      tags:
+      - Configurations
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Agent configuration created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAgentConfigurationV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Agent configuration details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAgentConfigurationV1Request'
+      security:
+      - ApiKeyAuth: []
+    get:
+      operationId: configurations_list
+      summary: List Agent Configurations
+      description: Returns all agent configurations for the specified project. Configurations are returned in their uninterpolated form—template variable placeholders appear as-is rather than with their substituted values.
+      tags:
+      - Configurations
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of agent configurations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAgentConfigurationsV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+  /v1/projects/{project_id}/agents/{agent_id}:
+    get:
+      operationId: configurations_get
+      summary: Get an Agent Configuration
+      description: Returns the specified agent configuration in its uninterpolated form
+      tags:
+      - Configurations
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: agent_id
+        in: path
+        description: The unique identifier of the agent configuration
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An agent configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentConfigurationV1'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+    put:
+      operationId: configurations_update
+      summary: Update Agent Metadata
+      description: Updates the metadata associated with an agent configuration. The config itself is immutable—to change the configuration, delete the existing agent and create a new one.
+      tags:
+      - Configurations
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: agent_id
+        in: path
+        description: The unique identifier of the agent configuration
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Agent configuration updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentConfigurationV1'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Updated metadata for the agent configuration
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAgentMetadataV1Request'
+      security:
+      - ApiKeyAuth: []
+    delete:
+      operationId: configurations_delete
+      summary: Delete an Agent Configuration
+      description: Deletes the specified agent configuration. Deleting an agent configuration can cause a production outage if your service references this agent UUID. Migrate all active sessions to a new configuration before deleting.
+      tags:
+      - Configurations
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: agent_id
+        in: path
+        description: The unique identifier of the agent configuration
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Agent configuration deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAgentConfigurationV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+components:
+  schemas:
+    ErrorResponseTextError:
+      type: string
+      title: ErrorResponseTextError
+    ListAgentConfigurationsV1Response:
+      type: object
+      properties:
+        agents:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentConfigurationV1'
+          description: A list of agent configurations for the project
+      title: ListAgentConfigurationsV1Response
+    CreateAgentConfigurationV1ResponseConfig:
+      type: object
+      properties: {}
+      description: The parsed agent configuration object
+      title: CreateAgentConfigurationV1ResponseConfig
+    ErrorResponseLegacyError:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: The error code
+        err_msg:
+          type: string
+          description: The error message
+        request_id:
+          type: string
+          description: The request ID
+      title: ErrorResponseLegacyError
+    DeleteAgentConfigurationV1Response:
+      type: object
+      properties: {}
+      description: Confirmation that the agent configuration was deleted
+      title: DeleteAgentConfigurationV1Response
+    ErrorResponse:
+      oneOf:
+      - $ref: '#/components/schemas/ErrorResponseTextError'
+      - $ref: '#/components/schemas/ErrorResponseLegacyError'
+      - $ref: '#/components/schemas/ErrorResponseModernError'
+      title: ErrorResponse
+    AgentConfigurationV1:
+      type: object
+      properties:
+        agent_id:
+          type: string
+          description: The unique identifier of the agent configuration
+        config:
+          $ref: '#/components/schemas/AgentConfigurationV1Config'
+          description: The agent configuration object
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: A map of arbitrary key-value pairs for labeling or organizing the agent configuration
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the configuration was created
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the configuration was last updated
+      required:
+      - agent_id
+      - config
+      description: A reusable agent configuration
+      title: AgentConfigurationV1
+    ErrorResponseModernError:
+      type: object
+      properties:
+        category:
+          type: string
+          description: The category of the error
+        message:
+          type: string
+          description: A message about the error
+        details:
+          type: string
+          description: A description of the error
+        request_id:
+          type: string
+          description: The unique identifier of the request
+      title: ErrorResponseModernError
+    AgentConfigurationV1Config:
+      type: object
+      properties: {}
+      description: The agent configuration object
+      title: AgentConfigurationV1Config
+    CreateAgentConfigurationV1Request:
+      type: object
+      properties:
+        config:
+          type: string
+          description: A valid JSON string representing the agent block of a Settings message
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: A map of arbitrary key-value pairs for labeling or organizing the agent configuration
+        api_version:
+          type: integer
+          default: 1
+          description: API version. Defaults to 1
+      required:
+      - config
+      description: Request body for creating an agent configuration
+      title: CreateAgentConfigurationV1Request
+    UpdateAgentMetadataV1Request:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: A map of string key-value pairs to associate with this agent configuration
+      required:
+      - metadata
+      description: Request body for updating agent configuration metadata
+      title: UpdateAgentMetadataV1Request
+    CreateAgentConfigurationV1Response:
+      type: object
+      properties:
+        agent_id:
+          type: string
+          description: The unique identifier of the newly created agent configuration
+        config:
+          $ref: '#/components/schemas/CreateAgentConfigurationV1ResponseConfig'
+          description: The parsed agent configuration object
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Metadata associated with the agent configuration
+      required:
+      - agent_id
+      - config
+      title: CreateAgentConfigurationV1Response
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Use `Authorization: Token <API_KEY>`
+
+        Example: `Authorization: Token 12345abcdef`
+
+        '
+    JwtAuth:
+      type: http
+      scheme: bearer
+      description: 'Use `Authorization: Bearer <JWT>`
+
+        Example: `Authorization: Bearer eyJhbGciOiJ...`
+
+        '

@@ -1,140 +1,511 @@
 openapi: 3.2.0
 info:
-  title: Deepgram Management Models API
-  description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
-  version: '1.0'
-  contact:
-    name: Deepgram Support
-    url: https://developers.deepgram.com
-  termsOfService: https://deepgram.com/tos
+  title: REST Models API
+  version: 1.0.0
 servers:
+- url: https://agent.deepgram.com
+  description: Production
 - url: https://api.deepgram.com
-  description: Deepgram Production Server
-security:
-- bearerAuth: []
+  description: Base
 tags:
 - name: Models
-  description: Retrieve available model metadata.
 paths:
+  /v1/agent/settings/think/models:
+    get:
+      operationId: models_list
+      summary: List Agent Think Models
+      description: Retrieves the available think models that can be used for AI agent processing
+      tags:
+      - Models
+      responses:
+        '200':
+          description: List of available think models
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentThinkModelsV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/projects/{project_id}/models:
+    get:
+      operationId: models_list_2
+      summary: List Project Models
+      description: Returns metadata on all the latest models that a specific project has access to, including non-public models
+      tags:
+      - Models
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: include_outdated
+        in: query
+        description: returns non-latest versions of models
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: A list of models
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListModelsV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+  /v1/projects/{project_id}/models/{model_id}:
+    get:
+      operationId: models_get
+      summary: Get a Project Model
+      description: Returns metadata for a specific model
+      tags:
+      - Models
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: model_id
+        in: path
+        description: The specific UUID of the model
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A model object that can be either STT or TTS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetModelV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
   /v1/models:
     get:
-      operationId: listModels
-      summary: Deepgram List all available models
-      description: Retrieves metadata on all the latest public models available on the Deepgram platform, including both speech-to-text and text-to-speech models.
+      operationId: models_list_3
+      summary: List Models
+      description: Returns metadata on all the latest public models. To retrieve custom models, use Get Project Models.
       tags:
       - Models
       parameters:
       - name: include_outdated
         in: query
-        description: Include non-latest versions of models in the response.
+        description: returns non-latest versions of models
+        required: false
         schema:
           type: boolean
-          default: false
       responses:
         '200':
-          description: Model list retrieved successfully
+          description: A list of models
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ModelList'
-        '401':
-          description: Unauthorized
+                $ref: '#/components/schemas/ListModelsV1Response'
+        '400':
+          description: Invalid Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
   /v1/models/{model_id}:
     get:
-      operationId: getModel
-      summary: Deepgram Get a model
-      description: Retrieves metadata for a specific model by its identifier.
+      operationId: models_get_2
+      summary: Get a specific Model
+      description: Returns metadata for a specific public model
       tags:
       - Models
       parameters:
       - name: model_id
         in: path
+        description: The specific UUID of the model
         required: true
-        description: Unique identifier of the model.
         schema:
           type: string
       responses:
         '200':
-          description: Model details retrieved successfully
+          description: A model object that can be either STT or TTS
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Model'
-        '401':
-          description: Unauthorized
+                $ref: '#/components/schemas/GetModelV1Response'
+        '400':
+          description: Invalid Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: Model not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
 components:
   schemas:
-    Error:
+    ErrorResponseTextError:
+      type: string
+      title: ErrorResponseTextError
+    AgentThinkModelsV1ResponseModelsItems3:
       type: object
       properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
-    Model:
-      type: object
-      properties:
+        id:
+          $ref: '#/components/schemas/AgentThinkModelsV1ResponseModelsItemsOneOf3Id'
+          description: The unique identifier of the Groq model
         name:
           type: string
-          description: Name of the model.
-        canonical_name:
-          type: string
-          description: Canonical identifier for the model.
-        architecture:
-          type: string
-          description: Architecture of the model.
-        languages:
-          type: array
-          items:
-            type: string
-          description: Languages supported by the model.
-        version:
-          type: string
-          description: Version of the model.
-        uuid:
-          type: string
-          description: Unique identifier for the model.
-        metadata:
-          type: object
-          additionalProperties: true
-          description: Additional metadata about the model.
-    ModelList:
+          description: The display name of the model
+        provider:
+          description: The provider of the model
+      required:
+      - id
+      - name
+      - provider
+      description: Groq models
+      title: AgentThinkModelsV1ResponseModelsItems3
+    ListModelsV1Response:
       type: object
       properties:
         stt:
           type: array
           items:
-            $ref: '#/components/schemas/Model'
-          description: Available speech-to-text models.
+            $ref: '#/components/schemas/ListModelsV1ResponseSttModels'
         tts:
           type: array
           items:
-            $ref: '#/components/schemas/Model'
-          description: Available text-to-speech models.
+            $ref: '#/components/schemas/ListModelsV1ResponseTtsModels'
+      title: ListModelsV1Response
+    ErrorResponse:
+      oneOf:
+      - $ref: '#/components/schemas/ErrorResponseTextError'
+      - $ref: '#/components/schemas/ErrorResponseLegacyError'
+      - $ref: '#/components/schemas/ErrorResponseModernError'
+      title: ErrorResponse
+    ErrorResponseModernError:
+      type: object
+      properties:
+        category:
+          type: string
+          description: The category of the error
+        message:
+          type: string
+          description: A message about the error
+        details:
+          type: string
+          description: A description of the error
+        request_id:
+          type: string
+          description: The unique identifier of the request
+      title: ErrorResponseModernError
+    AgentThinkModelsV1ResponseModelsItemsOneOf3Id:
+      type: string
+      enum:
+      - openai/gpt-oss-20b
+      description: The unique identifier of the Groq model
+      title: AgentThinkModelsV1ResponseModelsItemsOneOf3Id
+    GetModelV1ResponseOneOf1Metadata:
+      type: object
+      properties:
+        accent:
+          type: string
+        age:
+          type: string
+        color:
+          type: string
+        image:
+          type: string
+          format: uri
+        sample:
+          type: string
+          format: uri
+        tags:
+          type: array
+          items:
+            type: string
+        use_cases:
+          type: array
+          items:
+            type: string
+      title: GetModelV1ResponseOneOf1Metadata
+    AgentThinkModelsV1Response:
+      type: object
+      properties:
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentThinkModelsV1ResponseModelsItems'
+      required:
+      - models
+      title: AgentThinkModelsV1Response
+    GetModelV1Response1:
+      type: object
+      properties:
+        name:
+          type: string
+        canonical_name:
+          type: string
+        architecture:
+          type: string
+        languages:
+          type: array
+          items:
+            type: string
+        version:
+          type: string
+        uuid:
+          type: string
+          format: uuid
+        metadata:
+          $ref: '#/components/schemas/GetModelV1ResponseOneOf1Metadata'
+      title: GetModelV1Response1
+    AgentThinkModelsV1ResponseModelsItems2:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/AgentThinkModelsV1ResponseModelsItemsOneOf2Id'
+          description: The unique identifier of the Google model
+        name:
+          type: string
+          description: The display name of the model
+        provider:
+          description: The provider of the model
+      required:
+      - id
+      - name
+      - provider
+      description: Google models
+      title: AgentThinkModelsV1ResponseModelsItems2
+    ListModelsV1ResponseTtsModelsMetadata:
+      type: object
+      properties:
+        accent:
+          type: string
+        age:
+          type: string
+        color:
+          type: string
+        image:
+          type: string
+          format: uri
+        sample:
+          type: string
+          format: uri
+        tags:
+          type: array
+          items:
+            type: string
+        use_cases:
+          type: array
+          items:
+            type: string
+      title: ListModelsV1ResponseTtsModelsMetadata
+    AgentThinkModelsV1ResponseModelsItemsOneOf2Id:
+      type: string
+      enum:
+      - gemini-2.5-flash
+      - gemini-2.0-flash
+      - gemini-2.0-flash-lite
+      description: The unique identifier of the Google model
+      title: AgentThinkModelsV1ResponseModelsItemsOneOf2Id
+    GetModelV1Response0:
+      type: object
+      properties:
+        name:
+          type: string
+        canonical_name:
+          type: string
+        architecture:
+          type: string
+        languages:
+          type: array
+          items:
+            type: string
+        version:
+          type: string
+        uuid:
+          type: string
+          format: uuid
+        batch:
+          type: boolean
+        streaming:
+          type: boolean
+        formatted_output:
+          type: boolean
+      title: GetModelV1Response0
+    AgentThinkModelsV1ResponseModelsItems0:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/AgentThinkModelsV1ResponseModelsItemsOneOf0Id'
+          description: The unique identifier of the OpenAI model
+        name:
+          type: string
+          description: The display name of the model
+        provider:
+          description: The provider of the model
+      required:
+      - id
+      - name
+      - provider
+      description: OpenAI models
+      title: AgentThinkModelsV1ResponseModelsItems0
+    GetModelV1Response:
+      oneOf:
+      - $ref: '#/components/schemas/GetModelV1Response0'
+      - $ref: '#/components/schemas/GetModelV1Response1'
+      title: GetModelV1Response
+    ListModelsV1ResponseTtsModels:
+      type: object
+      properties:
+        name:
+          type: string
+        canonical_name:
+          type: string
+        architecture:
+          type: string
+        languages:
+          type: array
+          items:
+            type: string
+        version:
+          type: string
+        uuid:
+          type: string
+          format: uuid
+        metadata:
+          $ref: '#/components/schemas/ListModelsV1ResponseTtsModelsMetadata'
+      title: ListModelsV1ResponseTtsModels
+    AgentThinkModelsV1ResponseModelsItems1:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/AgentThinkModelsV1ResponseModelsItemsOneOf1Id'
+          description: The unique identifier of the Anthropic model
+        name:
+          type: string
+          description: The display name of the model
+        provider:
+          description: The provider of the model
+      required:
+      - id
+      - name
+      - provider
+      description: Anthropic models
+      title: AgentThinkModelsV1ResponseModelsItems1
+    AgentThinkModelsV1ResponseModelsItemsOneOf1Id:
+      type: string
+      enum:
+      - claude-3-5-haiku-latest
+      - claude-sonnet-4-20250514
+      description: The unique identifier of the Anthropic model
+      title: AgentThinkModelsV1ResponseModelsItemsOneOf1Id
+    ListModelsV1ResponseSttModels:
+      type: object
+      properties:
+        name:
+          type: string
+        canonical_name:
+          type: string
+        architecture:
+          type: string
+        languages:
+          type: array
+          items:
+            type: string
+        version:
+          type: string
+        uuid:
+          type: string
+        batch:
+          type: boolean
+        streaming:
+          type: boolean
+        formatted_output:
+          type: boolean
+      title: ListModelsV1ResponseSttModels
+    AgentThinkModelsV1ResponseModelsItems4:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the AWS Bedrock model (any model string accepted for BYO LLMs)
+        name:
+          type: string
+          description: The display name of the model
+        provider:
+          description: The provider of the model
+      required:
+      - id
+      - name
+      - provider
+      description: AWS Bedrock models (custom models accepted)
+      title: AgentThinkModelsV1ResponseModelsItems4
+    ErrorResponseLegacyError:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: The error code
+        err_msg:
+          type: string
+          description: The error message
+        request_id:
+          type: string
+          description: The request ID
+      title: ErrorResponseLegacyError
+    AgentThinkModelsV1ResponseModelsItems:
+      oneOf:
+      - $ref: '#/components/schemas/AgentThinkModelsV1ResponseModelsItems0'
+      - $ref: '#/components/schemas/AgentThinkModelsV1ResponseModelsItems1'
+      - $ref: '#/components/schemas/AgentThinkModelsV1ResponseModelsItems2'
+      - $ref: '#/components/schemas/AgentThinkModelsV1ResponseModelsItems3'
+      - $ref: '#/components/schemas/AgentThinkModelsV1ResponseModelsItems4'
+      title: AgentThinkModelsV1ResponseModelsItems
+    AgentThinkModelsV1ResponseModelsItemsOneOf0Id:
+      type: string
+      enum:
+      - gpt-5
+      - gpt-5-mini
+      - gpt-5-nano
+      - gpt-4.1
+      - gpt-4.1-mini
+      - gpt-4.1-nano
+      - gpt-4o
+      - gpt-4o-mini
+      description: The unique identifier of the OpenAI model
+      title: AgentThinkModelsV1ResponseModelsItemsOneOf0Id
   securitySchemes:
-    bearerAuth:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Use `Authorization: Token <API_KEY>`
+
+        Example: `Authorization: Token 12345abcdef`
+
+        '
+    JwtAuth:
       type: http
       scheme: bearer
-      description: Deepgram API key passed as a bearer token in the Authorization header.
-externalDocs:
-  description: Deepgram Management API Documentation
-  url: https://developers.deepgram.com/docs/create-additional-api-keys
+      description: 'Use `Authorization: Bearer <JWT>`
+
+        Example: `Authorization: Bearer eyJhbGciOiJ...`
+
+        '

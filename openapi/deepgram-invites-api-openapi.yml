@@ -1,0 +1,214 @@
+openapi: 3.2.0
+info:
+  title: REST Invites API
+  version: 1.0.0
+servers:
+- url: https://agent.deepgram.com
+  description: Production
+- url: https://api.deepgram.com
+  description: Base
+tags:
+- name: Invites
+paths:
+  /v1/projects/{project_id}/invites:
+    get:
+      operationId: invites_list
+      summary: List Project Invites
+      description: Generates a list of invites for a specific project
+      tags:
+      - Invites
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of invites for a specific project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProjectInvitesV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+    post:
+      operationId: invites_create
+      summary: Create a Project Invite
+      description: Generates an invite for a specific project
+      tags:
+      - Invites
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The invite was successfully generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateProjectInviteV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: email to invite to the project
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectInviteV1Request'
+      security:
+      - ApiKeyAuth: []
+  /v1/projects/{project_id}/invites/{email}:
+    delete:
+      operationId: invites_delete
+      summary: Delete a Project Invite
+      description: Deletes an invite for a specific project
+      tags:
+      - Invites
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: email
+        in: path
+        description: The email address of the member
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The invite was successfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteProjectInviteV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+components:
+  schemas:
+    DeleteProjectInviteV1Response:
+      type: object
+      properties:
+        message:
+          type: string
+          description: confirmation message
+      title: DeleteProjectInviteV1Response
+    ErrorResponseTextError:
+      type: string
+      title: ErrorResponseTextError
+    CreateProjectInviteV1Response:
+      type: object
+      properties:
+        message:
+          type: string
+          description: confirmation message
+      title: CreateProjectInviteV1Response
+    ErrorResponseLegacyError:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: The error code
+        err_msg:
+          type: string
+          description: The error message
+        request_id:
+          type: string
+          description: The request ID
+      title: ErrorResponseLegacyError
+    ListProjectInvitesV1Response:
+      type: object
+      properties:
+        invites:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListProjectInvitesV1ResponseInvitesItems'
+      title: ListProjectInvitesV1Response
+    ErrorResponse:
+      oneOf:
+      - $ref: '#/components/schemas/ErrorResponseTextError'
+      - $ref: '#/components/schemas/ErrorResponseLegacyError'
+      - $ref: '#/components/schemas/ErrorResponseModernError'
+      title: ErrorResponse
+    ErrorResponseModernError:
+      type: object
+      properties:
+        category:
+          type: string
+          description: The category of the error
+        message:
+          type: string
+          description: A message about the error
+        details:
+          type: string
+          description: A description of the error
+        request_id:
+          type: string
+          description: The unique identifier of the request
+      title: ErrorResponseModernError
+    ListProjectInvitesV1ResponseInvitesItems:
+      type: object
+      properties:
+        email:
+          type: string
+          description: The email address of the invitee
+        scope:
+          type: string
+          description: The scope of the invitee
+      title: ListProjectInvitesV1ResponseInvitesItems
+    CreateProjectInviteV1Request:
+      type: object
+      properties:
+        email:
+          type: string
+          description: The email address of the invitee
+        scope:
+          type: string
+          description: The scope of the invitee
+      required:
+      - email
+      - scope
+      description: Request body for creating a project invite
+      title: CreateProjectInviteV1Request
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Use `Authorization: Token <API_KEY>`
+
+        Example: `Authorization: Token 12345abcdef`
+
+        '
+    JwtAuth:
+      type: http
+      scheme: bearer
+      description: 'Use `Authorization: Bearer <JWT>`
+
+        Example: `Authorization: Bearer eyJhbGciOiJ...`
+
+        '

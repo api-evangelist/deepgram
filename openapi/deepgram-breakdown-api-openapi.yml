@@ -1,0 +1,709 @@
+openapi: 3.2.0
+info:
+  title: REST Breakdown API
+  version: 1.0.0
+servers:
+- url: https://agent.deepgram.com
+  description: Production
+- url: https://api.deepgram.com
+  description: Base
+tags:
+- name: breakdown
+paths:
+  /v1/projects/{project_id}/usage/breakdown:
+    get:
+      operationId: breakdown_get
+      summary: Get Project Usage Breakdown
+      description: Retrieves the usage breakdown for a specific project, with various filter options by API feature or by groupings. Setting a feature (e.g. diarize) to true includes requests that used that feature, while false excludes requests that used it. Multiple true filters are combined with OR logic, while false filters use AND logic.
+      tags:
+      - breakdown
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: start
+        in: query
+        description: Start date of the requested date range. Format accepted is YYYY-MM-DD
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: end
+        in: query
+        description: End date of the requested date range. Format accepted is YYYY-MM-DD
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: grouping
+        in: query
+        description: Common usage grouping parameters
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1ProjectsProjectIdUsageBreakdownGetParametersGrouping'
+      - name: accessor
+        in: query
+        description: Filter for requests where a specific accessor was used
+        required: false
+        schema:
+          type: string
+      - name: alternatives
+        in: query
+        description: Filter for requests where alternatives were used
+        required: false
+        schema:
+          type: boolean
+      - name: callback_method
+        in: query
+        description: Filter for requests where callback method was used
+        required: false
+        schema:
+          type: boolean
+      - name: callback
+        in: query
+        description: Filter for requests where callback was used
+        required: false
+        schema:
+          type: boolean
+      - name: channels
+        in: query
+        description: Filter for requests where channels were used
+        required: false
+        schema:
+          type: boolean
+      - name: custom_intent_mode
+        in: query
+        description: Filter for requests where custom intent mode was used
+        required: false
+        schema:
+          type: boolean
+      - name: custom_intent
+        in: query
+        description: Filter for requests where custom intent was used
+        required: false
+        schema:
+          type: boolean
+      - name: custom_topic_mode
+        in: query
+        description: Filter for requests where custom topic mode was used
+        required: false
+        schema:
+          type: boolean
+      - name: custom_topic
+        in: query
+        description: Filter for requests where custom topic was used
+        required: false
+        schema:
+          type: boolean
+      - name: deployment
+        in: query
+        description: Filter for requests where a specific deployment was used
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1ProjectsProjectIdUsageBreakdownGetParametersDeployment'
+      - name: detect_entities
+        in: query
+        description: Filter for requests where detect entities was used
+        required: false
+        schema:
+          type: boolean
+      - name: detect_language
+        in: query
+        description: Filter for requests where detect language was used
+        required: false
+        schema:
+          type: boolean
+      - name: diarize
+        in: query
+        description: Filter for requests where diarize was used
+        required: false
+        schema:
+          type: boolean
+      - name: dictation
+        in: query
+        description: Filter for requests where dictation was used
+        required: false
+        schema:
+          type: boolean
+      - name: encoding
+        in: query
+        description: Filter for requests where encoding was used
+        required: false
+        schema:
+          type: boolean
+      - name: endpoint
+        in: query
+        description: Filter for requests where a specific endpoint was used
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1ProjectsProjectIdUsageBreakdownGetParametersEndpoint'
+      - name: extra
+        in: query
+        description: Filter for requests where extra was used
+        required: false
+        schema:
+          type: boolean
+      - name: filler_words
+        in: query
+        description: Filter for requests where filler words was used
+        required: false
+        schema:
+          type: boolean
+      - name: intents
+        in: query
+        description: Filter for requests where intents was used
+        required: false
+        schema:
+          type: boolean
+      - name: keyterm
+        in: query
+        description: Filter for requests where keyterm was used
+        required: false
+        schema:
+          type: boolean
+      - name: keywords
+        in: query
+        description: Filter for requests where keywords was used
+        required: false
+        schema:
+          type: boolean
+      - name: language
+        in: query
+        description: Filter for requests where language was used
+        required: false
+        schema:
+          type: boolean
+      - name: measurements
+        in: query
+        description: Filter for requests where measurements were used
+        required: false
+        schema:
+          type: boolean
+      - name: method
+        in: query
+        description: Filter for requests where a specific method was used
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1ProjectsProjectIdUsageBreakdownGetParametersMethod'
+      - name: model
+        in: query
+        description: Filter for requests where a specific model uuid was used
+        required: false
+        schema:
+          type: string
+      - name: multichannel
+        in: query
+        description: Filter for requests where multichannel was used
+        required: false
+        schema:
+          type: boolean
+      - name: numerals
+        in: query
+        description: Filter for requests where numerals were used
+        required: false
+        schema:
+          type: boolean
+      - name: paragraphs
+        in: query
+        description: Filter for requests where paragraphs were used
+        required: false
+        schema:
+          type: boolean
+      - name: profanity_filter
+        in: query
+        description: Filter for requests where profanity filter was used
+        required: false
+        schema:
+          type: boolean
+      - name: punctuate
+        in: query
+        description: Filter for requests where punctuate was used
+        required: false
+        schema:
+          type: boolean
+      - name: redact
+        in: query
+        description: Filter for requests where redact was used
+        required: false
+        schema:
+          type: boolean
+      - name: replace
+        in: query
+        description: Filter for requests where replace was used
+        required: false
+        schema:
+          type: boolean
+      - name: sample_rate
+        in: query
+        description: Filter for requests where sample rate was used
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        description: Filter for requests where search was used
+        required: false
+        schema:
+          type: boolean
+      - name: sentiment
+        in: query
+        description: Filter for requests where sentiment was used
+        required: false
+        schema:
+          type: boolean
+      - name: smart_format
+        in: query
+        description: Filter for requests where smart format was used
+        required: false
+        schema:
+          type: boolean
+      - name: summarize
+        in: query
+        description: Filter for requests where summarize was used
+        required: false
+        schema:
+          type: boolean
+      - name: tag
+        in: query
+        description: Filter for requests where a specific tag was used
+        required: false
+        schema:
+          type: string
+      - name: topics
+        in: query
+        description: Filter for requests where topics was used
+        required: false
+        schema:
+          type: boolean
+      - name: utt_split
+        in: query
+        description: Filter for requests where utt split was used
+        required: false
+        schema:
+          type: boolean
+      - name: utterances
+        in: query
+        description: Filter for requests where utterances was used
+        required: false
+        schema:
+          type: boolean
+      - name: version
+        in: query
+        description: Filter for requests where version was used
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Usage breakdown response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageBreakdownV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+  /v1/projects/{project_id}/billing/breakdown:
+    get:
+      operationId: breakdown_list
+      summary: Get Project Billing Breakdown
+      description: Retrieves the billing summary for a specific project, with various filter options or by grouping options.
+      tags:
+      - breakdown
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: start
+        in: query
+        description: Start date of the requested date range. Format accepted is YYYY-MM-DD
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: end
+        in: query
+        description: End date of the requested date range. Format accepted is YYYY-MM-DD
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: accessor
+        in: query
+        description: Filter for requests where a specific accessor was used
+        required: false
+        schema:
+          type: string
+      - name: deployment
+        in: query
+        description: Filter for requests where a specific deployment was used
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1ProjectsProjectIdBillingBreakdownGetParametersDeployment'
+      - name: tag
+        in: query
+        description: Filter for requests where a specific tag was used
+        required: false
+        schema:
+          type: string
+      - name: line_item
+        in: query
+        description: Filter requests by line item (e.g. streaming::nova-3)
+        required: false
+        schema:
+          type: string
+      - name: grouping
+        in: query
+        description: Group billing breakdown by one or more dimensions (accessor, deployment, line_item, tags)
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/V1ProjectsProjectIdBillingBreakdownGetParametersGroupingSchemaItems'
+      responses:
+        '200':
+          description: Billing breakdown response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingBreakdownV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+components:
+  schemas:
+    UsageBreakdownV1ResponseResultsItemsGrouping:
+      type: object
+      properties:
+        start:
+          type: string
+          format: date
+          description: Start date for this group
+        end:
+          type: string
+          format: date
+          description: End date for this group
+        accessor:
+          type:
+          - string
+          - 'null'
+          description: Optional accessor identifier
+        endpoint:
+          type:
+          - string
+          - 'null'
+          description: Optional endpoint identifier
+        feature_set:
+          type:
+          - string
+          - 'null'
+          description: Optional feature set identifier
+        models:
+          type: array
+          items:
+            type: string
+        method:
+          type:
+          - string
+          - 'null'
+          description: Optional method identifier
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Optional list of tags, null unless grouped by tags.
+        deployment:
+          type:
+          - string
+          - 'null'
+          description: Optional deployment identifier
+      title: UsageBreakdownV1ResponseResultsItemsGrouping
+    UsageBreakdownV1Response:
+      type: object
+      properties:
+        start:
+          type: string
+          format: date
+          description: Start date of the usage period
+        end:
+          type: string
+          format: date
+          description: End date of the usage period
+        resolution:
+          $ref: '#/components/schemas/UsageBreakdownV1ResponseResolution'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageBreakdownV1ResponseResultsItems'
+      required:
+      - start
+      - end
+      - resolution
+      - results
+      title: UsageBreakdownV1Response
+    UsageBreakdownV1ResponseResultsItems:
+      type: object
+      properties:
+        hours:
+          type: string
+          title: float
+          description: Audio hours processed
+        total_hours:
+          type: string
+          title: float
+          description: Total hours including all processing
+        agent_hours:
+          type: string
+          title: float
+          description: Agent hours used
+        tokens_in:
+          type: number
+          format: double
+          description: Number of input tokens
+        tokens_out:
+          type: number
+          format: double
+          description: Number of output tokens
+        tts_characters:
+          type: number
+          format: double
+          description: Number of text-to-speech characters processed
+        requests:
+          type: number
+          format: double
+          description: Number of requests
+        grouping:
+          $ref: '#/components/schemas/UsageBreakdownV1ResponseResultsItemsGrouping'
+      required:
+      - hours
+      - total_hours
+      - agent_hours
+      - tokens_in
+      - tokens_out
+      - tts_characters
+      - requests
+      - grouping
+      title: UsageBreakdownV1ResponseResultsItems
+    ErrorResponseTextError:
+      type: string
+      title: ErrorResponseTextError
+    V1ProjectsProjectIdUsageBreakdownGetParametersDeployment:
+      type: string
+      enum:
+      - hosted
+      - beta
+      - self-hosted
+      description: Deployment type for the requests
+      title: V1ProjectsProjectIdUsageBreakdownGetParametersDeployment
+    V1ProjectsProjectIdBillingBreakdownGetParametersDeployment:
+      type: string
+      enum:
+      - hosted
+      - beta
+      - self-hosted
+      description: Deployment type for the requests
+      title: V1ProjectsProjectIdBillingBreakdownGetParametersDeployment
+    UsageBreakdownV1ResponseResolution:
+      type: object
+      properties:
+        units:
+          type: string
+          description: Time unit for the resolution
+        amount:
+          type: number
+          format: double
+          description: Amount of units
+      required:
+      - units
+      - amount
+      title: UsageBreakdownV1ResponseResolution
+    V1ProjectsProjectIdUsageBreakdownGetParametersMethod:
+      type: string
+      enum:
+      - sync
+      - async
+      - streaming
+      description: Method type for the request
+      title: V1ProjectsProjectIdUsageBreakdownGetParametersMethod
+    V1ProjectsProjectIdUsageBreakdownGetParametersGrouping:
+      type: string
+      enum:
+      - accessor
+      - endpoint
+      - feature_set
+      - models
+      - method
+      - tags
+      - deployment
+      title: V1ProjectsProjectIdUsageBreakdownGetParametersGrouping
+    ErrorResponseLegacyError:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: The error code
+        err_msg:
+          type: string
+          description: The error message
+        request_id:
+          type: string
+          description: The request ID
+      title: ErrorResponseLegacyError
+    BillingBreakdownV1Response:
+      type: object
+      properties:
+        start:
+          type: string
+          format: date
+          description: Start date of the billing summmary period
+        end:
+          type: string
+          format: date
+          description: End date of the billing summary period
+        resolution:
+          $ref: '#/components/schemas/BillingBreakdownV1ResponseResolution'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillingBreakdownV1ResponseResultsItems'
+      required:
+      - start
+      - end
+      - resolution
+      - results
+      title: BillingBreakdownV1Response
+    V1ProjectsProjectIdBillingBreakdownGetParametersGroupingSchemaItems:
+      type: string
+      enum:
+      - accessor
+      - deployment
+      - line_item
+      - tags
+      title: V1ProjectsProjectIdBillingBreakdownGetParametersGroupingSchemaItems
+    BillingBreakdownV1ResponseResultsItemsGrouping:
+      type: object
+      properties:
+        start:
+          type: string
+          format: date
+          description: Start date for this group
+        end:
+          type: string
+          format: date
+          description: End date for this group
+        accessor:
+          type:
+          - string
+          - 'null'
+          description: Optional accessor identifier, null unless grouped by accessor.
+        deployment:
+          type:
+          - string
+          - 'null'
+          description: Optional deployment identifier, null unless grouped by deployment.
+        line_item:
+          type:
+          - string
+          - 'null'
+          description: Optional line item identifier, null unless grouped by line item.
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Optional list of tags, null unless grouped by tags.
+      title: BillingBreakdownV1ResponseResultsItemsGrouping
+    BillingBreakdownV1ResponseResultsItems:
+      type: object
+      properties:
+        dollars:
+          type: string
+          title: float
+          description: USD cost of the billing for this grouping
+        grouping:
+          $ref: '#/components/schemas/BillingBreakdownV1ResponseResultsItemsGrouping'
+      required:
+      - dollars
+      - grouping
+      title: BillingBreakdownV1ResponseResultsItems
+    ErrorResponse:
+      oneOf:
+      - $ref: '#/components/schemas/ErrorResponseTextError'
+      - $ref: '#/components/schemas/ErrorResponseLegacyError'
+      - $ref: '#/components/schemas/ErrorResponseModernError'
+      title: ErrorResponse
+    ErrorResponseModernError:
+      type: object
+      properties:
+        category:
+          type: string
+          description: The category of the error
+        message:
+          type: string
+          description: A message about the error
+        details:
+          type: string
+          description: A description of the error
+        request_id:
+          type: string
+          description: The unique identifier of the request
+      title: ErrorResponseModernError
+    BillingBreakdownV1ResponseResolution:
+      type: object
+      properties:
+        units:
+          type: string
+          description: Time unit for the resolution
+        amount:
+          type: number
+          format: double
+          description: Amount of units
+      required:
+      - units
+      - amount
+      title: BillingBreakdownV1ResponseResolution
+    V1ProjectsProjectIdUsageBreakdownGetParametersEndpoint:
+      type: string
+      enum:
+      - listen
+      - read
+      - speak
+      - agent
+      title: V1ProjectsProjectIdUsageBreakdownGetParametersEndpoint
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Use `Authorization: Token <API_KEY>`
+
+        Example: `Authorization: Token 12345abcdef`
+
+        '
+    JwtAuth:
+      type: http
+      scheme: bearer
+      description: 'Use `Authorization: Bearer <JWT>`
+
+        Example: `Authorization: Bearer eyJhbGciOiJ...`
+
+        '

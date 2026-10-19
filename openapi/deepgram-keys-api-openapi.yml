@@ -1,238 +1,340 @@
 openapi: 3.2.0
 info:
-  title: Deepgram Management Keys API
-  description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
-  version: '1.0'
-  contact:
-    name: Deepgram Support
-    url: https://developers.deepgram.com
-  termsOfService: https://deepgram.com/tos
+  title: REST Keys API
+  version: 1.0.0
 servers:
+- url: https://agent.deepgram.com
+  description: Production
 - url: https://api.deepgram.com
-  description: Deepgram Production Server
-security:
-- bearerAuth: []
+  description: Base
 tags:
 - name: Keys
-  description: Create, list, and manage API keys for projects.
 paths:
   /v1/projects/{project_id}/keys:
     get:
-      operationId: listProjectKeys
-      summary: Deepgram List project API keys
-      description: Retrieves all API keys associated with the specified project.
+      operationId: keys_list
+      summary: List Project Keys
+      description: Retrieves all API keys associated with the specified project
       tags:
       - Keys
       parameters:
-      - $ref: '#/components/parameters/project_id'
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: Only return keys with a specific status
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1ProjectsProjectIdKeysGetParametersStatus'
       responses:
         '200':
-          description: List of API keys retrieved successfully
+          description: A list of API keys
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/KeyList'
-        '401':
-          description: Unauthorized
+                $ref: '#/components/schemas/ListProjectKeysV1Response'
+        '400':
+          description: Invalid Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
     post:
-      operationId: createProjectKey
-      summary: Deepgram Create a project API key
-      description: Creates a new API key for the specified project with the given scopes. Requires the keys:write scope on the authenticating key.
+      operationId: keys_create
+      summary: Create a Project Key
+      description: Creates a new API key with specified settings for the project
       tags:
       - Keys
       parameters:
-      - $ref: '#/components/parameters/project_id'
-      requestBody:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
         required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/KeyCreate'
+        schema:
+          type: string
       responses:
         '200':
           description: API key created successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/KeyWithSecret'
+                $ref: '#/components/schemas/CreateKeyV1Response'
         '400':
-          description: Bad request
+          description: Invalid Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: API key settings
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKeyV1Request'
+      security:
+      - ApiKeyAuth: []
   /v1/projects/{project_id}/keys/{key_id}:
     get:
-      operationId: getProjectKey
-      summary: Deepgram Get a project API key
-      description: Retrieves details about a specific API key in the project.
+      operationId: keys_get
+      summary: Get a Project Key
+      description: Retrieves information about a specified API key
       tags:
       - Keys
       parameters:
-      - $ref: '#/components/parameters/project_id'
-      - $ref: '#/components/parameters/key_id'
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: key_id
+        in: path
+        description: The unique identifier of the API key
+        required: true
+        schema:
+          type: string
       responses:
         '200':
-          description: API key details retrieved successfully
+          description: A specific API key
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Key'
-        '401':
-          description: Unauthorized
+                $ref: '#/components/schemas/GetProjectKeyV1Response'
+        '400':
+          description: Invalid Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: Key not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
     delete:
-      operationId: deleteProjectKey
-      summary: Deepgram Delete a project API key
-      description: Permanently deletes a specific API key from the project.
+      operationId: keys_delete
+      summary: Delete a Project Key
+      description: Deletes an API key for a specific project
       tags:
       - Keys
       parameters:
-      - $ref: '#/components/parameters/project_id'
-      - $ref: '#/components/parameters/key_id'
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: key_id
+        in: path
+        description: The unique identifier of the API key
+        required: true
+        schema:
+          type: string
       responses:
-        '204':
-          description: API key deleted successfully
-        '401':
-          description: Unauthorized
+        '200':
+          description: API key deleted
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: Key not found
+                $ref: '#/components/schemas/DeleteProjectKeyV1Response'
+        '400':
+          description: Invalid Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
-    KeyWithSecret:
-      type: object
-      properties:
-        api_key_id:
-          type: string
-          description: Unique identifier for the API key.
-        key:
-          type: string
-          description: Full API key value. Only returned at creation time.
-        comment:
-          type: string
-          description: Description or comment for the API key.
-        scopes:
-          type: array
-          items:
-            type: string
-          description: Scopes assigned to this API key.
-        created:
-          type: string
-          format: date-time
-          description: Timestamp when the key was created.
-    KeyCreate:
-      type: object
-      required:
-      - comment
-      - scopes
-      properties:
-        comment:
-          type: string
-          description: Description or name for the API key.
-        scopes:
-          type: array
-          items:
-            type: string
-          description: Scopes to assign to this API key.
-        expiration_date:
-          type: string
-          format: date-time
-          description: Optional expiration date for the key.
-        time_to_live_in_seconds:
-          type: integer
-          description: Optional time-to-live in seconds for the key.
-    KeyList:
+    ErrorResponseTextError:
+      type: string
+      title: ErrorResponseTextError
+    ListProjectKeysV1Response:
       type: object
       properties:
         api_keys:
           type: array
           items:
-            $ref: '#/components/schemas/Key'
-          description: List of API keys.
-    Key:
+            $ref: '#/components/schemas/ListProjectKeysV1ResponseApiKeysItems'
+      title: ListProjectKeysV1Response
+    ListProjectKeysV1ResponseApiKeysItemsMember:
+      type: object
+      properties:
+        member_id:
+          type: string
+        email:
+          type: string
+      title: ListProjectKeysV1ResponseApiKeysItemsMember
+    GetProjectKeyV1ResponseItem:
+      type: object
+      properties:
+        member:
+          $ref: '#/components/schemas/GetProjectKeyV1ResponseItemMember'
+      title: GetProjectKeyV1ResponseItem
+    CreateKeyV1Response:
       type: object
       properties:
         api_key_id:
           type: string
-          description: Unique identifier for the API key.
+          description: The unique identifier of the API key
         key:
           type: string
-          description: Masked API key value.
+          description: The API key
         comment:
           type: string
-          description: Description or comment for the API key.
+          description: A comment for the API key
         scopes:
           type: array
           items:
             type: string
-          description: Scopes assigned to this API key.
-        created:
-          type: string
-          format: date-time
-          description: Timestamp when the key was created.
+          description: The scopes for the API key
+        tags:
+          type: array
+          items:
+            type: string
+          description: The tags for the API key
         expiration_date:
           type: string
           format: date-time
-          description: Expiration date of the key, if set.
-  parameters:
-    project_id:
-      name: project_id
-      in: path
-      required: true
-      description: Unique identifier of the project.
-      schema:
-        type: string
-    key_id:
-      name: key_id
-      in: path
-      required: true
-      description: Unique identifier of the API key.
-      schema:
-        type: string
+          description: The expiration date of the API key
+      description: API key created
+      title: CreateKeyV1Response
+    ListProjectKeysV1ResponseApiKeysItems:
+      type: object
+      properties:
+        member:
+          $ref: '#/components/schemas/ListProjectKeysV1ResponseApiKeysItemsMember'
+        api_key:
+          $ref: '#/components/schemas/ListProjectKeysV1ResponseApiKeysItemsApiKey'
+      title: ListProjectKeysV1ResponseApiKeysItems
+    GetProjectKeyV1ResponseItemMemberApiKey:
+      type: object
+      properties:
+        api_key_id:
+          type: string
+        comment:
+          type: string
+        scopes:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+        expiration_date:
+          type: string
+          format: date-time
+        created:
+          type: string
+          format: date-time
+      title: GetProjectKeyV1ResponseItemMemberApiKey
+    ErrorResponseLegacyError:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: The error code
+        err_msg:
+          type: string
+          description: The error message
+        request_id:
+          type: string
+          description: The request ID
+      title: ErrorResponseLegacyError
+    GetProjectKeyV1ResponseItemMember:
+      type: object
+      properties:
+        member_id:
+          type: string
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        api_key:
+          $ref: '#/components/schemas/GetProjectKeyV1ResponseItemMemberApiKey'
+      title: GetProjectKeyV1ResponseItemMember
+    DeleteProjectKeyV1Response:
+      type: object
+      properties:
+        message:
+          type: string
+      title: DeleteProjectKeyV1Response
+    ListProjectKeysV1ResponseApiKeysItemsApiKey:
+      type: object
+      properties:
+        api_key_id:
+          type: string
+        comment:
+          type: string
+        scopes:
+          type: array
+          items:
+            type: string
+        created:
+          type: string
+          format: date-time
+      title: ListProjectKeysV1ResponseApiKeysItemsApiKey
+    ErrorResponse:
+      oneOf:
+      - $ref: '#/components/schemas/ErrorResponseTextError'
+      - $ref: '#/components/schemas/ErrorResponseLegacyError'
+      - $ref: '#/components/schemas/ErrorResponseModernError'
+      title: ErrorResponse
+    V1ProjectsProjectIdKeysGetParametersStatus:
+      type: string
+      enum:
+      - active
+      - expired
+      title: V1ProjectsProjectIdKeysGetParametersStatus
+    GetProjectKeyV1Response:
+      type: object
+      properties:
+        item:
+          $ref: '#/components/schemas/GetProjectKeyV1ResponseItem'
+      title: GetProjectKeyV1Response
+    ErrorResponseModernError:
+      type: object
+      properties:
+        category:
+          type: string
+          description: The category of the error
+        message:
+          type: string
+          description: A message about the error
+        details:
+          type: string
+          description: A description of the error
+        request_id:
+          type: string
+          description: The unique identifier of the request
+      title: ErrorResponseModernError
+    CreateKeyV1Request:
+      oneOf:
+      - description: Any type
+      - description: Any type
+      title: CreateKeyV1Request
   securitySchemes:
-    bearerAuth:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Use `Authorization: Token <API_KEY>`
+
+        Example: `Authorization: Token 12345abcdef`
+
+        '
+    JwtAuth:
       type: http
       scheme: bearer
-      description: Deepgram API key passed as a bearer token in the Authorization header.
-externalDocs:
-  description: Deepgram Management API Documentation
-  url: https://developers.deepgram.com/docs/create-additional-api-keys
+      description: 'Use `Authorization: Bearer <JWT>`
+
+        Example: `Authorization: Bearer eyJhbGciOiJ...`
+
+        '

@@ -1,181 +1,288 @@
 openapi: 3.2.0
 info:
-  title: Deepgram Management Projects API
-  description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
-  version: '1.0'
-  contact:
-    name: Deepgram Support
-    url: https://developers.deepgram.com
-  termsOfService: https://deepgram.com/tos
+  title: REST Projects API
+  version: 1.0.0
 servers:
+- url: https://agent.deepgram.com
+  description: Production
 - url: https://api.deepgram.com
-  description: Deepgram Production Server
-security:
-- bearerAuth: []
+  description: Base
 tags:
 - name: Projects
-  description: Manage Deepgram projects and project settings.
 paths:
   /v1/projects:
     get:
-      operationId: listProjects
-      summary: Deepgram List all projects
-      description: Retrieves basic information about all projects associated with the authenticated API key.
+      operationId: projects_list
+      summary: List Projects
+      description: Retrieves basic information about the projects associated with the API key
       tags:
       - Projects
       responses:
         '200':
-          description: List of projects retrieved successfully
+          description: A list of projects
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectList'
-        '401':
-          description: Unauthorized due to missing or invalid API key
+                $ref: '#/components/schemas/ListProjectsV1Response'
+        '400':
+          description: Invalid Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
   /v1/projects/{project_id}:
     get:
-      operationId: getProject
-      summary: Deepgram Get a project
-      description: Retrieves detailed information about a specific project.
+      operationId: projects_get
+      summary: Get a Project
+      description: Retrieves information about the specified project
       tags:
       - Projects
       parameters:
-      - $ref: '#/components/parameters/project_id'
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page. Default 10. Range [1,1000]
+        required: false
+        schema:
+          type: number
+          format: double
+          minimum: 1
+          maximum: 1000
+          default: 10
+      - name: page
+        in: query
+        description: Navigate and return the results to retrieve specific portions of information of the response
+        required: false
+        schema:
+          type: number
+          format: double
       responses:
         '200':
-          description: Project details retrieved successfully
+          description: A project
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
-        '401':
-          description: Unauthorized
+                $ref: '#/components/schemas/GetProjectV1Response'
+        '400':
+          description: Invalid Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: Project not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
     patch:
-      operationId: updateProject
-      summary: Deepgram Update a project
-      description: Updates settings for a specific project.
+      operationId: projects_update
+      summary: Update a Project
+      description: Updates the name or other properties of an existing project
       tags:
       - Projects
       parameters:
-      - $ref: '#/components/parameters/project_id'
-      requestBody:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
         required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProjectV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: The name of the project
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProjectUpdate'
-      responses:
-        '200':
-          description: Project updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Project'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: Project not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+              $ref: '#/components/schemas/UpdateProjectV1Request'
+      security:
+      - ApiKeyAuth: []
     delete:
-      operationId: deleteProject
-      summary: Deepgram Delete a project
-      description: Permanently deletes a specific project and all associated resources.
+      operationId: projects_delete
+      summary: Delete a Project
+      description: Deletes the specified project
       tags:
       - Projects
       parameters:
-      - $ref: '#/components/parameters/project_id'
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
       responses:
-        '204':
-          description: Project deleted successfully
-        '401':
-          description: Unauthorized
+        '200':
+          description: A project
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: Project not found
+                $ref: '#/components/schemas/DeleteProjectV1Response'
+        '400':
+          description: Invalid Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+  /v1/projects/{project_id}/leave:
+    delete:
+      operationId: projects_leave
+      summary: Leave a Project
+      description: Removes the authenticated account from the specific project
+      tags:
+      - Projects
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully removed account from project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaveProjectV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        err_code:
-          type: string
-          description: Error code identifying the type of error.
-        err_msg:
-          type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
-    ProjectUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: New name for the project.
-        company:
-          type: string
-          description: New company name for the project.
-    Project:
-      type: object
-      properties:
-        project_id:
-          type: string
-          description: Unique identifier for the project.
-        name:
-          type: string
-          description: Name of the project.
-        company:
-          type: string
-          description: Company name associated with the project.
-    ProjectList:
+    ListProjectsV1Response:
       type: object
       properties:
         projects:
           type: array
           items:
-            $ref: '#/components/schemas/Project'
-          description: List of projects.
-  parameters:
-    project_id:
-      name: project_id
-      in: path
-      required: true
-      description: Unique identifier of the project.
-      schema:
-        type: string
+            $ref: '#/components/schemas/ListProjectsV1ResponseProjectsItems'
+      title: ListProjectsV1Response
+    DeleteProjectV1Response:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Confirmation message
+      title: DeleteProjectV1Response
+    GetProjectV1Response:
+      type: object
+      properties:
+        project_id:
+          type: string
+          description: The unique identifier of the project
+        mip_opt_out:
+          type: boolean
+          description: Model Improvement Program opt-out
+        name:
+          type: string
+          description: The name of the project
+      title: GetProjectV1Response
+    ErrorResponseTextError:
+      type: string
+      title: ErrorResponseTextError
+    ErrorResponseLegacyError:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: The error code
+        err_msg:
+          type: string
+          description: The error message
+        request_id:
+          type: string
+          description: The request ID
+      title: ErrorResponseLegacyError
+    LeaveProjectV1Response:
+      type: object
+      properties:
+        message:
+          type: string
+          description: confirmation message
+      title: LeaveProjectV1Response
+    UpdateProjectV1Request:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the project
+      title: UpdateProjectV1Request
+    ErrorResponse:
+      oneOf:
+      - $ref: '#/components/schemas/ErrorResponseTextError'
+      - $ref: '#/components/schemas/ErrorResponseLegacyError'
+      - $ref: '#/components/schemas/ErrorResponseModernError'
+      title: ErrorResponse
+    ErrorResponseModernError:
+      type: object
+      properties:
+        category:
+          type: string
+          description: The category of the error
+        message:
+          type: string
+          description: A message about the error
+        details:
+          type: string
+          description: A description of the error
+        request_id:
+          type: string
+          description: The unique identifier of the request
+      title: ErrorResponseModernError
+    UpdateProjectV1Response:
+      type: object
+      properties:
+        message:
+          type: string
+          description: confirmation message
+      title: UpdateProjectV1Response
+    ListProjectsV1ResponseProjectsItems:
+      type: object
+      properties:
+        project_id:
+          type: string
+          description: The unique identifier of the project
+        name:
+          type: string
+          description: The name of the project
+      title: ListProjectsV1ResponseProjectsItems
   securitySchemes:
-    bearerAuth:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Use `Authorization: Token <API_KEY>`
+
+        Example: `Authorization: Token 12345abcdef`
+
+        '
+    JwtAuth:
       type: http
       scheme: bearer
-      description: Deepgram API key passed as a bearer token in the Authorization header.
-externalDocs:
-  description: Deepgram Management API Documentation
-  url: https://developers.deepgram.com/docs/create-additional-api-keys
+      description: 'Use `Authorization: Bearer <JWT>`
+
+        Example: `Authorization: Bearer eyJhbGciOiJ...`
+
+        '

@@ -1,0 +1,121 @@
+openapi: 3.2.0
+info:
+  title: REST Tokens API
+  version: 1.0.0
+servers:
+- url: https://agent.deepgram.com
+  description: Production
+- url: https://api.deepgram.com
+  description: Base
+tags:
+- name: Tokens
+paths:
+  /v1/auth/grant:
+    post:
+      operationId: tokens_grant
+      summary: Token-based Authentication
+      description: Generates a temporary JSON Web Token (JWT) with a 30-second (by default) TTL and usage::write permission for core voice APIs, requiring an API key with Member or higher authorization. Tokens created with this endpoint will not work with the Manage APIs.
+      tags:
+      - Tokens
+      responses:
+        '200':
+          description: Grant response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Time to live settings
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantV1Request'
+      security:
+      - ApiKeyAuth: []
+components:
+  schemas:
+    GrantV1Response:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: JSON Web Token (JWT)
+        expires_in:
+          type: number
+          format: double
+          description: Time in seconds until the JWT expires
+      required:
+      - access_token
+      title: GrantV1Response
+    ErrorResponseTextError:
+      type: string
+      title: ErrorResponseTextError
+    GrantV1Request:
+      type: object
+      properties:
+        ttl_seconds:
+          type: number
+          format: double
+          minimum: 1
+          maximum: 3600
+          description: Time to live in seconds for the token. Defaults to 30 seconds.
+      title: GrantV1Request
+    ErrorResponseLegacyError:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: The error code
+        err_msg:
+          type: string
+          description: The error message
+        request_id:
+          type: string
+          description: The request ID
+      title: ErrorResponseLegacyError
+    ErrorResponse:
+      oneOf:
+      - $ref: '#/components/schemas/ErrorResponseTextError'
+      - $ref: '#/components/schemas/ErrorResponseLegacyError'
+      - $ref: '#/components/schemas/ErrorResponseModernError'
+      title: ErrorResponse
+    ErrorResponseModernError:
+      type: object
+      properties:
+        category:
+          type: string
+          description: The category of the error
+        message:
+          type: string
+          description: A message about the error
+        details:
+          type: string
+          description: A description of the error
+        request_id:
+          type: string
+          description: The unique identifier of the request
+      title: ErrorResponseModernError
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Use `Authorization: Token <API_KEY>`
+
+        Example: `Authorization: Token 12345abcdef`
+
+        '
+    JwtAuth:
+      type: http
+      scheme: bearer
+      description: 'Use `Authorization: Bearer <JWT>`
+
+        Example: `Authorization: Bearer eyJhbGciOiJ...`
+
+        '

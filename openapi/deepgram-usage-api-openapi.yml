@@ -1,197 +1,411 @@
 openapi: 3.2.0
 info:
-  title: Deepgram Management Usage API
-  description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
-  version: '1.0'
-  contact:
-    name: Deepgram Support
-    url: https://developers.deepgram.com
-  termsOfService: https://deepgram.com/tos
+  title: REST Usage API
+  version: 1.0.0
 servers:
+- url: https://agent.deepgram.com
+  description: Production
 - url: https://api.deepgram.com
-  description: Deepgram Production Server
-security:
-- bearerAuth: []
+  description: Base
 tags:
 - name: Usage
-  description: Retrieve usage data and request logs for projects.
 paths:
   /v1/projects/{project_id}/usage:
     get:
-      operationId: getProjectUsage
-      summary: Deepgram Get project usage
-      description: Retrieves usage data for the specified project over a given time range.
+      operationId: usage_get
+      summary: Get Project Usage
+      description: Retrieves the usage for a specific project. Use Get Project Usage Breakdown for a more comprehensive usage summary.
       tags:
       - Usage
       parameters:
-      - $ref: '#/components/parameters/project_id'
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
       - name: start
         in: query
-        description: Start date for the usage period in ISO 8601 format.
+        description: Start date of the requested date range. Format accepted is YYYY-MM-DD
+        required: false
         schema:
           type: string
-          format: date-time
+          format: date
       - name: end
         in: query
-        description: End date for the usage period in ISO 8601 format.
+        description: End date of the requested date range. Format accepted is YYYY-MM-DD
+        required: false
         schema:
           type: string
-          format: date-time
+          format: date
+      - name: accessor
+        in: query
+        description: Filter for requests where a specific accessor was used
+        required: false
+        schema:
+          type: string
+      - name: alternatives
+        in: query
+        description: Filter for requests where alternatives were used
+        required: false
+        schema:
+          type: boolean
+      - name: callback_method
+        in: query
+        description: Filter for requests where callback method was used
+        required: false
+        schema:
+          type: boolean
+      - name: callback
+        in: query
+        description: Filter for requests where callback was used
+        required: false
+        schema:
+          type: boolean
+      - name: channels
+        in: query
+        description: Filter for requests where channels were used
+        required: false
+        schema:
+          type: boolean
+      - name: custom_intent_mode
+        in: query
+        description: Filter for requests where custom intent mode was used
+        required: false
+        schema:
+          type: boolean
+      - name: custom_intent
+        in: query
+        description: Filter for requests where custom intent was used
+        required: false
+        schema:
+          type: boolean
+      - name: custom_topic_mode
+        in: query
+        description: Filter for requests where custom topic mode was used
+        required: false
+        schema:
+          type: boolean
+      - name: custom_topic
+        in: query
+        description: Filter for requests where custom topic was used
+        required: false
+        schema:
+          type: boolean
+      - name: deployment
+        in: query
+        description: Filter for requests where a specific deployment was used
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1ProjectsProjectIdUsageGetParametersDeployment'
+      - name: detect_entities
+        in: query
+        description: Filter for requests where detect entities was used
+        required: false
+        schema:
+          type: boolean
+      - name: detect_language
+        in: query
+        description: Filter for requests where detect language was used
+        required: false
+        schema:
+          type: boolean
+      - name: diarize
+        in: query
+        description: Filter for requests where diarize was used
+        required: false
+        schema:
+          type: boolean
+      - name: dictation
+        in: query
+        description: Filter for requests where dictation was used
+        required: false
+        schema:
+          type: boolean
+      - name: encoding
+        in: query
+        description: Filter for requests where encoding was used
+        required: false
+        schema:
+          type: boolean
+      - name: endpoint
+        in: query
+        description: Filter for requests where a specific endpoint was used
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1ProjectsProjectIdUsageGetParametersEndpoint'
+      - name: extra
+        in: query
+        description: Filter for requests where extra was used
+        required: false
+        schema:
+          type: boolean
+      - name: filler_words
+        in: query
+        description: Filter for requests where filler words was used
+        required: false
+        schema:
+          type: boolean
+      - name: intents
+        in: query
+        description: Filter for requests where intents was used
+        required: false
+        schema:
+          type: boolean
+      - name: keyterm
+        in: query
+        description: Filter for requests where keyterm was used
+        required: false
+        schema:
+          type: boolean
+      - name: keywords
+        in: query
+        description: Filter for requests where keywords was used
+        required: false
+        schema:
+          type: boolean
+      - name: language
+        in: query
+        description: Filter for requests where language was used
+        required: false
+        schema:
+          type: boolean
+      - name: measurements
+        in: query
+        description: Filter for requests where measurements were used
+        required: false
+        schema:
+          type: boolean
+      - name: method
+        in: query
+        description: Filter for requests where a specific method was used
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1ProjectsProjectIdUsageGetParametersMethod'
+      - name: model
+        in: query
+        description: Filter for requests where a specific model uuid was used
+        required: false
+        schema:
+          type: string
+      - name: multichannel
+        in: query
+        description: Filter for requests where multichannel was used
+        required: false
+        schema:
+          type: boolean
+      - name: numerals
+        in: query
+        description: Filter for requests where numerals were used
+        required: false
+        schema:
+          type: boolean
+      - name: paragraphs
+        in: query
+        description: Filter for requests where paragraphs were used
+        required: false
+        schema:
+          type: boolean
+      - name: profanity_filter
+        in: query
+        description: Filter for requests where profanity filter was used
+        required: false
+        schema:
+          type: boolean
+      - name: punctuate
+        in: query
+        description: Filter for requests where punctuate was used
+        required: false
+        schema:
+          type: boolean
+      - name: redact
+        in: query
+        description: Filter for requests where redact was used
+        required: false
+        schema:
+          type: boolean
+      - name: replace
+        in: query
+        description: Filter for requests where replace was used
+        required: false
+        schema:
+          type: boolean
+      - name: sample_rate
+        in: query
+        description: Filter for requests where sample rate was used
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        description: Filter for requests where search was used
+        required: false
+        schema:
+          type: boolean
+      - name: sentiment
+        in: query
+        description: Filter for requests where sentiment was used
+        required: false
+        schema:
+          type: boolean
+      - name: smart_format
+        in: query
+        description: Filter for requests where smart format was used
+        required: false
+        schema:
+          type: boolean
+      - name: summarize
+        in: query
+        description: Filter for requests where summarize was used
+        required: false
+        schema:
+          type: boolean
+      - name: tag
+        in: query
+        description: Filter for requests where a specific tag was used
+        required: false
+        schema:
+          type: string
+      - name: topics
+        in: query
+        description: Filter for requests where topics was used
+        required: false
+        schema:
+          type: boolean
+      - name: utt_split
+        in: query
+        description: Filter for requests where utt split was used
+        required: false
+        schema:
+          type: boolean
+      - name: utterances
+        in: query
+        description: Filter for requests where utterances was used
+        required: false
+        schema:
+          type: boolean
+      - name: version
+        in: query
+        description: Filter for requests where version was used
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
-          description: Usage data retrieved successfully
+          description: A specific request for a specific project
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UsageSummary'
-        '401':
-          description: Unauthorized
+                $ref: '#/components/schemas/UsageV1Response'
+        '400':
+          description: Invalid Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-  /v1/projects/{project_id}/requests:
-    get:
-      operationId: listProjectRequests
-      summary: Deepgram List project requests
-      description: Retrieves a paginated list of API requests made to the specified project over a given time range.
-      tags:
-      - Usage
-      parameters:
-      - $ref: '#/components/parameters/project_id'
-      - name: start
-        in: query
-        description: Start date for the request period in ISO 8601 format.
-        schema:
-          type: string
-          format: date-time
-      - name: end
-        in: query
-        description: End date for the request period in ISO 8601 format.
-        schema:
-          type: string
-          format: date-time
-      - name: limit
-        in: query
-        description: Maximum number of results to return per page.
-        schema:
-          type: integer
-          minimum: 1
-      - name: cursor
-        in: query
-        description: Pagination cursor for retrieving the next page of results.
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Request list retrieved successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RequestList'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/ErrorResponse'
+      deprecated: true
+      security:
+      - ApiKeyAuth: []
 components:
   schemas:
-    Error:
+    ErrorResponseTextError:
+      type: string
+      title: ErrorResponseTextError
+    V1ProjectsProjectIdUsageGetParametersDeployment:
+      type: string
+      enum:
+      - hosted
+      - beta
+      - self-hosted
+      description: Deployment type for the requests
+      title: V1ProjectsProjectIdUsageGetParametersDeployment
+    UsageV1ResponseResolution:
+      type: object
+      properties:
+        units:
+          type: string
+        amount:
+          type: number
+          format: double
+      title: UsageV1ResponseResolution
+    ErrorResponseLegacyError:
       type: object
       properties:
         err_code:
           type: string
-          description: Error code identifying the type of error.
+          description: The error code
         err_msg:
           type: string
-          description: Human-readable error message.
+          description: The error message
         request_id:
           type: string
-          description: Unique identifier for the request that produced the error.
-    UsageSummary:
+          description: The request ID
+      title: ErrorResponseLegacyError
+    ErrorResponse:
+      oneOf:
+      - $ref: '#/components/schemas/ErrorResponseTextError'
+      - $ref: '#/components/schemas/ErrorResponseLegacyError'
+      - $ref: '#/components/schemas/ErrorResponseModernError'
+      title: ErrorResponse
+    UsageV1Response:
       type: object
       properties:
         start:
           type: string
-          format: date-time
-          description: Start of the usage period.
+          format: date
         end:
           type: string
-          format: date-time
-          description: End of the usage period.
+          format: date
         resolution:
-          type: object
-          properties:
-            units:
-              type: string
-              description: Time unit for the resolution.
-            amount:
-              type: integer
-              description: Number of time units per resolution period.
-          description: Resolution of the usage data.
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              start:
-                type: string
-                format: date-time
-                description: Start of the period.
-              end:
-                type: string
-                format: date-time
-                description: End of the period.
-              hours:
-                type: number
-                format: float
-                description: Total audio hours processed.
-              requests:
-                type: integer
-                description: Total number of API requests.
-          description: Usage data broken down by resolution period.
-    RequestList:
+          $ref: '#/components/schemas/UsageV1ResponseResolution'
+      title: UsageV1Response
+    V1ProjectsProjectIdUsageGetParametersEndpoint:
+      type: string
+      enum:
+      - listen
+      - read
+      - speak
+      - agent
+      title: V1ProjectsProjectIdUsageGetParametersEndpoint
+    ErrorResponseModernError:
       type: object
       properties:
-        page:
-          type: integer
-          description: Current page number.
-        limit:
-          type: integer
-          description: Number of results per page.
-        requests:
-          type: array
-          items:
-            type: object
-            properties:
-              request_id:
-                type: string
-                description: Unique identifier for the request.
-              created:
-                type: string
-                format: date-time
-                description: Timestamp when the request was made.
-              path:
-                type: string
-                description: API path of the request.
-              api_key_id:
-                type: string
-                description: API key used for the request.
-          description: List of API requests.
-  parameters:
-    project_id:
-      name: project_id
-      in: path
-      required: true
-      description: Unique identifier of the project.
-      schema:
-        type: string
+        category:
+          type: string
+          description: The category of the error
+        message:
+          type: string
+          description: A message about the error
+        details:
+          type: string
+          description: A description of the error
+        request_id:
+          type: string
+          description: The unique identifier of the request
+      title: ErrorResponseModernError
+    V1ProjectsProjectIdUsageGetParametersMethod:
+      type: string
+      enum:
+      - sync
+      - async
+      - streaming
+      description: Method type for the request
+      title: V1ProjectsProjectIdUsageGetParametersMethod
   securitySchemes:
-    bearerAuth:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Use `Authorization: Token <API_KEY>`
+
+        Example: `Authorization: Token 12345abcdef`
+
+        '
+    JwtAuth:
       type: http
       scheme: bearer
-      description: Deepgram API key passed as a bearer token in the Authorization header.
-externalDocs:
-  description: Deepgram Management API Documentation
-  url: https://developers.deepgram.com/docs/create-additional-api-keys
+      description: 'Use `Authorization: Bearer <JWT>`
+
+        Example: `Authorization: Bearer eyJhbGciOiJ...`
+
+        '

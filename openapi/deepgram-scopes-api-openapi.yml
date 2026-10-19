@@ -1,118 +1,170 @@
 openapi: 3.2.0
 info:
-  title: Deepgram Management Scopes API
-  description: The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for managing projects, API keys, team members, invitations, scopes, billing balances, usage tracking, and model metadata. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
-  version: '1.0'
-  contact:
-    name: Deepgram Support
-    url: https://developers.deepgram.com
-  termsOfService: https://deepgram.com/tos
+  title: REST Scopes API
+  version: 1.0.0
 servers:
+- url: https://agent.deepgram.com
+  description: Production
 - url: https://api.deepgram.com
-  description: Deepgram Production Server
-security:
-- bearerAuth: []
+  description: Base
 tags:
 - name: Scopes
-  description: Manage member scopes and permissions within projects.
 paths:
   /v1/projects/{project_id}/members/{member_id}/scopes:
     get:
-      operationId: getMemberScopes
-      summary: Deepgram Get member scopes
-      description: Retrieves the scopes assigned to a specific member within a project.
+      operationId: scopes_list
+      summary: List Project Member Scopes
+      description: Retrieves a list of scopes for a specific member
       tags:
       - Scopes
       parameters:
-      - $ref: '#/components/parameters/project_id'
-      - $ref: '#/components/parameters/member_id'
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: member_id
+        in: path
+        description: The unique identifier of the Member
+        required: true
+        schema:
+          type: string
       responses:
         '200':
-          description: Member scopes retrieved successfully
+          description: A list of scopes for a specific member
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ScopeList'
-        '401':
-          description: Unauthorized
+                $ref: '#/components/schemas/ListProjectMemberScopesV1Response'
+        '400':
+          description: Invalid Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
     put:
-      operationId: updateMemberScopes
-      summary: Deepgram Update member scopes
-      description: Updates the scopes assigned to a specific member within a project.
+      operationId: scopes_update
+      summary: Update Project Member Scopes
+      description: Updates the scopes for a specific member
       tags:
       - Scopes
       parameters:
-      - $ref: '#/components/parameters/project_id'
-      - $ref: '#/components/parameters/member_id'
-      requestBody:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
         required: true
+        schema:
+          type: string
+      - name: member_id
+        in: path
+        description: The unique identifier of the Member
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Updated the scopes for a specific member
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProjectMemberScopesV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: A scope to update
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ScopeUpdate'
-      responses:
-        '200':
-          description: Member scopes updated successfully
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+              $ref: '#/components/schemas/UpdateProjectMemberScopesV1Request'
+      security:
+      - ApiKeyAuth: []
 components:
   schemas:
-    Error:
+    UpdateProjectMemberScopesV1Request:
       type: object
       properties:
-        err_code:
+        scope:
           type: string
-          description: Error code identifying the type of error.
-        err_msg:
+          description: A scope to update
+      required:
+      - scope
+      title: UpdateProjectMemberScopesV1Request
+    ErrorResponseTextError:
+      type: string
+      title: ErrorResponseTextError
+    UpdateProjectMemberScopesV1Response:
+      type: object
+      properties:
+        message:
           type: string
-          description: Human-readable error message.
-        request_id:
-          type: string
-          description: Unique identifier for the request that produced the error.
-    ScopeList:
+          description: confirmation message
+      title: UpdateProjectMemberScopesV1Response
+    ListProjectMemberScopesV1Response:
       type: object
       properties:
         scopes:
           type: array
           items:
             type: string
-          description: List of scopes assigned to the member.
-    ScopeUpdate:
+          description: The API scopes of the member
+      title: ListProjectMemberScopesV1Response
+    ErrorResponseLegacyError:
       type: object
-      required:
-      - scope
       properties:
-        scope:
+        err_code:
           type: string
-          description: New scope to assign to the member.
-  parameters:
-    project_id:
-      name: project_id
-      in: path
-      required: true
-      description: Unique identifier of the project.
-      schema:
-        type: string
-    member_id:
-      name: member_id
-      in: path
-      required: true
-      description: Unique identifier of the member.
-      schema:
-        type: string
+          description: The error code
+        err_msg:
+          type: string
+          description: The error message
+        request_id:
+          type: string
+          description: The request ID
+      title: ErrorResponseLegacyError
+    ErrorResponse:
+      oneOf:
+      - $ref: '#/components/schemas/ErrorResponseTextError'
+      - $ref: '#/components/schemas/ErrorResponseLegacyError'
+      - $ref: '#/components/schemas/ErrorResponseModernError'
+      title: ErrorResponse
+    ErrorResponseModernError:
+      type: object
+      properties:
+        category:
+          type: string
+          description: The category of the error
+        message:
+          type: string
+          description: A message about the error
+        details:
+          type: string
+          description: A description of the error
+        request_id:
+          type: string
+          description: The unique identifier of the request
+      title: ErrorResponseModernError
   securitySchemes:
-    bearerAuth:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Use `Authorization: Token <API_KEY>`
+
+        Example: `Authorization: Token 12345abcdef`
+
+        '
+    JwtAuth:
       type: http
       scheme: bearer
-      description: Deepgram API key passed as a bearer token in the Authorization header.
-externalDocs:
-  description: Deepgram Management API Documentation
-  url: https://developers.deepgram.com/docs/create-additional-api-keys
+      description: 'Use `Authorization: Bearer <JWT>`
+
+        Example: `Authorization: Bearer eyJhbGciOiJ...`
+
+        '

@@ -1,0 +1,137 @@
+openapi: 3.2.0
+info:
+  title: REST Purchases API
+  version: 1.0.0
+servers:
+- url: https://agent.deepgram.com
+  description: Production
+- url: https://api.deepgram.com
+  description: Base
+tags:
+- name: Purchases
+paths:
+  /v1/projects/{project_id}/purchases:
+    get:
+      operationId: purchases_list
+      summary: List Project Purchases
+      description: Returns the original purchased amount on an order transaction
+      tags:
+      - Purchases
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page. Default 10. Range [1,1000]
+        required: false
+        schema:
+          type: number
+          format: double
+          minimum: 1
+          maximum: 1000
+          default: 10
+      responses:
+        '200':
+          description: A list of purchases for a specific project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProjectPurchasesV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+components:
+  schemas:
+    ListProjectPurchasesV1Response:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListProjectPurchasesV1ResponseOrdersItems'
+      title: ListProjectPurchasesV1Response
+    ErrorResponseTextError:
+      type: string
+      title: ErrorResponseTextError
+    ErrorResponseLegacyError:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: The error code
+        err_msg:
+          type: string
+          description: The error message
+        request_id:
+          type: string
+          description: The request ID
+      title: ErrorResponseLegacyError
+    ListProjectPurchasesV1ResponseOrdersItems:
+      type: object
+      properties:
+        order_id:
+          type: string
+          format: uuid
+        expiration:
+          type: string
+          format: date-time
+        created:
+          type: string
+          format: date-time
+        amount:
+          type: string
+          title: float
+        units:
+          type: string
+        order_type:
+          type: string
+      title: ListProjectPurchasesV1ResponseOrdersItems
+    ErrorResponse:
+      oneOf:
+      - $ref: '#/components/schemas/ErrorResponseTextError'
+      - $ref: '#/components/schemas/ErrorResponseLegacyError'
+      - $ref: '#/components/schemas/ErrorResponseModernError'
+      title: ErrorResponse
+    ErrorResponseModernError:
+      type: object
+      properties:
+        category:
+          type: string
+          description: The category of the error
+        message:
+          type: string
+          description: A message about the error
+        details:
+          type: string
+          description: A description of the error
+        request_id:
+          type: string
+          description: The unique identifier of the request
+      title: ErrorResponseModernError
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Use `Authorization: Token <API_KEY>`
+
+        Example: `Authorization: Token 12345abcdef`
+
+        '
+    JwtAuth:
+      type: http
+      scheme: bearer
+      description: 'Use `Authorization: Bearer <JWT>`
+
+        Example: `Authorization: Bearer eyJhbGciOiJ...`
+
+        '

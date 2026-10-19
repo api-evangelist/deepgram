@@ -1,0 +1,292 @@
+openapi: 3.2.0
+info:
+  title: REST Requests API
+  version: 1.0.0
+servers:
+- url: https://agent.deepgram.com
+  description: Production
+- url: https://api.deepgram.com
+  description: Base
+tags:
+- name: Requests
+paths:
+  /v1/projects/{project_id}/requests:
+    get:
+      operationId: requests_list
+      summary: List Project Requests
+      description: Generates a list of requests for a specific project
+      tags:
+      - Requests
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: start
+        in: query
+        description: Start date of the requested date range. Formats accepted are YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS, or YYYY-MM-DDTHH:MM:SS+HH:MM
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: end
+        in: query
+        description: End date of the requested date range. Formats accepted are YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS, or YYYY-MM-DDTHH:MM:SS+HH:MM
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: limit
+        in: query
+        description: Number of results to return per page. Default 10. Range [1,1000]
+        required: false
+        schema:
+          type: number
+          format: double
+          minimum: 1
+          maximum: 1000
+          default: 10
+      - name: page
+        in: query
+        description: Navigate and return the results to retrieve specific portions of information of the response
+        required: false
+        schema:
+          type: number
+          format: double
+      - name: accessor
+        in: query
+        description: Filter for requests where a specific accessor was used
+        required: false
+        schema:
+          type: string
+      - name: request_id
+        in: query
+        description: Filter for a specific request id
+        required: false
+        schema:
+          type: string
+      - name: deployment
+        in: query
+        description: Filter for requests where a specific deployment was used
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1ProjectsProjectIdRequestsGetParametersDeployment'
+      - name: endpoint
+        in: query
+        description: Filter for requests where a specific endpoint was used
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1ProjectsProjectIdRequestsGetParametersEndpoint'
+      - name: method
+        in: query
+        description: Filter for requests where a specific method was used
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1ProjectsProjectIdRequestsGetParametersMethod'
+      - name: status
+        in: query
+        description: Filter for requests that succeeded (status code < 300) or failed (status code >=400)
+        required: false
+        schema:
+          $ref: '#/components/schemas/V1ProjectsProjectIdRequestsGetParametersStatus'
+      responses:
+        '200':
+          description: A list of requests for a specific project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProjectRequestsV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+  /v1/projects/{project_id}/requests/{request_id}:
+    get:
+      operationId: requests_get
+      summary: Get a Project Request
+      description: Retrieves a specific request for a specific project
+      tags:
+      - Requests
+      parameters:
+      - name: project_id
+        in: path
+        description: The unique identifier of the project
+        required: true
+        schema:
+          type: string
+      - name: request_id
+        in: path
+        description: The unique identifier of the request
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A specific request for a specific project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProjectRequestV1Response'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+components:
+  schemas:
+    ProjectRequestResponseResponse:
+      type: object
+      properties: {}
+      description: The response of the request
+      title: ProjectRequestResponseResponse
+    ErrorResponseTextError:
+      type: string
+      title: ErrorResponseTextError
+    V1ProjectsProjectIdRequestsGetParametersMethod:
+      type: string
+      enum:
+      - sync
+      - async
+      - streaming
+      description: Method type for the request
+      title: V1ProjectsProjectIdRequestsGetParametersMethod
+    V1ProjectsProjectIdRequestsGetParametersStatus:
+      type: string
+      enum:
+      - succeeded
+      - failed
+      title: V1ProjectsProjectIdRequestsGetParametersStatus
+    ErrorResponseLegacyError:
+      type: object
+      properties:
+        err_code:
+          type: string
+          description: The error code
+        err_msg:
+          type: string
+          description: The error message
+        request_id:
+          type: string
+          description: The request ID
+      title: ErrorResponseLegacyError
+    V1ProjectsProjectIdRequestsGetParametersEndpoint:
+      type: string
+      enum:
+      - listen
+      - read
+      - speak
+      - agent
+      title: V1ProjectsProjectIdRequestsGetParametersEndpoint
+    ListProjectRequestsV1Response:
+      type: object
+      properties:
+        page:
+          type: number
+          format: double
+          description: The page number of the paginated response
+        limit:
+          type: number
+          format: double
+          description: The number of results per page
+        requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectRequestResponse'
+      title: ListProjectRequestsV1Response
+    ErrorResponse:
+      oneOf:
+      - $ref: '#/components/schemas/ErrorResponseTextError'
+      - $ref: '#/components/schemas/ErrorResponseLegacyError'
+      - $ref: '#/components/schemas/ErrorResponseModernError'
+      title: ErrorResponse
+    ErrorResponseModernError:
+      type: object
+      properties:
+        category:
+          type: string
+          description: The category of the error
+        message:
+          type: string
+          description: A message about the error
+        details:
+          type: string
+          description: A description of the error
+        request_id:
+          type: string
+          description: The unique identifier of the request
+      title: ErrorResponseModernError
+    V1ProjectsProjectIdRequestsGetParametersDeployment:
+      type: string
+      enum:
+      - hosted
+      - beta
+      - self-hosted
+      description: Deployment type for the requests
+      title: V1ProjectsProjectIdRequestsGetParametersDeployment
+    GetProjectRequestV1Response:
+      type: object
+      properties:
+        request:
+          $ref: '#/components/schemas/ProjectRequestResponse'
+      title: GetProjectRequestV1Response
+    ProjectRequestResponse:
+      type: object
+      properties:
+        request_id:
+          type: string
+          description: The unique identifier of the request
+        project_uuid:
+          type: string
+          description: The unique identifier of the project
+        created:
+          type: string
+          format: date-time
+          description: The date and time the request was created
+        path:
+          type: string
+          description: The API path of the request
+        api_key_id:
+          type: string
+          description: The unique identifier of the API key
+        response:
+          $ref: '#/components/schemas/ProjectRequestResponseResponse'
+          description: The response of the request
+        code:
+          type: number
+          format: double
+          description: The response code of the request
+        deployment:
+          type: string
+          description: The deployment type
+        callback:
+          type: string
+          description: The callback URL for the request
+      description: A single request
+      title: ProjectRequestResponse
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Use `Authorization: Token <API_KEY>`
+
+        Example: `Authorization: Token 12345abcdef`
+
+        '
+    JwtAuth:
+      type: http
+      scheme: bearer
+      description: 'Use `Authorization: Bearer <JWT>`
+
+        Example: `Authorization: Bearer eyJhbGciOiJ...`
+
+        '
