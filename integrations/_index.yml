@@ -15,28 +15,6 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
-- slug: deepgram-litellm
-  label: LiteLLM
-  partner: litellm
-  partner_name: LiteLLM
-  type: coverage
-  channel: partner-built
-  evidence: https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json
-  source: edge
-  relationship: system-coverage
-  status: not-a-workflow
-  arazzo: null
-- slug: deepgram-cloudflare-ai-gateway
-  label: Cloudflare AI Gateway
-  partner: cloudflare-ai-gateway
-  partner_name: Cloudflare AI Gateway
-  type: coverage
-  channel: partner-built
-  evidence: https://github.com/cloudflare/cloudflare-docs/blob/production/src/content/docs/ai-gateway/usage/providers/deepgram.mdx
-  source: edge
-  relationship: system-coverage
-  status: not-a-workflow
-  arazzo: null
 - slug: deepgram-pipecat
   label: Pipecat
   partner: pipecat-ai
@@ -55,6 +33,28 @@
   type: coverage
   channel: partner-built
   evidence: https://github.com/livekit/agents/tree/main/livekit-plugins/livekit-plugins-deepgram
+  source: edge
+  relationship: system-coverage
+  status: not-a-workflow
+  arazzo: null
+- slug: deepgram-litellm
+  label: LiteLLM
+  partner: litellm
+  partner_name: LiteLLM
+  type: coverage
+  channel: partner-built
+  evidence: https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json
+  source: edge
+  relationship: system-coverage
+  status: not-a-workflow
+  arazzo: null
+- slug: deepgram-cloudflare-ai-gateway
+  label: Cloudflare AI Gateway
+  partner: cloudflare-ai-gateway
+  partner_name: Cloudflare AI Gateway
+  type: coverage
+  channel: partner-built
+  evidence: https://github.com/cloudflare/cloudflare-docs/blob/production/src/content/docs/ai-gateway/usage/providers/deepgram.mdx
   source: edge
   relationship: system-coverage
   status: not-a-workflow
@@ -91,7 +91,7 @@
   type: marketplace
   marketplace: pipedream-components
   channel: open-source-node
-  evidence: https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/deepgram
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/deepgram
   source: edge
   relationship: ipaas-bridge
   contract_reference:
@@ -108,5 +108,18 @@
     actions: true
     sources: false
     builder: Pipedream repo (component)
+  status: not-a-workflow
+  arazzo: null
+- slug: deepgram-genesys-own
+  label: Genesys (own)
+  partner: genesys
+  partner_name: Genesys (own)
+  category: businessOptimization|businessIntelligence
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appfoundry.genesys.com/filter/genesyscloud/listing/63118678-7b84-41d4-b837-e209031ce4ab
+  source: edge
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null
