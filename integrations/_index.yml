@@ -110,19 +110,6 @@
     builder: Pipedream repo (component)
   status: not-a-workflow
   arazzo: null
-- slug: deepgram-genesys-own
-  label: Genesys (own)
-  partner: genesys
-  partner_name: Genesys (own)
-  category: businessOptimization|businessIntelligence
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://appfoundry.genesys.com/filter/genesyscloud/listing/63118678-7b84-41d4-b837-e209031ce4ab
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
 - slug: deepgram-y-combinator
   label: Y Combinator
   partner: y-combinator
@@ -188,5 +175,31 @@
       Plugin and download counts are context, never counted.'
     detected_by: sweep-obsidian-community-plugins.py
     detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
+- slug: deepgram-genesys-own
+  label: Genesys (own)
+  partner: genesys
+  partner_name: Genesys (own)
+  category: businessOptimization|businessIntelligence
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appfoundry.genesys.com/filter/genesyscloud/listing/63118678-7b84-41d4-b837-e209031ce4ab
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: deepgram-artifact-hub-artifact-hub
+  label: Artifact Hub (artifact-hub)
+  partner: artifact-hub
+  partner_name: Artifact Hub (artifact-hub)
+  category: Artifact Hub listing (Helm chart)
+  type: marketplace
+  marketplace: artifact-hub
+  channel: partner-built
+  evidence: https://artifacthub.io/packages/search?repo=deepgram-self-hosted
+  source: edge
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null
