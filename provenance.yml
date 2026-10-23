@@ -7,35 +7,35 @@ artifacts:
     method: generated
     evidence: declared in the artifact
   arazzo/deepgram-audit-project-usage-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/deepgram-balance-gated-transcription-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/deepgram-diarized-transcript-intelligence-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/deepgram-invite-and-confirm-member-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/deepgram-provision-project-key-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/deepgram-rotate-project-key-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/deepgram-select-model-and-transcribe-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/deepgram-transcribe-analyze-synthesize-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/deepgram-transcribe-and-track-usage-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/deepgram-update-member-scopes-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   asyncapi/deepgram-speech-to-text-asyncapi.yml:
     method: unknown
     evidence: no authorship recorded
@@ -48,6 +48,9 @@ artifacts:
   authentication/deepgram-authentication.yml:
     method: derived
     evidence: declared in the artifact
+  capabilities/deepgram-capability-edges.yml:
+    method: unknown
+    evidence: no authorship recorded
   collections/deepgram-balances-api.opencollection.json:
     method: derived
     evidence: openapi/deepgram-balances-api
@@ -55,11 +58,11 @@ artifacts:
     method: derived
     evidence: openapi/deepgram-balances-api
   collections/deepgram-invitations-api.opencollection.json:
-    method: derived
-    evidence: openapi/deepgram-invitations-api
+    method: unknown
+    evidence: no authorship recorded
   collections/deepgram-invitations-api.postman_collection.json:
-    method: derived
-    evidence: openapi/deepgram-invitations-api
+    method: unknown
+    evidence: no authorship recorded
   collections/deepgram-keys-api.opencollection.json:
     method: derived
     evidence: openapi/deepgram-keys-api
@@ -85,11 +88,11 @@ artifacts:
     method: derived
     evidence: openapi/deepgram-models-api
   collections/deepgram-pre-recorded-api.opencollection.json:
-    method: derived
-    evidence: openapi/deepgram-pre-recorded-api
+    method: unknown
+    evidence: no authorship recorded
   collections/deepgram-pre-recorded-api.postman_collection.json:
-    method: derived
-    evidence: openapi/deepgram-pre-recorded-api
+    method: unknown
+    evidence: no authorship recorded
   collections/deepgram-projects-api.opencollection.json:
     method: derived
     evidence: openapi/deepgram-projects-api
@@ -109,23 +112,23 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   collections/deepgram-text-intelligence-api.opencollection.json:
-    method: derived
-    evidence: openapi/deepgram-text-intelligence-api
+    method: unknown
+    evidence: no authorship recorded
   collections/deepgram-text-intelligence-api.postman_collection.json:
-    method: derived
-    evidence: openapi/deepgram-text-intelligence-api
+    method: unknown
+    evidence: no authorship recorded
   collections/deepgram-text-to-speech-api.opencollection.json:
-    method: derived
-    evidence: openapi/deepgram-text-to-speech-api
+    method: unknown
+    evidence: no authorship recorded
   collections/deepgram-text-to-speech-api.postman_collection.json:
-    method: derived
-    evidence: openapi/deepgram-text-to-speech-api
+    method: unknown
+    evidence: no authorship recorded
   collections/deepgram-text-to-speech.opencollection.json:
-    method: derived
-    evidence: openapi/deepgram-text-to-speech
+    method: unknown
+    evidence: no authorship recorded
   collections/deepgram-text-to-speech.postman_collection.json:
-    method: derived
-    evidence: openapi/deepgram-text-to-speech
+    method: unknown
+    evidence: no authorship recorded
   collections/deepgram-usage-api.opencollection.json:
     method: derived
     evidence: openapi/deepgram-usage-api
@@ -138,6 +141,12 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  integrations/_index.yml:
+    method: generated
+    evidence: carries an API Evangelist house phrase
+  integrations/deepgram-integration-edges.yml:
+    method: searched
+    evidence: declared in the artifact
   json-ld/deepgram-context.jsonld:
     method: unknown
     evidence: no authorship recorded
@@ -285,127 +294,7 @@ artifacts:
   json-structure/deepgram-structure.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -489,28 +378,59 @@ artifacts:
   kin/score-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   llms/deepgram-llms.txt:
     method: searched
     evidence: 'derive-llms-provenance.py: harvested'
-  openapi/_original/deepgram-management-openapi.yml:
+  mcp/deepgram-mcp-tools.json:
+    method: unknown
+    evidence: no authorship recorded
+  mcp/deepgram-mcp.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/_original/deepgram-openapi.json:
     method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
-  openapi/_original/deepgram-speech-to-text-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
-  openapi/_original/deepgram-text-to-speech-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
+    evidence: byte-identical to https://developers.deepgram.com/openapi.json (sha256 171b704e27e1, fetched
+      2026-10-19)
+  openapi/deepgram-audio-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/deepgram-balances-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/deepgram-invitations-api-openapi.yml:
+  openapi/deepgram-breakdown-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/deepgram-configurations-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/deepgram-distributioncredentials-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/deepgram-fields-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/deepgram-invites-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/deepgram-keys-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/deepgram-media-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/deepgram-members-api-openapi.yml:
@@ -519,22 +439,28 @@ artifacts:
   openapi/deepgram-models-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/deepgram-pre-recorded-api-openapi.yml:
+  openapi/deepgram-projects-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/deepgram-projects-api-openapi.yml:
+  openapi/deepgram-purchases-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/deepgram-requests-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/deepgram-scopes-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/deepgram-text-intelligence-api-openapi.yml:
+  openapi/deepgram-text-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/deepgram-text-to-speech-api-openapi.yml:
+  openapi/deepgram-tokens-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/deepgram-usage-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/deepgram-variables-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   plans/deepgram-plans-pricing.yml:
@@ -547,8 +473,8 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   postman/deepgram-text-to-speech.postman_collection.json:
-    method: derived
-    evidence: openapi/deepgram-text-to-speech
+    method: unknown
+    evidence: no authorship recorded
   rate-limits/deepgram-rate-limits.yml:
     method: generated
     evidence: declared in the artifact
@@ -568,6 +494,9 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   security/deepgram-domain-security.yml:
+    method: unknown
+    evidence: no authorship recorded
+  vendors/deepgram-vendors.yml:
     method: unknown
     evidence: no authorship recorded
   vocabulary/deepgram-vocabulary.yml:
