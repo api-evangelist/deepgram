@@ -1,4 +1,4 @@
-# Deepgram (deepgram)
+# Deepgram
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,167 +66,248 @@
 
 Deepgram is an enterprise voice AI platform that provides speech-to-text, text-to-speech, and voice agent APIs powered by advanced AI models. The platform offers real-time and batch transcription through its Nova model family, natural-sounding speech synthesis through its Aura model family, and an end-to-end Voice Agent API that combines STT, LLM orchestration, and TTS into a single real-time interface.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/deepgram/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/deepgram/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · Speech-to-Text · Text-to-Speech · Transcription · Voice AI · Voice · Real-Time
 
-## Scope
+## Deepgram on APIs.io
 
-- **Position:** Consuming
-- **Access:** 3rd-Party
+Everything profiled for Deepgram is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/deepgram/](https://apis.io/providers/deepgram/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (12)
 
-- Artificial Intelligence
-- Speech-To-Text
-- Text-To-Speech
-- Transcription
-- Voice AI
+- [Deepgram Voice Agent API](https://apis.io/apis/deepgram/voice-agent-api/) — The Deepgram Voice Agent API is an end-to-end solution that combines speech-to-text, LLM orchestration, and text-to-speech into a single real-time API. It…
+- [Deepgram Balances API](https://apis.io/apis/deepgram/deepgram-balances-api/) — Retrieve billing balance information for projects.
+- [Deepgram Invitations API](https://apis.io/apis/deepgram/deepgram-invitations-api/) — Manage project invitations.
+- [Deepgram Keys API](https://apis.io/apis/deepgram/deepgram-keys-api/) — Create, list, and manage API keys for projects.
+- [Deepgram Members API](https://apis.io/apis/deepgram/deepgram-members-api/) — Manage project team members.
+- [Deepgram Models API](https://apis.io/apis/deepgram/deepgram-models-api/) — Retrieve available model metadata.
+- [Deepgram Pre-Recorded API](https://apis.io/apis/deepgram/deepgram-pre-recorded-api/) — Transcribe pre-recorded audio files or audio from URLs.
+- [Deepgram Projects API](https://apis.io/apis/deepgram/deepgram-projects-api/) — Manage Deepgram projects and project settings.
+- [Deepgram Scopes API](https://apis.io/apis/deepgram/deepgram-scopes-api/) — Manage member scopes and permissions within projects.
+- [Deepgram Text Intelligence API](https://apis.io/apis/deepgram/deepgram-text-intelligence-api/) — Analyze text content for summarization, sentiment, topics, and intents.
+- [Deepgram Text-To-Speech API](https://apis.io/apis/deepgram/deepgram-text-to-speech-api/) — Convert text into natural-sounding speech audio.
+- [Deepgram Usage API](https://apis.io/apis/deepgram/deepgram-usage-api/) — Retrieve usage data and request logs for projects.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-20
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Arazzo workflows (10)
 
-### Deepgram Speech-To-Text API
+Multi-step workflows that chain operations into a business task.
 
-The Deepgram Speech-to-Text API provides accurate, fast transcription of audio content using advanced AI models. It supports both pre-recorded audio files and real-time streaming audio, delivering transcripts in under 300 milliseconds. The API includes features such as punctuation, diarization, language detection, smart formatting, and support for multiple languages and audio formats.
+- [Deepgram Audit Project Usage and Billing](https://apis.io/arazzos/deepgram/deepgram-audit-project-usage-workflow/)
+- [Deepgram Balance-Gated Transcription](https://apis.io/arazzos/deepgram/deepgram-balance-gated-transcription-workflow/)
+- [Deepgram Diarized Transcript Intelligence](https://apis.io/arazzos/deepgram/deepgram-diarized-transcript-intelligence-workflow/)
+- [Deepgram Invite and Confirm a Project Member](https://apis.io/arazzos/deepgram/deepgram-invite-and-confirm-member-workflow/)
+- [Deepgram Provision a Project API Key](https://apis.io/arazzos/deepgram/deepgram-provision-project-key-workflow/)
+- [Deepgram Rotate a Project API Key](https://apis.io/arazzos/deepgram/deepgram-rotate-project-key-workflow/)
+- [Deepgram Select a Model and Transcribe](https://apis.io/arazzos/deepgram/deepgram-select-model-and-transcribe-workflow/)
+- [Deepgram Transcribe, Analyze, and Synthesize](https://apis.io/arazzos/deepgram/deepgram-transcribe-analyze-synthesize-workflow/)
+- [Deepgram Transcribe Audio and Track Usage](https://apis.io/arazzos/deepgram/deepgram-transcribe-and-track-usage-workflow/)
+- [Deepgram Update a Member's Scopes](https://apis.io/arazzos/deepgram/deepgram-update-member-scopes-workflow/)
 
-- **Human URL:** [https://developers.deepgram.com/docs/stt/getting-started](https://developers.deepgram.com/docs/stt/getting-started)
-- **Base URL:** `https://api.deepgram.com`
+#### AsyncAPI (3)
 
-#### Tags
+Event-driven and webhook contracts.
 
-- Audio
-- Speech Recognition
-- Speech-To-Text
-- Transcription
+- [Deepgram Speech-to-Text Streaming Events](https://apis.io/asyncapis/deepgram/deepgram-speech-to-text-asyncapi/)
+- [Deepgram Text-to-Speech Streaming Events](https://apis.io/asyncapis/deepgram/deepgram-text-to-speech-asyncapi/)
+- [Deepgram Voice Agent Events](https://apis.io/asyncapis/deepgram/deepgram-voice-agent-asyncapi/)
 
-#### Properties
+#### Event channels (3)
 
-- [Documentation](https://developers.deepgram.com/docs/stt/getting-started)
-- [OpenAPI](openapi/deepgram-speech-to-text-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/deepgram-speech-to-text.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/deepgram-speech-to-text.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [AsyncAPI](asyncapi/deepgram-speech-to-text-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Rules](rules/deepgram-speech-to-text-api-rules.yml)
-- [Capabilities](capabilities/deepgram-speech-to-text-api-capabilities.yml)
+Individual events and webhooks the provider emits.
 
-### Deepgram Text-To-Speech API
+- [/v1/agent/converse](https://apis.io/channels/deepgram/v1-agent-converse/)
+- [/v1/listen](https://apis.io/channels/deepgram/v1-listen/)
+- [/v1/speak](https://apis.io/channels/deepgram/v1-speak/)
 
-The Deepgram Text-to-Speech API converts text into natural-sounding speech using the Aura model family. It supports both single text requests and continuous streaming text-to-speech, delivering sub-200 millisecond latency suitable for real-time voice agents and conversational AI applications. The API offers multiple voice options and is designed for enterprise-grade deployments including voicebots, IVR systems, and interactive voice applications.
+#### GraphQL (1)
 
-- **Human URL:** [https://developers.deepgram.com/reference/text-to-speech-api/speak](https://developers.deepgram.com/reference/text-to-speech-api/speak)
-- **Base URL:** `https://api.deepgram.com`
+GraphQL schemas.
 
-#### Tags
+- [Moved to /providers/deepgram/](https://apis.io/graphqls/deepgram/deepgram-graphql/)
 
-- Audio
-- Speech Synthesis
-- Text-To-Speech
-- Voice
+#### MCP servers (1)
 
-#### Properties
+Model Context Protocol servers that expose the API to agents.
 
-- [Documentation](https://developers.deepgram.com/reference/text-to-speech-api/speak)
-- [OpenAPI](openapi/deepgram-text-to-speech-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/deepgram-text-to-speech.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/deepgram-text-to-speech.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [AsyncAPI](asyncapi/deepgram-text-to-speech-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Rules](rules/deepgram-text-to-speech-api-rules.yml)
-- [Capabilities](capabilities/deepgram-text-to-speech-api-capabilities.yml)
+- [deepgram](https://apis.io/servers/deepgram/deepgram/)
 
-### Deepgram Voice Agent API
+#### Agentic access (1)
 
-The Deepgram Voice Agent API is an end-to-end solution that combines speech-to-text, LLM orchestration, and text-to-speech into a single real-time API. It simplifies the development of conversational voice agents by eliminating the need to stitch together multiple services. The API includes built-in barge-in detection, turn-taking prediction, function calling, and mid-session control to ensure smooth, natural conversations without pauses or interruptions.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://deepgram.com/product/voice-agent-api](https://deepgram.com/product/voice-agent-api)
-- **Base URL:** `https://api.deepgram.com`
+- [Deepgram Agentic Access](https://apis.io/agentic-access/deepgram/deepgram-agentic-access/)
 
-#### Tags
+#### JSON Schema (47)
 
-- Conversational AI
-- Real-Time
-- Voice Agent
-- Voice AI
+The data models the API reads and writes.
 
-#### Properties
+- [Alternative](https://apis.io/schemas/deepgram/deepgram-alternative/)
+- [AudioUrlRequest](https://apis.io/schemas/deepgram/deepgram-audiourlrequest/)
+- [Balance](https://apis.io/schemas/deepgram/deepgram-balance/)
+- [BalanceList](https://apis.io/schemas/deepgram/deepgram-balancelist/)
+- [Channel](https://apis.io/schemas/deepgram/deepgram-channel/)
+- [Error](https://apis.io/schemas/deepgram/deepgram-error/)
+- [Intent](https://apis.io/schemas/deepgram/deepgram-intent/)
+- [IntentResults](https://apis.io/schemas/deepgram/deepgram-intentresults/)
+- [IntentSegment](https://apis.io/schemas/deepgram/deepgram-intentsegment/)
+- [Invitation](https://apis.io/schemas/deepgram/deepgram-invitation/)
+- [InvitationCreate](https://apis.io/schemas/deepgram/deepgram-invitationcreate/)
+- [InvitationList](https://apis.io/schemas/deepgram/deepgram-invitationlist/)
+- [Key](https://apis.io/schemas/deepgram/deepgram-key/)
+- [KeyCreate](https://apis.io/schemas/deepgram/deepgram-keycreate/)
+- [KeyList](https://apis.io/schemas/deepgram/deepgram-keylist/)
+- [KeyWithSecret](https://apis.io/schemas/deepgram/deepgram-keywithsecret/)
+- [Member](https://apis.io/schemas/deepgram/deepgram-member/)
+- [MemberList](https://apis.io/schemas/deepgram/deepgram-memberlist/)
+- [Metadata](https://apis.io/schemas/deepgram/deepgram-metadata/)
+- [Model](https://apis.io/schemas/deepgram/deepgram-model/)
+- [ModelInfo](https://apis.io/schemas/deepgram/deepgram-modelinfo/)
+- [ModelList](https://apis.io/schemas/deepgram/deepgram-modellist/)
+- [Paragraph](https://apis.io/schemas/deepgram/deepgram-paragraph/)
+- [ParagraphGroup](https://apis.io/schemas/deepgram/deepgram-paragraphgroup/)
+- [Project](https://apis.io/schemas/deepgram/deepgram-project/)
+- …and 22 more published on APIs.io
 
-- [Documentation](https://developers.deepgram.com/docs/voice-agent/getting-started)
-- [AsyncAPI](asyncapi/deepgram-voice-agent-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/deepgram-management.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/deepgram-management.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/deepgram-speech-to-text.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/deepgram-speech-to-text.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/deepgram-text-to-speech.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/deepgram-text-to-speech.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### JSON Structure (1)
 
-### Deepgram Audio Intelligence API
+Data models expressed in JSON Structure.
 
-The Deepgram Audio Intelligence API provides advanced analysis capabilities for audio and text content. It offers features including sentiment analysis, summarization, topic detection, and intent recognition. These capabilities allow developers to extract structured insights from transcribed audio or text input, enabling use cases such as call center analytics, meeting summarization, and content categorization.
+- [Deepgram Structure](https://apis.io/json-structure/deepgram/deepgram-structure/)
 
-- **Human URL:** [https://developers.deepgram.com/docs/audio-intelligence](https://developers.deepgram.com/docs/audio-intelligence)
-- **Base URL:** `https://api.deepgram.com`
+#### JSON-LD (1)
 
-#### Tags
+Linked-data contexts for the provider's vocabulary.
 
-- Audio Intelligence
-- Sentiment Analysis
-- Summarization
-- Topic Detection
+- [Deepgram Context](https://apis.io/jsonld/deepgram/deepgram-context/)
 
-#### Properties
+#### Vocabulary (1)
 
-- [Documentation](https://developers.deepgram.com/docs/audio-intelligence)
-- [OpenAPI](openapi/deepgram-speech-to-text-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/deepgram-speech-to-text.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/deepgram-speech-to-text.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+The provider's domain terms, defined.
 
-### Deepgram Management API
+- [Deepgram Vocabulary](https://apis.io/vocabularies/deepgram/deepgram-vocabulary/)
 
-The Deepgram Management API allows developers to programmatically manage their Deepgram account resources. It provides endpoints for creating and managing API keys, configuring projects, managing team members, and monitoring usage. This API enables automation of administrative tasks and integration of Deepgram account management into existing workflows and infrastructure tooling.
+#### Collections (17)
 
-- **Human URL:** [https://developers.deepgram.com/docs/create-additional-api-keys](https://developers.deepgram.com/docs/create-additional-api-keys)
-- **Base URL:** `https://api.deepgram.com`
+Postman and Open Collection request collections.
 
-#### Tags
+- [Deepgram Management Balances API](https://apis.io/collections/deepgram/open-deepgram-balances-api/)
+- [Deepgram Management Balances Invitations API](https://apis.io/collections/deepgram/open-deepgram-invitations-api/)
+- [Deepgram Management Balances Keys API](https://apis.io/collections/deepgram/open-deepgram-keys-api/)
+- [Deepgram Management API](https://apis.io/collections/deepgram/open-deepgram-management/)
+- [Deepgram Management Balances Members API](https://apis.io/collections/deepgram/open-deepgram-members-api/)
+- [Deepgram Management Balances Models API](https://apis.io/collections/deepgram/open-deepgram-models-api/)
+- [Deepgram Management Balances Pre-Recorded API](https://apis.io/collections/deepgram/open-deepgram-pre-recorded-api/)
+- [Deepgram Management Balances Projects API](https://apis.io/collections/deepgram/open-deepgram-projects-api/)
+- [Deepgram Management Balances Scopes API](https://apis.io/collections/deepgram/open-deepgram-scopes-api/)
+- [Deepgram Speech-to-Text API](https://apis.io/collections/deepgram/open-deepgram-speech-to-text/)
+- [Deepgram Management Balances Text Intelligence API](https://apis.io/collections/deepgram/open-deepgram-text-intelligence-api/)
+- [Deepgram Text-to-Speech API](https://apis.io/collections/deepgram/open-deepgram-text-to-speech/)
+- [Deepgram Management Balances Text-To-Speech API](https://apis.io/collections/deepgram/open-deepgram-text-to-speech-api/)
+- [Deepgram Management Balances Usage API](https://apis.io/collections/deepgram/open-deepgram-usage-api/)
+- [Deepgram Management API](https://apis.io/collections/deepgram/postman-deepgram-management/)
+- [Deepgram Speech-to-Text API](https://apis.io/collections/deepgram/postman-deepgram-speech-to-text/)
+- [Deepgram Text-to-Speech API](https://apis.io/collections/deepgram/postman-deepgram-text-to-speech/)
 
-- Administration
-- API Keys
-- Management
-- Projects
+#### Governance rules (5)
 
-#### Properties
+Spectral rulesets for the provider's contracts.
 
-- [Documentation](https://developers.deepgram.com/docs/create-additional-api-keys)
-- [OpenAPI](openapi/deepgram-management-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/deepgram-management.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/deepgram-management.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/deepgram-management-api-rules.yml)
-- [Capabilities](capabilities/deepgram-management-api-capabilities.yml)
+- [Deepgram — asyncapi rules](https://apis.io/rules/deepgram/deepgram-asyncapi-spectral-rules/)
+- [Deepgram — jsonschema rules](https://apis.io/rules/deepgram/deepgram-jsonschema-spectral-rules/)
+- [Deepgram — management api rules](https://apis.io/rules/deepgram/deepgram-management-api-rules/)
+- [Deepgram — speech to text api rules](https://apis.io/rules/deepgram/deepgram-speech-to-text-api-rules/)
+- [Deepgram — text to speech api rules](https://apis.io/rules/deepgram/deepgram-text-to-speech-api-rules/)
 
-## Common Properties
+#### Security (2)
 
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [LinkedIn](https://www.linkedin.com/company/deepgram)
-- [Documentation](https://developers.deepgram.com/home)
-- [Documentation](https://developers.deepgram.com/reference/deepgram-api-overview)
-- [Pricing](https://deepgram.com/pricing)
-- [Authentication](https://developers.deepgram.com/docs/authenticating)
-- [Changelog](https://developers.deepgram.com/changelog)
-- [SDK](https://github.com/deepgram/deepgram-python-sdk)
-- [SDK](https://github.com/deepgram/deepgram-js-sdk)
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Deepgram Authentication](https://apis.io/security/deepgram/deepgram-authentication/)
+- [Deepgram Domain Security](https://apis.io/security/deepgram/deepgram-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Deepgram Plans Pricing](https://apis.io/plans/deepgram/deepgram-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Deepgram Rate Limits](https://apis.io/rate-limits/deepgram/deepgram-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Deepgram Finops](https://apis.io/finops/deepgram/deepgram-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://deepgram.com/)
-- [Privacy Policy](https://deepgram.com/privacy)
-- [Terms of Service](https://deepgram.com/tos)
-- [JSON-LD](json-ld/deepgram-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/deepgram-transcript-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Vocabulary](vocabulary/deepgram-vocabulary.yml)
-- [Features](undefined)
-- [Integrations](https://deepgram.com/partners)
-- [L L Ms Txt](https://deepgram.com/llms.txt)
+- [Documentation](https://developers.deepgram.com/home)
+- [Pricing](https://deepgram.com/pricing)
+- [Changelog](https://developers.deepgram.com/changelog)
+- [Terms of service](https://deepgram.com/tos)
+- [Privacy policy](https://deepgram.com/privacy)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 44.3** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 80.0 |
+| Contract quality | 64.3 |
+| Contract governance | 27.3 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 29.8 |
+| Access clarity | 39.5 |
+
+**Agent readiness 33.6** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 22.7** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/deepgram/](https://apis.io/providers/deepgram/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Deepgram: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/deepgram/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
